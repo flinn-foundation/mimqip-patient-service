@@ -1,11 +1,10 @@
 <%@page contentType="text/html" %>
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
-<%@page import="flinn.recommend.beans.RecommendTreatmentGuidelineBean"%>
-<%@page import="flinn.recommend.beans.RecommendDiagnosisBean"%>
 <%@page import="flinn.beans.response.ResponseTreatmentBean"%>
-<%@page import= "flinn.recommend.dao.imp.RuleDaoImp"%>
+<%@page import="flinn.recommend.beans.RecommendDiagnosisBean"%>
+<%@page import="flinn.recommend.beans.RecommendTreatmentGuidelineBean"%>
+<%@page import="flinn.recommend.dao.imp.RuleDaoImp"%>
+<%@page import= "java.util.ArrayList"%>
 <%@page import="java.util.Arrays" %>
-<%@page import="java.util.ArrayList" %>
 <%@page import="java.util.List" %>
 
 

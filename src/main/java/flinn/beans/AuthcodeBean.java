@@ -1,12 +1,12 @@
 package flinn.beans;
 
+import flinn.beans.response.ResponseAppUserBean;
+import flinn.beans.response.ResponseFacilityBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.response.ResponseAppUserBean;
-import flinn.beans.response.ResponseFacilityBean;
 
 @XmlRootElement(name = "authcode")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -73,5 +73,5 @@ public class AuthcodeBean extends AbstractDataBean {
 		b.setUser(user);
 		return b;
 	}
-	
+
 }

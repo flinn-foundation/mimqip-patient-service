@@ -1,11 +1,11 @@
 package flinn.beans.response;
 
+import flinn.beans.AbstractDataBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
 
 @XmlRootElement(name = "recommendation")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -35,7 +35,7 @@ public class ResponseRecommendationBean extends AbstractDataBean {
 	protected String[][] othermessages;
 	@XmlElement(name = "guidelinechart")
 	protected ResponseGuidelineChart guidelinechart;
-	
+
 	public ResponseRecommendationBean() {
 		super();
 	}
@@ -136,5 +136,5 @@ public class ResponseRecommendationBean extends AbstractDataBean {
 		this.guidelinechart = guidelinechart;
 	}
 
-	
+
 }

@@ -1,12 +1,12 @@
 package flinn.beans.response;
 
-import java.math.BigDecimal;
+import flinn.beans.AbstractDataBean;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import flinn.beans.AbstractDataBean;
+import java.math.BigDecimal;
 
 @XmlRootElement(name = "error")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -15,7 +15,7 @@ public class ErrorBean extends AbstractDataBean {
 	protected BigDecimal number;
 	@XmlElement(name = "message")
 	protected String message;
-	
+
 	public BigDecimal getNumber() {
 		return number;
 	}

@@ -1,10 +1,9 @@
-<%@page import="java.util.List"%>
 <%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-		<td colspan="3" width="30%" bgcolor="#CAD8DF"><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-<%
+    <tr>
+        <td colspan="3" width="30%" bgcolor="#CAD8DF"><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
+        <%
 Boolean invalid = false;
 String jspSelf = request.getRequestURL().toString();
 
@@ -109,7 +108,7 @@ if (qsOrder2 != 1){
 	<tr bgcolor="#CAD8DF">
 		<td colspan="13"><img src="/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
-	
+
 <%
 boolean first = true;
 String orderby = "LabTestName";
@@ -182,12 +181,12 @@ for (int i=0; i<labList.length; i++) {
 		<td colspan="13"><img src="/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
 	</table>
-	
+
 <%!
 public int lab_is_not_valid(flinn.beans.LabTestBean bean) throws Exception {
   String now = flinn.util.DateString.now();
   java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-  
+
   if (!bean.getValid()) {
   	return 1;
   }

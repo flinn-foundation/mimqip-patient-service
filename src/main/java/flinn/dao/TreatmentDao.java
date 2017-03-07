@@ -1,5 +1,14 @@
 package flinn.dao;
 
+import flinn.beans.TreatmentGroupBean;
+import flinn.beans.request.RequestTreatmentBean;
+import flinn.beans.response.ResponseTreatmentBean;
+import flinn.dao.imp.TreatmentDaoImp;
+import flinn.util.RecommendUtils;
+import flinn.util.cache.EHCacheImpl;
+import flinn.util.cache.ICache;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,16 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.log4j.Logger;
-
-import flinn.beans.TreatmentGroupBean;
-import flinn.beans.request.RequestTreatmentBean;
-import flinn.beans.response.ResponseTreatmentBean;
-import flinn.dao.imp.TreatmentDaoImp;
-import flinn.util.RecommendUtils;
-import flinn.util.cache.EHCacheImpl;
-import flinn.util.cache.ICache;
 
 public abstract class TreatmentDao
 {
@@ -105,13 +104,13 @@ public abstract class TreatmentDao
 	public int create(final RequestTreatmentBean bean, Connection connection) throws Exception
 	{
 		int treatmentid = 0;
-		
+
 		ICache<String, ResponseTreatmentBean> treatmentCache = EHCacheImpl
 		.getDefaultInstance("treatmentCache");
 
 		// remove from treatment from cache if exist
 		treatmentCache.deleteAll();
-		
+
 		if (bean != null)
 		{
 			if (connection == null || connection.isClosed())
@@ -216,9 +215,9 @@ public abstract class TreatmentDao
 		List<ResponseTreatmentBean> results;
 
 		ICache<String, List<ResponseTreatmentBean>> treatmentCache = EHCacheImpl.getDefaultInstance("treatmentCache");
-		
+
 		String cacheKey = RecommendUtils.formatCacheKey(orderBy);
-		
+
 		// try to retrieve the object from the cache by orderBy
 		results = treatmentCache.get(String.valueOf(cacheKey));
 		if (results != null) {
@@ -232,17 +231,17 @@ public abstract class TreatmentDao
 				LOG.error("bad DB Connection");
 				throw new Exception("bad DB Connection");
 			}
-	
+
 			String query = "Select * from Treatment T, TreatmentGroup TG WHERE T.TreatmentGroupID = TG.ID";
 			if (orderBy != null)
 			{
 				query += " ORDER BY " + orderBy;
 			}
-	
+
 			LOG.debug("Going to run query = " + query);
-	
+
 			final PreparedStatement preparedStatementQuery = connection.prepareStatement(query);
-	
+
 			final ResultSet resultSet = preparedStatementQuery.executeQuery();
 			try
 			{
@@ -261,11 +260,11 @@ public abstract class TreatmentDao
 	public List<ResponseTreatmentBean> findValid(final String orderBy, Connection connection, boolean isSuperAdmin) throws Exception
 	{
 		List<ResponseTreatmentBean> results = null;
-		
+
 		ICache<String, List<ResponseTreatmentBean>> treatmentCache = EHCacheImpl.getDefaultInstance("treatmentCache");
-		
+
 		String cacheKey = RecommendUtils.formatCacheKey(orderBy);
-		
+
 		// try to retrieve the object from the cache by orderBy
 		results = treatmentCache.get(String.valueOf(cacheKey));
 		if (results != null) {
@@ -279,18 +278,18 @@ public abstract class TreatmentDao
 				LOG.error("bad DB Connection");
 				throw new Exception("bad DB Connection");
 			}
-	
+
 			String query = "Select * from Treatment T, TreatmentGroup TG WHERE T.TreatmentGroupID = TG.ID AND T.Valid='1' AND TG.Valid='1'";
 			if (orderBy != null) {
 				query += " ORDER BY " + orderBy;
 			} else {
 				query += " ORDER BY TG.ID,T.ID";
 			}
-	
+
 			LOG.debug("Going to run query = " + query);
-	
+
 			final PreparedStatement preparedStatementQuery = connection.prepareStatement(query);
-	
+
 			final ResultSet resultSet = preparedStatementQuery.executeQuery();
 			try
 			{
@@ -481,7 +480,7 @@ public abstract class TreatmentDao
 	public int update(final RequestTreatmentBean bean, final ResponseTreatmentBean original, Connection connection) throws Exception
 	{
 		int result = -1;
-		
+
 		ICache<String, ResponseTreatmentBean> treatmentCache = EHCacheImpl
 		.getDefaultInstance("treatmentCache");
 

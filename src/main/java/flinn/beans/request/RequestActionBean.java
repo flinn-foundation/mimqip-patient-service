@@ -1,12 +1,12 @@
 package flinn.beans.request;
 
-import java.math.BigDecimal;
+import flinn.beans.AbstractDataBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
+import java.math.BigDecimal;
 
 @XmlRootElement(name = "action")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -26,7 +26,7 @@ public class RequestActionBean extends AbstractDataBean {
 	protected String correlationid;
 	@XmlElement(name = "timestamp")
 	protected BigDecimal timestamp;
-	
+
 	public String getType() {
 		return type;
 	}

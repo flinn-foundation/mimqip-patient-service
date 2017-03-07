@@ -1,18 +1,17 @@
 package flinn.beans.response;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
+import flinn.beans.AbstractDataBean;
+import flinn.beans.PatientDetailsBean;
+import flinn.beans.PatientStatusBean;
+import flinn.beans.request.RequestPatientBean;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.PatientDetailsBean;
-import flinn.beans.PatientStatusBean;
-import flinn.beans.request.RequestPatientBean;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 
 @XmlRootElement(name = "patient")
 @XmlAccessorType(XmlAccessType.FIELD)

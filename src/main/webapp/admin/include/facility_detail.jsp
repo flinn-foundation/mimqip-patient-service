@@ -1,5 +1,4 @@
-<%@page contentType="text/html" %> 
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page contentType="text/html" %>
 
 <%
   int fid = -1;
@@ -15,7 +14,7 @@
   java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
   String facName = "", facShortcut = "", facEmail = "", role = "";
   int lastactivity = -1;
-  
+
   String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
   flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
   flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
@@ -28,74 +27,74 @@
 		dm.rollbackConnection("updateLastActivity");
 		dm.LOG.debug("Unable to commit changes to updateLastActivity");
 	}
-	
-	adminid = userSession.getUser().getAppuserid();  
-  
+
+	adminid = userSession.getUser().getAppuserid();
+
   if (request.getParameter("id") != null){
 	  facilityid = Integer.parseInt(request.getParameter("id"));
   }
-  
+
   if(flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
   if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
-  
+
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
   }
-  
+
   if (request.getParameter("edit") != null){
 	  	if(request.getParameter("edit").equals("y")) hasEdit = true;
   }
-  
+
   if (request.getParameter("Email") != null){
 	  	facEmail = request.getParameter("Email");
-  }  
-  
+  }
+
   if (request.getParameter("role") != null){
 	  role = request.getParameter("role");
   }
-  
+
   if (isAdmin && postType) {
 		flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
 		flinn.beans.request.RequestFacilityBean input= new flinn.beans.request.RequestFacilityBean();
-		
-		if (request.getParameter("AdminID") != null) //Update adminid if input field differs 
+
+		if (request.getParameter("AdminID") != null) //Update adminid if input field differs
 		{
 			if(adminid != Integer.parseInt(request.getParameter("AdminID"))) adminid = Integer.parseInt(request.getParameter("AdminID"));
 		}
-		
+
 		input.setAdministratorid(Integer.toString(adminid));
-		
+
 		if(role.equals("Admin")){ //Only pull request data for super admin
 			input.setFacilityid(facilityid);
 		}
 		else{ //Facility admins can only edit their facility
 			input.setFacilityid(userSession.getUser().getFacilityid());
 		}
-		
+
 		input.setFacilityname(request.getParameter("Name"));
 		facName = request.getParameter("Name");
 		input.setFacilityshortcut(request.getParameter("Shortcut"));
 		facShortcut = request.getParameter("Shortcut");
 		input.setFacilityemail(request.getParameter("Email"));
-		
+
 		Boolean isValid = false;
-		
+
 		if (request.getParameter("Valid") != null){
 			if (request.getParameter("Valid").equals("1")){isValid = true;}
 		}
-		
+
 		input.setLaunch(flinn.util.AdminFunctions.parse_date_snippet("Launch",request));
 		input.setExpiration(flinn.util.AdminFunctions.parse_date_snippet("Expiration",request));
 
 		//Do roles loop through checks and set to obj
-		//java.util.HashMap<String, String> userSetting = new java.util.HashMap<String,String>(); 
+		//java.util.HashMap<String, String> userSetting = new java.util.HashMap<String,String>();
 		//userSetting.put("FullName", userFullName);
-		//if(!userEmail.equals(""))userSetting.put("Email", userEmail);			
+		//if(!userEmail.equals(""))userSetting.put("Email", userEmail);
 		//input.setSettings(userSetting);
 		input.setValid(isValid);
-		    	
+
     	if (facilityid > 0){//Update facility
-	   		rqcont.setFacility(input);    		
+	   		rqcont.setFacility(input);
     		flinn.beans.response.ResponseFacilityContainerBean rspBean= new flinn.beans.response.ResponseFacilityContainerBean();
 
     		try{
@@ -118,13 +117,13 @@
     		}
     	}
     	facilityid = fid;
-        
+
       if (fid > 0) {
-	      if (facilityid > 0) {  		response.sendRedirect("/admin/facility_detail.jsp?id="+fid+"&reason=facility+changes+saved");    	  
-	      } else {  		response.sendRedirect("/admin/facility_detail.jsp?id="+fid+"&reason=facility+created"); 
+	      if (facilityid > 0) {  		response.sendRedirect("/admin/facility_detail.jsp?id="+fid+"&reason=facility+changes+saved");
+	      } else {  		response.sendRedirect("/admin/facility_detail.jsp?id="+fid+"&reason=facility+created");
 	      }
 	    } else {
-			response.sendRedirect("/admin/error.jsp?reason="+fid);     	
+			response.sendRedirect("/admin/error.jsp?reason="+fid);
 	    }
   }
 
@@ -150,7 +149,7 @@ while(it.hasNext())
 {
 	String key = it.next();
 	String value = adminFacility.getFacility().getSettings().get(key);
-	
+
 	if (key.equals("FullName"))userFullName = value;
 	if (key.equals("Email"))userEmail = value;
 }
@@ -180,7 +179,7 @@ if (isAdmin && hasEdit) editable = true;
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-	</tr>	
+	</tr>
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Facility Shortcut</p></td>
@@ -194,7 +193,7 @@ if (isAdmin && hasEdit) editable = true;
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-	</tr>	
+	</tr>
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Email Address</p></td>
@@ -203,12 +202,12 @@ if (isAdmin && hasEdit) editable = true;
 			<p class="formText" style="text-align:left;">
 			<% if (editable) out.print("<input type='text' name='Email' maxlength='50' value='"); %><% if (facilityid > 0)out.print(facEmail); %><% if (editable) out.print("'>"); %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-	</tr>	
+	</tr>
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Administrator ID</p></td>
@@ -220,12 +219,12 @@ if (isAdmin && hasEdit) editable = true;
 					out.print("<input type=\"hidden\" name=\"AdminID\" value=\"" + adminid + "\">");
 				}%></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -245,10 +244,10 @@ if (editable) {
   out.print("> invalid<br>\n");
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (adminFacility.getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); } 
+  if (adminFacility.getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); }
 } if(facilityid == 0)adminFacility.setValid(false);%></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -257,7 +256,7 @@ if (editable) {
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Live Date<br><em>when the account should become active</em></p></td>
-		<td align="right"><% 
+		<td align="right"><%
 if (editable) {
   out.print("<p class='formText' style='text-align:left;'>");
   out.print("(YYYY-MM-DD hh:mm:ss)<br>");
@@ -275,14 +274,14 @@ if (editable) {
     if (df.parse(flinn.util.DateString.now()).compareTo(df.parse(adminFacility.getLaunch())) < 0) {
     	out.print("<span class='formTextRed'>"+adminFacility.getLaunch()+"</span>");
     } else {
-    	out.print(flinn.util.AdminFunctions.formatNulls(adminFacility.getLaunch())); 
+    	out.print(flinn.util.AdminFunctions.formatNulls(adminFacility.getLaunch()));
     }
   } else {
-	  out.print(flinn.util.AdminFunctions.formatNulls(adminFacility.getLaunch())); 
+	  out.print(flinn.util.AdminFunctions.formatNulls(adminFacility.getLaunch()));
   }
 } %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -291,7 +290,7 @@ if (editable) {
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Expire Date<br><em>when the account should expire</em></p></td>
-		<td><% 
+		<td><%
 if (editable) {
 	out.print("<p class='formText' style='text-align:left;'>");
 	out.print("(YYYY-MM-DD hh:mm:ss)<br>");
@@ -317,7 +316,7 @@ if (editable) {
   }
 } %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 <% if (!editable) { %>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
@@ -350,7 +349,7 @@ if (isAdmin && !editable) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 if (editable) {
   %>
 	<tr>
@@ -370,8 +369,8 @@ if (editable) {
                                 <td>
                                         <div class="updateText"><a href="<%
 if (facilityid > 0) {
-  out.print(jspSelf); 
-  out.print("?id="+facilityid); 
+  out.print(jspSelf);
+  out.print("?id="+facilityid);
 } else {
 	out.print("/admin/facility.jsp");
 }
@@ -383,12 +382,12 @@ if (facilityid > 0) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 %>
-<% 
+<%
 dm.disposeConnection("facility_detail");
 if (editable) { %>
-</FORM>	
+</FORM>
 <script language="JavaScript" type="text/javascript">
   function formsubmit(frmname) {
     if(document.forms[frmname]) {
@@ -398,7 +397,7 @@ if (editable) { %>
     }
   }
 
-  
+
   var frmvalidator  = new Validator("adminform");
 <% if (editable) { %>
   frmvalidator.addValidation("Name","req","Please enter a name for the facility");
@@ -408,7 +407,7 @@ if (editable) { %>
   frmvalidator.addValidation("Email","email","Please enter an Email address");
   frmvalidator.addValidation("Email","maxlen=50","Max length for Email address is 50");
   frmvalidator.addValidation("AdminID","numeric","Please enter an Administrator ID");
-  frmvalidator.addValidation("AdminID","maxlen=8","Max length for Administrator ID is 8");  
+  frmvalidator.addValidation("AdminID","maxlen=8","Max length for Administrator ID is 8");
 <% } %>
 
 </script>

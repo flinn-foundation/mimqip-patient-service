@@ -1,18 +1,16 @@
 package flinn.servlet;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Enumeration;
+import flinn.beans.BeanInterface;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
-
-import org.apache.log4j.Logger;
-
-import flinn.beans.BeanInterface;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
 
 public abstract class AbstractBaseServlet extends HttpServlet implements BaseServletInterface
 {
@@ -32,7 +30,7 @@ public abstract class AbstractBaseServlet extends HttpServlet implements BaseSer
 	public static final String ACTION_FORM_NAME = "action";
 	public static final String XML_RESPONSE_TYPE = "xml";
 	public static final String JSON_RESPONSE_TYPE = "json";
-	
+
 	public static final String UN_ORDERED_LIST_START = "<ul>";
 	public static final String UN_ORDERED_LIST_END = "</ul>";
 	public static final String LIST_ENTRY_START = "<li>";
@@ -190,8 +188,8 @@ public abstract class AbstractBaseServlet extends HttpServlet implements BaseSer
 	public void printHelpMenu(final PrintWriter out, final Exception exception, final String message)
 	{
 
-		
-		
+
+
 		out.println("<h1>Help Menu</h1>");
 		out.println(LINE_BRAKE);
 		if (message != null && !message.equals(""))

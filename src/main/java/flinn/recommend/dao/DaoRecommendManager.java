@@ -1,23 +1,8 @@
 package flinn.recommend.dao;
 
-import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-
 import flinn.beans.request.RequestActionBean;
 import flinn.beans.request.RequestContainerBean;
-import flinn.beans.response.ErrorBean;
-import flinn.beans.response.ErrorContainerBean;
-import flinn.beans.response.ResponseActionBean;
-import flinn.beans.response.ResponseContainerBean;
-import flinn.beans.response.ResponseSessionContainerBean;
-import flinn.beans.response.ResponseTreatmentBean;
-import flinn.dao.AbstractBaseDao;
+import flinn.beans.response.*;
 import flinn.dao.AuthcodeDao;
 import flinn.dao.imp.AppUserDaoImp;
 import flinn.dao.imp.TreatmentDaoImp;
@@ -25,15 +10,17 @@ import flinn.recommend.beans.RecommendDiagnosisBean;
 import flinn.recommend.beans.request.RequestMessageBean;
 import flinn.recommend.beans.request.RequestRuleBean;
 import flinn.recommend.beans.request.RequestSettingBean;
-import flinn.recommend.beans.response.ResponseMessageBean;
-import flinn.recommend.beans.response.ResponseMessageContainerBean;
-import flinn.recommend.beans.response.ResponseRuleBean;
-import flinn.recommend.beans.response.ResponseRuleContainerBean;
-import flinn.recommend.beans.response.ResponseSettingBean;
-import flinn.recommend.beans.response.ResponseSettingContainerBean;
+import flinn.recommend.beans.response.*;
 import flinn.recommend.dao.imp.MessageDaoImp;
 import flinn.recommend.dao.imp.RuleDaoImp;
 import flinn.recommend.dao.imp.SettingDaoImp;
+import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 public class DaoRecommendManager extends AbstractBaseDao {
 	public static final Logger LOG = Logger

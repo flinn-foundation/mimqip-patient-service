@@ -1,17 +1,16 @@
 package flinn.beans.response;
 
-import java.util.HashMap;
-import java.util.Iterator;
+import flinn.beans.AbstractDataBean;
+import flinn.beans.PatientDetailsBean;
+import flinn.beans.PatientStatusBean;
+import flinn.beans.request.RequestPatientBean;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.PatientDetailsBean;
-import flinn.beans.PatientStatusBean;
-import flinn.beans.request.RequestPatientBean;
+import java.util.HashMap;
+import java.util.Iterator;
 
 @XmlRootElement(name = "patient")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -22,14 +21,14 @@ public class ResponsePatientShortBean extends AbstractDataBean {
 	@XmlElement(name = "facilityid")
 	protected int facilityid;
 	@XmlElement(name = "valid")
-	protected Boolean valid;	
+	protected Boolean valid;
 	@XmlElement(name = "StartDate")
 	protected String startdate;
 	@XmlElement(name = "details")
 	protected HashMap<String, String> details;
 	@XmlElement(name = "status")
-	protected HashMap<String, String> status;	
-	
+	protected HashMap<String, String> status;
+
 	public ResponsePatientShortBean() {
 		super();
 	}
@@ -40,7 +39,7 @@ public class ResponsePatientShortBean extends AbstractDataBean {
 		setValid(bean.getValid());
 		setStartdate(bean.getStartdate());
 	}
-	
+
 	public ResponsePatientShortBean (ResponsePatientBean bean, boolean search) {
 		setPatientid(bean.getPatientid());
 		setFacilityid(bean.getFacilityid());
@@ -79,7 +78,7 @@ public class ResponsePatientShortBean extends AbstractDataBean {
 	}
 	public void setDetails(HashMap<String, String> details){
 		this.details = details;
-	}	
+	}
 	public HashMap<String, String> getStatus(){
 		return status;
 	}

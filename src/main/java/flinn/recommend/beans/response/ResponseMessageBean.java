@@ -1,13 +1,13 @@
 package flinn.recommend.beans.response;
 
+import flinn.beans.AbstractDataBean;
+import flinn.recommend.beans.RecommendMessageBean;
+import flinn.recommend.beans.request.RequestMessageBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.recommend.beans.RecommendMessageBean;
-import flinn.recommend.beans.request.RequestMessageBean;
 
 @XmlRootElement(name = "message")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -21,7 +21,7 @@ public class ResponseMessageBean extends AbstractDataBean{
 	protected String messagetag;
 	@XmlElement(name = "message")
 	protected String message;
-	
+
 	public ResponseMessageBean() {
 		super();
 	}
@@ -73,5 +73,5 @@ public class ResponseMessageBean extends AbstractDataBean{
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 }

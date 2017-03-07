@@ -1,5 +1,5 @@
-<%@ page import="java.util.*" %>
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@ page import="java.util.Date" %>
+<%@page import="java.util.GregorianCalendar"%>
 
 <%
 
@@ -21,7 +21,7 @@
 
   	isDrFirstAccessible = isAdmin || isSuperAdmin || isDoctor;
   }
-  
+
 %>
 
 
@@ -29,13 +29,13 @@
 public String computeLi(int lower, int upper, boolean isYear){
 	StringBuffer liOut = new StringBuffer();
 	if (isYear){
-		for(int i=upper; i>lower; i--){ 
-			liOut.append(buildLi(i));													
-		}	
-	}	
+		for(int i=upper; i>lower; i--){
+			liOut.append(buildLi(i));
+		}
+	}
 	else{
-		for(int i=lower; i<upper; i++){ 
-			liOut.append(buildLi(i));													
+		for(int i=lower; i<upper; i++){
+			liOut.append(buildLi(i));
 		}
 	}
 	return liOut.toString();
@@ -43,13 +43,13 @@ public String computeLi(int lower, int upper, boolean isYear){
 
 public String buildLi(int i){
 	StringBuffer liOut = new StringBuffer();
-	liOut.append("<li");							
+	liOut.append("<li");
 	if (i % 2 == 0) {
-		liOut.append(" class=\"odd\""); 
-	} 
+		liOut.append(" class=\"odd\"");
+	}
 	liOut.append("><a href=\"#");
 	liOut.append(Integer.toString(i));
-	liOut.append("\">");							
+	liOut.append("\">");
 	liOut.append(Integer.toString(i));
 	liOut.append("</a></li>");
 	return liOut.toString();
@@ -58,7 +58,7 @@ public String buildLi(int i){
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Flinn Foundation: Patient Search</title>
 	<link type="text/css" rel="Stylesheet" href="css/global.css" />
@@ -66,7 +66,7 @@ public String buildLi(int i){
 	<link type="text/css" rel="Stylesheet" href="css/colorbox.css" />
 	<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>-->
 	<script type="text/javascript" src="js/jquery-1.6.min.js"></script>
-	<script type="text/javascript" src="js/globalUtils.js"></script>	
+	<script type="text/javascript" src="js/globalUtils.js"></script>
 	<script type="text/javascript" src="js/patientSearch.js"></script>
 </head>
 <!--[if IE 7 ]><body id="patientSelect" class="ie7"><![endif]-->
@@ -77,25 +77,25 @@ public String buildLi(int i){
 	<div id="utilityBarWrapper" class="tall">
 		<div id="utilityBar">
 			<h1></h1>
-			<span class="welcome"></span>	
+			<span class="welcome"></span>
 			<a href="#" id="logoutBtn" class="roundedBtn">Logout</a>
 			<div class="buttons">
 				<a href="/patient-search.jsp" id="patientSearchBtn" class="roundedBtn">Patient Search</a>
 				<a href="/admin/" id="adminBtn" class="roundedBtn">Administration</a>
 			</div>
-<% if (isDrFirstAccessible == true) { %>			
+<% if (isDrFirstAccessible == true) { %>
 			<div class="utilityLinks">
-				<a href="#" id="drFirstMessageBtn">DrFirst Messages</a>	
-				<a href="#" id="drFirstReportBtn">DrFirst Reports</a>	
+				<a href="#" id="drFirstMessageBtn">DrFirst Messages</a>
+				<a href="#" id="drFirstReportBtn">DrFirst Reports</a>
 			</div>
-<% } %>				
+<% } %>
 		</div>
 	</div>
 	<div id="patientSelectWrapper">
 		<div id="topHeadingWrapper">
 			<div id="topHeading">
 				<h1>Patient Search</h1>
-				<a href="new-patient.jsp" class="orangeBtn" id="enterNewPatient">Enter New Patient</a>		
+				<a href="new-patient.jsp" class="orangeBtn" id="enterNewPatient">Enter New Patient</a>
 			</div>
 		</div>
 		<div id="searchFieldsWrapper">
@@ -119,7 +119,7 @@ public String buildLi(int i){
 				<div class="fieldWrapper">
 					<label for="lName">Last Name:</label>
 					<input type="text" class="greenInput" id="lName" />
-				</div>			
+				</div>
 				<div class="fieldWrapper floatRight">
 					<label for="dob">Date of Birth:</label>
 					<div class="dropdown dob" id="mmDropdown">
@@ -133,14 +133,14 @@ public String buildLi(int i){
 						<a href="#" class="pullDown">DD</a>
 						<ul>
 							<li class="odd"><a href="#" class="selected">DD</a></li>
-							<%out.print(computeLi(1,32,false));%> 
+							<%out.print(computeLi(1,32,false));%>
 						</ul>
 					</div>
 					<div class="dropdown dob" id="yyyyDropdown">
 						<a href="#" class="pullDown">YYYY</a>
 						<ul>
 							<li class="odd"><a href="#" class="selected">YYYY</a></li>
-							<% 						
+							<%
 							GregorianCalendar cal = new GregorianCalendar();
 							Date date1 = new Date();
 							cal.setTime(date1);
@@ -153,7 +153,7 @@ public String buildLi(int i){
 				<div class="fieldWrapper">
 					<label for="patientId">ID #:</label>
 					<input type="text" class="greenInput" id="patientId" />
-				</div>	
+				</div>
 				<input type="submit" value="Search" class="orangeBtn" id="loginBtn" />
 				<div class="clear"></div>
 			</div>

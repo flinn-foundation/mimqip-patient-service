@@ -1,5 +1,5 @@
-<%@page import="java.util.List"%>
 <%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page import="java.util.List"%>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -31,12 +31,12 @@ if (!invalid) { %>
 		<td width="220" nowrap bgcolor="#CAD8DF"><a href="/admin/treatment_group.jsp?invalid=y<% 		if (request.getParameter("order") != null){
 			out.print("&order="+request.getParameter("order")); }
 		%>" class="subLink"><img src="/admin/images/blue_arrow.gif" width=5 height=10 alt="" border="0">&nbsp;&nbsp;Show All Treatment Groups</a></td>
-						
+
 <% } else { %>
 		<td width="220" nowrap bgcolor="#CAD8DF"><a href="/admin/treatment_group.jsp?<% 		if (request.getParameter("order") != null){
 			out.print("order="+request.getParameter("order")); }
 		%>" class="subLink"><img src="/admin/images/blue_arrow.gif" width=5 height=10 alt="" border="0">&nbsp;&nbsp;Show Active Treatment Groups</a></td>
-	
+
 <% } %>
 		<td colspan="2"></td>
 	</tr>
@@ -108,7 +108,7 @@ if (request.getParameter("order") != null) {
 	<tr bgcolor="#CAD8DF">
 		<td colspan="13"><img src="/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
-	
+
 <%
 boolean first = true;
 String orderby = "TreatmentGroupName";
@@ -150,7 +150,7 @@ try{
 		dm.LOG.debug("Unable to open connection for findAllTreatmentGroups");
 	}
 	finally{dm.disposeConnection("findAllTreatmentGroups");}
-	
+
 if(dataList != null){
 for (int i=0; i<dataList.size(); i++) {
   if (!first) {
@@ -184,7 +184,7 @@ for (int i=0; i<dataList.size(); i++) {
 		<td colspan="13"><img src="/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
 	</table>
-	
+
 <%!
 public int data_is_not_valid(flinn.beans.TreatmentGroupBean bean) throws Exception {
   if (!bean.getValid()) {

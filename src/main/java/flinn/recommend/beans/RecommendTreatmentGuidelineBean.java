@@ -1,12 +1,12 @@
 package flinn.recommend.beans;
 
+import flinn.beans.AbstractDataBean;
+import flinn.beans.response.ResponseTreatmentBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.response.ResponseTreatmentBean;
 
 @XmlRootElement(name = "treatmentguideline")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -24,7 +24,7 @@ public class RecommendTreatmentGuidelineBean extends AbstractDataBean {
 	protected int drug;
 	@XmlElement(name = "treatment")
 	protected ResponseTreatmentBean treatment;
-	
+
 	public RecommendTreatmentGuidelineBean() {
 		super();
 	}

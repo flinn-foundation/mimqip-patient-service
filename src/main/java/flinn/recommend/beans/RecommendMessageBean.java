@@ -1,11 +1,11 @@
 package flinn.recommend.beans;
 
+import flinn.beans.AbstractDataBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
 
 @XmlRootElement(name = "message")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -16,10 +16,10 @@ public class RecommendMessageBean extends AbstractDataBean {
 	@XmlElement(name = "priority")
 	protected int priority;
 	@XmlElement(name = "message")
-	protected String message;	
+	protected String message;
 	@XmlElement(name = "messagetag")
-	protected String messagetag;	
-	
+	protected String messagetag;
+
 	public RecommendMessageBean() {
 		super();
 	}
@@ -55,5 +55,5 @@ public class RecommendMessageBean extends AbstractDataBean {
 	public void setMessagetag(String messagetag) {
 		this.messagetag = messagetag;
 	}
-	
+
 }

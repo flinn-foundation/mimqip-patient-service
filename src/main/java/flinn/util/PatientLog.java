@@ -1,20 +1,19 @@
 package flinn.util;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.JAXBException;
-
-import org.apache.log4j.DailyRollingFileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-
 import flinn.beans.request.RequestContainerBean;
 import flinn.beans.response.ErrorContainerBean;
 import flinn.beans.response.ResponseContainerBean;
 import flinn.beans.response.ResponseSessionContainerBean;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
+
+@Slf4j
 public class PatientLog {
 	private static final Logger logger = Logger.getLogger(PatientLog.class);
 	private static String baseDir = null;
@@ -55,14 +54,14 @@ public class PatientLog {
 			patientLogger.setLevel(Level.INFO);
 			patientLogger.setAdditivity(false);
 
-			DailyRollingFileAppender appender = (DailyRollingFileAppender) patientLogger
-					.getAppender(patientID);
-			if (appender == null) {
-				appender = new DailyRollingFileAppender(layout, logname, "'.'yyyy-MM-dd");
-				appender.setName(patientID);
-				appender.activateOptions();
-				patientLogger.addAppender(appender);
-			}
+//			DailyRollingFileAppender appender = (DailyRollingFileAppender) patientLogger
+//					.getAppender(patientID);
+//			if (appender == null) {
+//				appender = new DailyRollingFileAppender(layout, logname, "'.'yyyy-MM-dd");
+//				appender.setName(patientID);
+//				appender.activateOptions();
+//				patientLogger.addAppender(appender);
+//			}
 
 			StringBuilder sb = new StringBuilder(2048);
 

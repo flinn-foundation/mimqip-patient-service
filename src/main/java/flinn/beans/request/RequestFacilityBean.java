@@ -1,13 +1,14 @@
 package flinn.beans.request;
 
-import java.util.HashMap;
+import flinn.beans.AbstractDataBean;
+import flinn.beans.FacilityIPBean;
+import flinn.beans.response.ResponseFacilityBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import flinn.beans.AbstractDataBean;
-import flinn.beans.FacilityIPBean;
-import flinn.beans.response.ResponseFacilityBean;
+import java.util.HashMap;
 
 @XmlRootElement(name = "facility")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -23,7 +24,7 @@ public class RequestFacilityBean  extends AbstractDataBean {
 	@XmlElement(name = "administratorid")
 	protected String administratorid;
 	@XmlElement(name = "valid")
-	protected Boolean valid;	
+	protected Boolean valid;
 	@XmlElement(name = "launch")
 	protected String launch;
 	@XmlElement(name = "expiration")
@@ -32,22 +33,22 @@ public class RequestFacilityBean  extends AbstractDataBean {
 	protected FacilityIPBean[] ip;
 	@XmlElement(name = "settings")
 	protected HashMap<String, String> settings;
-	
 
 
-	
+
+
 	public RequestFacilityBean(ResponseFacilityBean bean) {
 		setFacilityname(bean.getFacilityname());
 		setFacilityshortcut(bean.getFacilityshortcut());
 		setFacilityemail(bean.getFacilityemail());
-		setAdministratorid(bean.getAdministratorid());		
+		setAdministratorid(bean.getAdministratorid());
 		setValid(bean.getValid());
 		setLaunch(bean.getLaunch());
 		setExpiration(bean.getExpiration());
 		setSettings(bean.getSettings());
 		setIp(bean.getIp());
 	}
-	
+
 
 	public int getFacilityid() {
 		return facilityid;

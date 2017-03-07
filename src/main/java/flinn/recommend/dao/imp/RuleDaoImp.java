@@ -1,14 +1,5 @@
 package flinn.recommend.dao.imp;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.log4j.Logger;
-
 import flinn.beans.request.RequestContainerBean;
 import flinn.beans.response.ResponseActionBean;
 import flinn.beans.response.ResponseContainerBean;
@@ -23,6 +14,14 @@ import flinn.util.AdminRole;
 import flinn.util.RecommendUtils;
 import flinn.util.cache.EHCacheImpl;
 import flinn.util.cache.ICache;
+import org.apache.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
 
 public class RuleDaoImp extends RuleDao {
 
@@ -231,36 +230,36 @@ public class RuleDaoImp extends RuleDao {
 		ICache<String, List<ResponseRuleBean>> rulesCache = EHCacheImpl.getDefaultInstance("rulesCache");
 
 		String cacheKey = RecommendUtils.formatCacheKey(orderBy);
-		
+
 		// try to retrieve the object from the cache
 		responseRuleBean = (List<ResponseRuleBean>) rulesCache.get(String.valueOf(cacheKey));
 		if (responseRuleBean != null) {
 			LOG.debug("findAllRules --> RULES: orderBy" + String.valueOf(cacheKey)
 					+ " found in cache");
 		}
-		
+
 		// if the returned object is null, it was not found in the cache
 		if (responseRuleBean == null) {
 			if (connection == null || connection.isClosed()) {
 				LOG.debug("bad DB Connection");
 				throw new Exception("bad DB Connection");
 			}
-	
+
 			String query = "Select * from RecommendRule ";
 			if (orderBy != null) {
 				query += " ORDER BY " + orderBy;
 			} else {
 				query += " ORDER BY RuleType, Priority ASC";
 			}
-	
+
 			LOG.warn("Going to run query = " + query);
-	
+
 			PreparedStatement preparedStatementQuery = null;
 			ResultSet resultSet = null;
 			try {
 				preparedStatementQuery = connection.prepareStatement(query);
 				resultSet = preparedStatementQuery.executeQuery();
-				
+
 				// get the first item from the response and add to cache
 				responseRuleBean = getListFromRs(resultSet, connection);
 				rulesCache.put(String.valueOf(orderBy), responseRuleBean);

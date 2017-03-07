@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Flinn Foundation</title>
 	<link type="text/css" rel="Stylesheet" href="css/global.css" />
@@ -8,7 +8,7 @@
 	<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>-->
 	<script type="text/javascript" src="js/jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="js/globalUtils.js"></script>
-	<script type="text/javascript" src="js/jquery.ui.tabs.min.js"></script>		
+	<script type="text/javascript" src="js/jquery.ui.tabs.min.js"></script>
 	<script type="text/javascript" src="js/jHtmlArea-min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 </head>
@@ -20,10 +20,10 @@
 	<div id="utilityBarWrapper">
 		<div id="utilityBar">
 			<h1></h1>
-			<span class="welcome"></span>	
+			<span class="welcome"></span>
 			<a href="#" id="logoutBtn" class="roundedBtn">Logout</a>
 			<div class="buttons">
-				<a href="/patient-search.jsp" id="patientSearchBtn" class="roundedBtn">Patient Search</a>							
+				<a href="/patient-search.jsp" id="patientSearchBtn" class="roundedBtn">Patient Search</a>
 				<a href="/admin/" id="adminBtn" class="roundedBtn">Administration</a>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 		</div>
 	</div>
 	<div id="topWrapper">
-		<div id="top">			
+		<div id="top">
 			<div id="boxes">
 				<div id="boxInformation" class="box">
 					<div class="headingBar">
@@ -143,7 +143,7 @@
 			<ul>
 				<li id="tabEvaluations">
 					<a href="#evaluations"><span>Patient Evaluations</span></a>
-				</li>				
+				</li>
 				<li id="tabMedications" class="on">
 					<a href="#medications"><span>Medications</span></a>
 				</li>
@@ -155,7 +155,7 @@
 				</li>
 				<li id="tabLabs">
 					<a href="#labs"><span>Patient Labs</span></a>
-				</li>				
+				</li>
 				<li id="tabInformation">
 					<a href="#information"><span>Patient Information</span></a>
 				</li>
@@ -164,7 +164,7 @@
 				</li>
 			</ul>
 		</div>
-		<div id="evaluations" class="tabBox">			
+		<div id="evaluations" class="tabBox">
 			<div id="evalNav">
 				<ul>
 					<li><h3>Required Evaluations</h3></li>
@@ -172,7 +172,7 @@
 					<li id="PastCRSNav" class="pastEval"><a href="#PastCRS">View Past <span>Diagnosis-Related Scales</span></a></li>
 					<li><a href="#global_rating_scale">Enter New <span class="upper">Global Rating Scale</span></a></li>
 					<li class="pastEval"><a href="#Pastglobal_rating_scale">View Past Global <span>Rating Scales</span></a></li>
-					
+
 					<li><h3>Additional Evaluations</h3></li>
 					<li><a href="#psychiatric_evaluation">Enter New <span class="upper">Psychiatric Evaluation</span></a></li>
 					<li class="pastEval"><a href="#Pastpsychiatric_evaluation">View Past <span>Psychiatric Evaluation</span></a></li>
@@ -195,16 +195,16 @@
 				<div id="mental_status" class="eval"><div class="content"></div></div>
 				<div id="Pastmental_status" class="past eval"><div class="content"></div></div>
 				<div id="substance_abuse" class="eval"><div class="content"></div></div>
-				<div id="Pastsubstance_abuse" class="past eval"><div class="content"></div></div>		
+				<div id="Pastsubstance_abuse" class="past eval"><div class="content"></div></div>
 				<div id="vital_signs" class="eval"><div class="content"></div></div>
 				<div id="Pastvital_signs" class="past eval"><div class="content"></div></div>
 			</div>
 		</div>
 		<div id="medications" class="tabBox">
 			<div class="floatHolder">
-				<a href="#" class="btn" id="discontinue"><span>Discontinue</span></a>	
+				<a href="#" class="btn" id="discontinue"><span>Discontinue</span></a>
 				<a href="#" class="btn" id="prescribe"><span>ePrescribe</span></a>
-				<h3>Manage Medications:</h3>				
+				<h3>Manage Medications:</h3>
 			</div>
 			<div id="graphWrapper">
 				<div id="key">
@@ -220,7 +220,7 @@
 						</ul>
 					</div>
 				</div>
-				<div id="graph">					
+				<div id="graph">
 					<ul>
 						<li></li>
 						<li></li>
@@ -231,7 +231,7 @@
 						<li></li>
 						<li></li>
 					</ul>
-				</div>			
+				</div>
 			</div>
 			<div id="chartWrapper">
 				<a href="#" class="previous navArrow"><<</a>
@@ -285,7 +285,7 @@
 									<span class="date"></span>
 								</th>
 							</tr>
-							</thead>			
+							</thead>
 							<tbody>
 							<!--<tr class="current">
 								<td class="heading">Buproprion</td>
@@ -407,7 +407,7 @@
 					<div class="notes"></div>
 				</div>
 				<h2 class="conditionalHeading hide" id="otherInfoHdr">Other Information</h2>
-				<div class="othermessages"></div>	
+				<div class="othermessages"></div>
 			</div>
 		</div>
 		<div id="progress" class="tabBox">
@@ -419,8 +419,8 @@
 							<p>Enter a search term:</p>
 							<input type="text" disabled="disabled" rel="Enter keyword(s)" id="noteKeywords" class="greenInput" value="Enter keyword(s)" />
 							<input type="submit" class="orangeBtn" id="searchNotesKeyword" value="Search" disabled="disabled" />
-						</form>					
-					</div>					
+						</form>
+					</div>
 					<div class="fieldWrapper" id="tagHolder">
 						<p>Select a tag to filter:</p>
 						<div class="dropdown disabled" id="tagDropdown">
@@ -438,7 +438,7 @@
 					<ul></ul>
 					<div class="pagination bottomPagination"></div>
 				</div>
-				<div id="noteContent"></div>				
+				<div id="noteContent"></div>
 			</div>
 			<div id="noNotesWritten" class="noresults"><p>No progress notes have been written for this patient.</p><p>Click the Create Note button in the upper right to create a note.</p></div>
 			<div id="noNotesSearch" class="noresults">Your search did not match any progress notes. <a href="#" class="clearNoteSearch">Clear your search</a></div>
@@ -475,7 +475,7 @@
 		</div>
 		<div id="information" class="tabBox">
 			<div id="displayPatientInfo">
-				<h2>Patient Information: </h2>
+				<h2>Patient Information:ï¿½</h2>
 				<div id="displayInfo" class="patientForm">
 					<div class="floatLeft">
 						<div class="fieldWrapper">
@@ -501,9 +501,9 @@
 						<div class="fieldWrapper">
 							<label for="pcpeText">Primary Care Physician Email:</label>
 							<span id="pcpeText" class="infoText paddingTop"></span>
-						</div>	
+						</div>
 					</div>
-					<div class="floatLeft">						
+					<div class="floatLeft">
 						<div class="fieldWrapper">
 							<label for="patientIdText">ID #:</label>
 							<span id="patientIdText" class="infoText"></span>
@@ -520,7 +520,7 @@
 							<label for="dobText">Date of Birth:</label>
 							<span id="dobText" class="infoText"></span>
 						</div>
-						
+
 						<div class="fieldWrapper">
 							<label for="maritalText">Marital Status:</label>
 							<span id="maritalText" class="infoText"></span>
@@ -534,13 +534,13 @@
 							<span id="livingText" class="infoText"></span>
 						</div>
 					</div>
-					<a href="#" id="editBtn" class="orangeBtn">Edit</a>					
-				</div>					
+					<a href="#" id="editBtn" class="orangeBtn">Edit</a>
+				</div>
 			</div>
 			<div id="editPatientInfo">
-				<h2>Edit Patient Information: </h2>
+				<h2>Edit Patient Information:ï¿½</h2>
 				<div id="createFields" class="patientForm">
-					<jsp:include page="/inc/patientForm.jsp" />					
+					<jsp:include page="/inc/patientForm.jsp" />
 					<a href="#" id="closeEditPatient">Cancel</a><input type="submit" value="Save" class="orangeBtn" id="savePatient" />
 					<div class="clear"></div>
 				</div>
@@ -548,7 +548,7 @@
 		</div>
 		<div id="reports" class="tabBox">Reports</div>
 	</div>
-	</div>	
+	</div>
 </div>
 </body>
 </html>

@@ -1,20 +1,20 @@
 package flinn.beans.request;
 
+import flinn.beans.AbstractDataBean;
+import flinn.beans.ProgressNoteTagBean;
+import flinn.beans.response.ResponseProgressNoteBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.ProgressNoteTagBean;
-import flinn.beans.response.ResponseProgressNoteBean;
 
 @XmlRootElement(name = "progressnote")
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class RequestProgressNoteBean extends AbstractDataBean {
 	@XmlElement(name = "progressnoteid")
-	protected int progressnoteid;	
+	protected int progressnoteid;
 	@XmlElement(name = "patientid")
 	protected int patientid;
 	@XmlElement(name = "notetext")
@@ -27,7 +27,7 @@ public class RequestProgressNoteBean extends AbstractDataBean {
 	protected String entrydate;
 	@XmlElement(name = "tags")
 	protected ProgressNoteTagBean[] tags;
-	
+
 	public RequestProgressNoteBean(ResponseProgressNoteBean bean) {
 		setPatientid(bean.getPatientid());
 		setNotetext(bean.getNotetext());
@@ -54,7 +54,7 @@ public class RequestProgressNoteBean extends AbstractDataBean {
 	}
 	public void setNotetext(String notetext) {
 		this.notetext = notetext;
-	}	
+	}
 	public ProgressNoteTagBean[] getTags() {
 		return tags;
 	}

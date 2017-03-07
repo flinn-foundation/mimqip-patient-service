@@ -1,13 +1,13 @@
 package flinn.beans.request;
 
-import java.util.HashMap;
+import flinn.beans.AbstractDataBean;
+import flinn.beans.response.ResponsePatientBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.response.ResponsePatientBean;
+import java.util.HashMap;
 
 @XmlRootElement(name = "patient")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -17,13 +17,13 @@ public class RequestPatientBean extends AbstractDataBean {
 	@XmlElement(name = "facilityid")
 	protected int facilityid;
 	@XmlElement(name = "valid")
-	protected Boolean valid;	
+	protected Boolean valid;
 	@XmlElement(name = "startdate")
 	protected String startdate;
 	@XmlElement(name = "details")
 	protected HashMap<String, String> details;
 	@XmlElement(name = "status")
-	protected HashMap<String, String> status;	
+	protected HashMap<String, String> status;
 	@XmlElement(name = "shortform")
 	protected boolean shortform;
 	@XmlElement(name = "statusprefix")
@@ -31,14 +31,14 @@ public class RequestPatientBean extends AbstractDataBean {
 	@XmlElement(name = "agingfactor")
 	protected int agingfactor;
 
-	
+
 	public RequestPatientBean(ResponsePatientBean bean) {
 		setPatientid(bean.getPatientid());
 		setFacilityid(bean.getFacilityid());
 		setValid(bean.getValid());
 		setStartdate(bean.getStartdate());
 	}
-	
+
 	public RequestPatientBean() {
 		super();
 	}
@@ -72,7 +72,7 @@ public class RequestPatientBean extends AbstractDataBean {
 	}
 	public void setDetails(HashMap<String, String> details){
 		this.details = details;
-	}	
+	}
 	public HashMap<String, String> getStatus(){
 		return status;
 	}

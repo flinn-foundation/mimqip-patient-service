@@ -1,9 +1,5 @@
 package flinn.dao;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-
 import flinn.beans.AuthcodeBean;
 import flinn.beans.AuthcodeBeanCache;
 import flinn.beans.request.RequestContainerBean;
@@ -12,6 +8,9 @@ import flinn.beans.response.ResponseAppUserBean;
 import flinn.beans.response.ResponseFacilityBean;
 import flinn.beans.response.ResponseSessionContainerBean;
 import flinn.util.IpAddress;
+import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class AuthcodeDao
 {

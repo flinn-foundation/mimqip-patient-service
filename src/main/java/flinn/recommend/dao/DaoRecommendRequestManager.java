@@ -1,25 +1,9 @@
 package flinn.recommend.dao;
 
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
 import flinn.beans.request.RequestContainerBean;
 import flinn.beans.request.RequestPatientBean;
 import flinn.beans.request.RequestPrescriptionBean;
-import flinn.beans.response.ResponseActionBean;
-import flinn.beans.response.ResponseContainerBean;
-import flinn.beans.response.ResponseInitialStagingBean;
-import flinn.beans.response.ResponseInitialStagingContainerBean;
-import flinn.beans.response.ResponseLabBean;
-import flinn.beans.response.ResponsePatientBean;
-import flinn.beans.response.ResponsePrescriptionBean;
-import flinn.beans.response.ResponseRecommendationBean;
-import flinn.beans.response.ResponseRecommendationContainerBean;
-import flinn.beans.response.ResponseSessionContainerBean;
-import flinn.dao.AbstractBaseDao;
+import flinn.beans.response.*;
 import flinn.dao.DaoRequestManager;
 import flinn.dao.imp.LabDaoImp;
 import flinn.dao.imp.PatientDaoImp;
@@ -34,9 +18,15 @@ import flinn.recommend.dao.imp.RuleDaoImp;
 import flinn.service.PatientService;
 import flinn.service.ServiceException;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
 public class DaoRecommendRequestManager extends AbstractBaseDao {
 	/* TODO: need to change this to handle web services (like DaoRequestManager) rather than handle calls directly via java method calls.  Phase 2 */
-	
+
 	public ResponseContainerBean handleInitialStaging(RequestContainerBean input, ResponseSessionContainerBean session, Connection connection, boolean b)
 	{
 		if (input.getInitialstaging() != null)
@@ -87,7 +77,7 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 			else //Set reason bean
 			{
 				ResponseContainerBean rcb = (new GuidelineReasonDaoImp()).handleGuidelineReasonCreate(input, session, connection);
-				
+
 				return rcb;
 			}
 		}
@@ -95,7 +85,7 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 	}
 
 	public boolean handleConsistencyCheck(int patientid) throws ServiceException {
-		
+
 		ResponsePatientBean patientBean = new PatientService().getPatientResponseBean(patientid);
 		if (patientBean != null) {
 			ResponseRecommendationContainerBean rcb = requestRecommendation(new RequestPatientBean(patientBean));
@@ -107,7 +97,7 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 		}
 		return true;
 	}
-	
+
 	public ResponseContainerBean handleRequest(RequestContainerBean input, ResponseSessionContainerBean session, Connection connection, boolean b)
 	{
 		if (input.getPatient() == null) {
@@ -128,7 +118,7 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 		rcb.setAction(new ResponseActionBean(input.getAction()));
 		return rcb;
 	}
-	
+
 	public ResponseRecommendationContainerBean requestRecommendation(RequestPatientBean patientreq)
 	{
 		if (patientreq != null)
@@ -153,7 +143,7 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 
 			RequestPrescriptionBean bean = new RequestPrescriptionBean();
 			bean.setPatientid(patientreq.getPatientid());
-			
+
 			HashMap<String, ArrayList<ResponsePrescriptionBean>> prescriptionInterim = new HashMap<String, ArrayList<ResponsePrescriptionBean>>();
 			HashMap<String, ResponsePrescriptionBean []> prescriptions = new HashMap<String, ResponsePrescriptionBean []>();
 			List<ResponsePrescriptionBean> prescriptionList = null;
@@ -207,8 +197,8 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 			ResponseRecommendationBean rrb = new ResponseRecommendationBean();
 
 			String[] status = { "Patient Name: "+patient.getDetails().get("firstname")[0].getValue()+" "+patient.getDetails().get("lastname")[0].getValue(),
-					"Patient Birthday: " + patient.getDetails().get("birth")[0].getValue(), 
-					"Patient Diagnosis: " + patientInfo.getInfo().get("diagnosis_primary"), 
+					"Patient Birthday: " + patient.getDetails().get("birth")[0].getValue(),
+					"Patient Diagnosis: " + patientInfo.getInfo().get("diagnosis_primary"),
 					"Patient Stage: " + patientInfo.getInfo().get("diagnosis_stage") };
 			rrb.setStatus(status);
 			String[] medications = new String[patientInfo.getPrescriptioninfo().size()];
@@ -222,14 +212,14 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 					LOG.error("Problem with medication " + key);
 				}
 				i++;
-				
+
 			}
 			rrb.setMedications(medications);
-			
+
 			String[][] othermessages = null;
 			String[] othersideeffects = getOthersideeffects(patientInfo, rules);
 			String[] otherreports = getOtherreports(patientInfo, rules);
-			
+
 			int k = 0;
 			// TODO: This should really handle "other messages" more flexibly than this.  Unfortunately, not at this time.
 			if (othersideeffects != null) {
@@ -247,7 +237,7 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 			//		{ "Notes", "None at the present time" }
 			//};
 			rrb.setOthermessages(othermessages);
-			
+
 			rrb.setMedicaltrial(getMedicaltrial(patientInfo, rules));
 			rrb.setGeneralconsistency(getGeneralConsistency(patientInfo, rules));
 			rrb.setAdditionalconsistency(getAdditionalConsistency(patientInfo, rules));
@@ -262,7 +252,7 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 				rrb.setGuidelinechart(null);
 			}
 			rcb.setRecommendation(rrb);
-			
+
 			try
 			{
 				if (connection != null && !connection.isClosed())
@@ -422,7 +412,7 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 		ret = messages.toArray(ret);
 		return ret;
 	}
-	
+
 	private String[] getOthersideeffects(RecommendPatientInfoBean patientInfo,
 			List<ResponseRuleBean> rules) {
 		ArrayList<String> messages = evaluateRules("othersideeffects",patientInfo,rules);
@@ -432,7 +422,7 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 		ret[1] = messages.get(0);
 		return ret;
 	}
-	
+
 	private String[] getOtherreports(RecommendPatientInfoBean patientInfo,
 			List<ResponseRuleBean> rules) {
 		ArrayList<String> messages = evaluateRules("otherreports",patientInfo,rules);
@@ -442,7 +432,7 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 		ret[1] = messages.get(0);
 		return ret;
 	}
-	
+
 	private boolean evaluateRuleCriterium(
 			RecommendRuleCriteriaBean bean,
 			HashMap<String, String> info,

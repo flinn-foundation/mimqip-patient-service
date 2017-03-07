@@ -1,16 +1,15 @@
 package flinn.recommend.dao;
 
+import flinn.recommend.beans.request.RequestMessageBean;
+import flinn.recommend.beans.response.ResponseMessageBean;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.log4j.Logger;
-
-import flinn.recommend.beans.request.RequestMessageBean;
-import flinn.recommend.beans.response.ResponseMessageBean;
 
 public abstract class MessageDao {
 

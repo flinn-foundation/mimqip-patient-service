@@ -1,15 +1,16 @@
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.GregorianCalendar" %>
 <%!
 public String computeLi(int lower, int upper, boolean isYear){
 	StringBuffer liOut = new StringBuffer();
 	if (isYear){
-		for(int i=upper; i>lower; i--){ 
-			liOut.append(buildLi(i));													
-		}	
-	}	
+		for(int i=upper; i>lower; i--){
+			liOut.append(buildLi(i));
+		}
+	}
 	else{
-		for(int i=lower; i<upper; i++){ 
-			liOut.append(buildLi(i));													
+		for(int i=lower; i<upper; i++){
+			liOut.append(buildLi(i));
 		}
 	}
 	return liOut.toString();
@@ -17,13 +18,13 @@ public String computeLi(int lower, int upper, boolean isYear){
 
 public String buildLi(int i){
 	StringBuffer liOut = new StringBuffer();
-	liOut.append("<li");							
+	liOut.append("<li");
 	if (i % 2 == 0) {
-		liOut.append(" class=\"odd\""); 
-	} 
+		liOut.append(" class=\"odd\"");
+	}
 	liOut.append("><a href=\"#");
 	liOut.append(Integer.toString(i));
-	liOut.append("\">");							
+	liOut.append("\">");
 	liOut.append(Integer.toString(i));
 	liOut.append("</a></li>");
 	return liOut.toString();
@@ -32,7 +33,7 @@ public String buildLi(int i){
 <div id="colorboxForm" class="enterLabs">
 		<h1>Enter laboratory test results</h1>
 		<h2 id="labsPatID" class="secondaryHeading">Patient ID#: <span></span></h2>
-		
+
 		<div id="labFields" class="show">
 			<form action="" id="enterLabsForm">
 				<div class="fieldWrapper">
@@ -48,14 +49,14 @@ public String buildLi(int i){
 					<a href="#" class="pullDown">DD</a>
 					<ul>
 						<li class="odd"><a href="#" class="selected">DD</a></li>
-						<%out.print(computeLi(1,32,false));%> 
+						<%out.print(computeLi(1,32,false));%>
 					</ul>
 				</div>
 				<div class="dropdown dob" id="yyyyDropdownLabs">
 					<a href="#" class="pullDown">YYYY</a>
 					<ul>
 						<li class="odd"><a href="#" class="selected">YYYY</a></li>
-						<% 						
+						<%
 						GregorianCalendar cal = new GregorianCalendar();
 						Date date1 = new Date();
 						cal.setTime(date1);
@@ -80,7 +81,7 @@ public String buildLi(int i){
 	<div id="savedLab">
 		<p>The lab test results have been saved.</p>
 		<p class="buttons">
-			<a href="#" id="moreLabs" class="orangeBtn">Enter More Labs</a> 
+			<a href="#" id="moreLabs" class="orangeBtn">Enter More Labs</a>
 			<span>or</span>
 			<a href="#" id="closeLabs">Close</a>
 		</p>

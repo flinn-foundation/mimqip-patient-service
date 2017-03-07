@@ -1,13 +1,13 @@
 package flinn.util;
 
+import flinn.recommend.beans.RecommendDiagnosisBean;
+import flinn.recommend.beans.RecommendTreatmentGuidelineBean;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import flinn.recommend.beans.RecommendDiagnosisBean;
-import flinn.recommend.beans.RecommendTreatmentGuidelineBean;
 
 public class RecommendUtils {
 
@@ -16,7 +16,7 @@ public class RecommendUtils {
 			HashMap<String, HashMap<String, String>> prescriptioninfo,
 			RecommendDiagnosisBean diagnosis, RecommendDiagnosisBean[] diagnoses) {
 		HashMap<String,String> ret = new HashMap<String,String>();
-		
+
 		if (isConsistent(prescriptioninfo,diagnosis)) {
 			ret.put("consistent", "1");
 		} else {
@@ -37,7 +37,7 @@ public class RecommendUtils {
 
 		return ret;
 	}
-	
+
 	public static boolean isConsistentAdditional(
 			HashMap<String, HashMap<String, String>> prescriptioninfo,
 			RecommendDiagnosisBean diagnosis) {
@@ -165,7 +165,7 @@ public class RecommendUtils {
 	public static boolean isConsistent(
 			HashMap<String, HashMap<String, String>> prescriptioninfo,
 			RecommendDiagnosisBean diagnosis) {
-		
+
 		int row=-1;
 		int drug=-1;
 		boolean rowworks = false;
@@ -227,7 +227,7 @@ public class RecommendUtils {
 		}
 		return rowworks;
 	}
-	
+
 	public static String formatDateFromDB(String date) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String ret = "";
@@ -240,14 +240,14 @@ public class RecommendUtils {
 		ret = formatDateFromDB(workingDate);
 		return ret;
 	}
-	
+
 	public static String formatDateFromDB(Date date) {
 		SimpleDateFormat dfout = new SimpleDateFormat("M/d/yyyy");
 		String ret = "";
 		ret = dfout.format(date);
 		return ret;
 	}
-	
+
 	public static String formatCacheKey(String value) {
 		if(value == null)
 			value = "all";

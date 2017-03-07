@@ -1,12 +1,12 @@
 package flinn.beans.request;
 
+import flinn.beans.AbstractDataBean;
+import flinn.beans.LabTestBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.LabTestBean;
 
 @XmlRootElement(name = "labsearch")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -17,7 +17,7 @@ public class RequestLabSearchBean extends AbstractDataBean {
 	@XmlElement(name = "labtest")
 	protected LabTestBean labtest;
 	@XmlElement(name = "page")
-	protected int page;		
+	protected int page;
 	@XmlElement(name = "pagecount")
 	protected int pagecount;
 	public int getPatientid() {

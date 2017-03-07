@@ -1,5 +1,12 @@
 package flinn.dao;
 
+import flinn.beans.FacilityIPBean;
+import flinn.beans.request.RequestFacilityBean;
+import flinn.beans.response.ResponseFacilityBean;
+import flinn.util.cache.EHCacheImpl;
+import flinn.util.cache.ICache;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,14 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.log4j.Logger;
-
-import flinn.beans.FacilityIPBean;
-import flinn.beans.request.RequestFacilityBean;
-import flinn.beans.response.ResponseFacilityBean;
-import flinn.util.cache.EHCacheImpl;
-import flinn.util.cache.ICache;
 
 public abstract class FacilityDao {
 

@@ -1,14 +1,5 @@
 package flinn.recommend.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.log4j.Logger;
-
 import flinn.dao.imp.TreatmentDaoImp;
 import flinn.recommend.beans.RecommendDiagnosisBean;
 import flinn.recommend.beans.RecommendMessageBean;
@@ -18,6 +9,14 @@ import flinn.recommend.beans.request.RequestRuleBean;
 import flinn.recommend.beans.response.ResponseRuleBean;
 import flinn.util.cache.EHCacheImpl;
 import flinn.util.cache.ICache;
+import org.apache.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class RuleDao {
 
@@ -61,9 +60,9 @@ public abstract class RuleDao {
 	public int create(final RequestRuleBean bean, Connection connection)
 			throws Exception {
 		int ruleid = 0;
-		
+
 		clearRulesCache();
-		
+
 		if (bean != null) {
 			if (connection == null || connection.isClosed()) {
 				LOG.debug("bad DB Connection");
@@ -226,7 +225,7 @@ public abstract class RuleDao {
 			final ResponseRuleBean original, Connection connection)
 			throws Exception {
 		int result = -1;
-		
+
 		clearRulesCache();
 
 		if (bean != null) {
@@ -376,7 +375,7 @@ public abstract class RuleDao {
 		if (results == null || results.size() < 1) {
 			results = new ArrayList<RecommendDiagnosisBean>();
 			final PreparedStatement preparedStatementQuery = connection.prepareStatement(command);
-	
+
 			final ResultSet resultSet = preparedStatementQuery.executeQuery();
 			try {
 				while (resultSet.next()) {
@@ -402,22 +401,22 @@ public abstract class RuleDao {
 			return results.toArray(ar);
 		}
 		return null;
-	}	
-	
+	}
+
     private RecommendDiagnosisBean[] getDiagnoses(int ruleid, Connection connection) throws Exception {
 		final String command = "select D.DiagnosisID, D.Diagnosis, D.Stage, D.Notes from RecommendRule_RecommendDiagnosis RD, RecommendDiagnosis D WHERE RD.RuleID = ? AND RD.DiagnosisID = D.DiagnosisID";
 
 		ICache<String, List<RecommendDiagnosisBean>> diagnosisCache = EHCacheImpl.getDefaultInstance("diagnosisCache");
-		
+
 		List<RecommendDiagnosisBean> results = null;
 		if (diagnosisCache != null) results = diagnosisCache.get("rule-"+ruleid);
-	
+
 		if (results == null || results.size() < 1) {
 			results = new ArrayList<RecommendDiagnosisBean>();
 			final PreparedStatement preparedStatementQuery = connection
 					.prepareStatement(command);
 			preparedStatementQuery.setInt(1, ruleid);
-	
+
 			final ResultSet resultSet = preparedStatementQuery.executeQuery();
 			try {
 				while (resultSet.next()) {
@@ -607,7 +606,7 @@ public abstract class RuleDao {
 		final String delcommand = "delete from RecommendRule_RecommendDiagnosis WHERE RuleID = ? and DiagnosisID = ?";
 
 		clearDiagnosisCache();
-		
+
 		// Insert into RecommendRule_RecommendDiagnosis
 		if (recommendDiagnosisBeans != null) {
 			for (int i = 0; i < recommendDiagnosisBeans.length; i++) {
@@ -706,7 +705,7 @@ public abstract class RuleDao {
 		final String delcommand = "delete from RecommendRuleCriterium WHERE RuleID = ? and RuleCriteriumID = ?";
 
 		clearRulesCache();
-		
+
 		// Insert into FacilitySetting
 		if (criteria != null) {
 			for (int i = 0; i < criteria.length; i++) {
@@ -826,14 +825,14 @@ public abstract class RuleDao {
 	private RecommendMessageBean getMessage(int messageid, Connection connection)
 	throws SQLException {
 		final String command = "select * from RecommendMessage WHERE MessageID = ?";
-		
+
 		RecommendMessageBean mess = null;
-		
+
 		if (messageid > 0) {
 			final PreparedStatement preparedStatementQuery = connection
 					.prepareStatement(command);
 			preparedStatementQuery.setInt(1, messageid);
-		
+
 			final ResultSet resultSet = preparedStatementQuery.executeQuery();
 			try {
 				if (resultSet.next()) {
@@ -854,9 +853,9 @@ public abstract class RuleDao {
 	public void updateMessage(RecommendMessageBean message,
 			RecommendMessageBean oldMessage, Connection connection)
 			throws Exception {
-		
+
 		clearRulesCache();
-		
+
 		final String command = "update RecommendMessage set Priority = ?, Message = ?, MessageTag = ? where MessageID = ?";
 
 		if (message != null && oldMessage != null) {

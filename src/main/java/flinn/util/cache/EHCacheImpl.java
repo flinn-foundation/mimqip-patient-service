@@ -1,9 +1,5 @@
 package flinn.util.cache;
 
-import org.apache.log4j.Logger;
-
-import java.lang.management.ManagementFactory;
-import javax.management.MBeanServer;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
@@ -11,10 +7,14 @@ import net.sf.ehcache.Element;
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.management.ManagementService;
 import net.sf.ehcache.store.MemoryStoreEvictionPolicy;
+import org.apache.log4j.Logger;
+
+import javax.management.MBeanServer;
+import java.lang.management.ManagementFactory;
 
 /**
  * Basic naive (example) EHCacheImpl (starting point, not a finished product).
- * 
+ *
  * @param <K>
  * @param <V>
  */
@@ -73,7 +73,7 @@ public final class EHCacheImpl<K, V> implements ICache<K, V> {
 				timeToIdleSeconds, maxElements, putNullInCache);
 	}
 
-	
+
 	public void put(final K key, final V value) {
 		if (this.putNullInCache) {
 			this.getCache().put(new Element(key, value));
@@ -104,9 +104,9 @@ public final class EHCacheImpl<K, V> implements ICache<K, V> {
 	private Ehcache getCache() {
 		return this.cacheManager.getEhcache(this.cacheName);
 	}
-	
+
 	public void deleteAll() {
 		this.getCache().removeAll();
 	}
-	
+
 }

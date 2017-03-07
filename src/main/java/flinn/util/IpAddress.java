@@ -1,12 +1,12 @@
 package flinn.util;
 
-import javax.servlet.http.HttpServletRequest;
-
 import flinn.beans.FacilityIPBean;
 import flinn.beans.response.ResponseFacilityBean;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class IpAddress {
-	
+
 	public static final long parse(String address) throws Exception {
 	    String[] octets;
 	    int oct1, oct2, oct3, oct4;
@@ -33,7 +33,7 @@ public class IpAddress {
 	    // System.out.println("IpAddress.parse(): Success "+(oct1*256*256*256 + oct2*256*256 + oct3*256 + oct4));
 	    return (((long)oct1)*256*256*256 + oct2*256*256 + oct3*256 + oct4);
 	}
-	
+
 	public static final String toAddress(long l) {
 		int oct1, oct2, oct3, oct4;
 	    oct1 = (int)(l / (256*256*256));
@@ -43,7 +43,7 @@ public class IpAddress {
 	    String ret = ""+oct1+"."+oct2+"."+oct3+"."+oct4;
 		return ret;
 	}
-	
+
 	public static final boolean validateFacilityIP(ResponseFacilityBean facility, HttpServletRequest req) {
 
 		boolean pass = false;
@@ -51,7 +51,7 @@ public class IpAddress {
 		String remote = req.getRemoteAddr();
 		String fremote = req.getHeader("x-forwarded-for");
 		long remoteL = -1;
-		try { 
+		try {
 			remoteL = flinn.util.IpAddress.parse(remote);
 		} catch (Exception e) {
 			// No valid Remote.  Leave it -1.

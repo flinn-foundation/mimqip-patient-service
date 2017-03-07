@@ -1,5 +1,4 @@
-<%@page contentType="text/html" %> 
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page contentType="text/html" %>
 
 <%
             int adminid = -1;
@@ -248,7 +247,7 @@
         <%
                     dm.disposeConnection("setting_detail");
                     if (editable) {%>
-    </FORM>	
+    </FORM>
     <script language="JavaScript" type="text/javascript">
         function formsubmit(frmname) {
             if(document.forms[frmname]) {

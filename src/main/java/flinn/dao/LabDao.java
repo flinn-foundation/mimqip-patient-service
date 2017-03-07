@@ -1,20 +1,15 @@
 package flinn.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import flinn.beans.LabTestBean;
+import flinn.beans.request.RequestLabBean;
+import flinn.beans.response.ResponseLabBean;
+import org.apache.log4j.Logger;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
-import com.mysql.jdbc.Statement;
-import org.apache.log4j.Logger;
-
-import flinn.beans.LabTestBean;
-import flinn.beans.request.RequestLabBean;
-import flinn.beans.response.ResponseLabBean;
 
 public abstract class LabDao
 {
@@ -95,7 +90,7 @@ public abstract class LabDao
 			final String command = "insert into Lab (PatientID, LabTestID, LabDate, LabText) values(?, ?, ?, ?)";
 
 			LOG.debug("Running query: " + command);
-			PreparedStatement insertStatement = connection.prepareStatement(command,Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement insertStatement = connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
 
 			//Insert into AppUser
 			insertStatement.setInt(1, bean.getPatientid());

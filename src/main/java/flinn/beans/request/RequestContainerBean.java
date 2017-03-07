@@ -1,14 +1,14 @@
 package flinn.beans.request;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import flinn.beans.AbstractDataBean;
 import flinn.recommend.beans.request.RequestMessageBean;
 import flinn.recommend.beans.request.RequestRuleBean;
 import flinn.recommend.beans.request.RequestSettingBean;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "request")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -36,9 +36,9 @@ public class RequestContainerBean extends AbstractDataBean {
 	@XmlElement(name = "prescriptions")
 	protected RequestPrescriptionBean[] prescriptions;
 	@XmlElement(name = "prescriptionsearch")
-	protected RequestPrescriptionSearchBean prescriptionsearch;		
+	protected RequestPrescriptionSearchBean prescriptionsearch;
 	@XmlElement(name = "treatment")
-	protected RequestTreatmentBean treatment;	
+	protected RequestTreatmentBean treatment;
 	@XmlElement(name = "authenticate")
 	protected RequestAuthenticateBean authenticate;
 	@XmlElement(name = "initialstaging")
@@ -47,20 +47,20 @@ public class RequestContainerBean extends AbstractDataBean {
 	protected RequestGuidelineReasonBean guidelinereason;
 
 	// Recommend objects
-	
+
 	@XmlElement(name = "message")
 	protected RequestMessageBean message;
 	@XmlElement(name = "rule")
 	protected RequestRuleBean rule;
 	@XmlElement(name = "setting")
 	protected RequestSettingBean setting;
-	
+
 	public RequestActionBean getAction() {
 		return action;
 	}
 	public void setAction(RequestActionBean action) {
 		this.action = action;
-	}	
+	}
 	public RequestAppUserBean getUser() {
 		return user;
 	}
@@ -78,7 +78,7 @@ public class RequestContainerBean extends AbstractDataBean {
 	}
 	public void setPatient(RequestPatientBean patient) {
 		this.patient = patient;
-	}		
+	}
 	public RequestFacilityBean getFacility() {
 		return facility;
 	}
@@ -97,7 +97,7 @@ public class RequestContainerBean extends AbstractDataBean {
 	public void setProgressnotesearch(
 			RequestProgressNoteSearchBean progressnotesearch) {
 		this.progressnotesearch = progressnotesearch;
-	}	
+	}
 	public RequestLabBean getLab() {
 		return lab;
 	}
@@ -128,13 +128,13 @@ public class RequestContainerBean extends AbstractDataBean {
 	public void setPrescriptionsearch(
 			RequestPrescriptionSearchBean prescriptionsearch) {
 		this.prescriptionsearch = prescriptionsearch;
-	}		
+	}
 	public RequestTreatmentBean getTreatment() {
 		return treatment;
 	}
 	public void setTreatment(RequestTreatmentBean treatment) {
 		this.treatment = treatment;
-	}	
+	}
 	public RequestAuthenticateBean getAuthenticate() {
 		return authenticate;
 	}
@@ -159,7 +159,7 @@ public class RequestContainerBean extends AbstractDataBean {
 	}
 
 	// Recommend Objects
-	
+
 	public RequestMessageBean getMessage() {
 		return message;
 	}

@@ -1,11 +1,11 @@
 package flinn.beans.response;
 
+import flinn.beans.AbstractDataBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
 
 @XmlRootElement(name = "guidelinechart")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -19,7 +19,7 @@ public class ResponseGuidelineChart extends AbstractDataBean {
 	protected ResponseGuidelineChartRow[] rows;
 	@XmlElement(name = "notes")
 	protected String notes;
-	
+
 	public ResponseGuidelineChart() {
 		super();
 	}

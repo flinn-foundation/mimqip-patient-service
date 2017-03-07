@@ -1,5 +1,14 @@
 package flinn.beans;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import flinn.persistence.delegate.BigDecimalPersistenceDelegate;
+import flinn.persistence.delegate.DatePersistenceDelegate;
+import flinn.persistence.delegate.TimestampPersistenceDelegate;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -8,16 +17,6 @@ import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import flinn.persistence.delegate.BigDecimalPersistenceDelegate;
-import flinn.persistence.delegate.DatePersistenceDelegate;
-import flinn.persistence.delegate.TimestampPersistenceDelegate;
 
 
 public abstract class AbstractDataBean implements BeanInterface

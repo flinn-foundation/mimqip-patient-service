@@ -1,5 +1,4 @@
-<%@page contentType="text/html" %> 
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page contentType="text/html" %>
 
 <%
   int ptid = -1;
@@ -13,7 +12,7 @@
   String jspSelf = request.getRequestURI().toString();
   String tagName = "", tagDesc = "";
   int lastactivity = -1;
-  
+
   String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
   flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
   flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
@@ -26,47 +25,47 @@
 		dm.rollbackConnection("updateLastActivity");
 		dm.LOG.debug("Unable to commit changes to updateLastActivity");
 	}
-	
-	adminid = userSession.getUser().getAppuserid(); 
 
-  
+	adminid = userSession.getUser().getAppuserid();
+
+
   if (request.getParameter("id") != null){
 	  tagid = Integer.parseInt(request.getParameter("id"));
   }
-  
+
   if (flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
   if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
-  
+
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
   }
-  
+
   if (request.getParameter("edit") != null){
 	  	if(request.getParameter("edit").equals("y")) hasEdit = true;
   }
-  
+
   if (request.getParameter("Name") != null){
 	  tagName = request.getParameter("Name");
   }
-  
+
   if (request.getParameter("Description") != null){
 	  tagDesc = request.getParameter("Description");
   }
-  
-  
+
+
   if (isAdmin && postType) {
 		flinn.beans.ProgressNoteTagBean input= new flinn.beans.ProgressNoteTagBean();
 		input.setProgressnotetagid(tagid);
 		input.setProgressnotetag(tagName);
 		input.setProgressnotetagdescription(tagDesc);
-		
+
 		Boolean isValid = false;
-		
+
 		if (request.getParameter("Valid") != null){
 			if (request.getParameter("Valid").equals("1")){isValid = true;}
 		}
 		input.setValid(isValid);
-		    	
+
     	if (tagid > 0){//Update lab test
     		try{
         		ptid = dm.updateNoteTag(input, userSession);
@@ -75,7 +74,7 @@
     			dm.rollbackConnection("updateNoteTag");
     		}
     	}
-    	else{ //Create lab test    		
+    	else{ //Create lab test
     		try{
     			ptid = dm.createNoteTag(input, userSession);
     		}
@@ -84,13 +83,13 @@
     		}
     	}
     	tagid = ptid;
-        
+
       if (ptid > 0) {
-	      if (tagid > 0) {  response.sendRedirect("/admin/progress_note_tag_detail.jsp?id="+ptid+"&reason=progressnotetag+changes+saved");    	  
-	      } else {  		response.sendRedirect("/admin/progress_note_tag_detail.jsp?id="+ptid+"&reason=progressnotetag+created"); 
+	      if (tagid > 0) {  response.sendRedirect("/admin/progress_note_tag_detail.jsp?id="+ptid+"&reason=progressnotetag+changes+saved");
+	      } else {  		response.sendRedirect("/admin/progress_note_tag_detail.jsp?id="+ptid+"&reason=progressnotetag+created");
 	      }
 	    } else {
-			response.sendRedirect("/admin/error.jsp?reason="+ptid);     	
+			response.sendRedirect("/admin/error.jsp?reason="+ptid);
 	    }
   }
 
@@ -141,8 +140,8 @@ if (isAdmin && hasEdit) editable = true;
 		<td nowrap><p class="formText">Progress Note Tag Description</p></td>
 		<td align="right">
 			<p class="formText" style="text-align:left;">
-			<% if (editable) out.print("<textarea rows='4' cols='40' name='Description'>");  
-			if (tagid > 0)out.print(tagDesc.replace("&","&amp;").replace("'","&#039;"));  
+			<% if (editable) out.print("<textarea rows='4' cols='40' name='Description'>");
+			if (tagid > 0)out.print(tagDesc.replace("&","&amp;").replace("'","&#039;"));
 			if (editable) out.print("</textarea>"); %></p></td>
 		<td>&nbsp;</td>
 	</tr>
@@ -150,7 +149,7 @@ if (isAdmin && hasEdit) editable = true;
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-	</tr>	
+	</tr>
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Valid?</p></td>
@@ -165,16 +164,16 @@ if (editable) {
   out.print("> invalid<br>\n");
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (adminTag.getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); } 
+  if (adminTag.getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); }
 } if(tagid == 0)adminTag.setValid(false);%></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 	</tr>
-	
+
 <% if (!editable) { %>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
@@ -207,7 +206,7 @@ if (isAdmin && !editable) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 if (editable) {
   %>
 	<tr>
@@ -227,8 +226,8 @@ if (editable) {
                                 <td>
                                         <div class="updateText"><a href="<%
 if (tagid > 0) {
-  out.print(jspSelf); 
-  out.print("?id="+tagid); 
+  out.print(jspSelf);
+  out.print("?id="+tagid);
 } else {
 	out.print("/admin/progress_note_tag.jsp");
 }
@@ -240,12 +239,12 @@ if (tagid > 0) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 %>
-<% 
+<%
 dm.disposeConnection("progress_note_detail");
 if (editable) { %>
-</FORM>	
+</FORM>
 <script language="JavaScript" type="text/javascript">
   function formsubmit(frmname) {
     if(document.forms[frmname]) {
@@ -255,13 +254,13 @@ if (editable) { %>
     }
   }
 
-  
+
   var frmvalidator  = new Validator("adminform");
 <% if (editable) { %>
   frmvalidator.addValidation("Name","req","Please enter a name for the progress note tag");
   frmvalidator.addValidation("Name","maxlen=20","Max length for progress note tag name is 20");
   frmvalidator.addValidation("Description","req","Please enter a description for the progress note tag");
-  frmvalidator.addValidation("Description","maxlen=80","Max length for progress note tag description is 80");  
+  frmvalidator.addValidation("Description","maxlen=80","Max length for progress note tag description is 80");
 <% } %>
 
 </script>

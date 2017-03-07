@@ -1,5 +1,4 @@
-<%@page contentType="text/html" %> 
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page contentType="text/html" %>
 
 <%
   int mid = -1;
@@ -22,7 +21,7 @@
 
   int mGroupID = -1;
   int lastactivity = -1;
-  
+
   String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
   flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
   flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
@@ -35,13 +34,13 @@
 		dm.rollbackConnection("updateLastActivity");
 		dm.LOG.debug("Unable to commit changes to updateLastActivity");
 	}
-	
-	adminid = userSession.getUser().getAppuserid(); 
-  
+
+	adminid = userSession.getUser().getAppuserid();
+
   if (request.getParameter("id") != null) medid = Integer.parseInt(request.getParameter("id"));
 
   if (request.getParameter("Name") != null) mName = request.getParameter("Name");
-  
+
   if (request.getParameter("Abbreviation") != null) mAbbrev = request.getParameter("Abbreviation");
 
   if (request.getParameter("MedGroup") != null) mGroupID = Integer.parseInt(request.getParameter("MedGroup"));
@@ -72,29 +71,29 @@
   if (request.getParameter("SerumLevelLow") != null) mSerumLevelLow = request.getParameter("SerumLevelLow");
   if (request.getParameter("SerumLevelHigh") != null) mSerumLevelHigh = request.getParameter("SerumLevelHigh");
   if (request.getParameter("SerumLevelUnit") != null) mSerumLevelUnit = request.getParameter("SerumLevelUnit");
-    
+
   if(flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
   if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
-  
+
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
   }
-  
+
   if (request.getParameter("edit") != null){
 	  	if(request.getParameter("edit").equals("y")) hasEdit = true;
   }
-  
-  
+
+
   if (isAdmin && postType) {
 		flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
 		flinn.beans.request.RequestTreatmentBean rqTreatmentBean = new flinn.beans.request.RequestTreatmentBean();
-		
+
 		rqTreatmentBean.setTreatmentid(medid);
 		rqTreatmentBean.setTreatmentname(mName);
 		rqTreatmentBean.setTreatmentabbreviation(mAbbrev);
 		rqTreatmentBean.setTreatmentgroupid(mGroupID);
 		java.util.HashMap<String, String> details = new java.util.HashMap<String, String>();
-		
+
 		details.put("StartDose", mStartDose);
 		details.put("DailyLowDose", mDailyLowDose);
 		details.put("DailyHighDose", mDailyHighDose);
@@ -124,12 +123,12 @@
 
 		rqTreatmentBean.setDetails(details);
 		Boolean isValid = false;
-		
+
 		if (request.getParameter("Valid") != null){
 			if (request.getParameter("Valid").equals("1")){isValid = true;}
 		}
 		rqTreatmentBean.setValid(isValid);
-		    	
+
     	if (medid > 0){//Update treatment
     		try{
         		rqcont.setTreatment(rqTreatmentBean);
@@ -153,13 +152,13 @@
     		}
     	}
     	medid = mid;
-        
+
       if (mid > 0) {
-	      if (medid > 0) {  		response.sendRedirect("/admin/treatment_detail.jsp?id="+mid+"&reason=treatment+changes+saved");    	  
-	      } else {  		response.sendRedirect("/admin/treatment_detail.jsp?id="+mid+"&reason=treatment+created"); 
+	      if (medid > 0) {  		response.sendRedirect("/admin/treatment_detail.jsp?id="+mid+"&reason=treatment+changes+saved");
+	      } else {  		response.sendRedirect("/admin/treatment_detail.jsp?id="+mid+"&reason=treatment+created");
 	      }
 	    } else {
-			response.sendRedirect("/admin/error.jsp?reason="+mid);     	
+			response.sendRedirect("/admin/error.jsp?reason="+mid);
 	    }
   }
 
@@ -178,7 +177,7 @@ mName = title;
 medid = adminTreatment.getTreatmentid();
 mAbbrev = adminTreatment.getTreatmentabbreviation();
 
-// get required fields first 
+// get required fields first
 mStartDose = adminTreatment.getDetails().get("StartDose");
 mDailyLowDose = adminTreatment.getDetails().get("DailyLowDose");
 mDailyHighDose = adminTreatment.getDetails().get("DailyHighDose");
@@ -288,7 +287,7 @@ if (isAdmin && hasEdit) editable = true;
 			<% if (editable) out.print("<input type='text' name='DailyLowDose' maxlength='30' value='"); %><% if (medid > 0)out.print(mDailyLowDose.replace("&","&amp;").replace("'","&#039;")); %><% if (editable) out.print("'>"); %></p></td>
 		<td>&nbsp;</td>
 	</tr>
-	
+
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -624,7 +623,7 @@ if (isAdmin && hasEdit) editable = true;
 			<% if (editable) out.print("<input type='text' name='SerumLevelUnit' maxlength='30' value='"); %><% if (medid > 0)out.print(mSerumLevelUnit.replace("&","&amp;").replace("'","&#039;")); %><% if (editable) out.print("'>"); %></p></td>
 		<td>&nbsp;</td>
 	</tr>
-	
+
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -647,7 +646,7 @@ if (isAdmin && hasEdit) editable = true;
 							out.print("<option value='");
 							out.print(tgBean[i].getTreatmentgroupid());
 							out.print("'");
-							if (mGroupID == tgBean[i].getTreatmentgroupid())out.print(" SELECTED"); 
+							if (mGroupID == tgBean[i].getTreatmentgroupid())out.print(" SELECTED");
 							out.print(">");
 							out.print(tgBean[i].getTreatmentgroupabbreviation());
 						}
@@ -658,11 +657,11 @@ if (isAdmin && hasEdit) editable = true;
 					dm.LOG.debug("Unable to open connection findAllTreatmentGroups");
 				}
 
-			}	 
+			}
 			else{out.print(mGroupAbbrev);}
 			%></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -682,10 +681,10 @@ if (editable) {
   out.print("> invalid<br>\n");
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (adminTreatment.getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); } 
+  if (adminTreatment.getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); }
 } if(medid == 0)adminTreatment.setValid(false);%></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 <% if (!editable) { %>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
@@ -718,7 +717,7 @@ if (isAdmin && !editable) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 if (editable) {
   %>
 	<tr>
@@ -738,8 +737,8 @@ if (editable) {
                                 <td>
                                         <div class="updateText"><a href="<%
 if (medid > 0) {
-  out.print(jspSelf); 
-  out.print("?id="+medid); 
+  out.print(jspSelf);
+  out.print("?id="+medid);
 } else {
 	out.print("/admin/treatment.jsp");
 }
@@ -751,12 +750,12 @@ if (medid > 0) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 %>
 <%
 dm.disposeConnection("treatment_detail");
 if (editable) { %>
-</FORM>	
+</FORM>
 <script language="JavaScript" type="text/javascript">
   function formsubmit(frmname) {
     if(document.forms[frmname]) {
@@ -766,7 +765,7 @@ if (editable) { %>
     }
   }
 
-  
+
   var frmvalidator  = new Validator("adminform");
 <% if (editable) { %>
   frmvalidator.addValidation("Name","req","Please enter a name for the treatment");
@@ -774,7 +773,7 @@ if (editable) { %>
   frmvalidator.addValidation("Abbreviation","req","Please enter an abbreviation name for the treatment");
   frmvalidator.addValidation("Abbreviation","maxlen=100","Max length for treatment abbreviation");
   frmvalidator.addValidation("MedGroup","dontselect","Please select a treatment group");
-  
+
   frmvalidator.addValidation("StartDose","req","Please enter a start dose for the treatment");
   frmvalidator.addValidation("StartDose","maxlen=30","Max length for start dose unit is 30");
   frmvalidator.addValidation("DailyLowDose","req","Please enter a daily low dose for the treatment");
@@ -812,7 +811,7 @@ if (editable) { %>
   frmvalidator.addValidation("SerumLevelLow","maxlen=30","Max length for treatment serum level low is 30");
   frmvalidator.addValidation("SerumLevelHigh","maxlen=30","Max length for treatment serum level high is 30");
   frmvalidator.addValidation("SerumLevelUnit","maxlen=30","Max length for treatment serum level unit is 30");
-  
+
 <% } %>
 
 </script>

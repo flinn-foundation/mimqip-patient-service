@@ -1,5 +1,10 @@
 package flinn.util;
 
+import flinn.rcopia.model.RcExtResponseType;
+import flinn.rcopia.service.RcopiaService;
+import flinn.rcopia.service.RcopiaTransformationService;
+import org.apache.log4j.Logger;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -8,12 +13,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
-
-import org.apache.log4j.Logger;
-
-import flinn.rcopia.model.RcExtResponseType;
-import flinn.rcopia.service.RcopiaService;
-import flinn.rcopia.service.RcopiaTransformationService;
 
 public class DrFirstUtils {
 
@@ -25,15 +24,15 @@ public class DrFirstUtils {
 	private static String closeWindow = ApplicationProperties.getProperty("closeWindow");
 	private static String allowPopupScreens = ApplicationProperties.getProperty("allowPopupScreens");
 
-//  Currently not used or provided via querystring parameters	
+//  Currently not used or provided via querystring parameters
 //	private static String rcopiaPracticeUserName = ApplicationProperties.getProperty("rcopiaPracticeUserName");
 //	private static String logoutUrl = ApplicationProperties.getProperty("logoutUrl");
 
 	private static final Logger LOG = Logger.getLogger(DrFirstUtils.class);
-	
+
 	public static String buildDrFirstUrl(String practiceUserName,
 			String patientId, String userId, String logout) {
-		
+
 		// Sanity check patientId
 		int pid = 0;
 		try {
@@ -75,7 +74,7 @@ public class DrFirstUtils {
 
 			String MACValue = generateMD5Hash(queryString.toString(),
 					ApplicationProperties.getProperty("secretKey"));
-			
+
 			queryString.append("&MAC=" + MACValue);
 			String path = ApplicationProperties.getProperty("drFirstURL")
 					+ queryString.toString();
@@ -132,7 +131,7 @@ public class DrFirstUtils {
 
 			String MACValue = generateMD5Hash(queryString.toString(),
 					ApplicationProperties.getProperty("secretKey"));
-			
+
 			queryString.append("&MAC=" + MACValue);
 
 			path = ApplicationProperties.getProperty("drFirstURL")
@@ -170,7 +169,7 @@ public class DrFirstUtils {
 			String startupScreen = "report";
 			String skipAuth = "n";
 			String limpMode = "y";
-			
+
 			StringBuilder queryString = new StringBuilder();
 			queryString.append("rcopia_portal_system_name=" + portalName);
 			queryString.append("&rcopia_user_external_id=" + userId);

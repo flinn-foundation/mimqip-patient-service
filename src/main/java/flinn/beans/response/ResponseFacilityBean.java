@@ -1,15 +1,14 @@
 package flinn.beans.response;
 
-import java.util.HashMap;
+import flinn.beans.AbstractDataBean;
+import flinn.beans.FacilityIPBean;
+import flinn.beans.request.RequestFacilityBean;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.FacilityIPBean;
-import flinn.beans.request.RequestFacilityBean;
+import java.util.HashMap;
 
 @XmlRootElement(name = "facility")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -26,7 +25,7 @@ public class ResponseFacilityBean extends AbstractDataBean{
 	@XmlElement(name = "administratorid")
 	protected String administratorid;
 	@XmlElement(name = "valid")
-	protected Boolean valid;	
+	protected Boolean valid;
 	@XmlElement(name = "launch")
 	protected String launch;
 	@XmlElement(name = "expiration")
@@ -34,8 +33,8 @@ public class ResponseFacilityBean extends AbstractDataBean{
 	@XmlElement(name = "ip")
 	protected FacilityIPBean[] ip;
 	@XmlElement(name = "settings")
-	protected HashMap<String, String> settings;	
-	
+	protected HashMap<String, String> settings;
+
 	public ResponseFacilityBean() {
 		super();
 	}
@@ -45,14 +44,14 @@ public class ResponseFacilityBean extends AbstractDataBean{
 		setFacilityname(reqFacility.getFacilityname());
 		setFacilityshortcut(reqFacility.getFacilityshortcut());
 		setFacilityemail(reqFacility.getFacilityemail());
-		setAdministratorid(reqFacility.getAdministratorid());		
+		setAdministratorid(reqFacility.getAdministratorid());
 		setValid(reqFacility.getValid());
 		setLaunch(reqFacility.getLaunch());
 		setExpiration(reqFacility.getExpiration());
 		setSettings(reqFacility.getSettings());
-		setIp(reqFacility.getIp());		
+		setIp(reqFacility.getIp());
 	}
-	
+
 	public int getFacilityid() {
 		return facilityid;
 	}
@@ -113,5 +112,5 @@ public class ResponseFacilityBean extends AbstractDataBean{
 	public void setSettings(HashMap<String, String> settings) {
 		this.settings = settings;
 	}
-	
+
 }

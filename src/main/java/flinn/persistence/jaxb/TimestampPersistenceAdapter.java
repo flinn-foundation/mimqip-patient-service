@@ -1,8 +1,7 @@
 package flinn.persistence.jaxb;
 
-import java.sql.Timestamp;
-
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+import java.sql.Timestamp;
 
 public class TimestampPersistenceAdapter extends XmlAdapter<String, Timestamp>
 {

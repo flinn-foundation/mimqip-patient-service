@@ -1,12 +1,13 @@
 package flinn.servlet;
 
-import java.beans.XMLDecoder;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.util.Date;
+import com.google.gson.Gson;
+import flinn.beans.BeanInterface;
+import flinn.beans.request.RequestActionBean;
+import flinn.beans.request.RequestContainerBean;
+import flinn.beans.response.ErrorContainerBean;
+import flinn.beans.response.ResponseContainerBean;
+import flinn.dao.DaoRequestManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,16 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-
-import org.apache.log4j.Logger;
-
-import com.google.gson.Gson;
-import flinn.beans.BeanInterface;
-import flinn.beans.response.ErrorContainerBean;
-import flinn.beans.request.RequestActionBean;
-import flinn.beans.request.RequestContainerBean;
-import flinn.beans.response.ResponseContainerBean;
-import flinn.dao.DaoRequestManager;
+import java.beans.XMLDecoder;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.util.Date;
 
 public class FlinnTrainingServlet extends HttpServlet {
 	public static final String DOMAIN_NAME = "localhost";
@@ -52,14 +50,14 @@ public class FlinnTrainingServlet extends HttpServlet {
 	{
 		LOG.debug("Log appender instantiated for " + FlinnServlet.class);
 	}
-	
+
 	@Override
 	protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException
 	{
 
 		RequestContainerBean reqcont = null;
 		RequestActionBean reqab = null;
-		
+
 		try
 		{
 			System.out.println("Request Start time: "+new Date().getTime());
@@ -75,13 +73,13 @@ public class FlinnTrainingServlet extends HttpServlet {
 				else if (thisread == 0) Thread.sleep(50);
 				else bytesRead += thisread;
 				System.out.println("ContentLength: "+contentLength+" Received: "+bytesRead+" This Read: "+thisread);
-			}	
-			
+			}
+
 
 			System.out.println("|"+new String(buf)+"|");
 			reqcont = handleBeanInput(buf, bytesRead, format);
 			if (reqcont != null) reqab = reqcont.getAction();
-			
+
 			if (reqcont == null || reqab == null || reqab.getCommand() == null || reqab.getCommand().equals("") || reqab.getType() == null || reqab.getType().equals("")) {
 				try {
 					sendError(reqab, "Inappropriate or missing level or type -- GENERIC", 3, req, resp);
@@ -135,7 +133,7 @@ public class FlinnTrainingServlet extends HttpServlet {
 		rcb.getAction().setUrl(req.getRequestURL()+"?"+req.getQueryString());
 		printBeanInterface(rcb, req, resp);
 	}
-	
+
 	public void printBeanInterface(final BeanInterface beanInterface, final HttpServletRequest req, final HttpServletResponse resp) throws IOException, JAXBException
 	{
 		final PrintWriter out = resp.getWriter();
@@ -162,7 +160,7 @@ public class FlinnTrainingServlet extends HttpServlet {
 
 	private RequestContainerBean handleBeanInput(char[] buf, int buflen, String format) throws Exception {
 		if (format == null) format = RESPONSE_CODES[DEFAULT_CONTENT_TYPE_INDEX];
-		
+
 		if (format.equalsIgnoreCase(JAVA_RESPONSE_FORMAT))
 		{
 			// String input="<?xml version=\"1.0\" encoding=\"UTF-8\"?><java version=\"1.6.0_13\" class=\"java.flinn.beans.XMLDecoder\"><object class=\"com.healthmedia.stepbystep.flinn.beans.RequestContainerBean\"><void property=\"action\"><object class=\"com.healthmedia.stepbystep.flinn.beans.RequestActionBean\"><void property=\"keycode\"><string>password</string></void><void property=\"level\"><string>profile</string></void><void property=\"type\"><string>read</string></void></object></void><void property=\"login\"><string>somevalueinlogin</string></void></object></java>";
@@ -197,15 +195,15 @@ public class FlinnTrainingServlet extends HttpServlet {
 		}
 	 return myRCBean;
 	}
-	
-	
+
+
 	public RequestContainerBean processJavaintoRequestActionBean(String xmlInput) throws Exception
 	{
 		RequestContainerBean myRCBean=null;
 		try {
 			ByteArrayInputStream is= new ByteArrayInputStream((xmlInput).getBytes());
 			//ByteArrayInputStream is = new ByteArrayInputStream(xmlInput.getBytes("UTF8"));
-			
+
 			XMLDecoder decode = new XMLDecoder(is,new RequestContainerBean());
 			//Object myObject = decode.readObject();
 			myRCBean= (RequestContainerBean) decode.readObject();

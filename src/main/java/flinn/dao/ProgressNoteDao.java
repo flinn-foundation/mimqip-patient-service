@@ -1,19 +1,14 @@
 package flinn.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.mysql.jdbc.Statement;
-import org.apache.log4j.Logger;
-
 import flinn.beans.ProgressNoteTagBean;
 import flinn.beans.request.RequestProgressNoteBean;
 import flinn.beans.response.ResponseProgressNoteBean;
 import flinn.beans.response.ResponseSessionContainerBean;
+import org.apache.log4j.Logger;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class ProgressNoteDao
 {

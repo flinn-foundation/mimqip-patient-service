@@ -1,10 +1,10 @@
 package flinn.util;
 
+import org.apache.commons.lang.time.DateUtils;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.apache.commons.lang.time.DateUtils;
 
 public final class DateString
 {

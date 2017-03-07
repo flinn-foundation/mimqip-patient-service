@@ -1,11 +1,11 @@
 package flinn.beans.request;
 
+import flinn.beans.AbstractDataBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
 
 @XmlRootElement(name = "lab")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -17,7 +17,7 @@ public class RequestInitialStagingBean extends AbstractDataBean {
 	protected String diagnosis;
 	@XmlElement(name = "treatments")
 	protected String[] treatments;
-	
+
 
 	public int getPatientid() {
 		return patientid;

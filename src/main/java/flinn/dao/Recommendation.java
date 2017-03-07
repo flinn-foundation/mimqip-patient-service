@@ -1,7 +1,5 @@
 package flinn.dao;
 
-import java.sql.Connection;
-
 import flinn.beans.request.RequestContainerBean;
 import flinn.beans.request.RequestPatientBean;
 import flinn.beans.response.ResponseActionBean;
@@ -9,6 +7,8 @@ import flinn.beans.response.ResponseContainerBean;
 import flinn.beans.response.ResponseRecommendationContainerBean;
 import flinn.beans.response.ResponseSessionContainerBean;
 import flinn.service.ServiceException;
+
+import java.sql.Connection;
 
 public class Recommendation extends AbstractBaseDao
 {
@@ -26,7 +26,7 @@ public class Recommendation extends AbstractBaseDao
 	public boolean handleConsistencyCheck(int patientid) throws ServiceException {
 		return ((new flinn.recommend.dao.DaoRecommendRequestManager()).handleConsistencyCheck(patientid));
 	}
-	
+
 	public ResponseContainerBean handleRequest(RequestContainerBean input, ResponseSessionContainerBean session, Connection connection, boolean b)
 	{
 		if (input.getPatient() == null) {
@@ -47,7 +47,7 @@ public class Recommendation extends AbstractBaseDao
 		rcb.setAction(new ResponseActionBean(input.getAction()));
 		return rcb;
 	}
-	
+
 	public ResponseRecommendationContainerBean requestRecommendation(RequestPatientBean patientreq)
 	{
 		return ((new flinn.recommend.dao.DaoRecommendRequestManager()).requestRecommendation(patientreq));

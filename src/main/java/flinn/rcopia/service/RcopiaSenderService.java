@@ -1,7 +1,7 @@
 package flinn.rcopia.service;
 
-import java.io.IOException;
-
+import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+import flinn.util.ApplicationProperties;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpStatus;
@@ -9,9 +9,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.log4j.Logger;
 
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-
-import flinn.util.ApplicationProperties;
+import java.io.IOException;
 
 public class RcopiaSenderService
 {

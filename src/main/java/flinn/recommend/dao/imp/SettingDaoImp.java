@@ -1,11 +1,5 @@
 package flinn.recommend.dao.imp;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-
-import org.apache.log4j.Logger;
-
 import flinn.beans.request.RequestContainerBean;
 import flinn.beans.response.ResponseActionBean;
 import flinn.beans.response.ResponseContainerBean;
@@ -16,6 +10,11 @@ import flinn.recommend.beans.response.ResponseSettingContainerBean;
 import flinn.recommend.dao.DaoRecommendManager;
 import flinn.recommend.dao.SettingDao;
 import flinn.util.AdminRole;
+import org.apache.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 public class SettingDaoImp extends SettingDao {
 

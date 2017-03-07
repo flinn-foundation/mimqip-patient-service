@@ -1,13 +1,8 @@
 <%@page contentType="text/html" %>
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
-<%@page import="flinn.recommend.beans.RecommendDiagnosisBean"%>
-<%@page import="flinn.recommend.beans.RecommendMessageBean"%>
 <%@page import="flinn.recommend.beans.RecommendRuleCriteriaBean"%>
-<%@page import="flinn.recommend.beans.response.ResponseMessageBean"%>
-<%@page import="flinn.recommend.beans.response.ResponseRuleBean"%>
-<%@page import="java.util.Arrays" %>
-<%@page import="java.util.ArrayList" %>
-<%@page import="java.util.List" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.List"%>
 
 
 <%

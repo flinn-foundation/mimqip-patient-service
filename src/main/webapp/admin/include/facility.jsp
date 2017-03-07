@@ -1,5 +1,5 @@
-<%@page import="java.util.List"%>
 <%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page import="java.util.List"%>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -31,7 +31,7 @@ if (!invalid) { %>
 		<td width="168" nowrap bgcolor="#CAD8DF"><a href="/admin/facility.jsp?invalid=y<% 		if (request.getParameter("order") != null){
 			out.print("&order="+request.getParameter("order")); }
 		%>" class="subLink"><img src="/admin/images/blue_arrow.gif" width=5 height=10 alt="" border="0">&nbsp;&nbsp;Show All Facilities</a></td>
-						
+
 <% } else { %>
 		<td width="168" nowrap bgcolor="#CAD8DF"><a href="/admin/facility.jsp?<% 		if (request.getParameter("order") != null){
 			out.print("order="+request.getParameter("order")); }
@@ -73,7 +73,7 @@ if (qsOrder != 1){
 if (qsOrder1 != 1){
 	if (request.getParameter("invalid") != null) {
 	  out.print("<a href='"+jspSelf+"?invalid=y&order=1' class='tableHeader'>");
-	  } 
+	  }
 	else {
 	  out.print("<a href='"+jspSelf+"?order=1' class='tableHeader'>");
 	}
@@ -115,7 +115,7 @@ if (qsOrder2 != 1) {
 	<tr bgcolor="#CAD8DF">
 		<td colspan="13"><img src="/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
-	
+
 <%
 boolean first = true;
 String orderby = "FacilityName";
@@ -187,16 +187,16 @@ for (int i=0; i<dbList.size(); i++) {
 		<td colspan="13"><img src="/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
 	</table>
-	
+
 <%!
 public int date_is_not_valid(flinn.beans.response.ResponseFacilityBean bean) throws Exception {
   String now = flinn.util.DateString.now();
   java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-  
+
   if (!bean.getValid()) {
 	  	return 1;
 	  }
-  
+
   if (flinn.util.DateString.interpret(bean.getLaunch()) != null) {
     if (df.parse(now).compareTo(df.parse(bean.getLaunch())) < 0) {
       return 2;

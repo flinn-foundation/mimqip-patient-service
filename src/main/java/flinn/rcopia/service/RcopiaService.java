@@ -1,28 +1,13 @@
 package flinn.rcopia.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-
 import flinn.beans.response.ResponsePatientBean;
 import flinn.dao.model.Medication;
-import flinn.rcopia.model.MedicationListType;
-import flinn.rcopia.model.MedicationType;
-import flinn.rcopia.model.NotificationCountType;
-import flinn.rcopia.model.RcExtRequestType;
-import flinn.rcopia.model.RcExtResponseType;
-import flinn.rcopia.model.ResponseType;
-import flinn.service.BaseService;
-import flinn.service.MedicationService;
-import flinn.service.PatientService;
-import flinn.service.PrescriptionEventService;
-import flinn.service.ServiceException;
+import flinn.rcopia.model.*;
+import flinn.service.*;
 import flinn.util.DateString;
+import org.apache.log4j.Logger;
+
+import java.util.*;
 
 public class RcopiaService extends BaseService
 {
@@ -68,7 +53,7 @@ public class RcopiaService extends BaseService
 		{
 			lastUpdatedDate = patientBean.getRcopiaLastUpdatedDate();
 		}
-		
+
 		RcExtRequestType rcRequest = transform.createUpdateMedicationRequest(lastUpdatedDate, patientBean.getPatientid());
 		LOG.debug("Created Rcopia request for update_medication");
 

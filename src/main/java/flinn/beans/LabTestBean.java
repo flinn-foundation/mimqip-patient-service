@@ -1,11 +1,10 @@
 package flinn.beans;
 
-import java.util.HashMap;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.HashMap;
 
 
 @XmlRootElement(name = "labtest")
@@ -17,14 +16,14 @@ public class LabTestBean extends AbstractDataBean {
 	@XmlElement(name = "labtestname")
 	protected String labtestname;
 	@XmlElement(name = "valid")
-	protected Boolean valid;	
+	protected Boolean valid;
 	@XmlElement(name = "startdate")
 	protected String startdate;
 	@XmlElement(name = "discontinuedate")
 	protected String discontinuedate;
 	@XmlElement(name = "details")
 	protected HashMap<String, String> details;
-	
+
 	public int getLabtestid() {
 		return labtestid;
 	}
@@ -60,6 +59,6 @@ public class LabTestBean extends AbstractDataBean {
 	}
 	public void setDetails(HashMap<String, String> details) {
 		this.details = details;
-	}	
+	}
 
 }

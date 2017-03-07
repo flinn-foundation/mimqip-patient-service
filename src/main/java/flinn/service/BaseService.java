@@ -1,8 +1,8 @@
 package flinn.service;
 
-import java.sql.Connection;
-
 import org.apache.log4j.Logger;
+
+import java.sql.Connection;
 
 public abstract class BaseService
 {

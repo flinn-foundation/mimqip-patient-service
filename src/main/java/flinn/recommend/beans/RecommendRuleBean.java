@@ -1,11 +1,11 @@
 package flinn.recommend.beans;
 
+import flinn.beans.AbstractDataBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
 
 @XmlRootElement(name = "rule")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -16,18 +16,18 @@ public class RecommendRuleBean extends AbstractDataBean {
 	@XmlElement(name = "priority")
 	protected int priority;
 	@XmlElement(name = "valid")
-	protected Boolean valid;	
+	protected Boolean valid;
 	@XmlElement(name = "ruletype")
 	protected String ruletype;
 	@XmlElement(name = "rulename")
-	protected String rulename;	
+	protected String rulename;
 	@XmlElement(name = "criteria")
 	protected RecommendRuleCriteriaBean[] criteria;
 	@XmlElement(name = "messages")
-	protected RecommendMessageBean[] messages;	
+	protected RecommendMessageBean[] messages;
 	@XmlElement(name = "diagnoses")
 	protected RecommendDiagnosisBean[] diagnoses;
-	
+
 	public RecommendRuleBean() {
 		super();
 	}

@@ -1,5 +1,3 @@
-<%@page import="java.util.List"%>
-
 <%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
 
 <%
@@ -7,7 +5,7 @@ Boolean invalid = false;
 String jspSelf = request.getRequestURL().toString();
 
 if (request.getParameter("invalid") != null){
-  	if(request.getParameter("invalid").equals("y")) 
+  	if(request.getParameter("invalid").equals("y"))
   		invalid = true;
 }
 
@@ -40,7 +38,7 @@ if (request.getParameter("invalid") != null){
 	<tr bgcolor="#CAD8DF">
 		<td colspan="13"><img src="/recommend/images/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
-	
+
 <%
 boolean first = true;
 String criteria = "false";
@@ -103,7 +101,7 @@ for (int i=0; i<diagnosisList.length; i++) {
 		<td colspan="13"><img src="/recommend/images/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
 	</table>
-	
+
 <%!
 public String WriteTableHeader (String name, String page) {
     StringBuilder outString = new StringBuilder();

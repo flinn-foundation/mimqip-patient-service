@@ -1,18 +1,18 @@
 package flinn.beans.request;
 
+import flinn.beans.AbstractDataBean;
+import flinn.beans.response.ResponseGuidelineReasonBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import flinn.beans.AbstractDataBean;
-import flinn.beans.response.ResponseGuidelineReasonBean;
-
 @XmlRootElement(name = "guidelinereason")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RequestGuidelineReasonBean extends AbstractDataBean  {
 	@XmlElement(name = "reasonid")
-	protected int reasonid;	
+	protected int reasonid;
 	@XmlElement(name = "reason")
 	protected String[] reason;
 	@XmlElement(name = "reasondate")
@@ -20,8 +20,8 @@ public class RequestGuidelineReasonBean extends AbstractDataBean  {
 	@XmlElement(name = "doctorname")
 	protected String doctorname;
 	@XmlElement(name = "patientid")
-	protected int patientid;		
-	
+	protected int patientid;
+
 	public RequestGuidelineReasonBean(ResponseGuidelineReasonBean bean)
 	{
 		setReasonid(bean.getReasonid());
@@ -30,7 +30,7 @@ public class RequestGuidelineReasonBean extends AbstractDataBean  {
 		setDoctorname(bean.getDoctorname());
 		setPatientid(bean.getPatientid());
 	}
-	
+
 	public String[] getReason() {
 		return reason;
 	}
@@ -48,7 +48,7 @@ public class RequestGuidelineReasonBean extends AbstractDataBean  {
 	}
 	public void setReasonid(int reasonid) {
 		this.reasonid = reasonid;
-	}	
+	}
 	public String getDoctorname() {
 		return doctorname;
 	}
@@ -60,7 +60,7 @@ public class RequestGuidelineReasonBean extends AbstractDataBean  {
 	}
 	public void setPatientid(int patientid) {
 		this.patientid = patientid;
-	}	
+	}
 	public RequestGuidelineReasonBean() {
 		super();
 	}

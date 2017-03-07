@@ -1,13 +1,13 @@
 package flinn.beans.response;
 
-import java.util.HashMap;
+import flinn.beans.AbstractDataBean;
+import flinn.beans.TreatmentGroupBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.TreatmentGroupBean;
+import java.util.HashMap;
 
 @XmlRootElement(name = "treatment")
 @XmlAccessorType(XmlAccessType.FIELD)

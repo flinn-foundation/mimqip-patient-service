@@ -1,5 +1,4 @@
-<%@page contentType="text/html" %> 
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page contentType="text/html" %>
 
 <%
   int uid = -1;
@@ -17,7 +16,7 @@
   String loginTailor = "", userFullName = "", userEmail = "";
   String userPracticeUserName = "", userUserExternalID = "";
   int lastactivity = -1;
-  
+
   String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
   flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
   flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
@@ -31,56 +30,56 @@
 		dm.LOG.debug("Unable to commit changes to updateLastActivity");
 	}
 
-  
+
   if (request.getParameter("FacilityID") != null){
 	  facilityid = Integer.parseInt(request.getParameter("FacilityID"));
   }
-  
+
   if (request.getParameter("id") != null){
   	userid = Integer.parseInt(request.getParameter("id"));
   }
-  
+
   if(flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
   if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
-  
+
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
   }
-  
+
   if (request.getParameter("edit") != null){
 	  	if(request.getParameter("edit").equals("y")) hasEdit = true;
   }
-  
+
   if (request.getParameter("passwd") != null){
 	  	if(request.getParameter("passwd").equals("y")) hasPwd = true;
-  } 
-  
+  }
+
   if (request.getParameter("FullName") != null){
 	  	userFullName = request.getParameter("FullName");
-  } 
-  
+  }
+
   if (request.getParameter("Email") != null){
 	  	userEmail = request.getParameter("Email");
-  }   
+  }
 
   if (request.getParameter("PracticeUserName") != null){
 	  	userPracticeUserName = request.getParameter("PracticeUserName");
-  } 
+  }
 
   if (request.getParameter("UserExternalID") != null){
 	  	userUserExternalID = request.getParameter("UserExternalID");
-  }   
+  }
 
 
   if(isSuperAdmin == false){ //Force facilityid for facilityadmins
 		facilityid = userSession.getUser().getFacilityid();
   }
-  
+
   if (isAdmin && postType) {
 	flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
 	flinn.beans.request.RequestAppUserBean input= new flinn.beans.request.RequestAppUserBean();
 
-  if (request.getParameter("cpasswd") != null) {	
+  if (request.getParameter("cpasswd") != null) {
 	flinn.beans.response.ResponseAppUserContainerBean adminUser = null;
 	input.setAppuserid(userid);
 	rqcont.setUser(input);
@@ -102,7 +101,7 @@
 		dm.rollbackConnection("updateUser");
 		dm.LOG.debug("Unable to commit changes to updateUser");
 	}
-	
+
     if (uid > 0) {      		response.sendRedirect("/admin/user_detail.jsp?id="+uid+"&reason=password+changed");
     } else {    		response.sendRedirect("/admin/error.jsp?reason="+uid);
     }
@@ -112,27 +111,27 @@
 		loginTailor = request.getParameter("Login");
 		input.setPassword(request.getParameter("userpasswd1"));
 		Boolean isValid = false;
-		
+
 		if (request.getParameter("Valid") != null){
 			if (request.getParameter("Valid").equals("1")){isValid = true;}
 		}
-		
+
 		//Do roles loop through checks and set to obj
-		java.util.HashMap<String, String> userSetting = new java.util.HashMap<String,String>(); 
+		java.util.HashMap<String, String> userSetting = new java.util.HashMap<String,String>();
 		userSetting.put("FullName", userFullName);
 		if(!userEmail.equals(""))
 			userSetting.put("Email", userEmail);
 		if (!userPracticeUserName.equals(""))
-			userSetting.put("PracticeUserName", userPracticeUserName); 
-		if (!userUserExternalID.equals(""))		  
+			userSetting.put("PracticeUserName", userPracticeUserName);
+		if (!userUserExternalID.equals(""))
 			userSetting.put("UserExternalID", userUserExternalID);
-			
+
 		input.setSettings(userSetting);
 		input.setRoles(flinn.util.AdminFunctions.getRolesFromForm(request));
 		input.setValid(isValid);
 		input.setLaunch(flinn.util.AdminFunctions.parse_date_snippet("Launch",request));
 		input.setExpiration(flinn.util.AdminFunctions.parse_date_snippet("Expiration",request));
-		    	
+
     	if (userid > 0){//Update user
     		if(isSuperAdmin && facilityid == -1) input.setFacilityid(0);
     		input.setAppuserid(userid);
@@ -146,9 +145,9 @@
     		catch(Exception e) {
     			dm.rollbackConnection("updateUser");
     			dm.LOG.debug("Unable to commit changes to updateUser");
-    		} 
+    		}
     	}
-    	else{ //Create user    		
+    	else{ //Create user
     		try{
     			rqcont.setUser(input);
         		uid = dm.createUser(rqcont, userSession);
@@ -156,16 +155,16 @@
     		catch(Exception e) {
     			dm.rollbackConnection("createUser");
     			dm.LOG.debug("Unable to commit changes to createUser");
-    		}    		
+    		}
     	}
     	userid = uid;
-        
+
       if (uid > 0) {
-      if (userid > 0) {  		response.sendRedirect("/admin/user_detail.jsp?id="+uid+"&reason=user+changes+saved");    	  
-      } else {  		response.sendRedirect("/admin/user_detail.jsp?id="+uid+"&reason=user+created"); 
+      if (userid > 0) {  		response.sendRedirect("/admin/user_detail.jsp?id="+uid+"&reason=user+changes+saved");
+      } else {  		response.sendRedirect("/admin/user_detail.jsp?id="+uid+"&reason=user+created");
       }
     } else {
-		response.sendRedirect("/admin/error.jsp?reason="+uid);     	
+		response.sendRedirect("/admin/error.jsp?reason="+uid);
     }
   }
 }
@@ -190,7 +189,7 @@ while(it.hasNext())
 {
 	String key = it.next();
 	String value = adminUser.getUser().getSettings().get(key);
-	
+
 	if (key.equals("FullName"))
 		userFullName = value;
 	if (key.equals("Email"))
@@ -216,7 +215,7 @@ if (isAdmin && hasPwd) cpasswd = true;
 <% if (cpasswd) { %>
 <input type="hidden" name="cpasswd" value="1">
 <% } %>
-<% } 
+<% }
 
 if(!cpasswd){%>
 	<tr>
@@ -239,12 +238,12 @@ if(!cpasswd){%>
 			<% if (editable) out.print("<input type='text' name='Login' maxlength='20' value='"); %><% if (userid > 0)out.print(loginTailor.replace("&","&amp;").replace("'","&#039;")); %><% if (editable) out.print("'>"); %></p></td>
 		<td>&nbsp;</td>
 	</tr>
-<% if(!cpasswd){%>	
+<% if(!cpasswd){%>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/php/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-	</tr>	
+	</tr>
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Full Name</p></td>
@@ -258,7 +257,7 @@ if(!cpasswd){%>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/php/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-	</tr>	
+	</tr>
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Email Address</p></td>
@@ -267,13 +266,13 @@ if(!cpasswd){%>
 			<p class="formText" style="text-align:left;">
 			<% if (editable) out.print("<input type='text' name='Email' maxlength='50' value='"); %><% if (userid > 0)out.print(userEmail); %><% if (editable) out.print("'>"); %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
-	
+	</tr>
+
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/php/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-	</tr>	
+	</tr>
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Practice User Name</p></td>
@@ -282,13 +281,13 @@ if(!cpasswd){%>
 		<p class="formText" style="text-align:left;">
 		<% if (editable) out.print("<input type='text' name='PracticeUserName' maxlength='50' value='"); %><% if (userid > 0)out.print(userPracticeUserName); %><% if (editable) out.print("'>"); %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/php/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-	</tr>	
+	</tr>
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">User External ID</p></td>
@@ -297,8 +296,8 @@ if(!cpasswd){%>
 		<p class="formText" style="text-align:left;">
 		<% if (editable) out.print("<input type='text' name='UserExternalID' maxlength='50' value='"); %><% if (userid > 0)out.print(userUserExternalID); %><% if (editable) out.print("'>"); %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
-	
+	</tr>
+
 <% }
 if (cpasswd || userid == 0) { %>
 	<tr>
@@ -313,7 +312,7 @@ if (cpasswd || userid == 0) { %>
 			<p class="formText" style="text-align:left;">
 			<input type='password' name='userpasswd1' maxlength='40' value=''></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/php/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -326,7 +325,7 @@ if (cpasswd || userid == 0) { %>
 			<p class="formText" style="text-align:left;">
 			<input type='password' name='userpasswd2' maxlength='40' value=''></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 <% } %>
 <% if (!cpasswd) { %>
 	<tr>
@@ -346,12 +345,12 @@ if (editable) {
 
   	//Pull user role
 	flinn.beans.AppUserRoleBean[] urar = adminUser.getUser().getRoles();
-  	
+
 	for(int i = 0;i< ar.length; i++){ //Loop thru all roles
 		if (!isSuperAdmin && i == 0){i++;} //Skip Admin if user isn't a superadmin
 		flinn.beans.AppUserRoleBean role = (flinn.beans.AppUserRoleBean)ar[i];
 				out.print("<input type='checkbox' name='userrole_"+role.getApprole()+"' value='"+role.getApproleid()+"'");
-				
+
 				for(int j=0; j < urar.length; j++){
 					flinn.beans.AppUserRoleBean userRole = (flinn.beans.AppUserRoleBean)urar[j];
 					String urole = userRole.getApprole();
@@ -372,7 +371,7 @@ else
 }
 %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -392,10 +391,10 @@ if (editable) {
   out.print("> invalid<br>\n");
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (adminUser.getUser().getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); } 
+  if (adminUser.getUser().getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); }
 } if(userid == 0)adminUser.getUser().setValid(false);%></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -404,7 +403,7 @@ if (editable) {
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Live Date<br><em>when the account should become active</em></p></td>
-		<td align="right"><% 
+		<td align="right"><%
 if (editable) {
   out.print("<p class='formText' style='text-align:left;'>");
   out.print("(YYYY-MM-DD hh:mm:ss)<br>");
@@ -423,14 +422,14 @@ if (editable) {
     if (df.parse(flinn.util.DateString.now()).compareTo(df.parse(adminUser.getUser().getLaunch())) < 0) {
     	out.print("<span class='formTextRed'>"+adminUser.getUser().getLaunch()+"</span>");
     } else {
-    	out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getLaunch())); 
+    	out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getLaunch()));
     }
   } else {
-	  out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getLaunch())); 
+	  out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getLaunch()));
   }
 } %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -439,7 +438,7 @@ if (editable) {
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Expire Date<br><em>when the account should expire</em></p></td>
-		<td><% 
+		<td><%
 if (editable) {
 	out.print("<p class='formText' style='text-align:left;'>");
 	out.print("(YYYY-MM-DD hh:mm:ss)<br>");
@@ -466,7 +465,7 @@ if (editable) {
   }
 } %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 <% if (!editable) { %>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
@@ -478,7 +477,7 @@ if (editable) {
 		<td nowrap><p class="formText">Last Login</p></td>
 		<td align="right"><p class="formText" style="text-align:left;"><% out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getLastloggedin())); %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -489,7 +488,7 @@ if (editable) {
 		<td nowrap><p class="formText">Last Remote Address</p></td>
 		<td align="right"><p class="formText" style="text-align:left;"><% out.print(adminUser.getUser().getLastremoteaddress()); %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -500,7 +499,7 @@ if (editable) {
 		<td nowrap><p class="formText">Last Server Activity</p></td>
 		<td align="right"><p class="formText" style="text-align:left;"><% out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getLastactivity())); %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -534,7 +533,7 @@ if (isAdmin && !editable && !cpasswd) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 if (editable) {
   %>
 	<tr>
@@ -554,8 +553,8 @@ if (editable) {
                                 <td>
                                         <div class="updateText"><a href="<%
 if (userid > 0) {
-  out.print(jspSelf); 
-  out.print("?id="+userid); 
+  out.print(jspSelf);
+  out.print("?id="+userid);
 } else {
 	out.print("/admin/user.jsp");
 }
@@ -567,7 +566,7 @@ if (userid > 0) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 if (cpasswd) {
   %>
         <tr>
@@ -587,8 +586,8 @@ if (cpasswd) {
                                 <td>
                                         <div class="updateText"><a href="<%
 if (adminUser != null) {
-	  out.print(jspSelf); 
-	  out.print("?id="+userid); 
+	  out.print(jspSelf);
+	  out.print("?id="+userid);
 	} else {
 		out.print("/admin/user.jsp");
 }
@@ -602,11 +601,11 @@ if (adminUser != null) {
   <%
 }
 %>
-<% 
+<%
 dm.disposeConnection("user_detail");
 
 if (editable || cpasswd) { %>
-</FORM>	
+</FORM>
 <script language="JavaScript" type="text/javascript">
   function formsubmit(frmname) {
     if(document.forms[frmname]) {
@@ -616,7 +615,7 @@ if (editable || cpasswd) { %>
     }
   }
 
-  
+
   var frmvalidator  = new Validator("adminform");
 <% if (editable) { %>
   frmvalidator.addValidation("Login","req","Please enter a user login");
@@ -632,7 +631,7 @@ if (editable || cpasswd) { %>
   frmvalidator.addValidation("userpasswd2","maxlen=40","Max length for password is 40");
   var theForm = document.forms["adminform"];
   /*if (theForm.userpasswd1 != theForm.userpasswd2){
-	  alert("Please verify that the passwords match.");	  
+	  alert("Please verify that the passwords match.");
 	  }
 	*/
 <% } %>

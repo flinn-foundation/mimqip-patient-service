@@ -1,20 +1,19 @@
 package flinn.beans.request;
 
-import java.util.HashMap;
+import flinn.beans.AbstractDataBean;
+import flinn.beans.AppUserRoleBean;
+import flinn.beans.response.ResponseAppUserBean;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.AppUserRoleBean;
-import flinn.beans.response.ResponseAppUserBean;
+import java.util.HashMap;
 
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RequestAppUserBean extends AbstractDataBean  {
-	
+
 	@XmlElement(name = "appuserid")
 	protected int appuserid;
 	@XmlElement(name = "facilityid")
@@ -24,7 +23,7 @@ public class RequestAppUserBean extends AbstractDataBean  {
 	@XmlElement(name = "password")
 	protected String password;
 	@XmlElement(name = "valid")
-	protected Boolean valid;	
+	protected Boolean valid;
 	@XmlElement(name = "launch")
 	protected String launch;
 	@XmlElement(name = "expiration")
@@ -39,7 +38,7 @@ public class RequestAppUserBean extends AbstractDataBean  {
 	protected AppUserRoleBean[] roles;
 	@XmlElement(name = "settings")
 	protected HashMap<String, String> settings;
-	
+
 	public RequestAppUserBean(ResponseAppUserBean bean) {
 		setFacilityid(bean.getFacilityid());
 		setLogin(bean.getLogin());
@@ -51,7 +50,7 @@ public class RequestAppUserBean extends AbstractDataBean  {
 		setSettings(bean.getSettings());
 		setAppuserid(bean.getAppuserid());
 	}
-	
+
 	public int getAppuserid() {
 		return appuserid;
 	}
@@ -81,7 +80,7 @@ public class RequestAppUserBean extends AbstractDataBean  {
 	}
 	public void setValid(Boolean valid) {
 		this.valid = valid;
-	}	
+	}
 	public String getLaunch() {
 		return launch;
 	}

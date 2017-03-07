@@ -1,24 +1,18 @@
 package flinn.dao.imp;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-
-import org.apache.log4j.Logger;
-
 import flinn.beans.TreatmentGroupBean;
 import flinn.beans.request.RequestContainerBean;
 import flinn.beans.request.RequestTreatmentBean;
-import flinn.beans.response.ResponseActionBean;
-import flinn.beans.response.ResponseContainerBean;
-import flinn.beans.response.ResponseSessionContainerBean;
-import flinn.beans.response.ResponseTreatmentBean;
-import flinn.beans.response.ResponseTreatmentContainerBean;
-import flinn.beans.response.ResponseTreatmentGroupContainerBean;
+import flinn.beans.response.*;
 import flinn.dao.DaoRequestManager;
 import flinn.dao.TreatmentDao;
 import flinn.util.cache.EHCacheImpl;
 import flinn.util.cache.ICache;
+import org.apache.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 public class TreatmentDaoImp extends TreatmentDao
 {
@@ -259,7 +253,7 @@ public class TreatmentDaoImp extends TreatmentDao
 			// LOG.debug("getTreatmentById --> ID: " + String.valueOf(treatmentid)
 			//		+ " found in cache");
 		}
-		
+
 		// if the returned object is null, it was not found in the cache
 		if (responseTreatmentBean == null) {
 			if (treatmentid > 0)
@@ -267,7 +261,7 @@ public class TreatmentDaoImp extends TreatmentDao
 				RequestTreatmentBean tmreq = new RequestTreatmentBean();
 				tmreq.setTreatmentid(treatmentid);
 				List<ResponseTreatmentBean> treatments = find(tmreq, null, connection);
-	
+
 				if (treatments != null && treatments.size() > 0)
 				{
 					// get the first item from the response and add to cache
@@ -285,26 +279,26 @@ public class TreatmentDaoImp extends TreatmentDao
 		LOG.debug("getTreatmentByGenericDrugName --> looking for Generic Drug Name: " + String.valueOf(genericDrugName));
 
 		ICache<String, ResponseTreatmentBean> treatmentCache = EHCacheImpl.getDefaultInstance("treatmentCache");
-		
+
 		// try to retrieve the object from the cache by id
 		responseTreatmentBean = treatmentCache.get(String.valueOf(genericDrugName + "---" + form));
 		if (responseTreatmentBean != null) {
 			LOG.debug("getTreatmentByGenericDrugName --> ID: " + String.valueOf(genericDrugName + "---" + form)
 					+ " found in cache");
 		}
-		
+
 		// if the returned object is null, it was not found in the cache
 		if (responseTreatmentBean == null) {
 			if (genericDrugName != null && genericDrugName.length() > 0)
 			{
 				List<ResponseTreatmentBean> treatments = findValid(null, connection, false);
-	
+
 				if (treatments != null && treatments.size() > 0)
 				{
 					// Find the flinn.beans that match, and get specific.
 					for (int i = 0; i < treatments.size(); i++) {
 						ResponseTreatmentBean bean = treatments.get(i);
-						if (bean.getDetails() != null && bean.getDetails().get("GenericNamePattern") != null 
+						if (bean.getDetails() != null && bean.getDetails().get("GenericNamePattern") != null
 								&& bean.getDetails().get("GenericNamePattern").equalsIgnoreCase(genericDrugName)) {
 							if (bean.getDetails().get("FormulationPattern") == null || bean.getDetails().get("FormulationPattern").equals("")) {
 								// If we haven't found a more specific answer already, this is the default choice.
@@ -314,8 +308,8 @@ public class TreatmentDaoImp extends TreatmentDao
 							} else if (form != null && !form.equals("")){
 								String testForm = bean.getDetails().get("FormulationPattern");
 								if (form.toLowerCase().matches(testForm)) {
-									if (responseTreatmentBean == null 
-											|| responseTreatmentBean.getDetails().get("FormulationPattern") == null 
+									if (responseTreatmentBean == null
+											|| responseTreatmentBean.getDetails().get("FormulationPattern") == null
 											|| responseTreatmentBean.getDetails().get("FormulationPattern").equals("")) {
 										// The formulation pattern matches, and the previous selection (if there was one) didn't have a formulation pattern.
 										responseTreatmentBean = bean;

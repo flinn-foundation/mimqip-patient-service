@@ -1,20 +1,18 @@
 package flinn.util;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
+import flinn.beans.AppUserRoleBean;
+import flinn.recommend.beans.RecommendDiagnosisBean;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-
-import flinn.beans.AppUserRoleBean;
-import flinn.recommend.beans.RecommendDiagnosisBean;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
 public class AdminFunctions extends HttpServlet {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

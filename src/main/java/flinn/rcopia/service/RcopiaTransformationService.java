@@ -1,38 +1,21 @@
 package flinn.rcopia.service;
 
+import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+import flinn.beans.PatientDetailsBean;
+import flinn.beans.response.ResponsePatientBean;
+import flinn.rcopia.model.*;
+import flinn.rcopia.service.RcopiaSenderService.PreferredMapper;
+import flinn.util.ApplicationProperties;
+import flinn.util.DateString;
+import org.apache.log4j.Logger;
+
+import javax.xml.bind.*;
+import javax.xml.transform.stream.StreamSource;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
-
-import org.apache.log4j.Logger;
-
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-
-import flinn.beans.PatientDetailsBean;
-import flinn.beans.response.ResponsePatientBean;
-import flinn.rcopia.model.CallerType;
-import flinn.rcopia.model.CommandType;
-import flinn.rcopia.model.ObjectFactory;
-import flinn.rcopia.model.PatientListTypeReq;
-import flinn.rcopia.model.PatientTypeReq;
-import flinn.rcopia.model.ProviderType;
-import flinn.rcopia.model.RcExtRequestType;
-import flinn.rcopia.model.RcExtResponseType;
-import flinn.rcopia.model.RcopiaOrExternalID;
-import flinn.rcopia.model.RequestType;
-import flinn.rcopia.model.TraceInformationType;
-import flinn.rcopia.service.RcopiaSenderService.PreferredMapper;
-import flinn.util.ApplicationProperties;
-import flinn.util.DateString;
 
 public class RcopiaTransformationService
 {

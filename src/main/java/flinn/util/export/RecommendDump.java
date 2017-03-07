@@ -1,13 +1,9 @@
 package flinn.util.export;
 
-import java.io.ByteArrayOutputStream;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import org.apache.log4j.Logger;
+
+import java.io.ByteArrayOutputStream;
+import java.sql.*;
 
 public class RecommendDump {
 
@@ -29,7 +25,7 @@ public class RecommendDump {
 	/**
 	 * Create script with insert statements: NOTE THIS IS INCOMPLETE AND ANY
 	 * CONTRIBUTIONS WOULD BE WELCOME
-	 * 
+	 *
 	 * @param out
 	 *            BufferedWriter
 	 * @param table
@@ -129,7 +125,7 @@ public class RecommendDump {
 
 	/**
 	 * Escape string ready for insert via mysql client
-	 * 
+	 *
 	 * @param bIn
 	 *            String to be escaped passed in as byte array
 	 * @return bOut MySQL compatible insert ready ByteArrayOutputStream

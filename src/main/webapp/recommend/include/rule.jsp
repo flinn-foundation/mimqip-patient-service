@@ -1,6 +1,6 @@
-<%@page import="java.util.List"%>
-
 <%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+
+<%@page import="java.util.List"%>
 
 <%
 Boolean invalid = false;
@@ -8,11 +8,11 @@ String jspSelf = request.getRequestURL().toString();
 Boolean qsOrder = false, qsOrder1 = false, qsOrder2 = false;
 
 if (request.getParameter("invalid") != null){
-  	if(request.getParameter("invalid").equals("y")) 
+  	if(request.getParameter("invalid").equals("y"))
   		invalid = true;
 }
 
-if (request.getParameter("order") != null) 
+if (request.getParameter("order") != null)
 {
     if (request.getParameter("order").equals("0"))
     	qsOrder = true;
@@ -74,16 +74,16 @@ if (request.getParameter("order") != null)
 	<tr bgcolor="#CAD8DF">
 		<td colspan="13"><img src="/recommend/images/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
-	
+
 <%
 boolean first = true;
 String orderby = "RuleType, Priority ASC";
 String criteria = "false";
 String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
 
-if (qsOrder1) 
+if (qsOrder1)
     orderby = "RuleName DESC";
-if (qsOrder2) 
+if (qsOrder2)
     orderby = "Priority ASC";
 
 
@@ -146,7 +146,7 @@ for (int i=0; i<ruleList.size(); i++) {
 		<td colspan="13"><img src="/recommend/images/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
 	</table>
-	
+
 <%!
 public String WriteTableHeader (String name, Boolean selected, String page, String order) {
     StringBuilder outString = new StringBuilder();

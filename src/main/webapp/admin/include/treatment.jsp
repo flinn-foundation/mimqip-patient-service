@@ -1,5 +1,5 @@
-<%@page import="java.util.List"%>
 <%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page import="java.util.List"%>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -31,12 +31,12 @@ if (!invalid) { %>
 		<td width="190" nowrap bgcolor="#CAD8DF"><a href="/admin/treatment.jsp?invalid=y<% 		if (request.getParameter("order") != null){
 			out.print("&order="+request.getParameter("order")); }
 		%>" class="subLink"><img src="/admin/images/blue_arrow.gif" width=5 height=10 alt="" border="0">&nbsp;&nbsp;Show All Treatments</a></td>
-						
+
 <% } else { %>
 		<td width="190" nowrap bgcolor="#CAD8DF"><a href="/admin/treatment.jsp?<% 		if (request.getParameter("order") != null){
 			out.print("order="+request.getParameter("order")); }
 		%>" class="subLink"><img src="/admin/images/blue_arrow.gif" width=5 height=10 alt="" border="0">&nbsp;&nbsp;Show Active Treatments</a></td>
-	
+
 <% } %>
 		<td colspan="2"></td>
 	</tr>
@@ -112,7 +112,7 @@ if (qsOrder2 != 1){
 	<tr bgcolor="#CAD8DF">
 		<td colspan="13"><img src="/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
-	
+
 <%
 boolean first = true;
 String orderby = "TreatmentName";
@@ -186,7 +186,7 @@ for (int i=0; i<dataList.size(); i++) {
 		<td colspan="13"><img src="/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
 	</table>
-	
+
 <%!
 public int data_is_not_valid(flinn.beans.response.ResponseTreatmentBean bean) throws Exception {
   if (!bean.getValid()) {

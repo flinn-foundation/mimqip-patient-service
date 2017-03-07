@@ -1,17 +1,16 @@
 package flinn.service;
 
+import flinn.dao.MedicationDao;
+import flinn.dao.dbconnection.DBConnectionPool;
+import flinn.dao.imp.PatientDaoImp;
+import flinn.dao.model.Medication;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.log4j.Logger;
-
-import flinn.dao.MedicationDao;
-import flinn.dao.dbconnection.DBConnectionPool;
-import flinn.dao.imp.PatientDaoImp;
-import flinn.dao.model.Medication;
 
 public class MedicationService extends BaseService
 {

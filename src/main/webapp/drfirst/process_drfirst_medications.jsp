@@ -1,6 +1,6 @@
-<%@ page import="flinn.rcopia.service.RcopiaTransformationService"%>
-<%@ page import="flinn.rcopia.service.RcopiaService"%>
 <%@ page import="flinn.rcopia.model.RcExtResponseType"%>
+<%@ page import="flinn.rcopia.service.RcopiaService"%>
+<%@ page import="flinn.rcopia.service.RcopiaTransformationService"%>
 
 <%
 	RcopiaService service = new RcopiaService();

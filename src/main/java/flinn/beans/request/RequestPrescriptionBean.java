@@ -1,13 +1,13 @@
 package flinn.beans.request;
 
+import flinn.beans.AbstractDataBean;
+import flinn.beans.response.ResponsePrescriptionBean;
+import flinn.beans.response.ResponseTreatmentBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.response.ResponsePrescriptionBean;
-import flinn.beans.response.ResponseTreatmentBean;
 
 @XmlRootElement(name = "prescription")
 @XmlAccessorType(XmlAccessType.FIELD)

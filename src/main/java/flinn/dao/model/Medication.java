@@ -1,5 +1,10 @@
 package flinn.dao.model;
 
+import flinn.rcopia.model.MedicationType;
+import flinn.rcopia.service.DoseTimingUtils;
+import flinn.util.DateString;
+import flinn.util.NumberUtils;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.ParseException;
@@ -7,11 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import flinn.rcopia.model.MedicationType;
-import flinn.rcopia.service.DoseTimingUtils;
-import flinn.util.DateString;
-import flinn.util.NumberUtils;
 
 public class Medication
 {
@@ -111,7 +111,7 @@ public class Medication
 		setDoseOther(medicationType.getSig().getDoseOther());
 		setRefills(medicationType.getSig().getRefills());
 		setDuration(medicationType.getSig().getDuration());
-		if (getDuration() == null) { 
+		if (getDuration() == null) {
 			setDuration(new BigInteger(""+0));
 		}
 		setQuantity(medicationType.getSig().getQuantity());
@@ -515,7 +515,7 @@ public class Medication
 		}
 		return dailyDoseAmount;
 	}
-	
+
 	public double calculateSecondDailyDoseAmount() throws ParseException
 	{
 		int timesPerDay = DoseTimingUtils.getDose(doseTiming);
@@ -546,7 +546,7 @@ public class Medication
 		}
 		return dailyDoseAmount;
 	}
-	
+
 	public String isValidForTreatment()
 	{
 		String errorMessage = "";

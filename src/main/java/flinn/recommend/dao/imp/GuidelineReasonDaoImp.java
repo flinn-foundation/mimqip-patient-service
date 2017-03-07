@@ -1,20 +1,15 @@
 package flinn.recommend.dao.imp;
 
+import flinn.beans.request.RequestContainerBean;
+import flinn.beans.request.RequestGuidelineReasonBean;
+import flinn.beans.response.*;
+import flinn.recommend.dao.DaoRecommendManager;
+import flinn.recommend.dao.GuidelineReasonDao;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-
-import org.apache.log4j.Logger;
-
-import flinn.beans.request.RequestContainerBean;
-import flinn.beans.request.RequestGuidelineReasonBean;
-import flinn.beans.response.ResponseActionBean;
-import flinn.beans.response.ResponseContainerBean;
-import flinn.beans.response.ResponseGuidelineReasonBean;
-import flinn.beans.response.ResponseGuidelineReasonContainerBean;
-import flinn.beans.response.ResponseSessionContainerBean;
-import flinn.recommend.dao.DaoRecommendManager;
-import flinn.recommend.dao.GuidelineReasonDao;
 
 public class GuidelineReasonDaoImp extends GuidelineReasonDao {
 	protected static final Logger LOG = Logger.getLogger(GuidelineReasonDaoImp.class);
@@ -45,13 +40,13 @@ public class GuidelineReasonDaoImp extends GuidelineReasonDao {
 
 		int newid = 0;
 		List<ResponseGuidelineReasonBean> reasons = null;
-		
+
 		try {
 			// Set doctorname
-			if (bean != null){			
+			if (bean != null){
 				bean.setDoctorname(session.getUser().getSettings().get("FullName"));
 			}
-			
+
 			// Create new Guideline reason record
 			newid = create(bean, connection);
 

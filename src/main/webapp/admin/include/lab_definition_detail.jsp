@@ -1,5 +1,4 @@
-<%@page contentType="text/html" %> 
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page contentType="text/html" %>
 
 <%
   int ltid = -1;
@@ -15,7 +14,7 @@
   java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
   String ltName = "", ltFormat = "";
   int lastactivity = -1;
-  
+
   String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
   flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
   flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
@@ -28,52 +27,52 @@
 		dm.rollbackConnection("updateLastActivity");
 		dm.LOG.debug("Unable to commit changes to updateLastActivity");
 	}
-	
-	adminid = userSession.getUser().getAppuserid(); 
-  
+
+	adminid = userSession.getUser().getAppuserid();
+
   if (request.getParameter("id") != null){
 	  labtestid = Integer.parseInt(request.getParameter("id"));
   }
-  
+
   if (request.getParameter("Name") != null){
 	  ltName = request.getParameter("Name");
   }
-  
+
   if (request.getParameter("Format") != null){
 	  ltFormat = request.getParameter("Format");
-  }  
- 
+  }
+
   if(flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
   if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
-  
+
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
   }
-  
+
   if (request.getParameter("edit") != null){
 	  	if(request.getParameter("edit").equals("y")) hasEdit = true;
   }
-  
-  
+
+
   if (isAdmin && postType) {
 		flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
 		flinn.beans.request.RequestLabBean rqLabBean = new flinn.beans.request.RequestLabBean();
 		flinn.beans.LabTestBean input= new flinn.beans.LabTestBean();
-		
+
 		input.setLabtestid(labtestid);
 		input.setLabtestname(ltName);
 		java.util.HashMap<String, String> details = new java.util.HashMap<String, String>();
 		details.put("Format", ltFormat.replace("\n", "||").replace("\r", "||").replace("||||", "||"));
 		input.setDetails(details);
 		Boolean isValid = false;
-		
+
 		if (request.getParameter("Valid") != null){
 			if (request.getParameter("Valid").equals("1")){isValid = true;}
 		}
 		input.setValid(isValid);
 		input.setStartdate(flinn.util.AdminFunctions.parse_date_snippet("StartDate",request));
 		input.setDiscontinuedate(flinn.util.AdminFunctions.parse_date_snippet("DiscontinueDate",request));
-		    	
+
     	if (labtestid > 0){//Update lab test
     	    rqLabBean.setLabtest(input);
     		rqcont.setLab(rqLabBean);
@@ -101,13 +100,13 @@
     		}
     	}
     	labtestid = ltid;
-        
+
       if (ltid > 0) {
-	      if (labtestid > 0) {  		response.sendRedirect("/admin/lab_definition_detail.jsp?id="+ltid+"&reason=labtest+changes+saved");    	  
-	      } else {  		response.sendRedirect("/admin/lab_definition_detail.jsp?id="+ltid+"&reason=labtest+created"); 
+	      if (labtestid > 0) {  		response.sendRedirect("/admin/lab_definition_detail.jsp?id="+ltid+"&reason=labtest+changes+saved");
+	      } else {  		response.sendRedirect("/admin/lab_definition_detail.jsp?id="+ltid+"&reason=labtest+created");
 	      }
 	    } else {
-			response.sendRedirect("/admin/error.jsp?reason="+ltid);     	
+			response.sendRedirect("/admin/error.jsp?reason="+ltid);
 	    }
   }
 
@@ -157,13 +156,13 @@ if (isAdmin && hasEdit) editable = true;
 		<td nowrap><p class="formText">Lab Test Format</p></td>
 		<td align="right">
 			<p class="formText" style="text-align:left;">
-			<% if (editable) out.print("<textarea rows='4' cols='80' name='Format'>"); %><% 
+			<% if (editable) out.print("<textarea rows='4' cols='80' name='Format'>"); %><%
 			if (labtestid > 0)
 				{
-				 if (editable)out.print(ltFormat.replace("&","&amp;").replace("'","&#039;").replace("||","\n")); 
-				 else out.print(ltFormat.replace("&","&amp;").replace("'","&#039;").replace("||","<br/>")); 
+				 if (editable)out.print(ltFormat.replace("&","&amp;").replace("'","&#039;").replace("||","\n"));
+				 else out.print(ltFormat.replace("&","&amp;").replace("'","&#039;").replace("||","<br/>"));
 				}
-			
+
 			%><% if (editable) out.print("</textarea>"); %></p></td>
 		<td>&nbsp;</td>
 	</tr>
@@ -171,7 +170,7 @@ if (isAdmin && hasEdit) editable = true;
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-	</tr>	
+	</tr>
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Valid?</p></td>
@@ -186,10 +185,10 @@ if (editable) {
   out.print("> invalid<br>\n");
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (adminLab.getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); } 
+  if (adminLab.getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); }
 } if(labtestid == 0)adminLab.setValid(false);%></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -198,7 +197,7 @@ if (editable) {
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Start Date<br><em>when the account should become active</em></p></td>
-		<td align="right"><p><% 
+		<td align="right"><p><%
 if (editable) {
   out.print("<p class='formText' style='text-align:left;'>");
   out.print("(YYYY-MM-DD hh:mm:ss)<br>");
@@ -216,14 +215,14 @@ if (editable) {
     if (df.parse(flinn.util.DateString.now()).compareTo(df.parse(adminLab.getStartdate())) < 0) {
     	out.print("<span class='formTextRed'>"+adminLab.getStartdate()+"</span>");
     } else {
-    	out.print(flinn.util.AdminFunctions.formatNulls(adminLab.getStartdate())); 
+    	out.print(flinn.util.AdminFunctions.formatNulls(adminLab.getStartdate()));
     }
   } else {
-	  out.print(flinn.util.AdminFunctions.formatNulls(adminLab.getStartdate())); 
+	  out.print(flinn.util.AdminFunctions.formatNulls(adminLab.getStartdate()));
   }
 } %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -232,7 +231,7 @@ if (editable) {
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Discontinue Date<br><em>when the account should expire</em></p></td>
-		<td><p><% 
+		<td><p><%
 if (editable) {
 	out.print("<p class='formText' style='text-align:left;'>");
 	out.print("(YYYY-MM-DD hh:mm:ss)<br>");
@@ -258,7 +257,7 @@ if (editable) {
   }
 } %></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 <% if (!editable) { %>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
@@ -291,7 +290,7 @@ if (isAdmin && !editable) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 if (editable) {
   %>
 	<tr>
@@ -311,8 +310,8 @@ if (editable) {
                                 <td>
                                         <div class="updateText"><a href="<%
 if (labtestid > 0) {
-  out.print(jspSelf); 
-  out.print("?id="+labtestid); 
+  out.print(jspSelf);
+  out.print("?id="+labtestid);
 } else {
 	out.print("/admin/lab_definition.jsp");
 }
@@ -324,12 +323,12 @@ if (labtestid > 0) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 %>
-<% 
+<%
 dm.disposeConnection("lab_definition_detail");
 if (editable) { %>
-</FORM>	
+</FORM>
 <script language="JavaScript" type="text/javascript">
   function formsubmit(frmname) {
     if(document.forms[frmname]) {
@@ -339,13 +338,13 @@ if (editable) { %>
     }
   }
 
-  
+
   var frmvalidator  = new Validator("adminform");
 <% if (editable) { %>
   frmvalidator.addValidation("Name","req","Please enter a name for the lab test");
   frmvalidator.addValidation("Name","maxlen=50","Max length for lab test name is 50");
   frmvalidator.addValidation("Format","req","Please enter a name for the lab test format");
-  frmvalidator.addValidation("Format","maxlen=500","Max length for lab test format is 500");  
+  frmvalidator.addValidation("Format","maxlen=500","Max length for lab test format is 500");
 <% } %>
 
 </script>

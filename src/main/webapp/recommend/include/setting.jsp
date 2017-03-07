@@ -1,12 +1,12 @@
-<%@page import="java.util.List"%>
-
 <%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+
+<%@page import="java.util.List"%>
 
 <%
 String jspSelf = request.getRequestURL().toString();
 Boolean qsOrder = false, qsOrder1 = false;
 
-if (request.getParameter("order") != null) 
+if (request.getParameter("order") != null)
 {
     if (request.getParameter("order").equals("0"))
     	qsOrder = true;
@@ -47,14 +47,14 @@ if (request.getParameter("order") != null)
 	<tr bgcolor="#CAD8DF">
 		<td colspan="13"><img src="/recommend/images/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
-	
+
 <%
 boolean first = true;
 String orderby = "SettingName";
 String criteria = "false";
 String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
 
-if (qsOrder1) 
+if (qsOrder1)
     orderby = "SettingValue DESC";
 
 
@@ -115,7 +115,7 @@ for (int i=0; i<settingList.size(); i++) {
 		<td colspan="13"><img src="/recommend/images/s.gif" width="1" height="1" alt="" border="0"></td>
 	</tr>
 	</table>
-	
+
 <%!
 public String WriteTableHeader (String name, Boolean selected, String page, String order) {
     StringBuilder outString = new StringBuilder();

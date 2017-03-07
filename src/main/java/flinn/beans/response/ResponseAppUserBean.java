@@ -1,15 +1,14 @@
 package flinn.beans.response;
 
-import java.util.HashMap;
+import flinn.beans.AbstractDataBean;
+import flinn.beans.AppUserRoleBean;
+import flinn.beans.request.RequestAppUserBean;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.AppUserRoleBean;
-import flinn.beans.request.RequestAppUserBean;
+import java.util.HashMap;
 
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -22,7 +21,7 @@ public class ResponseAppUserBean extends AbstractDataBean {
 	@XmlElement(name = "login")
 	protected String login;
 	@XmlElement(name = "valid")
-	protected Boolean valid;	
+	protected Boolean valid;
 	@XmlElement(name = "launch")
 	protected String launch;
 	@XmlElement(name = "expiration")
@@ -36,8 +35,8 @@ public class ResponseAppUserBean extends AbstractDataBean {
 	@XmlElement(name = "roles")
 	protected AppUserRoleBean[] roles;
 	@XmlElement(name = "settings")
-	protected HashMap<String, String> settings;	
-	
+	protected HashMap<String, String> settings;
+
 	public ResponseAppUserBean() {
 		super();
 	}
@@ -61,7 +60,7 @@ public class ResponseAppUserBean extends AbstractDataBean {
 	}
 	public void setAppuserid(int appuserid) {
 		this.appuserid = appuserid;
-	}	
+	}
 	public int getFacilityid() {
 		return facilityid;
 	}
@@ -79,7 +78,7 @@ public class ResponseAppUserBean extends AbstractDataBean {
 	}
 	public void setValid(Boolean valid) {
 		this.valid = valid;
-	}	
+	}
 	public String getLaunch() {
 		return launch;
 	}

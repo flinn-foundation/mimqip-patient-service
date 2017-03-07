@@ -1,10 +1,10 @@
 package flinn.util;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import org.apache.log4j.Logger;
 
 public class ApplicationProperties
 {

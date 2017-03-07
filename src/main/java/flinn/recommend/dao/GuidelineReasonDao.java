@@ -1,5 +1,9 @@
 package flinn.recommend.dao;
 
+import flinn.beans.request.RequestGuidelineReasonBean;
+import flinn.beans.response.ResponseGuidelineReasonBean;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,11 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import org.apache.log4j.Logger;
-
-import flinn.beans.request.RequestGuidelineReasonBean;
-import flinn.beans.response.ResponseGuidelineReasonBean;
 
 public abstract class GuidelineReasonDao {
 	protected static final Logger LOG = Logger.getLogger(GuidelineReasonDao.class);
@@ -138,7 +137,7 @@ public abstract class GuidelineReasonDao {
 		if (bean.getDoctorname() != null) {
 			preparedStatementQuery.setString(index, bean.getDoctorname());
 			index++;
-		}		
+		}
 	}
 
 	// Order must be the same as fillInColumnValues
@@ -173,7 +172,7 @@ public abstract class GuidelineReasonDao {
 		}
 		return query;
 	}
-	
+
 	public String arrayToString(String[] array, String delimiter) {
 	    StringBuilder arTostr = new StringBuilder();
 	    if (array.length > 0) {

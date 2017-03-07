@@ -1,5 +1,4 @@
-<%@page contentType="text/html" %> 
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page contentType="text/html" %>
 
 <%
             int adminid = -1;
@@ -279,7 +278,7 @@
         <%
                     dm.disposeConnection("message_detail");
                     if (editable) {%>
-    </FORM>	
+    </FORM>
     <script language="JavaScript" type="text/javascript">
         function formsubmit(frmname) {
             if(document.forms[frmname]) {
@@ -295,7 +294,7 @@
             frmvalidator.addValidation("MessageTag","req","Please enter a name for the message tag");
             frmvalidator.addValidation("MessageTag","maxlen=50","Max length for message is 50");
             frmvalidator.addValidation("Message","req","Please enter a message");
-            frmvalidator.addValidation("Message","maxlen=50000","Max length for message is 50000");  
+            frmvalidator.addValidation("Message","maxlen=50000","Max length for message is 50000");
         <% }%>
 
     </script>

@@ -1,10 +1,9 @@
-<%@page import="java.util.List"%>
 <%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-		<td colspan="3" width="30%" bgcolor="#CAD8DF"><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
-<%
+    <tr>
+        <td colspan="3" width="30%" bgcolor="#CAD8DF"><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
+        <%
 Boolean invalid = false;
 String jspSelf = request.getRequestURL().toString();
 
@@ -31,12 +30,12 @@ if (!invalid) { %>
 		<td width="225" nowrap bgcolor="#CAD8DF"><a href="/admin/progress_note_tag.jsp?invalid=y<% 		if (request.getParameter("order") != null){
 			out.print("&order="+request.getParameter("order")); }
 		%>" class="subLink"><img src="/admin/images/blue_arrow.gif" width=5 height=10 alt="" border="0">&nbsp;&nbsp;Show All Progress Note Tags</a></td>
-						
+
 <% } else { %>
 		<td width="225" nowrap bgcolor="#CAD8DF"><a href="/admin/progress_note_tag.jsp?<% 		if (request.getParameter("order") != null){
 			out.print("order="+request.getParameter("order")); }
 		%>" class="subLink"><img src="/admin/images/blue_arrow.gif" width=5 height=10 alt="" border="0">&nbsp;&nbsp;Show Active Progress Note Tags</a></td>
-	
+
 <% } %>
 		<td colspan="2"></td>
 	</tr>

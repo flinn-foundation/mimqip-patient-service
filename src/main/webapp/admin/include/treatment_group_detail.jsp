@@ -1,5 +1,4 @@
-<%@page contentType="text/html" %> 
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page contentType="text/html" %>
 
 <%
   int mid = -1;
@@ -15,7 +14,7 @@
   String mName = "", mAbbrev = "";
   int mGroupID = -1;
   int lastactivity = -1;
-  
+
   String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
   flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
   flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
@@ -28,47 +27,47 @@
 		dm.rollbackConnection("updateLastActivity");
 		dm.LOG.debug("Unable to commit changes to updateLastActivity");
 	}
-	
-	adminid = userSession.getUser().getAppuserid(); 
-  
+
+	adminid = userSession.getUser().getAppuserid();
+
   if (request.getParameter("id") != null) medid = Integer.parseInt(request.getParameter("id"));
 
   if (request.getParameter("Name") != null) mName = request.getParameter("Name");
-  
+
   if (request.getParameter("Abbreviation") != null) mAbbrev = request.getParameter("Abbreviation");
-  
+
   if(flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
   if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
-  
+
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
   }
-  
+
   if (request.getParameter("edit") != null){
 	  	if(request.getParameter("edit").equals("y")) hasEdit = true;
   }
-  
-  
+
+
   if (isAdmin && postType) {
 		flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
 		flinn.beans.request.RequestTreatmentBean rqTreatmentBean = new flinn.beans.request.RequestTreatmentBean();
-		
+
 		flinn.beans.TreatmentGroupBean tgBean = new flinn.beans.TreatmentGroupBean();
 		tgBean.setTreatmentgroupid(medid);
 		tgBean.setTreatmentgroupname(mName);
 		tgBean.setTreatmentgroupabbreviation(mAbbrev);
 		Boolean isValid = false;
-		
+
 		if (request.getParameter("Valid") != null){
 			if (request.getParameter("Valid").equals("1")){isValid = true;}
 		}
 		tgBean.setValid(isValid);
 		rqTreatmentBean.setGroup(tgBean);
-		    	
+
     	if (medid > 0){//Update treatment
     		rqcont.setTreatment(rqTreatmentBean);
     		flinn.beans.response.ResponseTreatmentGroupContainerBean rspBean= new flinn.beans.response.ResponseTreatmentGroupContainerBean();
-   		
+
     		try{
         		rspBean = (flinn.beans.response.ResponseTreatmentGroupContainerBean)dm.updateTreatmentGroup(rqcont, userSession);
         		flinn.beans.TreatmentGroupBean[] tgb = rspBean.getGroups();
@@ -83,7 +82,7 @@
     		try{
     			rqcont.setTreatment(rqTreatmentBean);
         		mid = dm.createTreatmentGroup(rqcont, userSession);
-        		
+
     		}
     		catch(Exception e) {
     			dm.rollbackConnection("createTreatmentGroup");
@@ -91,13 +90,13 @@
     		}
     	}
     	medid = mid;
-        
+
       if (mid > 0) {
-	      if (medid > 0) {  		response.sendRedirect("/admin/treatment_group_detail.jsp?id="+mid+"&reason=treatmentgroup+changes+saved");    	  
-	      } else {  		response.sendRedirect("/admin/treatment_group_detail.jsp?id="+mid+"&reason=treatmentgroup+created"); 
+	      if (medid > 0) {  		response.sendRedirect("/admin/treatment_group_detail.jsp?id="+mid+"&reason=treatmentgroup+changes+saved");
+	      } else {  		response.sendRedirect("/admin/treatment_group_detail.jsp?id="+mid+"&reason=treatmentgroup+created");
 	      }
 	    } else {
-			response.sendRedirect("/admin/error.jsp?reason="+mid);     	
+			response.sendRedirect("/admin/error.jsp?reason="+mid);
 	    }
   }
 
@@ -169,10 +168,10 @@ if (editable) {
   out.print("> invalid<br>\n");
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (adminTreatment.getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); } 
+  if (adminTreatment.getValid()) { out.print("valid"); } else { out.print("<span class=\"formTextRed\">invalid</span>"); }
 } if(medid == 0)adminTreatment.setValid(false);%></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 <% if (!editable) { %>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
@@ -205,7 +204,7 @@ if (isAdmin && !editable) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 if (editable) {
   %>
 	<tr>
@@ -225,8 +224,8 @@ if (editable) {
                                 <td>
                                         <div class="updateText"><a href="<%
 if (medid > 0) {
-  out.print(jspSelf); 
-  out.print("?id="+medid); 
+  out.print(jspSelf);
+  out.print("?id="+medid);
 } else {
 	out.print("/admin/treatment_group.jsp");
 }
@@ -238,12 +237,12 @@ if (medid > 0) {
 		<td>&nbsp;</td>
 	</tr>
   <%
-} 
+}
 %>
-<% 
+<%
 dm.disposeConnection("treatment_group_detail");
 if (editable) { %>
-</FORM>	
+</FORM>
 <script language="JavaScript" type="text/javascript">
   function formsubmit(frmname) {
     if(document.forms[frmname]) {
@@ -253,7 +252,7 @@ if (editable) { %>
     }
   }
 
-  
+
   var frmvalidator  = new Validator("adminform");
 <% if (editable) { %>
   frmvalidator.addValidation("Name","req","Please enter a name for the treatment group");

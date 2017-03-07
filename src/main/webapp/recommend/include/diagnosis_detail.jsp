@@ -1,10 +1,7 @@
 <%@page contentType="text/html" %>
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
-<%@page import="flinn.recommend.beans.RecommendTreatmentGuidelineBean"%>
 <%@page import="flinn.recommend.beans.RecommendDiagnosisBean"%>
 <%@page import="flinn.recommend.beans.RecommendRuleCriteriaBean"%>
-<%@page import="java.util.ArrayList" %>
-<%@page import="java.util.List" %>
+<%@page import="flinn.recommend.beans.RecommendTreatmentGuidelineBean"%>
 
 <%
             int adminid = -1;
@@ -297,8 +294,8 @@
         var frmvalidator  = new Validator("adminform");
         <% if (editable) {%>
             frmvalidator.addValidation("Notes","req","Please enter a note");
-            frmvalidator.addValidation("Notes","maxlen=500","Max length for notes is 500");  
-            
+            frmvalidator.addValidation("Notes","maxlen=500","Max length for notes is 500");
+
         <% }%>
 
     </script>

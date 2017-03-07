@@ -1,11 +1,11 @@
 package flinn.beans.request;
 
+import flinn.beans.AbstractDataBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
 
 @XmlRootElement(name = "patient")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -15,23 +15,23 @@ public class RequestPatientSearchBean extends AbstractDataBean {
 	@XmlElement(name = "facilityid")
 	protected int facilityid;
 	@XmlElement(name = "patientidentifier")
-	protected String patientidentifier;		
+	protected String patientidentifier;
 	@XmlElement(name = "valid")
-	protected Boolean valid;	
+	protected Boolean valid;
 	@XmlElement(name = "firstname")
-	protected String firstname;		
+	protected String firstname;
 	@XmlElement(name = "lastname")
-	protected String lastname;		
+	protected String lastname;
 	@XmlElement(name = "sex")
-	protected String sex;		
+	protected String sex;
 	@XmlElement(name = "birth")
-	protected String birth;		
+	protected String birth;
 	@XmlElement(name = "page")
-	protected int page;		
+	protected int page;
 	@XmlElement(name = "pagecount")
-	protected int pagecount;		
+	protected int pagecount;
 
-	
+
 	public RequestPatientSearchBean() {
 		super();
 	}
@@ -53,7 +53,7 @@ public class RequestPatientSearchBean extends AbstractDataBean {
 	}
 	public void setPatientidentifier(String patientidentifier) {
 		this.patientidentifier = patientidentifier;
-	}	
+	}
 	public Boolean getValid() {
 		return valid;
 	}

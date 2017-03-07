@@ -1,14 +1,14 @@
 package flinn.recommend.beans.response;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import flinn.beans.AbstractDataBean;
 import flinn.recommend.beans.RecommendDiagnosisBean;
 import flinn.recommend.beans.RecommendMessageBean;
 import flinn.recommend.beans.RecommendRuleCriteriaBean;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "recommendmessage")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -19,18 +19,18 @@ public class ResponseRuleBean extends AbstractDataBean{
 	@XmlElement(name = "priority")
 	protected int priority;
 	@XmlElement(name = "valid")
-	protected Boolean valid;	
+	protected Boolean valid;
 	@XmlElement(name = "ruletype")
 	protected String ruletype;
 	@XmlElement(name = "rulename")
-	protected String rulename;	
+	protected String rulename;
 	@XmlElement(name = "criteria")
 	protected RecommendRuleCriteriaBean[] criteria;
 	@XmlElement(name = "messages")
-	protected RecommendMessageBean[] messages;	
+	protected RecommendMessageBean[] messages;
 	@XmlElement(name = "diagnoses")
 	protected RecommendDiagnosisBean[] diagnoses;
-	
+
 	public ResponseRuleBean() {
 		super();
 	}
@@ -101,5 +101,5 @@ public class ResponseRuleBean extends AbstractDataBean{
 	public void setDiagnoses(RecommendDiagnosisBean[] diagnoses) {
 		this.diagnoses = diagnoses;
 	}
-	
+
 }

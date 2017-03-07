@@ -1,18 +1,5 @@
 package flinn.recommend.beans;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.TreeSet;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import flinn.beans.AbstractDataBean;
 import flinn.beans.PatientStatusBean;
 import flinn.beans.response.ResponseLabBean;
@@ -20,6 +7,14 @@ import flinn.beans.response.ResponsePatientBean;
 import flinn.beans.response.ResponsePrescriptionBean;
 import flinn.util.DateString;
 import flinn.util.RecommendUtils;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @XmlRootElement(name = "patient")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -113,7 +108,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 				prescriptioninfo.put(psdetails[0].getTreatment().getDetails().get("GuidelineChartName"), analyzePrescription(psdetails));
 			}
 		}
-		
+
 	}
 
 	private HashMap <String,String> analyzePrescription(ResponsePrescriptionBean[] psdetails) {
@@ -123,7 +118,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 		resp.put("medication", psdetails[0].getTreatment().getDetails().get("DisplayName"));
 		resp.put("dose", psdetails[0].getDailydose());
 		resp.put("treatment_group", psdetails[0].getTreatment().getGroup().getTreatmentgroupabbreviation().toLowerCase());
-		
+
 		int response_time = 0;
 		float amt_highdose = 0;
 		float amt_lowdose = 0;
@@ -181,7 +176,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		ResponsePrescriptionBean working = new ResponsePrescriptionBean(psdetails[0]);
 		resp.put("dose_start_date", RecommendUtils.formatDateFromDB(workingstartdate));
 		resp.put("medication_start_date", RecommendUtils.formatDateFromDB(workingstartdate));
@@ -217,7 +212,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 				} else {
 					amt_dose = false;
 				}
-				
+
 			} else { //There's a gap in this prescription, ignore earlier prescriptions of this drug.
 				same_dose = false;
 				i = psdetails.length;
@@ -227,7 +222,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 		resp.put("medication_duration_weeks", ""+((int)(medication_duration/7)));
 		resp.put("dose_duration", ""+dose_duration);
 		resp.put("dose_duration_weeks", ""+((int)(dose_duration/7)));
-		
+
 		if (psdetails[0].getTreatment().getDetails().get("LongActingFlag") != null && psdetails[0].getTreatment().getDetails().get("LongActingFlag").equals("1")
 				&& psdetails[0].getTreatment().getDetails().get("AdministrationMechanism") != null && psdetails[0].getTreatment().getDetails().get("AdministrationMechanism").equalsIgnoreCase("injection")) {
 			resp.put("adequate_medication_trial", "0");
@@ -242,7 +237,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 						e.printStackTrace();
 					}
 					for (int i=1; i<psdetails.length; i++) {
-						// for each administration of the treatment, we have to determine if the patient 
+						// for each administration of the treatment, we have to determine if the patient
 						// was above the amt_req_dose level (within the grace period) before the administration.
 						try {
 							startdate = df.parse(psdetails[i].getEntrydate());
@@ -494,7 +489,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 			}
 		}
 	}
-	
+
 	private void setresponseAMT(ResponsePatientBean bean) {
 		if (prescriptioninfo != null) {
 			Iterator<String> it = prescriptioninfo.keySet().iterator();
@@ -593,7 +588,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 		int dose_duration_weeks = 36500;
 		int medication_duration = 36500;
 		int medication_duration_weeks = 36500;
-		
+
 		for (Iterator<String> it = prescriptioninfo.keySet().iterator(); it.hasNext();) {
 			String key = it.next();
 			HashMap<String,String> pres = prescriptioninfo.get(key);
@@ -798,7 +793,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 			int q9 = Integer.parseInt(info.get("crs_bipolar_q9"));
 			int q10 = Integer.parseInt(info.get("crs_bipolar_q10"));
 			int total = (q1+q2+q3+q4+q5+q6+q7+q8+q9+q10);
-			
+
 			info.put("bdss_score", ""+total);
 			int manictotal = q1+q2+q3+q7+q8;
 			int manicmax = Math.max(q1,Math.max(q2, Math.max(q3, Math.max(q7, q8))));
@@ -982,7 +977,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 				i = Integer.parseInt(info.get("diagnosis_stage"));
 			}
 			if (i > 0 && i <= 4) {
-				// Need to subtract two from the index because the array index is zero-based, 
+				// Need to subtract two from the index because the array index is zero-based,
 				// but both the diagnosis_stage_base (databaseID based) and i are one-based.
 				diagnosis = diagnoses[diagnosis_stage_base+i-2];
 				System.out.println("Setting diagnosis to: "+diagnosis.getDiagnosis());
@@ -1015,7 +1010,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 						info.put("diagnosis_bipolar_depressed_flag", "1");
 					}
 				}
-				
+
 				i++;
 			}
 			if (changedate != null) {
@@ -1065,7 +1060,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 			info.put("Gender_possessive", "His");
 		}
 	}
-	
+
 	public String toExpandedString() {
 		StringBuffer ret = new StringBuffer();
 		ret.append("PatientInfo:\n");
@@ -1114,7 +1109,7 @@ public class RecommendPatientInfoBean extends AbstractDataBean
 		} else {
 			ret.append("        No Diagnosis Available\n");
 		}
-	
+
 		return ret.toString();
 	}
 

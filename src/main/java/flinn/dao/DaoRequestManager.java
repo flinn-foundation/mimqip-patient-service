@@ -1,29 +1,18 @@
 package flinn.dao;
 
+import flinn.beans.request.RequestActionBean;
+import flinn.beans.request.RequestContainerBean;
+import flinn.beans.response.*;
+import flinn.dao.imp.*;
+import flinn.util.PatientLog;
+import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-
-import flinn.beans.request.RequestActionBean;
-import flinn.beans.request.RequestContainerBean;
-import flinn.beans.response.ErrorBean;
-import flinn.beans.response.ErrorContainerBean;
-import flinn.beans.response.ResponseActionBean;
-import flinn.beans.response.ResponseContainerBean;
-import flinn.beans.response.ResponseSessionContainerBean;
-import flinn.dao.imp.AppUserDaoImp;
-import flinn.dao.imp.FacilityDaoImp;
-import flinn.dao.imp.LabDaoImp;
-import flinn.dao.imp.PatientDaoImp;
-import flinn.dao.imp.PrescriptionDaoImp;
-import flinn.dao.imp.ProgressNoteDaoImp;
-import flinn.util.PatientLog;
-
-public class DaoRequestManager extends AbstractBaseDao
+public class DaoRequestManager
 {
 
 	protected static final Logger LOG = Logger.getLogger(DaoRequestManager.class);
@@ -92,7 +81,7 @@ public class DaoRequestManager extends AbstractBaseDao
 	{
 		String type = input.getAction().getType();
 		String command = input.getAction().getCommand();
-		
+
 		// Check the clock.  This is first because it doesn't require DB connectivity.
 		long diff = Math.abs(input.getAction().getTimestamp().longValue() - (new Date()).getTime());
 		if (diff > TIME_CONSTRAINT)
@@ -441,17 +430,17 @@ public class DaoRequestManager extends AbstractBaseDao
 				LOG.error("Unable to close connection after use in handleRequest");
 			}
 		}
-		
+
 		String options = ""; // currently not used.
 		PatientLog.WriteEntry(input, request, ret, session, options);
 		return ret;
 	}
-	
+
 	public ResponseContainerBean handleTrainingRequest(RequestContainerBean input, HttpServletRequest request)
 	{
 		String type = input.getAction().getType();
 		String command = input.getAction().getCommand();
-		
+
 		// Check the clock.  This is first because it doesn't require DB connectivity.
 		long diff = Math.abs(input.getAction().getTimestamp().longValue() - (new Date()).getTime());
 		if (diff > TIME_CONSTRAINT)
@@ -532,7 +521,7 @@ public class DaoRequestManager extends AbstractBaseDao
 				LOG.error("Unable to close connection after use in handleTrainingRequest");
 			}
 		}
-		
+
 		String options = ""; // currently not used.
 		PatientLog.WriteEntry(input, request, ret, session, options);
 		return ret;

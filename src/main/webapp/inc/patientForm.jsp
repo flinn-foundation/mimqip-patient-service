@@ -1,15 +1,16 @@
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.GregorianCalendar" %>
 <%!
 public String computeLi(int lower, int upper, boolean isYear){
 	StringBuffer liOut = new StringBuffer();
 	if (isYear){
-		for(int i=upper; i>lower; i--){ 
-			liOut.append(buildLi(i));													
-		}	
-	}	
+		for(int i=upper; i>lower; i--){
+			liOut.append(buildLi(i));
+		}
+	}
 	else{
-		for(int i=lower; i<upper; i++){ 
-			liOut.append(buildLi(i));													
+		for(int i=lower; i<upper; i++){
+			liOut.append(buildLi(i));
 		}
 	}
 	return liOut.toString();
@@ -17,13 +18,13 @@ public String computeLi(int lower, int upper, boolean isYear){
 
 public String buildLi(int i){
 	StringBuffer liOut = new StringBuffer();
-	liOut.append("<li");							
+	liOut.append("<li");
 	if (i % 2 == 0) {
-		liOut.append(" class=\"odd\""); 
-	} 
+		liOut.append(" class=\"odd\"");
+	}
 	liOut.append("><a href=\"#");
 	liOut.append(Integer.toString(i));
-	liOut.append("\">");							
+	liOut.append("\">");
 	liOut.append(Integer.toString(i));
 	liOut.append("</a></li>");
 	return liOut.toString();
@@ -48,12 +49,12 @@ public String buildLi(int i){
 			<li><input type="checkbox" value="Pacific Islander (Hawaiian, Samoan, or other)" id="racePacific" /> <label for="racePacific">Pacific Islander <span>(Hawaiian, Samoan, or other)</span></label></li>
 			<li><input type="checkbox" value="No response" id="raceNone" /> <label for="raceNone">No response</label></li>
 		</ul>
-	</div>	
+	</div>
 	<div class="fieldWrapper" id="ethnicityField">
 		<label for="raceDropdown">Ethnicity:</label>
 		<div class="floatLeft">
 			<p>Hispanic, Latino or Spanish? </p>
-			<ul id="ethnicityList" class="inputList">		
+			<ul id="ethnicityList" class="inputList">
 				<li><input type="radio" name="hispanic" value="yes" id="hispanicYes" /> <label for="hispanicYes">Yes</label></li>
 				<li><input type="radio" name="hispanic" value="no" id="hispanicNo" /> <label for="hispanicNo">No</label></li>
 				<li><input type="radio" name="hispanic" value="no response" id="hispanicNoResponse" /> <label for="hispanicNoResponse">No response</label></li>
@@ -69,7 +70,7 @@ public String buildLi(int i){
 		<input type="text" class="greenInput" id="pcpeInput" />
 	</div>
 </div>
-<div class="floatLeft right">	
+<div class="floatLeft right">
 	<div class="fieldWrapper">
 		<label for="patientIdInput">ID #:</label>
 		<input type="text" class="greenInput" id="patientIdInput" />
@@ -77,7 +78,7 @@ public String buildLi(int i){
 	<div class="fieldWrapper">
 		<label for="zipCodeInput">ZIP Code:</label>
 		<input type="text" maxlength="6" class="greenInput" id="zipCodeInput" />
-	</div>		
+	</div>
 	<div class="fieldWrapper">
 		<label for="employmentDropdown" class="noPadding">Employment Status:</label>
 		<div class="dropdown" id="employmentDropdown">
@@ -117,14 +118,14 @@ public String buildLi(int i){
 			<a href="#" class="pullDown">DD</a>
 			<ul>
 				<li class="odd"><a href="#" class="selected">DD</a></li>
-				<%out.print(computeLi(1,32,false));%> 
+				<%out.print(computeLi(1,32,false));%>
 			</ul>
 		</div>
 		<div class="dropdown dob" id="yyyyDropdown">
 			<a href="#" class="pullDown">YYYY</a>
 			<ul>
 				<li class="odd"><a href="#" class="selected">YYYY</a></li>
-				<% 						
+				<%
 				GregorianCalendar cal = new GregorianCalendar();
 				Date date1 = new Date();
 				cal.setTime(date1);
@@ -165,5 +166,5 @@ public String buildLi(int i){
 				<li class="odd"><a href="#Group home">Group home</a></li>
 			</ul>
 		</div>
-	</div>	
+	</div>
 </div>

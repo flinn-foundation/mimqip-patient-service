@@ -1,16 +1,15 @@
 package flinn.recommend.beans;
 
-import java.util.ArrayList;
+import flinn.beans.AbstractDataBean;
+import flinn.beans.response.ResponseGuidelineChart;
+import flinn.beans.response.ResponseGuidelineChartRow;
+import flinn.beans.response.ResponseTreatmentBean;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import flinn.beans.AbstractDataBean;
-import flinn.beans.response.ResponseGuidelineChart;
-import flinn.beans.response.ResponseGuidelineChartRow;
-import flinn.beans.response.ResponseTreatmentBean;
+import java.util.ArrayList;
 
 @XmlRootElement(name = "rule")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -19,7 +18,7 @@ public class RecommendDiagnosisBean extends AbstractDataBean {
 	@XmlElement(name = "diagnosisid")
 	protected int diagnosisid;
 	@XmlElement(name = "diagnosis")
-	protected String diagnosis;	
+	protected String diagnosis;
 	@XmlElement(name = "stage")
 	protected String stage;
 	@XmlElement(name = "notes")
@@ -100,7 +99,7 @@ public class RecommendDiagnosisBean extends AbstractDataBean {
 			} else {
 				cellTreats.add(t);
 			}
-			if (i+1 >= treatments2.length || treatments2[i+1].row != rownum || treatments2[i+1].drug != drugnum) { 
+			if (i+1 >= treatments2.length || treatments2[i+1].row != rownum || treatments2[i+1].drug != drugnum) {
 				cell = treatmentsToGuidelineCell(cellTreats);
 			}
 			treats.set(drugnum-1, cell);
@@ -115,7 +114,7 @@ public class RecommendDiagnosisBean extends AbstractDataBean {
 		guidelinechart.setNotes(notes);
 		guidelinechart.setStage(stage);
 	}
-	
+
 	private boolean containsTreatment(
 			ArrayList<RecommendTreatmentGuidelineBean> cellTreats,
 			ResponseTreatmentBean treatment) {

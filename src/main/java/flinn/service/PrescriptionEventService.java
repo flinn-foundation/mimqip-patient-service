@@ -1,17 +1,16 @@
 package flinn.service;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.log4j.Logger;
-
 import flinn.beans.response.ResponseTreatmentBean;
 import flinn.dao.dbconnection.DBConnectionPool;
 import flinn.dao.imp.PrescriptionDaoImp;
 import flinn.dao.imp.TreatmentDaoImp;
 import flinn.dao.model.Medication;
+import org.apache.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 
 public class PrescriptionEventService extends BaseService
 {

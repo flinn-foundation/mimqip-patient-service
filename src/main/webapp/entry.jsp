@@ -14,7 +14,7 @@ try {
 }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Flinn Foundation: Login</title>
 	<link type="text/css" rel="Stylesheet" href="/css/global.css" />
@@ -36,9 +36,9 @@ try {
 				e.preventDefault();
 				$("#openPopup").removeClass("show")
 				$(".login").show();
-			});			
+			});
 			utils.setLoginEvents();
-		});	
+		});
 	</script>
 </head>
 <!--[if IE 7 ]><body id="login" class="ie7"><![endif]-->

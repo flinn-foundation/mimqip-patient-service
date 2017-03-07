@@ -1,27 +1,27 @@
 package flinn.beans.request;
 
+import flinn.beans.AbstractDataBean;
+import flinn.beans.response.ResponseAuthenticateBean;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import flinn.beans.AbstractDataBean;
-import flinn.beans.response.ResponseAuthenticateBean;
-
 @XmlRootElement(name = "authenticate")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RequestAuthenticateBean extends AbstractDataBean  {
-	
+
 	@XmlElement(name = "login")
 	protected String login;
 	@XmlElement(name = "password")
 	protected String password;
 	@XmlElement(name = "facilityid")
-	protected int facilityid;		
-	
+	protected int facilityid;
+
 	public RequestAuthenticateBean(ResponseAuthenticateBean bean) {
 	}
-	
+
 	public String getLogin() {
 		return login;
 	}
@@ -39,7 +39,7 @@ public class RequestAuthenticateBean extends AbstractDataBean  {
 	}
 	public void setFacilityid(int facilityid) {
 		this.facilityid = facilityid;
-	}		
+	}
 
 	public RequestAuthenticateBean() {
 		super();
