@@ -3,6 +3,7 @@ package flinn.recommend.dao;
 import flinn.beans.request.RequestActionBean;
 import flinn.beans.request.RequestContainerBean;
 import flinn.beans.response.*;
+import flinn.dao.AbstractBaseDao;
 import flinn.dao.AuthcodeDao;
 import flinn.dao.imp.AppUserDaoImp;
 import flinn.dao.imp.TreatmentDaoImp;

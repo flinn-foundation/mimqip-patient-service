@@ -1,7 +1,8 @@
 package flinn.dao;
 
-import javax.naming.NamingException;
 import java.sql.SQLException;
+
+import javax.naming.NamingException;
 
 public interface DaoInterface
 {

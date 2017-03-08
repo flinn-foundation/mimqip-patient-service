@@ -4,6 +4,7 @@ import flinn.beans.request.RequestContainerBean;
 import flinn.beans.request.RequestPatientBean;
 import flinn.beans.request.RequestPrescriptionBean;
 import flinn.beans.response.*;
+import flinn.dao.AbstractBaseDao;
 import flinn.dao.DaoRequestManager;
 import flinn.dao.imp.LabDaoImp;
 import flinn.dao.imp.PatientDaoImp;

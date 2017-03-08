@@ -1,5 +1,7 @@
 package flinn.dao;
 
+import java.sql.Connection;
+
 import flinn.beans.request.RequestContainerBean;
 import flinn.beans.request.RequestPatientBean;
 import flinn.beans.response.ResponseActionBean;
@@ -7,8 +9,6 @@ import flinn.beans.response.ResponseContainerBean;
 import flinn.beans.response.ResponseRecommendationContainerBean;
 import flinn.beans.response.ResponseSessionContainerBean;
 import flinn.service.ServiceException;
-
-import java.sql.Connection;
 
 public class Recommendation extends AbstractBaseDao
 {

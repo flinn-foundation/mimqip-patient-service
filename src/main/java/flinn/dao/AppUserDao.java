@@ -1,11 +1,5 @@
 package flinn.dao;
 
-import flinn.beans.AppUserRoleBean;
-import flinn.beans.request.RequestAppUserBean;
-import flinn.beans.response.ResponseAppUserBean;
-import flinn.beans.response.ResponseSessionContainerBean;
-import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +8,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import flinn.beans.AppUserRoleBean;
+import flinn.beans.request.RequestAppUserBean;
+import flinn.beans.response.ResponseAppUserBean;
+import flinn.beans.response.ResponseSessionContainerBean;
 
 public abstract class AppUserDao
 {

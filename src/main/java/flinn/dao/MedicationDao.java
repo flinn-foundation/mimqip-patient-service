@@ -1,13 +1,18 @@
 package flinn.dao;
 
-import flinn.dao.dbconnection.Database;
-import flinn.dao.model.Medication;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.*;
+import flinn.dao.dbconnection.Database;
+import flinn.dao.model.Medication;
 
 public class MedicationDao
 {

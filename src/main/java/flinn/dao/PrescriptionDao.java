@@ -1,17 +1,18 @@
 package flinn.dao;
 
-import flinn.beans.request.RequestPrescriptionBean;
-import flinn.beans.response.ResponsePrescriptionBean;
-import flinn.beans.response.ResponseTreatmentBean;
-import flinn.dao.imp.TreatmentDaoImp;
-import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import flinn.beans.request.RequestPrescriptionBean;
+import flinn.beans.response.ResponsePrescriptionBean;
+import flinn.beans.response.ResponseTreatmentBean;
+import flinn.dao.imp.TreatmentDaoImp;
 
 public abstract class PrescriptionDao
 {

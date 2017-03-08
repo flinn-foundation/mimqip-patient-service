@@ -1,10 +1,5 @@
 package flinn.dao.model;
 
-import flinn.rcopia.model.MedicationType;
-import flinn.rcopia.service.DoseTimingUtils;
-import flinn.util.DateString;
-import flinn.util.NumberUtils;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.ParseException;
@@ -12,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import flinn.rcopia.model.MedicationType;
+import flinn.rcopia.service.DoseTimingUtils;
+import flinn.util.DateString;
+import flinn.util.NumberUtils;
 
 public class Medication
 {

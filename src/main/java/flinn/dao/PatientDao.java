@@ -1,16 +1,24 @@
 package flinn.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import flinn.beans.PatientDetailsBean;
 import flinn.beans.PatientStatusBean;
 import flinn.beans.request.RequestPatientBean;
 import flinn.beans.response.ResponsePatientBean;
 import flinn.util.cache.EHCacheImpl;
 import flinn.util.cache.ICache;
-import org.apache.log4j.Logger;
-
-import java.sql.*;
-import java.util.*;
-import java.util.Date;
 
 public abstract class PatientDao {
 

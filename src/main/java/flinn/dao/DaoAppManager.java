@@ -1,18 +1,43 @@
 package flinn.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+
 import flinn.beans.AppUserRoleBean;
 import flinn.beans.LabTestBean;
 import flinn.beans.ProgressNoteTagBean;
 import flinn.beans.TreatmentGroupBean;
-import flinn.beans.request.*;
-import flinn.beans.response.*;
-import flinn.dao.imp.*;
-import org.apache.log4j.Logger;
-
-import javax.servlet.http.HttpServletRequest;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
+import flinn.beans.request.RequestActionBean;
+import flinn.beans.request.RequestAppUserBean;
+import flinn.beans.request.RequestContainerBean;
+import flinn.beans.request.RequestFacilityBean;
+import flinn.beans.request.RequestPrescriptionBean;
+import flinn.beans.request.RequestTreatmentBean;
+import flinn.beans.response.ResponseActionBean;
+import flinn.beans.response.ResponseAppUserBean;
+import flinn.beans.response.ResponseAppUserContainerBean;
+import flinn.beans.response.ResponseContainerBean;
+import flinn.beans.response.ResponseFacilityBean;
+import flinn.beans.response.ResponseFacilityContainerBean;
+import flinn.beans.response.ResponseLabTestsContainerBean;
+import flinn.beans.response.ResponsePrescriptionBean;
+import flinn.beans.response.ResponseProgressNoteTagsContainerBean;
+import flinn.beans.response.ResponseSessionContainerBean;
+import flinn.beans.response.ResponseTreatmentBean;
+import flinn.beans.response.ResponseTreatmentContainerBean;
+import flinn.beans.response.ResponseTreatmentGroupContainerBean;
+import flinn.beans.response.ResponseTreatmentSearchContainerBean;
+import flinn.dao.imp.AppUserDaoImp;
+import flinn.dao.imp.FacilityDaoImp;
+import flinn.dao.imp.LabDaoImp;
+import flinn.dao.imp.PrescriptionDaoImp;
+import flinn.dao.imp.ProgressNoteDaoImp;
+import flinn.dao.imp.TreatmentDaoImp;
 
 public class DaoAppManager extends AbstractBaseDao
 {

@@ -1,18 +1,29 @@
 package flinn.dao;
 
-import flinn.beans.request.RequestActionBean;
-import flinn.beans.request.RequestContainerBean;
-import flinn.beans.response.*;
-import flinn.dao.imp.*;
-import flinn.util.PatientLog;
-import org.apache.log4j.Logger;
-
-import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Date;
 
-public class DaoRequestManager
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+
+import flinn.beans.request.RequestActionBean;
+import flinn.beans.request.RequestContainerBean;
+import flinn.beans.response.ErrorBean;
+import flinn.beans.response.ErrorContainerBean;
+import flinn.beans.response.ResponseActionBean;
+import flinn.beans.response.ResponseContainerBean;
+import flinn.beans.response.ResponseSessionContainerBean;
+import flinn.dao.imp.AppUserDaoImp;
+import flinn.dao.imp.FacilityDaoImp;
+import flinn.dao.imp.LabDaoImp;
+import flinn.dao.imp.PatientDaoImp;
+import flinn.dao.imp.PrescriptionDaoImp;
+import flinn.dao.imp.ProgressNoteDaoImp;
+import flinn.util.PatientLog;
+
+public class DaoRequestManager extends AbstractBaseDao
 {
 
 	protected static final Logger LOG = Logger.getLogger(DaoRequestManager.class);

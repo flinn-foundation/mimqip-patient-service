@@ -1,17 +1,25 @@
 package flinn.dao.imp;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import flinn.beans.ProgressNoteTagBean;
 import flinn.beans.request.RequestContainerBean;
 import flinn.beans.request.RequestProgressNoteBean;
 import flinn.beans.request.RequestProgressNoteSearchBean;
-import flinn.beans.response.*;
+import flinn.beans.response.ResponseActionBean;
+import flinn.beans.response.ResponseContainerBean;
+import flinn.beans.response.ResponsePatientBean;
+import flinn.beans.response.ResponseProgressNoteBean;
+import flinn.beans.response.ResponseProgressNoteContainerBean;
+import flinn.beans.response.ResponseProgressNoteSearchContainerBean;
+import flinn.beans.response.ResponseProgressNoteTagsContainerBean;
+import flinn.beans.response.ResponseSessionContainerBean;
 import flinn.dao.DaoRequestManager;
 import flinn.dao.ProgressNoteDao;
-import org.apache.log4j.Logger;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
 
 public class ProgressNoteDaoImp extends ProgressNoteDao
 {

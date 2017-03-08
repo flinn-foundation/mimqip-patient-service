@@ -1,5 +1,7 @@
 package flinn.util.export;
 
+import flinn.dao.dbconnection.DBConnectionPool;
+import flinn.dao.dbconnection.Database;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
