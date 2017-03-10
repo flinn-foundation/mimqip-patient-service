@@ -50,6 +50,8 @@ dependencies {
 
     compile group: 'javax.servlet.jsp.jstl', name: 'jstl', version: '1.2'
 
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper'
+
 
     compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.3'
     compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
@@ -59,6 +61,7 @@ dependencies {
 
     compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.2.11'
     compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.2.11'
+    compile 'javax.servlet:jstl'
 
 }
 
