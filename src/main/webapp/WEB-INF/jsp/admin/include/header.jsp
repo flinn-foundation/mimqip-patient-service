@@ -29,7 +29,7 @@ if (request.getParameter("admin_section") != null){
 	admin_section = request.getParameter("admin_section");
 }
  if (!admin_section.equals("home")) { %>
-<a href="./" class="pageTitle">admin home</a>
+<a href="" class="pageTitle">admin home</a>
 <% } %><br>
 <img src="images/s.gif" width=186 height=1 alt="" border="0"></p>
 	</td>

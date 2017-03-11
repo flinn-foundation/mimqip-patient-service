@@ -9,30 +9,30 @@ String admin_protocol = "http";
 int roleid = -1;
 
 String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
-if (authcode == null || authcode.equals("")){ 
-	response.sendRedirect(admin_protocol+"://"+serverName+"/sample");  
-	return;	
+if (authcode == null || authcode.equals("")){
+	response.sendRedirect(admin_protocol+"://"+serverName+"/index");
+	return;
 }
 else {
 	flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
 	flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
-	
+
 	if (userSession != null){
 		userlogin = userSession.getUser().getLogin();
-	
+
 		flinn.beans.AppUserRoleBean[] ar = userSession.getUser().getRoles();
 		flinn.beans.AppUserRoleBean userRole = (flinn.beans.AppUserRoleBean)ar[0];
 		role = userRole.getApprole();
 		roleid = userRole.getApproleid();
-		
+
 		if (roleid < 1 || roleid > 2){
-			response.sendRedirect(admin_protocol+"://"+serverName+"/sample");
-			return;	
+			response.sendRedirect(admin_protocol+"://"+serverName+"/index");
+			return;
 		}
 	}
 	else{
-		response.sendRedirect(admin_protocol+"://"+serverName+"/sample");
-		return;	
+		response.sendRedirect(admin_protocol+"://"+serverName+"/index");
+		return;
 	}
 }
 %>

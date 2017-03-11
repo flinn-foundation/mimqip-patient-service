@@ -21,7 +21,7 @@
 	</p>
 
 	<p>
-		<a href="./process_drfirst_medications.jsp" target="_blank">Process Medication Updated in DrFirst</a>
+		<a href="process_drfirst_medications.jsp" target="_blank">Process Medication Updated in DrFirst</a>
 	</p>
 
 </body>
