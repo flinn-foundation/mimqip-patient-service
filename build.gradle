@@ -38,7 +38,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
-//    compile group: 'org.liquibase', name: 'liquibase-core'
+    compile group: 'org.liquibase', name: 'liquibase-core'
     compile group: 'com.timgroup', name: 'java-statsd-client'
     compile group: 'com.getsentry.raven', name: 'raven-logback', version: '7.8.2'
     runtime group: 'com.h2database', name: 'h2'
@@ -48,11 +48,8 @@ dependencies {
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.2'
 
 
-    compile group: 'javax.servlet.jsp.jstl', name: 'jstl', version: '1.2'
-
+    compile group: 'javax.servlet', name: 'jstl'
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper'
-
-
     compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.3'
     compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
 
@@ -61,7 +58,7 @@ dependencies {
 
     compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.2.11'
     compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.2.11'
-    compile 'javax.servlet:jstl'
+
 
 }
 

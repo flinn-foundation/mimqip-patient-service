@@ -1,0 +1,736 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="miden (generated)" id="1489345089097-1">
+        <createTable tableName="AppRole">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="AdminName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-2">
+        <createTable tableName="AppRole_AppUser">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="AppRoleId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="AppUserId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-3">
+        <createTable tableName="AppUser">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="FacilityID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Login" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Valid" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Launch" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="Expiration" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastLoggedIn" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastActivity" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastRemoteAddr" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-4">
+        <createTable tableName="AppUserSetting">
+            <column autoIncrement="true" name="AppUserSettingID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="AppUserID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AppUserSettingName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AppUserSettingValue" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-5">
+        <createTable tableName="Facility">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="FacilityName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FacilityShortcut" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FacilityEmail" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="AdministratorID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Valid" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="Launch" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="Expiration" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-6">
+        <createTable tableName="FacilitySetting">
+            <column autoIncrement="true" name="FacilitySettingID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="FacilityID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FacilitySettingName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FacilitySettingValue" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-7">
+        <createTable tableName="Facility_IP">
+            <column defaultValueNumeric="0" name="ip_from" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="ip_to" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="FacilityID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-8">
+        <createTable tableName="HILOSEQUENCES">
+            <column name="SEQUENCENAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HIGHVALUES" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-9">
+        <createTable tableName="Lab">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PatientID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LabTestID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="LabDate" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LabText" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-10">
+        <createTable tableName="LabTest">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="LabTestName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Valid" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="StartDate" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="DiscontinueDate" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-11">
+        <createTable tableName="LabTestDetail">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="LabTestID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LabTestDetailName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LabTestDetailValue" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-12">
+        <createTable tableName="Medications">
+            <column autoIncrement="true" name="MedicationId" type="INT UNSIGNED">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="RcopiaId" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="Y" name="PrimaryFlag" type="VARCHAR(1)"/>
+            <column name="LastModifiedDate" type="datetime(6)"/>
+            <column name="DeletedFlag" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PatientId" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ProviderId" type="VARCHAR(20)"/>
+            <column name="PreparerId" type="VARCHAR(20)"/>
+            <column name="BrandName" type="VARCHAR(100)"/>
+            <column name="GenericName" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DrugRoute" type="VARCHAR(30)"/>
+            <column name="DrugForm" type="VARCHAR(40)"/>
+            <column name="DrugStrength" type="VARCHAR(100)"/>
+            <column name="Action" type="VARCHAR(30)"/>
+            <column name="DoseAmount" type="VARCHAR(30)"/>
+            <column name="DoseUnit" type="VARCHAR(30)"/>
+            <column name="DoseRoute" type="VARCHAR(30)"/>
+            <column name="DoseTiming" type="VARCHAR(100)"/>
+            <column name="DoseOther" type="VARCHAR(100)"/>
+            <column name="Refills" type="VARCHAR(20)"/>
+            <column name="Duration" type="BIGINT UNSIGNED"/>
+            <column name="Quantity" type="DECIMAL(11, 3)"/>
+            <column name="QuantityUnit" type="VARCHAR(40)"/>
+            <column name="StartDate" type="datetime(6)"/>
+            <column name="Stopdate" type="datetime(6)"/>
+            <column name="PrescriptionRcopiaId" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-13">
+        <createTable tableName="Patient">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="FacilityID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Valid" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="StartDate" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RcopiaLastUpdatedDate" type="datetime(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-14">
+        <createTable tableName="PatientDetail">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PatientID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PatientDetailName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PatientDetailValue" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="EntryDate" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-15">
+        <createTable tableName="PatientStatus">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PatientID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PatientStatusName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PatientStatusValue" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="EntryDate" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-16">
+        <createTable tableName="PrescriptionEvent">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PatientID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TreatmentID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RcopiaId" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EntryDate" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Duration" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Discontinue" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DailyDose" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DoctorName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-17">
+        <createTable tableName="ProgressNote">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="PatientID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="AppUserID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="EntryDate" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DoctorName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NoteText" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-18">
+        <createTable tableName="ProgressNoteTag">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Valid" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TagName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TagDescription" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-19">
+        <createTable tableName="ProgressNote_ProgressNoteTag">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="ProgressNoteId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="ProgressNoteTagId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-20">
+        <createTable tableName="RecommendAppRole">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="AdminName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-21">
+        <createTable tableName="RecommendAppRole_RecommendAppUser">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="RecommendAppRoleId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="RecommendAppUserId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-22">
+        <createTable tableName="RecommendAppUser">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Login" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Valid" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Launch" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="Expiration" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastLoggedIn" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastActivity" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastRemoteAddr" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-23">
+        <createTable tableName="RecommendAppUserSetting">
+            <column autoIncrement="true" name="RecommendAppUserSettingID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="RecommendAppUserID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RecommendAppUserSettingName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RecommendAppUserSettingValue" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-24">
+        <createTable tableName="RecommendDiagnosis">
+            <column autoIncrement="true" name="DiagnosisID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Diagnosis" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Stage" type="VARCHAR(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Notes" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-25">
+        <createTable tableName="RecommendFacility">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="RecommendFacilityName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RecommendFacilityIdentifier" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="StartDate" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-26">
+        <createTable tableName="RecommendMessage">
+            <column autoIncrement="true" name="MessageID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Priority" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MessageTag" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Message" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-27">
+        <createTable tableName="RecommendRule">
+            <column autoIncrement="true" name="RuleID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Priority" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Valid" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="TrueMessageID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="FalseMessageID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RuleType" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RuleName" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-28">
+        <createTable tableName="RecommendRuleCriterium">
+            <column autoIncrement="true" name="RuleCriteriumID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="RuleID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Priority" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FieldName" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Operator" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Value" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-29">
+        <createTable tableName="RecommendRule_RecommendDiagnosis">
+            <column name="RuleID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DiagnosisID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-30">
+        <createTable tableName="Sequence">
+            <column name="Entity" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NextID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-31">
+        <createTable tableName="Treatment">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="TreatmentGroupID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TreatmentName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TreatmentAbbr" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Valid" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DrfGenericDrugName" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-32">
+        <createTable tableName="TreatmentDetail">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="TreatmentID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TreatmentDetailName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TreatmentDetailValue" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-33">
+        <createTable tableName="TreatmentGroup">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="TreatmentGroupName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TreatmentGroupAbbr" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Valid" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-34">
+        <createTable tableName="Treatment_Diagnosis">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="TreatmentID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DiagnosisID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Row" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Drug" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-35">
+        <createTable tableName="content">
+            <column autoIncrement="true" name="contentid" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="contenttypeid" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contentorigpurpose" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contentorigtable" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contenttext" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0000-00-00 00:00:00" name="createdate" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="createuser" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-36">
+        <createTable tableName="contentjoin">
+            <column autoIncrement="true" name="contentjoinid" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="contentid" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contentjointable" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="contentjointablerowid" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contentjoinpurpose" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="contentjoinpriority" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-37">
+        <createTable tableName="contenttype">
+            <column autoIncrement="true" name="contenttypeid" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="contenttypemime" type="VARCHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contenttypedescription" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-38">
+        <addPrimaryKey columnNames="ip_from, FacilityID" constraintName="PRIMARY" tableName="Facility_IP"/>
+    </changeSet>
+    <!--<changeSet author="miden (generated)" id="1489345089097-39">-->
+        <!--<addPrimaryKey columnNames="SEQUENCENAME" constraintName="PRIMARY" tableName="HILOSEQUENCES"/>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="miden (generated)" id="1489345089097-40">-->
+        <!--<addPrimaryKey columnNames="RuleID, DiagnosisID" constraintName="PRIMARY" tableName="RecommendRule_RecommendDiagnosis"/>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="miden (generated)" id="1489345089097-41">-->
+        <!--<addPrimaryKey columnNames="Entity" constraintName="PRIMARY" tableName="Sequence"/>-->
+    <!--</changeSet>-->
+    <changeSet author="miden (generated)" id="1489345089097-42">
+        <addUniqueConstraint columnNames="PatientID, TreatmentID, RcopiaId, EntryDate" constraintName="PrescriptionEvent_UNIQUE" tableName="PrescriptionEvent"/>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-43">
+        <addUniqueConstraint columnNames="RcopiaId, LastModifiedDate" constraintName="rcopiaLastModifiedUK" tableName="Medications"/>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-44">
+        <addUniqueConstraint columnNames="RcopiaId, PrimaryFlag" constraintName="rcopiaPrimaryUK" tableName="Medications"/>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-45">
+        <createIndex indexName="BrandNameIndex" tableName="Medications">
+            <column name="BrandName"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-46">
+        <createIndex indexName="PatientIdFK" tableName="Medications">
+            <column name="PatientId"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-47">
+        <createIndex indexName="contentjointable_rowid" tableName="contentjoin">
+            <column name="contentjointable"/>
+            <column name="contentjointablerowid"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
