@@ -9,7 +9,6 @@ import flinn.recommend.beans.response.ResponseMessageBean;
 import flinn.recommend.beans.response.ResponseMessageContainerBean;
 import flinn.recommend.dao.DaoRecommendManager;
 import flinn.recommend.dao.MessageDao;
-import flinn.util.AdminRole;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -32,15 +31,6 @@ public class MessageDaoImp extends MessageDao {
 		if (bean == null)
 			return DaoRecommendManager.generateErrorBean(input.getAction(),
 					"Message create submitted with no appropriate info", 41);
-
-		// Only Admins can create new messages
-		if (!AdminRole.isRecommendAdmin(session)) {
-			return DaoRecommendManager
-					.generateErrorBean(
-							input.getAction(),
-							"User does not have Admin permissions to create new messages",
-							41);
-		}
 
 		int newid = 0;
 		List<ResponseMessageBean> messages = null;

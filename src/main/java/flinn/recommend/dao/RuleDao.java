@@ -91,8 +91,8 @@ public abstract class RuleDao {
 			} else {
 				insertStatement.setInt(4, 0);
 			}
-			insertStatement.setString(5, bean.getRuletype());
-			insertStatement.setString(6, bean.getRulename());
+			insertStatement.setString(5, bean.getRuleType());
+			insertStatement.setString(6, bean.getRuleName());
 			insertStatement.executeUpdate();
 
 			ResultSet rs = insertStatement.getGeneratedKeys();
@@ -164,16 +164,16 @@ public abstract class RuleDao {
 					bean.getMessages()[1].getMessageid());
 			index++;
 		}
-		if (bean.getRuletype() != null) {
-			preparedStatementQuery.setString(index, bean.getRuletype());
+		if (bean.getRuleType() != null) {
+			preparedStatementQuery.setString(index, bean.getRuleType());
 			index++;
 		}
-		if (bean.getRulename() != null) {
-			preparedStatementQuery.setString(index, bean.getRulename());
+		if (bean.getRuleName() != null) {
+			preparedStatementQuery.setString(index, bean.getRuleName());
 			index++;
 		}
-		if (bean.getRuleid() != 0) {
-			preparedStatementQuery.setInt(index, bean.getRuleid());
+		if (bean.getRuleId() != 0) {
+			preparedStatementQuery.setInt(index, bean.getRuleId());
 			index++;
 		}
 	}
@@ -203,17 +203,17 @@ public abstract class RuleDao {
 					+ EQUALS_QUESTION;
 			first = false;
 		}
-		if (bean.getRuletype() != null) {
+		if (bean.getRuleType() != null) {
 			query = query + " " + (first ? WHERE : AND) + "RuleType"
 					+ EQUALS_QUESTION;
 			first = false;
 		}
-		if (bean.getRulename() != null) {
+		if (bean.getRuleName() != null) {
 			query = query + " " + (first ? WHERE : AND) + "RuleName"
 					+ EQUALS_QUESTION;
 			first = false;
 		}
-		if (bean.getRuleid() != 0) {
+		if (bean.getRuleId() != 0) {
 			query = query + " " + (first ? WHERE : AND) + "RuleID"
 					+ EQUALS_QUESTION;
 			first = false;
@@ -273,17 +273,17 @@ public abstract class RuleDao {
 				command += "FalseMessageID = ?";
 				fieldcount++;
 			}
-			if (bean.getRuletype() != null
+			if (bean.getRuleType() != null
 					&& (original == null || !original.getRuletype().equals(
-							bean.getRuletype()))) {
+							bean.getRuleType()))) {
 				if (fieldcount > 0)
 					command += ", ";
 				command += "RuleType = ?";
 				fieldcount++;
 			}
-			if (bean.getRulename() != null
+			if (bean.getRuleName() != null
 					&& (original == null || !original.getRulename().equals(
-							bean.getRulename()))) {
+							bean.getRuleName()))) {
 				if (fieldcount > 0)
 					command += ", ";
 				command += "RuleName = ?";
@@ -332,16 +332,16 @@ public abstract class RuleDao {
 							bean.getMessages()[1].getMessageid());
 					fieldnum++;
 				}
-				if (bean.getRuletype() != null
+				if (bean.getRuleType() != null
 						&& (original == null || !original.getRuletype().equals(
-								bean.getRuletype()))) {
-					updateStatement.setString(fieldnum, bean.getRuletype());
+								bean.getRuleType()))) {
+					updateStatement.setString(fieldnum, bean.getRuleType());
 					fieldnum++;
 				}
-				if (bean.getRulename() != null
+				if (bean.getRuleName() != null
 						&& (original == null || !original.getRulename().equals(
-								bean.getRulename()))) {
-					updateStatement.setString(fieldnum, bean.getRulename());
+								bean.getRuleName()))) {
+					updateStatement.setString(fieldnum, bean.getRuleName());
 					fieldnum++;
 				}
 				if (original != null)
@@ -355,9 +355,9 @@ public abstract class RuleDao {
 				updateStatement.close();
 			}
 			if (original != null && original.getRuleid() > 0) {
-				saveDiagnoses(bean.getRuleid(), bean.getDiagnoses(),
+				saveDiagnoses(bean.getRuleId(), bean.getDiagnoses(),
 						original.getDiagnoses(), connection);
-				saveCriteria(bean.getRuleid(), bean.getCriteria(),
+				saveCriteria(bean.getRuleId(), bean.getCriteria(),
 						original.getCriteria(), connection);
 			}
 		}

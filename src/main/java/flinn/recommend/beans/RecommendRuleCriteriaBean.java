@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class RecommendRuleCriteriaBean extends AbstractDataBean {
 	@XmlElement(name = "criteriaid")
 	protected int criteriaid;
-	@XmlElement(name = "ruleid")
+	@XmlElement(name = "ruleId")
 	protected int ruleid;
 	@XmlElement(name = "priority")
 	protected int priority;

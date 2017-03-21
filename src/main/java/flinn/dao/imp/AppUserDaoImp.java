@@ -1,29 +1,19 @@
 package flinn.dao.imp;
 
+import flinn.beans.request.RequestAppUserBean;
+import flinn.beans.request.RequestContainerBean;
+import flinn.beans.response.*;
+import flinn.dao.AppUserDao;
+import flinn.dao.AuthcodeDao;
+import flinn.dao.DaoRequestManager;
+import flinn.util.IpAddress;
+import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-
-import flinn.beans.request.RequestAppUserBean;
-import flinn.beans.request.RequestContainerBean;
-import flinn.beans.response.ResponseActionBean;
-import flinn.beans.response.ResponseAppUserBean;
-import flinn.beans.response.ResponseAppUserContainerBean;
-import flinn.beans.response.ResponseAuthenticateBean;
-import flinn.beans.response.ResponseAuthenticateContainerBean;
-import flinn.beans.response.ResponseContainerBean;
-import flinn.beans.response.ResponseFacilityBean;
-import flinn.beans.response.ResponseSessionContainerBean;
-import flinn.dao.AppUserDao;
-import flinn.dao.AuthcodeDao;
-import flinn.dao.DaoRequestManager;
-import flinn.util.AdminRole;
-import flinn.util.IpAddress;
 
 public class AppUserDaoImp extends AppUserDao
 {
@@ -117,12 +107,7 @@ public class AppUserDaoImp extends AppUserDao
 		RequestAppUserBean bean = input.getUser();
 		if (bean == null)
 			return DaoRequestManager.generateErrorBean(input.getAction(), "User create submitted with no appropriate info", 41);
-
-		//Only Admins can create new users
-		if (!AdminRole.isAdmin(session))
-		{
-			return DaoRequestManager.generateErrorBean(input.getAction(), "User does not have Admin permissions to create new users", 41);
-		}
+		
 		int newid = 0;
 		List<ResponseAppUserBean> users = null;
 

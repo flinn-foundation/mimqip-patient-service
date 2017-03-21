@@ -11,15 +11,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class RecommendRuleBean extends AbstractDataBean {
-	@XmlElement(name = "ruleid")
+	@XmlElement(name = "ruleId")
 	protected int ruleid;
 	@XmlElement(name = "priority")
 	protected int priority;
 	@XmlElement(name = "valid")
 	protected Boolean valid;
-	@XmlElement(name = "ruletype")
+	@XmlElement(name = "ruleType")
 	protected String ruletype;
-	@XmlElement(name = "rulename")
+	@XmlElement(name = "ruleName")
 	protected String rulename;
 	@XmlElement(name = "criteria")
 	protected RecommendRuleCriteriaBean[] criteria;

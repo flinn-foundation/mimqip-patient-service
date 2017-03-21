@@ -87,28 +87,13 @@ if (is_authenticated) {
   }
 %>
 <tr valign="middle">
-        <td><span class="navLink"><img src="/admin/images/s.gif" width=5 height=50 alt="" border="0"></span></td>
-</tr>
-<tr bgColor="#FFFFFF">
-        <td height="1"><img src="/admin/images/s.gif" width=1 height=1 alt="" border="0"></td>
-</tr>
-<tr valign="middle">
         <td><a href="/admin/logout.jsp" id="logoutBtn" class="navLink"><img src="/admin/images/s.gif" width=5 height=15 alt="" border="0"><img src="/admin/images/nav_boxed_arrow.gif" width=25 height=15 alt="" border="0"><img src="/admin/images/s.gif" width=8 height=15 alt="" border="0">Logout</a></td>
-</tr>
-<tr bgColor="#FFFFFF">
-        <td height="1"><img src="/admin/images/s.gif" width=1 height=1 alt="" border="0"></td>
 </tr>
 <tr valign="middle">
         <td><a href="/admin/password.jsp" class="navLink<%=navLinkClass%>"><img src="/admin/images/s.gif" width=5 height=15 alt="" border="0"><img src="/admin/images/nav_boxed_arrow.gif" width=25 height=15 alt="" border="0"><img src="/admin/images/s.gif" width=8 height=15 alt="" border="0">Change Password</a></td>
 </tr>
-<tr bgColor="#FFFFFF">
-        <td height="1"><img src="/admin/images/s.gif" width=1 height=1 alt="" border="0"></td>
-</tr>
 <tr valign="middle">
 	<td><a href="/recommend/index.jsp" class="navLink"><img src="/admin/images/s.gif" width=5 height=15 alt="" border="0"><img src="/admin/images/nav_boxed_arrow.gif" width=25 height=15 alt="" border="0"><img src="/admin/images/s.gif" width=8 height=15 alt="" border="0">Recommend Home</a></td>
-</tr>
-<tr bgColor="#FFFFFF">
-	<td height="1"><img src="/admin/images/s.gif" width=1 height=1 alt="" border="0"></td>
 </tr>
 </table>
 

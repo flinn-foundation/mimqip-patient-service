@@ -246,7 +246,7 @@ public class DaoRecommendManager extends AbstractBaseDao {
 		LOG.debug("<findRule>");
 		ResponseRuleBean rule = null;
 		RequestRuleBean bean = new RequestRuleBean();
-		bean.setRuleid(ruleid);
+		bean.setRuleId(ruleid);
 		connection = getConnection(); // Get connection
 		List<flinn.recommend.beans.response.ResponseRuleBean> rules = (new RuleDaoImp()
 				.find(bean, null, connection));
@@ -265,8 +265,8 @@ public class DaoRecommendManager extends AbstractBaseDao {
 		RequestRuleBean bean = new RequestRuleBean();
 		bean.setPriority(input.getRule().getPriority());
 		bean.setMessages(input.getRule().getMessages());
-		bean.setRuletype(input.getRule().getRuletype());
-		bean.setRulename(input.getRule().getRulename());
+		bean.setRuleType(input.getRule().getRuleType());
+		bean.setRuleName(input.getRule().getRuleName());
 		bean.setValid(input.getRule().getValid());
 		bean.setDiagnoses(input.getRule().getDiagnoses());
 

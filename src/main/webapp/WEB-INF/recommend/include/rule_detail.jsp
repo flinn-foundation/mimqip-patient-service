@@ -19,7 +19,7 @@
             int ruleid = -1;
             int priority = -1;
             int truemessageid = -1, falsemessageid = -1;
-            String ruletype = "", rulename = "";
+            String ruleType = "", ruleName = "";
             int lastactivity = -1;
             RecommendDiagnosisBean[] rulediagnoses = null;
             RecommendRuleCriteriaBean[] rulecriterion = null;
@@ -55,11 +55,11 @@
             }
 
             if (request.getParameter("RuleType") != null) {
-                ruletype = request.getParameter("RuleType");
+                ruleType = request.getParameter("RuleType");
             }
 
             if (request.getParameter("RuleName") != null) {
-                rulename = request.getParameter("RuleName");
+                ruleName = request.getParameter("RuleName");
             }
 
             if (flinn.util.AdminRole.isRecommendAdmin(userSession)) {
@@ -86,10 +86,10 @@
                 flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
                 flinn.recommend.beans.request.RequestRuleBean input = new flinn.recommend.beans.request.RequestRuleBean();
 
-                input.setRuleid(ruleid);
+                input.setRuleId(ruleid);
                 input.setPriority(priority);
-                input.setRuletype(ruletype);
-                input.setRulename(rulename);
+                input.setRuleType(ruleType);
+                input.setRuleName(ruleName);
                 input.setDiagnoses(flinn.util.AdminFunctions.getDiagnosisFromForm(request));
 
                 ArrayList<RecommendMessageBean> mb = new ArrayList<RecommendMessageBean>();
@@ -156,8 +156,8 @@
                     adminRule = dm.findRule(ruleid);
                     ruleid = adminRule.getRuleid();
                     priority = adminRule.getPriority();
-                    rulename = adminRule.getRulename();
-                    ruletype = adminRule.getRuletype();
+                    ruleName = adminRule.getRulename();
+                    ruleType = adminRule.getRuletype();
                     rulediagnoses = adminRule.getDiagnoses();
                     rulecriterion = adminRule.getCriteria();
                     truemessageid = adminRule.getMessages()[0].getMessageid();
@@ -177,34 +177,34 @@
             }
 	    StringBuffer ruletypeSelect = new StringBuffer("<select name='RuleType'>");
 	    ruletypeSelect.append("<option value='generalmessages'");
-	    if (ruletype.equals("generalmessages")) ruletypeSelect.append(" selected");
+	    if (ruleType.equals("generalmessages")) ruletypeSelect.append(" selected");
 	    ruletypeSelect.append(">generalmessages</option>");
 	    ruletypeSelect.append("<option value='generalconsistency'");
-	    if (ruletype.equals("generalconsistency")) ruletypeSelect.append(" selected");
+	    if (ruleType.equals("generalconsistency")) ruletypeSelect.append(" selected");
 	    ruletypeSelect.append(">generalconsistency</option>");
 	    ruletypeSelect.append("<option value='additionalconsistency'");
-	    if (ruletype.equals("additionalconsistency")) ruletypeSelect.append(" selected");
+	    if (ruleType.equals("additionalconsistency")) ruletypeSelect.append(" selected");
 	    ruletypeSelect.append(">additionalconsistency</option>");
 	    ruletypeSelect.append("<option value='treatmentmessages'");
-	    if (ruletype.equals("treatmentmessages")) ruletypeSelect.append(" selected");
+	    if (ruleType.equals("treatmentmessages")) ruletypeSelect.append(" selected");
 	    ruletypeSelect.append(">treatmentmessages</option>");
 	    ruletypeSelect.append("<option value='specialmessages'");
-	    if (ruletype.equals("specialmessages")) ruletypeSelect.append(" selected");
+	    if (ruleType.equals("specialmessages")) ruletypeSelect.append(" selected");
 	    ruletypeSelect.append(">specialmessages</option>");
 	    ruletypeSelect.append("<option value='clinicalresponse'");
-	    if (ruletype.equals("clinicalresponse")) ruletypeSelect.append(" selected");
+	    if (ruleType.equals("clinicalresponse")) ruletypeSelect.append(" selected");
 	    ruletypeSelect.append(">clinicalresponse</option>");
 	    ruletypeSelect.append("<option value='medicaltrial'");
-	    if (ruletype.equals("medicaltrial")) ruletypeSelect.append(" selected");
+	    if (ruleType.equals("medicaltrial")) ruletypeSelect.append(" selected");
 	    ruletypeSelect.append(">medicaltrial</option>");
 	    ruletypeSelect.append("<option value='othersideeffects'");
-	    if (ruletype.equals("othersideeffects")) ruletypeSelect.append(" selected");
+	    if (ruleType.equals("othersideeffects")) ruletypeSelect.append(" selected");
 	    ruletypeSelect.append(">othersideeffects</option>");
 	    ruletypeSelect.append("<option value='otherreports'");
-	    if (ruletype.equals("otherreports")) ruletypeSelect.append(" selected");
+	    if (ruleType.equals("otherreports")) ruletypeSelect.append(" selected");
 	    ruletypeSelect.append(">otherreports</option>");
 	    ruletypeSelect.append("</select>");
-	    ruletypeSelect.append("<br/>(Currently: "+ruletype+")");
+	    ruletypeSelect.append("<br/>(Currently: "+ruleType+")");
 %>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#CAD8DF">
@@ -225,7 +225,7 @@
                     <% if (editable) {
                         out.print(ruletypeSelect);
                     } else if (ruleid > 0) {
-                        out.print(ruletype.replace("&","&amp;").replace("'", "&#039;"));
+                        out.print(ruleType.replace("&","&amp;").replace("'", "&#039;"));
                     }%></p></td>
             <td>&nbsp;</td>
         </tr>
@@ -297,7 +297,7 @@
                     <% if (editable) {
                                     out.print("<input type='text' name='RuleName' maxlength='50' value='");
                                 }%><% if (ruleid > 0) {
-                                                out.print(rulename.replace("&","&amp;").replace("'", "&#039;"));
+                                                out.print(ruleName.replace("&","&amp;").replace("'", "&#039;"));
                                             }%><% if (editable) {
                                                             out.print("'>");
                                                         }%></p></td>

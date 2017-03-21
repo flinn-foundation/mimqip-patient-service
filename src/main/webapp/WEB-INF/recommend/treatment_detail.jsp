@@ -43,7 +43,7 @@ else {
         <link rel="stylesheet" href="admin.css" type="text/css">
         <link rel="icon" href="/favicon.ico">
         <link rel="shortcut icon" href="/favicon.ico">
-        <script type="text/javascript" language="JavaScript" src="js/admin_util.js"></script>
+        <script type="text/javascript" language="JavaScript" src="../../../js/admin_util.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
         <script type="text/javascript" src="/js/jquery.cookie.min.js"></script>
         <script type="text/javascript" src="/js/globalUtils.js"></script>
@@ -52,7 +52,7 @@ else {
     <body leftmargin=0 topmargin=0 bgcolor="#ffffff">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-                <td width="670" align="left"><img src="images/admin_header.gif" width=670 height=96 alt="" border="0"></td>
+                <td width="670" align="left"><img src="../../../images/recommend/admin_header.gif" width=670 height=96 alt="" border="0"></td>
             </tr>
         </table>
 

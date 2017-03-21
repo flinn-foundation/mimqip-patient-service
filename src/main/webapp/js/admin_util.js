@@ -1,13 +1,15 @@
 
 function AddCriteriaWindow(ruleid, id) {
-	url="/recommend/criteria_detail.jsp?ruleid="+ruleid+"&id="+id;
+	url="/recommend/criteria_detail.jsp?ruleId="+ruleid+"&id="+id;
 	windowname="CRITERIA";
         popup=window.open(url,windowname,"height=610,width=550,status=no,toolbar=no,directories=no,menubar=no,scrollbars=yes,location=no");
 }
 
 function DeleteCriteria(ruleid,id) {
         if (confirm("Are you sure you want to delete this Criteria?")) {
-            location.href="/recommend/criteria_detail.jsp?ruleid="+ruleid+"&delid="+id;
+
+            $.ajax()
+            location.href="/recommend/criteria_detail?criterionId="+ruleid+"&criterionId="+id;
 
         }
 }

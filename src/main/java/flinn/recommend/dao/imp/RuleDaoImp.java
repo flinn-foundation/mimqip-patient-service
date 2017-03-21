@@ -10,7 +10,6 @@ import flinn.recommend.beans.response.ResponseRuleBean;
 import flinn.recommend.beans.response.ResponseRuleContainerBean;
 import flinn.recommend.dao.DaoRecommendManager;
 import flinn.recommend.dao.RuleDao;
-import flinn.util.AdminRole;
 import flinn.util.RecommendUtils;
 import flinn.util.cache.EHCacheImpl;
 import flinn.util.cache.ICache;
@@ -42,12 +41,6 @@ public class RuleDaoImp extends RuleDao {
 			return DaoRecommendManager.generateErrorBean(input.getAction(),
 					"Rule create submitted with no appropriate info", 41);
 
-		// Only Admins can create new users
-		if (!AdminRole.isRecommendAdmin(session)) {
-			return DaoRecommendManager.generateErrorBean(input.getAction(),
-					"User does not have Admin permissions to create new rules",
-					41);
-		}
 		int newid = 0;
 		List<ResponseRuleBean> rules = null;
 
@@ -90,7 +83,7 @@ public class RuleDaoImp extends RuleDao {
 			return DaoRecommendManager.generateErrorBean(input.getAction(),
 					"Rule create failed (unknown error - no returned ID)", 47);
 		bean = new RequestRuleBean();
-		bean.setRuleid(newid);
+		bean.setRuleId(newid);
 		try {
 			rules = find(bean, null, connection);
 		} catch (Exception e) {
@@ -146,7 +139,7 @@ public class RuleDaoImp extends RuleDao {
 					"Rule update submitted with no appropriate profile", 41);
 		List<ResponseRuleBean> rules = null;
 		RequestRuleBean b2 = new RequestRuleBean();
-		b2.setRuleid(bean.getRuleid());
+		b2.setRuleId(bean.getRuleId());
 
 		try {
 			rules = find(b2, null, connection);
@@ -199,7 +192,7 @@ public class RuleDaoImp extends RuleDao {
 							+ e.getMessage(), 49);
 		}
 		b2 = new RequestRuleBean();
-		b2.setRuleid(bean.getRuleid());
+		b2.setRuleId(bean.getRuleId());
 		try {
 			rules = find(b2, null, connection);
 		} catch (Exception e) {

@@ -168,7 +168,7 @@ body{
 #colorboxForm .fieldWrapper{padding-bottom:13px;}
 
 /* login */
-#login{background:#d0dadf url(../images/loginBg.png) repeat-x;}
+#login{background:#d0dadf url(../../images/loginBg.png) repeat-x;}
 #login #container{
 	width:395px;
 	height:335px;
@@ -297,7 +297,7 @@ textarea{
 }
 
 .dropdown a.pullDown{
-	background: #eaf1ce url(../images/dropdownArrowBg.gif) no-repeat top right;
+	background: #eaf1ce url(../../images/dropdownArrowBg.gif) no-repeat top right;
 	height:30px;
 	display:block;
 	position:absolute;
