@@ -1,8 +1,9 @@
-<%@ page import="flinn.util.DrFirstUtils"%><%
+<%@ page import="flinn.old.dao.util.DrFirstUtils"%>
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %><%
 String serverName = request.getServerName();
 String admin_protocol = "https";
 
-String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
+String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
 String userID = null;
 String practiceUserName = null;
 String patientId = request.getParameter("patientid");
@@ -12,8 +13,8 @@ if (authcode == null || authcode.equals("")){
         return;
 }
 else {
-        flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-        flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+        DaoAppManager dm = new DaoAppManager();
+        flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 
         if (userSession != null){
         	userID = userSession.getUser().getSettings().get("UserExternalID");
@@ -25,8 +26,8 @@ else {
 if (patientId != null) {
 	drfUrl = DrFirstUtils.buildDrFirstUrl(practiceUserName, patientId, userID, logout);
 	response.sendRedirect(drfUrl);
-	
-} 
+
+}
 %>
 
 <html>

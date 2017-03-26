@@ -1,3 +1,4 @@
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
 <%@page contentType="text/html" %>
 
 <%
@@ -15,9 +16,9 @@
   int mGroupID = -1;
   int lastactivity = -1;
 
-  String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
-  flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-  flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+  String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+  DaoAppManager dm = new DaoAppManager();
+  flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 	try{
 		//function call to update user's last activity
 		lastactivity = dm.updateLastActivity(userSession);
@@ -36,8 +37,8 @@
 
   if (request.getParameter("Abbreviation") != null) mAbbrev = request.getParameter("Abbreviation");
 
-  if(flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
-  if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
+  if(flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+  if (flinn.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
 
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
@@ -49,10 +50,10 @@
 
 
   if (isAdmin && postType) {
-		flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
-		flinn.beans.request.RequestTreatmentBean rqTreatmentBean = new flinn.beans.request.RequestTreatmentBean();
+		flinn.old.dao.beans.request.RequestContainerBean rqcont = new flinn.old.dao.beans.request.RequestContainerBean();
+		flinn.old.dao.beans.request.RequestTreatmentBean rqTreatmentBean = new flinn.old.dao.beans.request.RequestTreatmentBean();
 
-		flinn.beans.TreatmentGroupBean tgBean = new flinn.beans.TreatmentGroupBean();
+		flinn.old.dao.beans.TreatmentGroupBean tgBean = new flinn.old.dao.beans.TreatmentGroupBean();
 		tgBean.setTreatmentgroupid(medid);
 		tgBean.setTreatmentgroupname(mName);
 		tgBean.setTreatmentgroupabbreviation(mAbbrev);
@@ -66,11 +67,11 @@
 
     	if (medid > 0){//Update treatment
     		rqcont.setTreatment(rqTreatmentBean);
-    		flinn.beans.response.ResponseTreatmentGroupContainerBean rspBean= new flinn.beans.response.ResponseTreatmentGroupContainerBean();
+    		flinn.old.dao.beans.response.ResponseTreatmentGroupContainerBean rspBean= new flinn.old.dao.beans.response.ResponseTreatmentGroupContainerBean();
 
     		try{
-        		rspBean = (flinn.beans.response.ResponseTreatmentGroupContainerBean)dm.updateTreatmentGroup(rqcont, userSession);
-        		flinn.beans.TreatmentGroupBean[] tgb = rspBean.getGroups();
+        		rspBean = (flinn.old.dao.beans.response.ResponseTreatmentGroupContainerBean)dm.updateTreatmentGroup(rqcont, userSession);
+        		flinn.old.dao.beans.TreatmentGroupBean[] tgb = rspBean.getGroups();
         		mid = tgb[0].getTreatmentgroupid();
     		}
     		catch(Exception e) {
@@ -101,7 +102,7 @@
   }
 
 
-flinn.beans.TreatmentGroupBean adminTreatment = new flinn.beans.TreatmentGroupBean();
+flinn.old.dao.beans.TreatmentGroupBean adminTreatment = new flinn.old.dao.beans.TreatmentGroupBean();
 if (medid > 0){
 
 try{

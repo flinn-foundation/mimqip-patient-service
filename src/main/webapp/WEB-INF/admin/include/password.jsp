@@ -1,4 +1,5 @@
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page import="flinn.old.dao.beans.response.ResponseSessionContainerBean"%>
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
 <%
 String jspSelf = request.getRequestURL().toString();
 String upassword = "-1", upassword2 = "-2";
@@ -8,8 +9,8 @@ Boolean changed = false;
 Boolean match = false;
 
 
-String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
-ResponseSessionContainerBean userSession = (new flinn.dao.DaoAppManager()).getSession(authcode, request);
+String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+ResponseSessionContainerBean userSession = (new DaoAppManager()).getSession(authcode, request);
 
 userid = userSession.getUser().getAppuserid();
 
@@ -28,23 +29,23 @@ if (request.getParameter("userpasswd2") != null){ upassword2 = request.getParame
 if (upassword.equals(upassword2))match=true;
 
 if (userid > 0 && changed && match){//Update user
-	flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
-	flinn.beans.request.RequestAppUserBean input= new flinn.beans.request.RequestAppUserBean();
-	flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-	
-	flinn.beans.response.ResponseAppUserContainerBean adminUser = null;
+	flinn.old.dao.beans.request.RequestContainerBean rqcont = new flinn.old.dao.beans.request.RequestContainerBean();
+	flinn.old.dao.beans.request.RequestAppUserBean input= new flinn.old.dao.beans.request.RequestAppUserBean();
+	DaoAppManager dm = new DaoAppManager();
+
+	flinn.old.dao.beans.response.ResponseAppUserContainerBean adminUser = null;
 	input.setAppuserid(userid);
 	rqcont.setUser(input);
-	adminUser = (flinn.beans.response.ResponseAppUserContainerBean)dm.findUser(rqcont, userSession);
+	adminUser = (flinn.old.dao.beans.response.ResponseAppUserContainerBean)dm.findUser(rqcont, userSession);
 	input.setSettings(adminUser.getUser().getSettings());
 	input.setRoles(adminUser.getUser().getRoles());
 	input.setPassword(upassword);
 	rqcont.setUser(input);
-	
+
 	//Change password
-    flinn.beans.response.ResponseAppUserContainerBean rspUser = null;
+    flinn.old.dao.beans.response.ResponseAppUserContainerBean rspUser = null;
 	try{
-	    rspUser = (flinn.beans.response.ResponseAppUserContainerBean)dm.updateUser(rqcont, userSession);
+	    rspUser = (flinn.old.dao.beans.response.ResponseAppUserContainerBean)dm.updateUser(rqcont, userSession);
 	    uid = rspUser.getUser().getAppuserid();
 	}
 	catch(Exception e) {
@@ -61,7 +62,7 @@ if (userid > 0 && changed && match){//Update user
  	out.print("<div class=\"pageHolder\">");
  	out.print("<p class=\"tableText\">");
  	out.print("Password ");
- 	if (uid <= 0) out.print ("NOT "); 
+ 	if (uid <= 0) out.print ("NOT ");
  	out.print("Changed<br>");
 	if (uid <= 0) out.print(uid);
 	out.print("</p></div>");
@@ -83,7 +84,7 @@ if (userid > 0 && changed && match){//Update user
 			<p class="formText" style="text-align:left;">
 			<input type='password' name='userpasswd1' value='' maxlength="40"></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
 	<tr>
 		<td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
 		<td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -96,7 +97,7 @@ if (userid > 0 && changed && match){//Update user
 			<p class="formText" style="text-align:left;">
 			<input type='password' name='userpasswd2' value='' maxlength="40"></p></td>
 		<td>&nbsp;</td>
-	</tr>	
+	</tr>
         <tr>
                 <td><img src="/s.gif" width=1 height=1 alt="" border="0"></td>
                 <td colspan="2" background="/admin/images/row_separator.gif" style="background-repeat: repeat-x;"></td>
@@ -118,7 +119,7 @@ if (userid > 0 && changed && match){//Update user
                 </td>
                 <td>&nbsp;</td>
         </tr>
-</FORM>	
+</FORM>
 <script language="JavaScript" type="text/javascript">
   function formsubmit(frmname) {
     if(document.forms[frmname]) {

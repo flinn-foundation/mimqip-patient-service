@@ -1,3 +1,4 @@
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
 <%@page contentType="text/html" %>
 
 <%
@@ -15,9 +16,9 @@
   String facName = "", facShortcut = "", facEmail = "", role = "";
   int lastactivity = -1;
 
-  String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
-  flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-  flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+  String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+  DaoAppManager dm = new DaoAppManager();
+  flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 	try{
 		//function call to update user's last activity
 		lastactivity = dm.updateLastActivity(userSession);
@@ -34,8 +35,8 @@
 	  facilityid = Integer.parseInt(request.getParameter("id"));
   }
 
-  if(flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
-  if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
+  if(flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+  if (flinn.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
 
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
@@ -54,8 +55,8 @@
   }
 
   if (isAdmin && postType) {
-		flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
-		flinn.beans.request.RequestFacilityBean input= new flinn.beans.request.RequestFacilityBean();
+		flinn.old.dao.beans.request.RequestContainerBean rqcont = new flinn.old.dao.beans.request.RequestContainerBean();
+		flinn.old.dao.beans.request.RequestFacilityBean input= new flinn.old.dao.beans.request.RequestFacilityBean();
 
 		if (request.getParameter("AdminID") != null) //Update adminid if input field differs
 		{
@@ -83,8 +84,8 @@
 			if (request.getParameter("Valid").equals("1")){isValid = true;}
 		}
 
-		input.setLaunch(flinn.util.AdminFunctions.parse_date_snippet("Launch",request));
-		input.setExpiration(flinn.util.AdminFunctions.parse_date_snippet("Expiration",request));
+		input.setLaunch(flinn.old.dao.util.AdminFunctions.parse_date_snippet("Launch",request));
+		input.setExpiration(flinn.old.dao.util.AdminFunctions.parse_date_snippet("Expiration",request));
 
 		//Do roles loop through checks and set to obj
 		//java.util.HashMap<String, String> userSetting = new java.util.HashMap<String,String>();
@@ -95,10 +96,10 @@
 
     	if (facilityid > 0){//Update facility
 	   		rqcont.setFacility(input);
-    		flinn.beans.response.ResponseFacilityContainerBean rspBean= new flinn.beans.response.ResponseFacilityContainerBean();
+    		flinn.old.dao.beans.response.ResponseFacilityContainerBean rspBean= new flinn.old.dao.beans.response.ResponseFacilityContainerBean();
 
     		try{
-        		rspBean = (flinn.beans.response.ResponseFacilityContainerBean)dm.updateFacility(rqcont, userSession);
+        		rspBean = (flinn.old.dao.beans.response.ResponseFacilityContainerBean)dm.updateFacility(rqcont, userSession);
         		fid = rspBean.getFacility().getFacilityid();
     		}
     		catch(Exception e) {
@@ -128,10 +129,10 @@
   }
 
 
-flinn.beans.response.ResponseFacilityBean adminFacility = new flinn.beans.response.ResponseFacilityBean();
+flinn.old.dao.beans.response.ResponseFacilityBean adminFacility = new flinn.old.dao.beans.response.ResponseFacilityBean();
 if (facilityid > 0){
 try{
-	adminFacility = (flinn.beans.response.ResponseFacilityBean)dm.getFacility(facilityid);
+	adminFacility = (flinn.old.dao.beans.response.ResponseFacilityBean)dm.getFacility(facilityid);
 }
 catch(Exception e) {
 	dm.LOG.debug("Unable to open connection getFacility");
@@ -263,21 +264,21 @@ if (editable) {
   if (adminFacility.getLaunch() != null || facilityid != 0) {
     date_include_date = adminFacility.getLaunch();
   } else {
-    date_include_date = flinn.util.DateString.now();
+    date_include_date = flinn.old.dao.util.DateString.now();
   }
 
-  out.print(flinn.util.AdminFunctions.edit_date_snippet("Launch","formTextNarrow",date_include_date));
+  out.print(flinn.old.dao.util.AdminFunctions.edit_date_snippet("Launch","formTextNarrow",date_include_date));
 
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (flinn.util.DateString.interpret(adminFacility.getLaunch()) != null) {
-    if (df.parse(flinn.util.DateString.now()).compareTo(df.parse(adminFacility.getLaunch())) < 0) {
+  if (flinn.old.dao.util.DateString.interpret(adminFacility.getLaunch()) != null) {
+    if (df.parse(flinn.old.dao.util.DateString.now()).compareTo(df.parse(adminFacility.getLaunch())) < 0) {
     	out.print("<span class='formTextRed'>"+adminFacility.getLaunch()+"</span>");
     } else {
-    	out.print(flinn.util.AdminFunctions.formatNulls(adminFacility.getLaunch()));
+    	out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminFacility.getLaunch()));
     }
   } else {
-	  out.print(flinn.util.AdminFunctions.formatNulls(adminFacility.getLaunch()));
+	  out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminFacility.getLaunch()));
   }
 } %></p></td>
 		<td>&nbsp;</td>
@@ -300,19 +301,19 @@ if (editable) {
     date_include_date = "0000-00-00 00:00:00";
   }
 
-  out.print(flinn.util.AdminFunctions.edit_date_snippet("Expiration","formTextNarrow",date_include_date));
+  out.print(flinn.old.dao.util.AdminFunctions.edit_date_snippet("Expiration","formTextNarrow",date_include_date));
 
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (flinn.util.DateString.interpret(adminFacility.getExpiration()) != null) {
+  if (flinn.old.dao.util.DateString.interpret(adminFacility.getExpiration()) != null) {
 
-    if (df.parse(flinn.util.DateString.now()).compareTo(df.parse(adminFacility.getExpiration())) > 0) {
+    if (df.parse(flinn.old.dao.util.DateString.now()).compareTo(df.parse(adminFacility.getExpiration())) > 0) {
     	out.print("<span class='formTextRed'>"+adminFacility.getExpiration()+"</span>");
     } else {
-    	out.print(flinn.util.AdminFunctions.formatNulls(adminFacility.getExpiration()));
+    	out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminFacility.getExpiration()));
     }
   } else {
-	  out.print(flinn.util.AdminFunctions.formatNulls(adminFacility.getExpiration()));
+	  out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminFacility.getExpiration()));
   }
 } %></p></td>
 		<td>&nbsp;</td>

@@ -1,6 +1,7 @@
-<%@ page import="flinn.rcopia.model.RcExtResponseType"%>
-<%@ page import="flinn.rcopia.service.RcopiaService"%>
-<%@ page import="flinn.rcopia.service.RcopiaTransformationService"%>
+<%@ page import="flinn.old.dao.rcopia.model.RcExtResponseType"%>
+<%@ page import="flinn.old.dao.rcopia.service.RcopiaService"%>
+<%@ page import="flinn.old.dao.rcopia.service.RcopiaTransformationService"%>
+<%@ page import="flinn.old.dao.dao.Recommendation" %>
 
 <%
 	String patientIdString = request.getQueryString();
@@ -19,7 +20,7 @@
 		try {
 			RcExtResponseType rcResponse = service.updateMedications(patientId);
 			String xml = transformation.convertRcopiaResponseToXml(rcResponse);
-			consistent = new flinn.dao.Recommendation().handleConsistencyCheck(patientId);
+			consistent = new Recommendation().handleConsistencyCheck(patientId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			consistent = true;

@@ -239,7 +239,7 @@
     </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-13">
         <createTable tableName="Patient">
-            <column autoIncrement="true" name="ID" type="INT">
+            <column name="ID" type="INT">
                 <constraints primaryKey="true"/>
             </column>
             <column name="FacilityID" type="INT">
@@ -732,5 +732,15 @@
             <column name="contentjointable"/>
             <column name="contentjointablerowid"/>
         </createIndex>
+    </changeSet>
+
+    <changeSet author="Michael Iden" id="20170326-load-patients">
+        <loadData encoding="UTF-8"
+                  file="db.sampledata/patient-sample-data-20170326.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="Patient"
+                  quotchar='"'>
+        </loadData>
     </changeSet>
 </databaseChangeLog>

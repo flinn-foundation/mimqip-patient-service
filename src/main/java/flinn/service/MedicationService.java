@@ -1,9 +1,9 @@
 package flinn.service;
 
-import flinn.dao.MedicationDao;
-import flinn.dao.dbconnection.DBConnectionPool;
-import flinn.dao.imp.PatientDaoImp;
-import flinn.dao.model.Medication;
+import flinn.old.dao.dao.MedicationDao;
+import flinn.old.dao.dao.dbconnection.DBConnectionPool;
+import flinn.old.dao.dao.imp.PatientDaoImp;
+import flinn.old.dao.model.Medication;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;

@@ -1,8 +1,8 @@
 <%@page contentType="text/html" %>
-<%@page import="flinn.beans.response.ResponseTreatmentBean"%>
-<%@page import="flinn.recommend.beans.RecommendDiagnosisBean"%>
-<%@page import="flinn.recommend.beans.RecommendTreatmentGuidelineBean"%>
-<%@page import="flinn.recommend.dao.imp.RuleDaoImp"%>
+<%@page import="flinn.old.dao.beans.response.ResponseTreatmentBean"%>
+<%@page import="flinn.old.dao.recommend.beans.RecommendDiagnosisBean"%>
+<%@page import="flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean"%>
+<%@page import="flinn.old.dao.recommend.dao.imp.RuleDaoImp"%>
 <%@page import= "java.util.ArrayList"%>
 <%@page import="java.util.Arrays" %>
 <%@page import="java.util.List" %>
@@ -37,9 +37,9 @@
 
             RecommendDiagnosisBean diagnosis = null;
 
-            String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
-            flinn.recommend.dao.DaoRecommendManager dm = new flinn.recommend.dao.DaoRecommendManager();
-            flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+            String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+            flinn.old.dao.recommend.dao.DaoRecommendManager dm = new flinn.old.dao.recommend.dao.DaoRecommendManager();
+            flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
             try {
                 //function call to update user's last activity
                 lastactivity = dm.updateLastActivity(userSession);
@@ -82,10 +82,10 @@
             }
 
 
-            if (flinn.util.AdminRole.isRecommendAdmin(userSession)) {
+            if (flinn.old.dao.util.AdminRole.isRecommendAdmin(userSession)) {
                 isAdmin = true;
             }
-            if (flinn.util.AdminRole.isAdmin(userSession)) {
+            if (flinn.old.dao.util.AdminRole.isAdmin(userSession)) {
                 isSuperAdmin = true;
             }
 
@@ -106,7 +106,7 @@
                         dm.LOG.debug("Deleting guideline id = " + guidelineid);
 
                         // convert array to arraylist and back again to delete an element
-                        List<flinn.recommend.beans.RecommendTreatmentGuidelineBean> guideList = new ArrayList<flinn.recommend.beans.RecommendTreatmentGuidelineBean>();
+                        List<flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean> guideList = new ArrayList<flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean>();
 
                         for (int i = 0; i < treatments.length; i++) {
                             if (treatments[i].getTreatmentguidelineid() != guidelineid) {
@@ -135,7 +135,7 @@
                 } else {
                     // create guideline
                     dm.LOG.debug("Creating guideline");
-                    flinn.recommend.beans.RecommendTreatmentGuidelineBean rtgb = new flinn.recommend.beans.RecommendTreatmentGuidelineBean();
+                    flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean rtgb = new flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean();
 
                     rtgb.setTreatmentid(treatmentid);
                     rtgb.setDiagnosisid(diagnosisid);
@@ -144,7 +144,7 @@
                     rtgb.setDrug(drug);
 
                     // convert array to arraylist and back again to add another element
-                    List<flinn.recommend.beans.RecommendTreatmentGuidelineBean> guideList = new ArrayList<flinn.recommend.beans.RecommendTreatmentGuidelineBean>();
+                    List<flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean> guideList = new ArrayList<flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean>();
                     if (treatments != null) {
                         guideList.addAll(Arrays.asList(treatments));
                     }

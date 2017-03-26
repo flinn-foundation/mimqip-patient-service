@@ -8,23 +8,23 @@ try {
 } catch (NumberFormatException e) {
 	facilityid = 0;
 }
-flinn.beans.response.ResponseFacilityBean facility = null;
+flinn.old.dao.beans.response.ResponseFacilityBean facility = null;
 
 if (facilityid > 0) {
 	java.sql.Connection connection = null;
 	try {
-		connection = flinn.dao.dbconnection.DBConnectionPool.getConnection();
+		connection = flinn.old.dao.dao.dbconnection.DBConnectionPool.getConnection();
 		if (connection == null || connection.isClosed()) {
 			// LOG.debug("Unable to get DB Connection");
 		}
 	} catch (java.lang.Exception e) {
 		// LOG.debug("Unable to get DB Connection: "+e);
 	}
-	
-	flinn.beans.request.RequestFacilityBean facreq = new flinn.beans.request.RequestFacilityBean();
+
+	flinn.old.dao.beans.request.RequestFacilityBean facreq = new flinn.old.dao.beans.request.RequestFacilityBean();
 	facreq.setFacilityid(facilityid);
-	java.util.List<flinn.beans.response.ResponseFacilityBean> facilities = new flinn.dao.imp.FacilityDaoImp().find(facreq, null, connection);
-	
+	java.util.List<flinn.old.dao.beans.response.ResponseFacilityBean> facilities = new flinn.old.dao.dao.imp.FacilityDaoImp().find(facreq, null, connection);
+
 	if (facilities != null && facilities.size() > 0) {
 		facility = facilities.get(0);
 	}

@@ -1,3 +1,4 @@
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
 <%@page contentType="text/html" %>
 
 <%
@@ -13,9 +14,9 @@
   String tagName = "", tagDesc = "";
   int lastactivity = -1;
 
-  String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
-  flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-  flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+  String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+  DaoAppManager dm = new DaoAppManager();
+  flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 	try{
 		//function call to update user's last activity
 		lastactivity = dm.updateLastActivity(userSession);
@@ -33,8 +34,8 @@
 	  tagid = Integer.parseInt(request.getParameter("id"));
   }
 
-  if (flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
-  if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
+  if (flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+  if (flinn.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
 
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
@@ -54,7 +55,7 @@
 
 
   if (isAdmin && postType) {
-		flinn.beans.ProgressNoteTagBean input= new flinn.beans.ProgressNoteTagBean();
+		flinn.old.dao.beans.ProgressNoteTagBean input= new flinn.old.dao.beans.ProgressNoteTagBean();
 		input.setProgressnotetagid(tagid);
 		input.setProgressnotetag(tagName);
 		input.setProgressnotetagdescription(tagDesc);
@@ -94,7 +95,7 @@
   }
 
 
-flinn.beans.ProgressNoteTagBean adminTag = new flinn.beans.ProgressNoteTagBean();
+flinn.old.dao.beans.ProgressNoteTagBean adminTag = new flinn.old.dao.beans.ProgressNoteTagBean();
 if (tagid > 0){
 
 try{

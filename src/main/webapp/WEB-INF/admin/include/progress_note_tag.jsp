@@ -1,4 +1,5 @@
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page import="flinn.old.dao.beans.response.ResponseSessionContainerBean"%>
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -76,21 +77,21 @@ if (request.getParameter("order") != null) {
 boolean first = true;
 String orderby = "TagName";
 String criteria = "false";
-String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
+String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
 
 if (request.getParameter("order") != null) {
 	if (request.getParameter("order").equals("1")) orderby = "TagDescription ASC";
 }
 
-flinn.beans.response.ResponseProgressNoteTagsContainerBean rcb = new flinn.beans.response.ResponseProgressNoteTagsContainerBean();
-flinn.beans.ProgressNoteTagBean[] tagList = null;
-flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-flinn.beans.request.RequestContainerBean input = new flinn.beans.request.RequestContainerBean();
+flinn.old.dao.beans.response.ResponseProgressNoteTagsContainerBean rcb = new flinn.old.dao.beans.response.ResponseProgressNoteTagsContainerBean();
+flinn.old.dao.beans.ProgressNoteTagBean[] tagList = null;
+DaoAppManager dm = new DaoAppManager();
+flinn.old.dao.beans.request.RequestContainerBean input = new flinn.old.dao.beans.request.RequestContainerBean();
 ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 int lastactivity = -1;
 
 try{
-rcb = (flinn.beans.response.ResponseProgressNoteTagsContainerBean)dm.findAllNoteTags(input, userSession, invalid); //function call to return user
+rcb = (flinn.old.dao.beans.response.ResponseProgressNoteTagsContainerBean)dm.findAllNoteTags(input, userSession, invalid); //function call to return user
 tagList =  rcb.getTags();
 	try{
 		//function call to update user's last activity
@@ -110,7 +111,7 @@ finally{dm.disposeConnection("findAllNoteTags");}
 if (tagList != null)
 {
 for (int i=0; i<tagList.length; i++) {
-  flinn.beans.ProgressNoteTagBean tagBean = tagList[i];
+  flinn.old.dao.beans.ProgressNoteTagBean tagBean = tagList[i];
   if (!first) {
     %>
 	<tr>
@@ -141,7 +142,7 @@ for (int i=0; i<tagList.length; i++) {
 	</tr>
 	</table>
 <%!
-public int data_is_not_valid(flinn.beans.ProgressNoteTagBean bean) throws Exception {
+public int data_is_not_valid(flinn.old.dao.beans.ProgressNoteTagBean bean) throws Exception {
   if (!bean.getValid()) {
 	  	return 1;
 	  }

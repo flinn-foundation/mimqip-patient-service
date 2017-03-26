@@ -1,10 +1,10 @@
 package flinn.service;
 
-import flinn.beans.response.ResponseTreatmentBean;
-import flinn.dao.dbconnection.DBConnectionPool;
-import flinn.dao.imp.PrescriptionDaoImp;
-import flinn.dao.imp.TreatmentDaoImp;
-import flinn.dao.model.Medication;
+import flinn.old.dao.beans.response.ResponseTreatmentBean;
+import flinn.old.dao.dao.dbconnection.DBConnectionPool;
+import flinn.old.dao.dao.imp.PrescriptionDaoImp;
+import flinn.old.dao.dao.imp.TreatmentDaoImp;
+import flinn.old.dao.model.Medication;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;

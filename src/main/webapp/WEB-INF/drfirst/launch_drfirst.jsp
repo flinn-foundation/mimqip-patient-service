@@ -1,4 +1,4 @@
-<%@ page import="flinn.util.DrFirstUtils"%>
+<%@ page import="flinn.old.dao.util.DrFirstUtils"%>
 <%
 	String drfUrl = DrFirstUtils.buildDrFirstUrl("et3439", "1", "ext_doc_123","http://"+request.getServerName()+"/inc/drFirst-logout.jsp");
 %>

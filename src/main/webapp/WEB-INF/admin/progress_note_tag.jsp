@@ -1,4 +1,4 @@
-<%
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %><%
 String admin_section = "Manage Progress Note Tags";
 String admin_subsection = "Progress Note Tags";
 String sub_section = "";
@@ -9,38 +9,38 @@ String admin_protocol = "http";
 int roleid = -1;
 
 
-String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
-if (authcode == null || authcode.equals("")){ 
+String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+if (authcode == null || authcode.equals("")){
 	response.sendRedirect(admin_protocol+"://"+serverName+"/sample");
-	return;	
+	return;
 }
 else {
-	flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-	flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
-	
+	DaoAppManager dm = new DaoAppManager();
+	flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+
 	if (userSession != null){
 		userlogin = userSession.getUser().getLogin();
-		
-		flinn.beans.AppUserRoleBean[] ar = userSession.getUser().getRoles();
-		flinn.beans.AppUserRoleBean userRole = (flinn.beans.AppUserRoleBean)ar[0];
+
+		flinn.old.dao.beans.AppUserRoleBean[] ar = userSession.getUser().getRoles();
+		flinn.old.dao.beans.AppUserRoleBean userRole = (flinn.old.dao.beans.AppUserRoleBean)ar[0];
 		role = userRole.getApprole();
 		roleid = userRole.getApproleid();
-		
+
 		if (roleid != 1){ //Not a super admin
 			if (roleid == 2) { //Force Facility Admins to index page
 				response.sendRedirect("index.jsp");
-				return;	
+				return;
 			}
 			else { //Kick all non admins out
 				response.sendRedirect(admin_protocol+"://"+serverName+"/sample");
 				return;
 			}
-		}	
+		}
 	}
 	else{
 		response.sendRedirect(admin_protocol+"://"+serverName+"/sample");
-		return;	
-	}	
+		return;
+	}
 }
 
 Boolean invalid = false;    // Whether or not to show invalid users
@@ -56,7 +56,7 @@ Boolean invalid = false;    // Whether or not to show invalid users
 	<jsp:param name="admin_section" value="<%=admin_section%>" />
 	<jsp:param name="admin_subsection" value="<%=admin_subsection%>" />
 	<jsp:param name="sub_section" value="<%=sub_section%>" />
-	<jsp:param name="role" value="<%=role%>" />	
+	<jsp:param name="role" value="<%=role%>" />
 </jsp:include>
 	</td>
 	<td valign="top">

@@ -1,8 +1,8 @@
 package flinn.service;
 
-import flinn.beans.response.ResponsePatientBean;
-import flinn.dao.dbconnection.DBConnectionPool;
-import flinn.dao.imp.PatientDaoImp;
+import flinn.old.dao.beans.response.ResponsePatientBean;
+import flinn.old.dao.dao.dbconnection.DBConnectionPool;
+import flinn.old.dao.dao.imp.PatientDaoImp;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;

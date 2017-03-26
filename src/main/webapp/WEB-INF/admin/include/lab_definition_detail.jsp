@@ -1,3 +1,4 @@
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
 <%@page contentType="text/html" %>
 
 <%
@@ -15,9 +16,9 @@
   String ltName = "", ltFormat = "";
   int lastactivity = -1;
 
-  String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
-  flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-  flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+  String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+  DaoAppManager dm = new DaoAppManager();
+  flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 	try{
 		//function call to update user's last activity
 		lastactivity = dm.updateLastActivity(userSession);
@@ -42,8 +43,8 @@
 	  ltFormat = request.getParameter("Format");
   }
 
-  if(flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
-  if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
+  if(flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+  if (flinn.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
 
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
@@ -55,9 +56,9 @@
 
 
   if (isAdmin && postType) {
-		flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
-		flinn.beans.request.RequestLabBean rqLabBean = new flinn.beans.request.RequestLabBean();
-		flinn.beans.LabTestBean input= new flinn.beans.LabTestBean();
+		flinn.old.dao.beans.request.RequestContainerBean rqcont = new flinn.old.dao.beans.request.RequestContainerBean();
+		flinn.old.dao.beans.request.RequestLabBean rqLabBean = new flinn.old.dao.beans.request.RequestLabBean();
+		flinn.old.dao.beans.LabTestBean input= new flinn.old.dao.beans.LabTestBean();
 
 		input.setLabtestid(labtestid);
 		input.setLabtestname(ltName);
@@ -70,17 +71,17 @@
 			if (request.getParameter("Valid").equals("1")){isValid = true;}
 		}
 		input.setValid(isValid);
-		input.setStartdate(flinn.util.AdminFunctions.parse_date_snippet("StartDate",request));
-		input.setDiscontinuedate(flinn.util.AdminFunctions.parse_date_snippet("DiscontinueDate",request));
+		input.setStartdate(flinn.old.dao.util.AdminFunctions.parse_date_snippet("StartDate",request));
+		input.setDiscontinuedate(flinn.old.dao.util.AdminFunctions.parse_date_snippet("DiscontinueDate",request));
 
     	if (labtestid > 0){//Update lab test
     	    rqLabBean.setLabtest(input);
     		rqcont.setLab(rqLabBean);
-    		flinn.beans.response.ResponseLabTestsContainerBean rspBean= new flinn.beans.response.ResponseLabTestsContainerBean();
+    		flinn.old.dao.beans.response.ResponseLabTestsContainerBean rspBean= new flinn.old.dao.beans.response.ResponseLabTestsContainerBean();
 
     		try{
-        		rspBean = (flinn.beans.response.ResponseLabTestsContainerBean)dm.updateLabTest(rqcont, userSession);
-        		flinn.beans.LabTestBean[] ltBean = rspBean.getLabtests();
+        		rspBean = (flinn.old.dao.beans.response.ResponseLabTestsContainerBean)dm.updateLabTest(rqcont, userSession);
+        		flinn.old.dao.beans.LabTestBean[] ltBean = rspBean.getLabtests();
         		ltid = ltBean[0].getLabtestid();
     		}
     		catch(Exception e) {
@@ -111,7 +112,7 @@
   }
 
 
-flinn.beans.LabTestBean adminLab = new flinn.beans.LabTestBean();
+flinn.old.dao.beans.LabTestBean adminLab = new flinn.old.dao.beans.LabTestBean();
 if (labtestid > 0){
 
 try{
@@ -204,21 +205,21 @@ if (editable) {
   if (adminLab.getStartdate() != null || labtestid != 0) {
     date_include_date = adminLab.getStartdate();
   } else {
-    date_include_date = flinn.util.DateString.now();
+    date_include_date = flinn.old.dao.util.DateString.now();
   }
 
-  out.print(flinn.util.AdminFunctions.edit_date_snippet("StartDate","formTextNarrow",date_include_date));
+  out.print(flinn.old.dao.util.AdminFunctions.edit_date_snippet("StartDate","formTextNarrow",date_include_date));
 
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (flinn.util.DateString.interpret(adminLab.getStartdate()) != null) {
-    if (df.parse(flinn.util.DateString.now()).compareTo(df.parse(adminLab.getStartdate())) < 0) {
+  if (flinn.old.dao.util.DateString.interpret(adminLab.getStartdate()) != null) {
+    if (df.parse(flinn.old.dao.util.DateString.now()).compareTo(df.parse(adminLab.getStartdate())) < 0) {
     	out.print("<span class='formTextRed'>"+adminLab.getStartdate()+"</span>");
     } else {
-    	out.print(flinn.util.AdminFunctions.formatNulls(adminLab.getStartdate()));
+    	out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminLab.getStartdate()));
     }
   } else {
-	  out.print(flinn.util.AdminFunctions.formatNulls(adminLab.getStartdate()));
+	  out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminLab.getStartdate()));
   }
 } %></p></td>
 		<td>&nbsp;</td>
@@ -241,19 +242,19 @@ if (editable) {
     date_include_date = "0000-00-00 00:00:00";
   }
 
-  out.print(flinn.util.AdminFunctions.edit_date_snippet("DiscontinueDate","formTextNarrow",date_include_date));
+  out.print(flinn.old.dao.util.AdminFunctions.edit_date_snippet("DiscontinueDate","formTextNarrow",date_include_date));
 
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (flinn.util.DateString.interpret(adminLab.getDiscontinuedate()) != null) {
+  if (flinn.old.dao.util.DateString.interpret(adminLab.getDiscontinuedate()) != null) {
 
-    if (df.parse(flinn.util.DateString.now()).compareTo(df.parse(adminLab.getDiscontinuedate())) > 0) {
+    if (df.parse(flinn.old.dao.util.DateString.now()).compareTo(df.parse(adminLab.getDiscontinuedate())) > 0) {
     	out.print("<span class='formTextRed'>"+adminLab.getDiscontinuedate()+"</span>");
     } else {
-    	out.print(flinn.util.AdminFunctions.formatNulls(adminLab.getDiscontinuedate()));
+    	out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminLab.getDiscontinuedate()));
     }
   } else {
-	  out.print(flinn.util.AdminFunctions.formatNulls(adminLab.getDiscontinuedate()));
+	  out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminLab.getDiscontinuedate()));
   }
 } %></p></td>
 		<td>&nbsp;</td>

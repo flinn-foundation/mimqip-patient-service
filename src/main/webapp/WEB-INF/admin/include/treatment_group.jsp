@@ -1,5 +1,6 @@
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page import="flinn.old.dao.beans.response.ResponseSessionContainerBean"%>
 <%@page import="java.util.List"%>
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -113,28 +114,28 @@ if (request.getParameter("order") != null) {
 boolean first = true;
 String orderby = "TreatmentGroupName";
 String criteria = "false";
-String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
+String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
 
 if (request.getParameter("order") != null) {
 	if (request.getParameter("order").equals("1")) orderby = "TreatmentGroupAbbr DESC";
 }
 else {orderby = "TreatmentGroupName DESC";}
 
-List<flinn.beans.TreatmentGroupBean> dataList = null;
-flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
+List<flinn.old.dao.beans.TreatmentGroupBean> dataList = null;
+DaoAppManager dm = new DaoAppManager();
 ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 int lastactivity = -1;
 Boolean isAdmin = false, isSuperAdmin = false;
-if (flinn.util.AdminRole.isAdmin(userSession))
+if (flinn.old.dao.util.AdminRole.isAdmin(userSession))
 {
 	  isSuperAdmin = true;
-	  if(flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+	  if(flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
 }
-flinn.beans.request.RequestContainerBean input = new flinn.beans.request.RequestContainerBean();
-flinn.beans.response.ResponseTreatmentGroupContainerBean adminTreatmentGroup;
+flinn.old.dao.beans.request.RequestContainerBean input = new flinn.old.dao.beans.request.RequestContainerBean();
+flinn.old.dao.beans.response.ResponseTreatmentGroupContainerBean adminTreatmentGroup;
 
 try{
-	adminTreatmentGroup = (flinn.beans.response.ResponseTreatmentGroupContainerBean)dm.findAllTreatmentGroups(input, userSession, !invalid, isSuperAdmin, orderby); //function call to return user
+	adminTreatmentGroup = (flinn.old.dao.beans.response.ResponseTreatmentGroupContainerBean)dm.findAllTreatmentGroups(input, userSession, !invalid, isSuperAdmin, orderby); //function call to return user
 	dataList = java.util.Arrays.asList(adminTreatmentGroup.getGroups());
 	try{
 			//function call to update user's last activity
@@ -186,7 +187,7 @@ for (int i=0; i<dataList.size(); i++) {
 	</table>
 
 <%!
-public int data_is_not_valid(flinn.beans.TreatmentGroupBean bean) throws Exception {
+public int data_is_not_valid(flinn.old.dao.beans.TreatmentGroupBean bean) throws Exception {
   if (!bean.getValid()) {
 	  	return 1;
 	  }

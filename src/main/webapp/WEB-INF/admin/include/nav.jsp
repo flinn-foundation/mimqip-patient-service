@@ -1,5 +1,5 @@
-<%@page import="flinn.util.AdminFunctions"%>
-<%@page import="flinn.util.AdminNavigation"%>
+<%@page import="flinn.old.dao.util.AdminFunctions"%>
+<%@page import="flinn.old.dao.util.AdminNavigation"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%><table width="200" border="0" cellspacing="0" cellpadding="0" bgcolor="#E6E5E3">
 <tr bgColor="#FFFFFF">

@@ -1,3 +1,4 @@
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
 <%@page contentType="text/html" %>
 
 <%
@@ -17,9 +18,9 @@
   String userPracticeUserName = "", userUserExternalID = "";
   int lastactivity = -1;
 
-  String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
-  flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-  flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+  String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+  DaoAppManager dm = new DaoAppManager();
+  flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 	try{
 		//function call to update user's last activity
 		lastactivity = dm.updateLastActivity(userSession);
@@ -39,8 +40,8 @@
   	userid = Integer.parseInt(request.getParameter("id"));
   }
 
-  if(flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
-  if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
+  if(flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+  if (flinn.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
 
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
@@ -76,14 +77,14 @@
   }
 
   if (isAdmin && postType) {
-	flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
-	flinn.beans.request.RequestAppUserBean input= new flinn.beans.request.RequestAppUserBean();
+	flinn.old.dao.beans.request.RequestContainerBean rqcont = new flinn.old.dao.beans.request.RequestContainerBean();
+	flinn.old.dao.beans.request.RequestAppUserBean input= new flinn.old.dao.beans.request.RequestAppUserBean();
 
   if (request.getParameter("cpasswd") != null) {
-	flinn.beans.response.ResponseAppUserContainerBean adminUser = null;
+	flinn.old.dao.beans.response.ResponseAppUserContainerBean adminUser = null;
 	input.setAppuserid(userid);
 	rqcont.setUser(input);
-	adminUser = (flinn.beans.response.ResponseAppUserContainerBean)dm.findUser(rqcont, userSession);
+	adminUser = (flinn.old.dao.beans.response.ResponseAppUserContainerBean)dm.findUser(rqcont, userSession);
 	loginTailor = adminUser.getUser().getLogin();
 	input.setSettings(adminUser.getUser().getSettings());
 	input.setRoles(adminUser.getUser().getRoles());
@@ -91,10 +92,10 @@
 	rqcont.setUser(input);
 
 	//Change password
-    flinn.beans.response.ResponseAppUserContainerBean rspUser = null;
+    flinn.old.dao.beans.response.ResponseAppUserContainerBean rspUser = null;
 
 	try{
-	    rspUser = (flinn.beans.response.ResponseAppUserContainerBean)dm.updateUser(rqcont, userSession);
+	    rspUser = (flinn.old.dao.beans.response.ResponseAppUserContainerBean)dm.updateUser(rqcont, userSession);
 	    uid = rspUser.getUser().getAppuserid();
 	}
 	catch(Exception e) {
@@ -127,19 +128,19 @@
 			userSetting.put("UserExternalID", userUserExternalID);
 
 		input.setSettings(userSetting);
-		input.setRoles(flinn.util.AdminFunctions.getRolesFromForm(request));
+		input.setRoles(flinn.old.dao.util.AdminFunctions.getRolesFromForm(request));
 		input.setValid(isValid);
-		input.setLaunch(flinn.util.AdminFunctions.parse_date_snippet("Launch",request));
-		input.setExpiration(flinn.util.AdminFunctions.parse_date_snippet("Expiration",request));
+		input.setLaunch(flinn.old.dao.util.AdminFunctions.parse_date_snippet("Launch",request));
+		input.setExpiration(flinn.old.dao.util.AdminFunctions.parse_date_snippet("Expiration",request));
 
     	if (userid > 0){//Update user
     		if(isSuperAdmin && facilityid == -1) input.setFacilityid(0);
     		input.setAppuserid(userid);
     		rqcont.setUser(input);
-    		flinn.beans.response.ResponseAppUserContainerBean rspBean= new flinn.beans.response.ResponseAppUserContainerBean();
+    		flinn.old.dao.beans.response.ResponseAppUserContainerBean rspBean= new flinn.old.dao.beans.response.ResponseAppUserContainerBean();
 
     		try{
-        		rspBean = (flinn.beans.response.ResponseAppUserContainerBean)dm.updateUser(rqcont, userSession);
+        		rspBean = (flinn.old.dao.beans.response.ResponseAppUserContainerBean)dm.updateUser(rqcont, userSession);
         		uid = rspBean.getUser().getAppuserid();
     		}
     		catch(Exception e) {
@@ -169,13 +170,13 @@
   }
 }
 
-flinn.beans.response.ResponseAppUserContainerBean adminUser = null;
-flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
-flinn.beans.request.RequestAppUserBean input= new flinn.beans.request.RequestAppUserBean();
+flinn.old.dao.beans.response.ResponseAppUserContainerBean adminUser = null;
+flinn.old.dao.beans.request.RequestContainerBean rqcont = new flinn.old.dao.beans.request.RequestContainerBean();
+flinn.old.dao.beans.request.RequestAppUserBean input= new flinn.old.dao.beans.request.RequestAppUserBean();
 input.setAppuserid(userid);
 rqcont.setUser(input);
 try{
-	adminUser = (flinn.beans.response.ResponseAppUserContainerBean)dm.findUser(rqcont, userSession);
+	adminUser = (flinn.old.dao.beans.response.ResponseAppUserContainerBean)dm.findUser(rqcont, userSession);
 }
 catch(Exception e) {
 	dm.LOG.debug("Unable to open connection findAllUsers" + e.toString());
@@ -341,18 +342,18 @@ if (cpasswd || userid == 0) { %>
 <%
 if (editable) {
 	//Pull all roles
-  	flinn.beans.AppUserRoleBean[] ar = dm.getAllRolesUser();
+  	flinn.old.dao.beans.AppUserRoleBean[] ar = dm.getAllRolesUser();
 
   	//Pull user role
-	flinn.beans.AppUserRoleBean[] urar = adminUser.getUser().getRoles();
+	flinn.old.dao.beans.AppUserRoleBean[] urar = adminUser.getUser().getRoles();
 
 	for(int i = 0;i< ar.length; i++){ //Loop thru all roles
 		if (!isSuperAdmin && i == 0){i++;} //Skip Admin if user isn't a superadmin
-		flinn.beans.AppUserRoleBean role = (flinn.beans.AppUserRoleBean)ar[i];
+		flinn.old.dao.beans.AppUserRoleBean role = (flinn.old.dao.beans.AppUserRoleBean)ar[i];
 				out.print("<input type='checkbox' name='userrole_"+role.getApprole()+"' value='"+role.getApproleid()+"'");
 
 				for(int j=0; j < urar.length; j++){
-					flinn.beans.AppUserRoleBean userRole = (flinn.beans.AppUserRoleBean)urar[j];
+					flinn.old.dao.beans.AppUserRoleBean userRole = (flinn.old.dao.beans.AppUserRoleBean)urar[j];
 					String urole = userRole.getApprole();
 					if (role.getApprole().equals(urole)) out.print(" CHECKED");
 				}
@@ -362,9 +363,9 @@ if (editable) {
 }
 else
 {
-	flinn.beans.AppUserRoleBean[] ar = adminUser.getUser().getRoles();
+	flinn.old.dao.beans.AppUserRoleBean[] ar = adminUser.getUser().getRoles();
 	for (int i=0; i < ar.length; i++){
-		flinn.beans.AppUserRoleBean role = (flinn.beans.AppUserRoleBean)ar[i];
+		flinn.old.dao.beans.AppUserRoleBean role = (flinn.old.dao.beans.AppUserRoleBean)ar[i];
 		out.print(role.getApprole());
 		if (i != ar.length - 1) out.print("<br/>");
 	}
@@ -410,22 +411,22 @@ if (editable) {
   if (adminUser.getUser().getLaunch() != null) {
     date_include_date = adminUser.getUser().getLaunch();
   } else {
-    date_include_date = flinn.util.DateString.now();
+    date_include_date = flinn.old.dao.util.DateString.now();
   }
-  if(userid == 0)date_include_date = flinn.util.DateString.now();
+  if(userid == 0)date_include_date = flinn.old.dao.util.DateString.now();
 
-  out.print(flinn.util.AdminFunctions.edit_date_snippet("Launch","formTextNarrow",date_include_date));
+  out.print(flinn.old.dao.util.AdminFunctions.edit_date_snippet("Launch","formTextNarrow",date_include_date));
 
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (flinn.util.DateString.interpret(adminUser.getUser().getLaunch()) != null) {
-    if (df.parse(flinn.util.DateString.now()).compareTo(df.parse(adminUser.getUser().getLaunch())) < 0) {
+  if (flinn.old.dao.util.DateString.interpret(adminUser.getUser().getLaunch()) != null) {
+    if (df.parse(flinn.old.dao.util.DateString.now()).compareTo(df.parse(adminUser.getUser().getLaunch())) < 0) {
     	out.print("<span class='formTextRed'>"+adminUser.getUser().getLaunch()+"</span>");
     } else {
-    	out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getLaunch()));
+    	out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminUser.getUser().getLaunch()));
     }
   } else {
-	  out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getLaunch()));
+	  out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminUser.getUser().getLaunch()));
   }
 } %></p></td>
 		<td>&nbsp;</td>
@@ -449,19 +450,19 @@ if (editable) {
   }
   if(userid == 0)date_include_date = "0000-00-00 00:00:00";
 
-  out.print(flinn.util.AdminFunctions.edit_date_snippet("Expiration","formTextNarrow",date_include_date));
+  out.print(flinn.old.dao.util.AdminFunctions.edit_date_snippet("Expiration","formTextNarrow",date_include_date));
 
 } else {
 	out.print("<p class='formText' style='text-align:left;'>");
-  if (flinn.util.DateString.interpret(adminUser.getUser().getExpiration()) != null) {
+  if (flinn.old.dao.util.DateString.interpret(adminUser.getUser().getExpiration()) != null) {
 
-    if (df.parse(flinn.util.DateString.now()).compareTo(df.parse(adminUser.getUser().getExpiration())) > 0) {
+    if (df.parse(flinn.old.dao.util.DateString.now()).compareTo(df.parse(adminUser.getUser().getExpiration())) > 0) {
     	out.print("<span class='formTextRed'>"+adminUser.getUser().getExpiration()+"</span>");
     } else {
-    	out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getExpiration()));
+    	out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminUser.getUser().getExpiration()));
     }
   } else {
-	  out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getExpiration()));
+	  out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminUser.getUser().getExpiration()));
   }
 } %></p></td>
 		<td>&nbsp;</td>
@@ -475,7 +476,7 @@ if (editable) {
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Last Login</p></td>
-		<td align="right"><p class="formText" style="text-align:left;"><% out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getLastloggedin())); %></p></td>
+		<td align="right"><p class="formText" style="text-align:left;"><% out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminUser.getUser().getLastloggedin())); %></p></td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
@@ -497,7 +498,7 @@ if (editable) {
 	<tr>
 		<td width="12" align="left"><img src="/s.gif" width=12 height=1 alt="" border="0"></td>
 		<td nowrap><p class="formText">Last Server Activity</p></td>
-		<td align="right"><p class="formText" style="text-align:left;"><% out.print(flinn.util.AdminFunctions.formatNulls(adminUser.getUser().getLastactivity())); %></p></td>
+		<td align="right"><p class="formText" style="text-align:left;"><% out.print(flinn.old.dao.util.AdminFunctions.formatNulls(adminUser.getUser().getLastactivity())); %></p></td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>

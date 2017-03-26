@@ -1,3 +1,4 @@
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
 <%@page contentType="text/html" %>
 
 <%
@@ -22,9 +23,9 @@
   int mGroupID = -1;
   int lastactivity = -1;
 
-  String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
-  flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-  flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+  String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+  DaoAppManager dm = new DaoAppManager();
+  flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 	try{
 		//function call to update user's last activity
 		lastactivity = dm.updateLastActivity(userSession);
@@ -72,8 +73,8 @@
   if (request.getParameter("SerumLevelHigh") != null) mSerumLevelHigh = request.getParameter("SerumLevelHigh");
   if (request.getParameter("SerumLevelUnit") != null) mSerumLevelUnit = request.getParameter("SerumLevelUnit");
 
-  if(flinn.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
-  if (flinn.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
+  if(flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+  if (flinn.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
 
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
@@ -85,8 +86,8 @@
 
 
   if (isAdmin && postType) {
-		flinn.beans.request.RequestContainerBean rqcont = new flinn.beans.request.RequestContainerBean();
-		flinn.beans.request.RequestTreatmentBean rqTreatmentBean = new flinn.beans.request.RequestTreatmentBean();
+		flinn.old.dao.beans.request.RequestContainerBean rqcont = new flinn.old.dao.beans.request.RequestContainerBean();
+		flinn.old.dao.beans.request.RequestTreatmentBean rqTreatmentBean = new flinn.old.dao.beans.request.RequestTreatmentBean();
 
 		rqTreatmentBean.setTreatmentid(medid);
 		rqTreatmentBean.setTreatmentname(mName);
@@ -132,8 +133,8 @@
     	if (medid > 0){//Update treatment
     		try{
         		rqcont.setTreatment(rqTreatmentBean);
-        		flinn.beans.response.ResponseTreatmentContainerBean rspBean= new flinn.beans.response.ResponseTreatmentContainerBean();
-        		rspBean = (flinn.beans.response.ResponseTreatmentContainerBean)dm.updateTreatment(rqcont, userSession);
+        		flinn.old.dao.beans.response.ResponseTreatmentContainerBean rspBean= new flinn.old.dao.beans.response.ResponseTreatmentContainerBean();
+        		rspBean = (flinn.old.dao.beans.response.ResponseTreatmentContainerBean)dm.updateTreatment(rqcont, userSession);
         		mid = rspBean.getTreatment().getTreatmentid();
     		}
     		catch(Exception e) {
@@ -163,7 +164,7 @@
   }
 
 
-flinn.beans.response.ResponseTreatmentBean adminTreatment = new flinn.beans.response.ResponseTreatmentBean();
+flinn.old.dao.beans.response.ResponseTreatmentBean adminTreatment = new flinn.old.dao.beans.response.ResponseTreatmentBean();
 if (medid > 0){
 
 try{
@@ -635,10 +636,10 @@ if (isAdmin && hasEdit) editable = true;
 		<td align="right">
 			<p class="formText" style="text-align:left;">
 			<% if (editable) {
-				flinn.beans.request.RequestContainerBean input = new flinn.beans.request.RequestContainerBean();
+				flinn.old.dao.beans.request.RequestContainerBean input = new flinn.old.dao.beans.request.RequestContainerBean();
 				try{
-					flinn.beans.response.ResponseTreatmentGroupContainerBean adminTreatmentGroup = (flinn.beans.response.ResponseTreatmentGroupContainerBean)dm.findAllTreatmentGroups(input, userSession, true, isSuperAdmin, null);
-					flinn.beans.TreatmentGroupBean[] tgBean = adminTreatmentGroup.getGroups();
+					flinn.old.dao.beans.response.ResponseTreatmentGroupContainerBean adminTreatmentGroup = (flinn.old.dao.beans.response.ResponseTreatmentGroupContainerBean)dm.findAllTreatmentGroups(input, userSession, true, isSuperAdmin, null);
+					flinn.old.dao.beans.TreatmentGroupBean[] tgBean = adminTreatmentGroup.getGroups();
 					if(tgBean.length > 0){
 						out.print("<SELECT name='MedGroup'>");
 						for(int i=0; i < tgBean.length; i++)

@@ -1,4 +1,5 @@
-<%@page import="flinn.beans.response.ResponseSessionContainerBean"%>
+<%@page import="flinn.old.dao.beans.response.ResponseSessionContainerBean"%>
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -113,22 +114,22 @@ if (qsOrder2 != 1){
 boolean first = true;
 String orderby = "LabTestName";
 String criteria = "false";
-String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
+String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
 
 if (request.getParameter("order") != null) {
 	if (request.getParameter("order").equals("1")) orderby = "StartDate DESC";
 	if (request.getParameter("order").equals("2")) orderby = "DiscontinueDate DESC";
 }
 
-flinn.beans.response.ResponseLabTestsContainerBean rcb = new flinn.beans.response.ResponseLabTestsContainerBean();
-flinn.beans.LabTestBean[] labList = null;
-flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-flinn.beans.request.RequestContainerBean input = new flinn.beans.request.RequestContainerBean();
+flinn.old.dao.beans.response.ResponseLabTestsContainerBean rcb = new flinn.old.dao.beans.response.ResponseLabTestsContainerBean();
+flinn.old.dao.beans.LabTestBean[] labList = null;
+DaoAppManager dm = new DaoAppManager();
+flinn.old.dao.beans.request.RequestContainerBean input = new flinn.old.dao.beans.request.RequestContainerBean();
 ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 int lastactivity = -1;
 
 try{
-	rcb = (flinn.beans.response.ResponseLabTestsContainerBean)dm.findAllLabTests(input, userSession, !invalid, orderby); //function call to return user
+	rcb = (flinn.old.dao.beans.response.ResponseLabTestsContainerBean)dm.findAllLabTests(input, userSession, !invalid, orderby); //function call to return user
 	labList =  rcb.getLabtests();
 	try{
 			//function call to update user's last activity
@@ -147,7 +148,7 @@ finally{dm.disposeConnection("findAllLabTests");}
 
 if (labList != null){
 for (int i=0; i<labList.length; i++) {
-  flinn.beans.LabTestBean labBean = labList[i];
+  flinn.old.dao.beans.LabTestBean labBean = labList[i];
   if (!first) {
     %>
 	<tr>
@@ -164,9 +165,9 @@ for (int i=0; i<labList.length; i++) {
 		<td>&nbsp;</td>
 		<td><p class="tableText<% if (lab_is_not_valid(labBean) > 0) out.print("Inactive"); %>"><%= labBean.getLabtestname()%></p></td>
 		<td>&nbsp;</td>
-		<td><p class="tableText<% if (lab_is_not_valid(labBean) > 0) out.print("Inactive"); %>"><%= flinn.util.AdminFunctions.formatNulls(labBean.getStartdate())%></p></td>
+		<td><p class="tableText<% if (lab_is_not_valid(labBean) > 0) out.print("Inactive"); %>"><%= flinn.old.dao.util.AdminFunctions.formatNulls(labBean.getStartdate())%></p></td>
 		<td>&nbsp;</td>
-		<td><p class="tableText<% if (lab_is_not_valid(labBean) > 0) out.print("Inactive"); %>"><%= flinn.util.AdminFunctions.formatNulls(labBean.getDiscontinuedate())%></p></td>
+		<td><p class="tableText<% if (lab_is_not_valid(labBean) > 0) out.print("Inactive"); %>"><%= flinn.old.dao.util.AdminFunctions.formatNulls(labBean.getDiscontinuedate())%></p></td>
 		<td>&nbsp;</td>
 		<td><p class="tableText<% if (lab_is_not_valid(labBean) > 0) out.print("Inactive"); %>"><%= labBean.getLabtestid()%></p></td>
 		<td>&nbsp;</td>
@@ -183,19 +184,19 @@ for (int i=0; i<labList.length; i++) {
 	</table>
 
 <%!
-public int lab_is_not_valid(flinn.beans.LabTestBean bean) throws Exception {
-  String now = flinn.util.DateString.now();
+public int lab_is_not_valid(flinn.old.dao.beans.LabTestBean bean) throws Exception {
+  String now = flinn.old.dao.util.DateString.now();
   java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   if (!bean.getValid()) {
   	return 1;
   }
-  if (flinn.util.DateString.interpret(bean.getStartdate()) != null) {
+  if (flinn.old.dao.util.DateString.interpret(bean.getStartdate()) != null) {
     if (df.parse(now).compareTo(df.parse(bean.getStartdate())) < 0) {
       return 2;
     }
   }
-  if (flinn.util.DateString.interpret(bean.getDiscontinuedate()) != null) {
+  if (flinn.old.dao.util.DateString.interpret(bean.getDiscontinuedate()) != null) {
     if (df.parse(now).compareTo(df.parse(bean.getDiscontinuedate())) > 0) {
       return 3;
     }

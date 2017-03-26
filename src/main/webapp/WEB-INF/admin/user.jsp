@@ -1,4 +1,4 @@
-<%
+<%@ page import="flinn.old.dao.dao.DaoAppManager" %><%
 String admin_section = "Manage Users";
 String admin_subsection = "Users";
 String sub_section = "";
@@ -6,31 +6,31 @@ String userlogin = "u";
 String role = "r";
 int roleid = -1;
 
-String authcode = flinn.util.CookieHandler.getCookie("authcode", request);
-if (authcode == null || authcode.equals("")){ 
+String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+if (authcode == null || authcode.equals("")){
 	response.sendRedirect("/sample");
-	return;	
+	return;
 }
 else {
-	flinn.dao.DaoAppManager dm = new flinn.dao.DaoAppManager();
-	flinn.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+	DaoAppManager dm = new DaoAppManager();
+	flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 
-	if (userSession != null){	
+	if (userSession != null){
 		userlogin = userSession.getUser().getLogin();
-	
-		flinn.beans.AppUserRoleBean[] ar = userSession.getUser().getRoles();
-		flinn.beans.AppUserRoleBean userRole = (flinn.beans.AppUserRoleBean)ar[0];
+
+		flinn.old.dao.beans.AppUserRoleBean[] ar = userSession.getUser().getRoles();
+		flinn.old.dao.beans.AppUserRoleBean userRole = (flinn.old.dao.beans.AppUserRoleBean)ar[0];
 		role = userRole.getApprole();
 		roleid = userRole.getApproleid();
-		
+
 		if (roleid < 1 || roleid > 2){
 			response.sendRedirect("/sample");
-			return;	
+			return;
 		}
 	}
 	else{
 		response.sendRedirect("/sample");
-		return;	
+		return;
 	}
 }
 
