@@ -16,6 +16,7 @@ public class Message {
 
     private String messageTag;
 
+    @Lob
     private String text;
 
 }

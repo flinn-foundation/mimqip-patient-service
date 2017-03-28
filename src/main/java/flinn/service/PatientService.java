@@ -1,7 +1,9 @@
 package flinn.service;
 
 import flinn.mapper.PatientMapper;
+import flinn.repository.PatientDetailRepository;
 import flinn.repository.PatientRepository;
+import flinn.repository.PatientStatusRepository;
 import io.swagger.model.Patient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +15,17 @@ import java.util.List;
 @Service
 public class PatientService {
 
-    /*
-    * TODO: Create add patient details see {ResponsePatientBean}
-    *
-    */
-
     private PatientRepository patientRepository;
+    private PatientDetailRepository patientDetailRepository;
+    private PatientStatusRepository patientStatusRepository;
+
     private PatientMapper patientConverter;
 
     @Autowired
-    public PatientService(PatientRepository patientRepository, PatientMapper patientConverter) {
+    public PatientService(PatientRepository patientRepository, PatientDetailRepository patientDetailRepository, PatientStatusRepository patientStatusRepository, PatientMapper patientConverter) {
         this.patientRepository = patientRepository;
+        this.patientDetailRepository = patientDetailRepository;
+        this.patientStatusRepository = patientStatusRepository;
         this.patientConverter = patientConverter;
     }
 

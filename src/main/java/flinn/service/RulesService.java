@@ -1,7 +1,7 @@
 package flinn.service;
 
 import flinn.mapper.RuleMapper;
-import flinn.repository.RulesRepository;
+import flinn.repository.RuleRepository;
 import io.swagger.model.Rule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +14,21 @@ import java.util.List;
 @Service
 public class RulesService {
 
-    private RulesRepository rulesRepository;
+    private RuleRepository ruleRepository;
     private RuleMapper ruleConverter;
 
     @Autowired
-    public RulesService(RulesRepository rulesRepository, RuleMapper ruleConverter) {
-        this.rulesRepository = rulesRepository;
+    public RulesService(RuleRepository ruleRepository, RuleMapper ruleConverter) {
+        this.ruleRepository = ruleRepository;
         this.ruleConverter = ruleConverter;
     }
 
     public List<Rule> getAllRules() {
-        rulesRepository.findAll().forEach(rule -> log.info(rule.toString()));
+        ruleRepository.findAll().forEach(rule -> log.info(rule.toString()));
         return new ArrayList<>();
     }
 
     public Rule getRule(Long id) {
-        return ruleConverter.entityToApiModel(rulesRepository.findOne(id));
+        return ruleConverter.entityToApiModel(ruleRepository.findOne(id));
     }
 }
