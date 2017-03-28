@@ -64,6 +64,8 @@ dependencies {
 
     compile "io.springfox:springfox-swagger2:2.5.0"
     compile "io.springfox:springfox-swagger-ui:2.5.0"
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.0.pr2'
+
 
 
 }

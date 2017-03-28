@@ -1,8 +1,8 @@
-package flinn.swagger.api;
+package io.swagger.api;
 
 import javax.xml.bind.annotation.XmlTransient;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-23T20:07:13.406Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-27T14:18:48.125-04:00")
 
 @javax.xml.bind.annotation.XmlRootElement
 public class ApiResponseMessage {
@@ -15,9 +15,9 @@ public class ApiResponseMessage {
 	int code;
 	String type;
 	String message;
-
+	
 	public ApiResponseMessage(){}
-
+	
 	public ApiResponseMessage(int code, String message){
 		this.code = code;
 		switch(code){

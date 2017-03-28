@@ -1,10 +1,11 @@
-package flinn.swagger.api;
+package io.swagger.api;
+
+import java.io.IOException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-23T20:07:13.406Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-27T14:18:48.125-04:00")
 
 public class ApiOriginFilter implements Filter {
 	@Override

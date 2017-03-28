@@ -29,87 +29,87 @@ public class PatientDaoImp extends PatientDao {
 		LOG.debug("Log appender instantiated for " + PatientDaoImp.class);
 	}
 
-	public ResponseContainerBean handlePatientCreate(
-            RequestContainerBean input, ResponseSessionContainerBean session,
-            Connection connection) {
-		// sanity checks on incoming data. Ensure no changes to aspects of the
-		// data we don't want changed.
-		RequestPatientBean bean = input.getPatient();
-		if (bean == null)
-			return DaoRequestManager.generateErrorBean(input.getAction(),
-					"Patient create submitted with no appropriate info", 41);
-		if (bean.getFacilityid() == 0) {
-			bean.setFacilityid(session.getFacility().getFacilityid());
-		}
-		if (bean.getFacilityid() != session.getFacility().getFacilityid()) {
-			return DaoRequestManager
-					.generateErrorBean(
-							input.getAction(),
-							"Patient create failed (Attempt to create patient in wrong facility)",
-							41);
-		}
-		int newid = 0;
-		List<ResponsePatientBean> patients = null;
-
-		try {
-			// Create new Patient record
-			newid = create(bean, connection);
-		} catch (Exception e) {
-			LOG.error(e);
-			try {
-				connection.rollback();
-			} catch (SQLException e1) {
-				LOG.error("Error rolling back connection in handlePatientCreate: "
-						+ e);
-			}
-			LOG.error("Inappropriate Exception caught: " + e.getMessage(), e);
-			return DaoRequestManager.generateErrorBean(input.getAction(),
-					"Patient create failed (unknown error): " + e.getMessage(),
-					48);
-		}
-
-		try {
-			connection.commit();
-		} catch (Exception e) {
-			try {
-				connection.rollback();
-			} catch (SQLException e1) {
-				LOG.error("Error rolling back connection in handlePatientCreate: "
-						+ e);
-			}
-			LOG.error("Patient retrieval post-update failed (unknown error): "
-					+ e);
-			return DaoRequestManager.generateErrorBean(input.getAction(),
-					"Patient retrieval post-create failed (unknown error): "
-							+ e.getMessage(), 49);
-		}
-		if (newid < 1)
-			return DaoRequestManager.generateErrorBean(input.getAction(),
-					"Patient create failed (unknown error - no returned ID)",
-					47);
-		bean = new RequestPatientBean();
-		bean.setPatientid(newid);
-		try {
-			patients = find(bean, null, connection);
-		} catch (Exception e) {
-			return DaoRequestManager.generateErrorBean(input.getAction(),
-					"Patient retrieval post-create failed (unknown error): "
-							+ e.getMessage(), 47);
-		}
-
-		if (patients == null || patients.size() == 0) {
-			return DaoRequestManager
-					.generateErrorBean(
-							input.getAction(),
-							"Patient retrieval post-create failed (unknown error) No Exception",
-							49);
-		}
-
-		ResponsePatientContainerBean rcb = new ResponsePatientContainerBean();
-		rcb.setPatient(patients.get(0));
-		rcb.setAction(new ResponseActionBean(input.getAction()));
-		return rcb;
-	}
+//	public ResponseContainerBean handlePatientCreate(
+//            RequestContainerBean input, ResponseSessionContainerBean session,
+//            Connection connection) {
+//		// sanity checks on incoming data. Ensure no changes to aspects of the
+//		// data we don't want changed.
+//		RequestPatientBean bean = input.getPatient();
+//		if (bean == null)
+//			return DaoRequestManager.generateErrorBean(input.getAction(),
+//					"Patient create submitted with no appropriate info", 41);
+//		if (bean.getFacilityid() == 0) {
+//			bean.setFacilityid(session.getFacility().getFacilityid());
+//		}
+//		if (bean.getFacilityid() != session.getFacility().getFacilityid()) {
+//			return DaoRequestManager
+//					.generateErrorBean(
+//							input.getAction(),
+//							"Patient create failed (Attempt to create patient in wrong facility)",
+//							41);
+//		}
+//		int newid = 0;
+//		List<ResponsePatientBean> patients = null;
+//
+//		try {
+//			// Create new Patient record
+//			newid = create(bean, connection);
+//		} catch (Exception e) {
+//			LOG.error(e);
+//			try {
+//				connection.rollback();
+//			} catch (SQLException e1) {
+//				LOG.error("Error rolling back connection in handlePatientCreate: "
+//						+ e);
+//			}
+//			LOG.error("Inappropriate Exception caught: " + e.getMessage(), e);
+//			return DaoRequestManager.generateErrorBean(input.getAction(),
+//					"Patient create failed (unknown error): " + e.getMessage(),
+//					48);
+//		}
+//
+//		try {
+//			connection.commit();
+//		} catch (Exception e) {
+//			try {
+//				connection.rollback();
+//			} catch (SQLException e1) {
+//				LOG.error("Error rolling back connection in handlePatientCreate: "
+//						+ e);
+//			}
+//			LOG.error("Patient retrieval post-update failed (unknown error): "
+//					+ e);
+//			return DaoRequestManager.generateErrorBean(input.getAction(),
+//					"Patient retrieval post-create failed (unknown error): "
+//							+ e.getMessage(), 49);
+//		}
+//		if (newid < 1)
+//			return DaoRequestManager.generateErrorBean(input.getAction(),
+//					"Patient create failed (unknown error - no returned ID)",
+//					47);
+//		bean = new RequestPatientBean();
+//		bean.setPatientid(newid);
+//		try {
+//			patients = find(bean, null, connection);
+//		} catch (Exception e) {
+//			return DaoRequestManager.generateErrorBean(input.getAction(),
+//					"Patient retrieval post-create failed (unknown error): "
+//							+ e.getMessage(), 47);
+//		}
+//
+//		if (patients == null || patients.size() == 0) {
+//			return DaoRequestManager
+//					.generateErrorBean(
+//							input.getAction(),
+//							"Patient retrieval post-create failed (unknown error) No Exception",
+//							49);
+//		}
+//
+//		ResponsePatientContainerBean rcb = new ResponsePatientContainerBean();
+//		rcb.setPatient(patients.get(0));
+//		rcb.setAction(new ResponseActionBean(input.getAction()));
+//		return rcb;
+//	}
 
 	public ResponseContainerBean handlePatientRead(RequestContainerBean input,
                                                    ResponseSessionContainerBean session, Connection connection) {

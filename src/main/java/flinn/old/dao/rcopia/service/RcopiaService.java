@@ -19,7 +19,7 @@ public class RcopiaService extends BaseService
 
 	private final PrescriptionEventService prescriptionEventService = new PrescriptionEventService();
 	private final MedicationService medicationService = new MedicationService();
-	private final PatientService patientService = new PatientService();
+	private final OldPatientService oldPatientService = new OldPatientService();
 
 	public RcExtResponseType updateMedications(Date lastUpdatedDate) throws RcopiaTransformationException, RcopiaSenderException, RcopiaServiceException, ServiceException
 	{
@@ -36,7 +36,7 @@ public class RcopiaService extends BaseService
 
 	public RcExtResponseType updateMedications(int patientId) throws ServiceException, RcopiaTransformationException, RcopiaSenderException, RcopiaServiceException
 	{
-		ResponsePatientBean patientBean = patientService.getPatientResponseBean(patientId);
+		ResponsePatientBean patientBean = oldPatientService.getPatientResponseBean(patientId);
 		return updateMedications(patientBean);
 	}
 
@@ -60,7 +60,7 @@ public class RcopiaService extends BaseService
 		RcExtResponseType rcResponse = callWebService(rcRequest);
 		validateRcopiaResponse(rcResponse);
 		processRcResponseForUpdateMedication(rcResponse);
-		patientService.updateRcopiaDate(patientBean.getPatientid(), new Date());
+		oldPatientService.updateRcopiaDate(patientBean.getPatientid(), new Date());
 		return rcResponse;
 	}
 
@@ -86,7 +86,7 @@ public class RcopiaService extends BaseService
 
 	public RcExtResponseType createPatient(int patientId) throws ServiceException, RcopiaServiceException, RcopiaTransformationException, RcopiaSenderException
 	{
-		ResponsePatientBean patientBean = patientService.getPatientResponseBean(patientId);
+		ResponsePatientBean patientBean = oldPatientService.getPatientResponseBean(patientId);
 		return createPatient(patientBean);
 	}
 
@@ -98,7 +98,7 @@ public class RcopiaService extends BaseService
 		RcExtResponseType rcResponse = callWebService(rcRequest);
 		validateRcopiaResponse(rcResponse);
 
-		patientService.updateRcopiaDate(patientBean.getPatientid(), new Date());
+		oldPatientService.updateRcopiaDate(patientBean.getPatientid(), new Date());
 		return rcResponse;
 	}
 

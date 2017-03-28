@@ -1,27 +1,16 @@
 package flinn.old.dao.dao;
 
+import flinn.old.dao.beans.request.RequestActionBean;
+import flinn.old.dao.beans.request.RequestContainerBean;
+import flinn.old.dao.beans.response.*;
+import flinn.old.dao.dao.imp.*;
+import flinn.old.dao.util.PatientLog;
+import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-
-import flinn.old.dao.beans.request.RequestActionBean;
-import flinn.old.dao.beans.request.RequestContainerBean;
-import flinn.old.dao.beans.response.ErrorBean;
-import flinn.old.dao.beans.response.ErrorContainerBean;
-import flinn.old.dao.beans.response.ResponseActionBean;
-import flinn.old.dao.beans.response.ResponseContainerBean;
-import flinn.old.dao.beans.response.ResponseSessionContainerBean;
-import flinn.old.dao.dao.imp.AppUserDaoImp;
-import flinn.old.dao.dao.imp.FacilityDaoImp;
-import flinn.old.dao.dao.imp.LabDaoImp;
-import flinn.old.dao.dao.imp.PatientDaoImp;
-import flinn.old.dao.dao.imp.PrescriptionDaoImp;
-import flinn.old.dao.dao.imp.ProgressNoteDaoImp;
-import flinn.old.dao.util.PatientLog;
 
 public class DaoRequestManager extends AbstractBaseDao
 {
@@ -170,11 +159,11 @@ public class DaoRequestManager extends AbstractBaseDao
 				{
 					ret = generateErrorBean(input.getAction(), "Patient Search is a read operation", 5);
 				}
-				else if (command.equals(ACTION_COMMAND_PATIENT))
-				{
-					ret = (new PatientDaoImp()).handlePatientCreate(input, session, connection);
-					// add here
-				}
+//				else if (command.equals(ACTION_COMMAND_PATIENT))
+//				{
+//					ret = (new PatientDaoImp()).handlePatientCreate(input, session, connection);
+//					// add here
+//				}
 				else if (command.equals(ACTION_COMMAND_PRESCRIPTION))
 				{
 					ret = (new PrescriptionDaoImp()).handlePrescriptionCreate(input, session, connection);

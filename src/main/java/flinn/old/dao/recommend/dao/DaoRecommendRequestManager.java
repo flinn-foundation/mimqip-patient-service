@@ -15,7 +15,7 @@ import flinn.old.dao.recommend.beans.RecommendPatientInfoBean;
 import flinn.old.dao.recommend.beans.RecommendRuleCriteriaBean;
 import flinn.old.dao.recommend.beans.response.ResponseRuleBean;
 import flinn.old.dao.recommend.dao.imp.GuidelineReasonDaoImp;
-import flinn.service.PatientService;
+import flinn.service.OldPatientService;
 import flinn.service.ServiceException;
 
 import java.sql.Connection;
@@ -87,7 +87,7 @@ public class DaoRecommendRequestManager extends AbstractBaseDao {
 
 	public boolean handleConsistencyCheck(int patientid) throws ServiceException {
 
-		ResponsePatientBean patientBean = new PatientService().getPatientResponseBean(patientid);
+		ResponsePatientBean patientBean = new OldPatientService().getPatientResponseBean(patientid);
 		if (patientBean != null) {
 			ResponseRecommendationContainerBean rcb = requestRecommendation(new RequestPatientBean(patientBean));
 			if (rcb.getRecommendation().getConsistent() != null && (rcb.getRecommendation().getConsistent().equals("1") || rcb.getRecommendation().getConsistent().equals("true"))) {

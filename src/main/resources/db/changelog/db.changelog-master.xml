@@ -238,20 +238,20 @@
         </createTable>
     </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-13">
-        <createTable tableName="Patient">
-            <column name="ID" type="INT">
+        <createTable tableName="PATIENT">
+            <column name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="FacilityID" type="INT">
+            <column name="FACILITY_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="Valid" type="TINYINT(3)">
+            <column name="VALID" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>
-            <column defaultValue="0000-00-00 00:00:00" name="StartDate" type="datetime(6)">
+            <column defaultValue="0000-00-00 00:00:00" name="START_DATE" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
-            <column name="RcopiaLastUpdatedDate" type="datetime(6)"/>
+            <column name="RCOPIA_LAST_UPDATED_DATE" type="DATETIME"/>
         </createTable>
     </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-14">

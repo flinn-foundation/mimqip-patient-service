@@ -1,11 +1,9 @@
 package flinn.controller.recommend;
 
 import flinn.service.RulesService;
-import flinn.swagger.api.RulesApi;
-import flinn.swagger.model.Rule;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.api.RulesApi;
+import io.swagger.model.Rule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,21 +24,21 @@ public class RulesController implements RulesApi {
         this.rulesService = rulesService;
     }
 
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Array of rules", response = Rule.class)})
+//    @ApiResponses({
+//            @ApiResponse(code = 200, message = "Array of rules", response = Rule.class)})
+//    public ResponseEntity<List<Rule>> rulesGet() {
+//
+//        return new ResponseEntity<>(rulesService.getAllRules(), HttpStatus.OK);
+//    }
+
+    @Override
     public ResponseEntity<List<Rule>> rulesGet() {
-
-        log.info("Something");
-
-        rulesService.getAllRules();
-
         return new ResponseEntity<>(rulesService.getAllRules(), HttpStatus.OK);
     }
 
     public ResponseEntity<Rule> rulesIdGet(@ApiParam(value = "ID of rule to fetch",required=true ) @PathVariable("id") Long id) {
 
-        log.info("Something Else");
-        return new ResponseEntity<Rule>(HttpStatus.OK);
+        return new ResponseEntity<>(rulesService.getRule(id), HttpStatus.OK);
     }
 
 //    @GetMapping

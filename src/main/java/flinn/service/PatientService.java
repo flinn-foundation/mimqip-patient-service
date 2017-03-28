@@ -1,83 +1,39 @@
 package flinn.service;
 
-import flinn.old.dao.beans.response.ResponsePatientBean;
-import flinn.old.dao.dao.dbconnection.DBConnectionPool;
-import flinn.old.dao.dao.imp.PatientDaoImp;
-import org.apache.log4j.Logger;
+import flinn.mapper.PatientMapper;
+import flinn.repository.PatientRepository;
+import io.swagger.model.Patient;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Date;
+import java.util.List;
 
-public class PatientService extends BaseService
-{
+@Slf4j
+@Service
+public class PatientService {
 
-	static final Logger LOG = Logger.getLogger(PatientService.class);
+    /*
+    * TODO: Create add patient details see {ResponsePatientBean}
+    *
+    */
 
-	private final PatientDaoImp patientDao = new PatientDaoImp();
+    private PatientRepository patientRepository;
+    private PatientMapper patientConverter;
 
-	public ResponsePatientBean getPatientResponseBean(int patientId) throws ServiceException
-	{
-		Connection connection = null;
-		ResponsePatientBean patientBean = null;
-		try
-		{
-			connection = DBConnectionPool.getConnection();
-			patientBean = patientDao.findPatientById(patientId, connection);
-			if (patientBean == null)
-			{
-				throw new IllegalArgumentException("Unable to find patient with id " + patientId);
-			}
-		}
-		catch (SQLException e)
-		{
-			LOG.error(e);
-			throw new ServiceException("SQLException when getting ResponsePatientBean from database", e);
-		}
-		catch (Exception e)
-		{
-			LOG.error(e);
-			throw new ServiceException("Exception when getting ResponsePatientBean from databases", e);
-		}
-		finally
-		{
-			closeConnection(connection);
-		}
-		return patientBean;
-	}
+    @Autowired
+    public PatientService(PatientRepository patientRepository, PatientMapper patientConverter) {
+        this.patientRepository = patientRepository;
+        this.patientConverter = patientConverter;
+    }
 
-	public int updateRcopiaDate(int patientId, Date lastModifiedDate) throws ServiceException
-	{
-		LOG.debug("patientId=" + patientId + ", lastModifiedDate=" + lastModifiedDate);
-		int status = -1;
-		Connection connection = null;
-		try
-		{
-			connection = DBConnectionPool.getConnection();
-			connection.setAutoCommit(false);
+    public List<Patient> getPatientsData() {
+        return patientConverter.entityToApiModel(patientRepository.findAll());
+    }
 
-			status = patientDao.updateRcopiaDate(patientId, lastModifiedDate, connection);
+    public Patient getPatientData(Long patientId) {
+        return patientConverter.entityToApiModel(patientRepository.findOne(patientId));
+    }
 
-			commitConnection(connection);
-		}
-		catch (SQLException e)
-		{
-			LOG.error(e);
-			rollbackConnection(connection);
-			throw new ServiceException("SQLException in updateRcopiaDate", e);
-		}
-		catch (Exception e)
-		{
-			LOG.error(e);
-			rollbackConnection(connection);
-			throw new ServiceException("Exception in updateRcopiaDate", e);
-		}
-		finally
-		{
-			closeConnection(connection);
-		}
-
-		return status;
-	}
 
 }
