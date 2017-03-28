@@ -3,6 +3,7 @@ package flinn.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
@@ -11,7 +12,8 @@ import java.time.LocalDateTime;
 public class Patient {
 
     @Id
-    private Long id;
+    @GeneratedValue
+    private long id;
 
     private int facilityId;
 

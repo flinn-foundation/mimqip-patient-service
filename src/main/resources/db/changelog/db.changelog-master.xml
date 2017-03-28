@@ -480,43 +480,41 @@
         </createTable>
     </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-26">
-        <createTable tableName="RecommendMessage">
-            <column autoIncrement="true" name="MessageID" type="INT">
+        <createTable tableName="MESSAGE">
+            <column name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="Priority" type="INT">
+            <column name="PRIORITY" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="MessageTag" type="VARCHAR(20)">
+            <column name="MESSAGE_TAG" type="VARCHAR(20)">
                 <constraints nullable="false"/>
             </column>
-            <column name="Message" type="TEXT">
+            <column name="TEXT" type="TEXT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-27">
-        <createTable tableName="RecommendRule">
-            <column autoIncrement="true" name="RuleID" type="INT">
+        <createTable tableName="RULE">
+            <column name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="Priority" type="INT">
+            <column name="NAME" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="Valid" type="INT">
+            <column name="TYPE" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column defaultValueNumeric="0" name="TrueMessageID" type="INT">
+            <column name="PRIORITY" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column defaultValueNumeric="0" name="FalseMessageID" type="INT">
+            <column name="VALID" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>
-            <column name="RuleType" type="VARCHAR(50)">
-                <constraints nullable="false"/>
+            <column name="TRUE_MESSAGE_ID" type="BIGINT">
             </column>
-            <column name="RuleName" type="VARCHAR(50)">
-                <constraints nullable="false"/>
+            <column name="FALSE_MESSAGE_ID" type="BIGINT">
             </column>
         </createTable>
     </changeSet>
@@ -739,7 +737,25 @@
                   file="db.sampledata/patient-sample-data-20170326.csv"
                   schemaName="public"
                   separator=","
-                  tableName="Patient"
+                  tableName="PATIENT"
+                  quotchar='"'>
+        </loadData>
+    </changeSet>
+    <changeSet author="Michael Iden" id="20170328-load-messages">
+        <loadData encoding="UTF-8"
+                  file="db.sampledata/message-20170328.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="MESSAGE"
+                  quotchar='"'>
+        </loadData>
+    </changeSet>
+    <changeSet author="Michael Iden" id="20170326-load-rules">
+        <loadData encoding="UTF-8"
+                  file="db.sampledata/rule-20170328.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="RULE"
                   quotchar='"'>
         </loadData>
     </changeSet>
