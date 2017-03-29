@@ -5,23 +5,21 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Data
 @Entity
-public class Treatment {
+public class TreatmentDetail {
 
     @Id
     @GeneratedValue
     private long id;
 
-    private long groupId;
+    private long treatmentId;
 
-    private String name;
+    private String key;
 
-    private String abbreviation;
-
-    private boolean valid;
-
-    private String genericName;
+    @Lob
+    private String value;
 
 }
