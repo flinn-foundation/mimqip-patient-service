@@ -29,6 +29,6 @@ public class RulesService {
     }
 
     public Rule getRule(Long id) {
-        return ruleConverter.entityToApiModel(ruleRepository.findOne(id));
+        return ruleConverter.convertModelToApiDto(ruleRepository.findOne(id));
     }
 }

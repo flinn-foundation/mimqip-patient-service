@@ -3,24 +3,15 @@ package flinn.model;
 import lombok.Data;
 
 import javax.persistence.Embeddable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @Embeddable
-public class PatientDetailNew {
-
-    private String firstName;
-
-    private String lastName;
+public class PatientDetails {
 
     private String physicianName;
 
     private String physicianEmail;
-
-    private String sex;
-
-    private LocalDate dateOfBirth;
 
     private String zipCode;
 

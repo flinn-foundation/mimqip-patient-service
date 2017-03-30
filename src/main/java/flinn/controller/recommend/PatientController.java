@@ -2,7 +2,7 @@ package flinn.controller.recommend;
 
 import flinn.service.PatientService;
 import io.swagger.api.PatientsApi;
-import io.swagger.model.Patient;
+import io.swagger.model.PatientDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,13 +23,13 @@ public class PatientController implements PatientsApi {
     }
 
     @Override
-    public ResponseEntity<List<Patient>> patientsGet() {
+    public ResponseEntity<List<PatientDto>> patientsGet() {
         log.info("HERE");
         return new ResponseEntity<>(patientService.getPatientsData(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Patient> patientsIdGet(Long id) {
+    public ResponseEntity<PatientDto> patientsIdGet(Long id) {
         return ResponseEntity.ok(patientService.getPatientData(id));
     }
 }

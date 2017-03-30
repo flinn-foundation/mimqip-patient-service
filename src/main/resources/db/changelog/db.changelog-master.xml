@@ -237,25 +237,8 @@
             <column name="PRESCRIPTION_RCOPIA_ID" type="VARCHAR(20)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Michael Iden" id="1489345089097-13">
+    <changeSet author="Michael Iden" id="20170330-patient">
         <createTable tableName="PATIENT">
-            <column name="ID" type="BIGINT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="FACILITY_ID" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="VALID" type="BOOLEAN">
-                <constraints nullable="false"/>
-            </column>
-            <column name="START_DATE" type="DATETIME">
-                <constraints nullable="false"/>
-            </column>
-            <column name="RCOPIA_LAST_UPDATED_DATE" type="DATETIME"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Michael Iden" id="20170330-patient-new">
-        <createTable tableName="PATIENT_NEW">
             <column name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
@@ -304,33 +287,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="PATIENT_IDENTIFIER" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ENTRY_DATE" type="DATETIME">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet author="MichaelIden" id="20170330-patient-details" >
-        <createTable tableName="PATIENT_PATIENT_DETAILS">
-            <column name="PATIENT_ID" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="PATIENT_DETAILS_ID" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Michael Iden" id="1489345089097-14">
-        <createTable tableName="PATIENT_DETAIL">
-            <column name="ID" type="BIGINT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="KEY" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="VALUE" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="ENTRY_DATE" type="DATETIME">
@@ -814,30 +770,12 @@
                   quotchar='"'>
         </loadData>
     </changeSet>
-    <changeSet author="Michael Iden" id="20170326-load-patients">
+    <changeSet author="Michael Iden" id="20170328-patients">
         <loadData encoding="UTF-8"
-                  file="db.sampledata/patient-20170326.csv"
+                  file="db.sampledata/patient-20170330.csv"
                   schemaName="public"
                   separator=","
                   tableName="PATIENT"
-                  quotchar='"'>
-        </loadData>
-    </changeSet>
-    <changeSet author="Michael Iden" id="20170328-load-patient-details">
-        <loadData encoding="UTF-8"
-                  file="db.sampledata/patient-detail-20170328.csv"
-                  schemaName="public"
-                  separator=","
-                  tableName="PATIENT_DETAIL"
-                  quotchar='"'>
-        </loadData>
-    </changeSet>
-    <changeSet author="Michael Iden" id="20170330-load-patient-patient-details">
-        <loadData encoding="UTF-8"
-                  file="db.sampledata/patient-patient-details-20170330.csv"
-                  schemaName="public"
-                  separator=","
-                  tableName="PATIENT_PATIENT_DETAILS"
                   quotchar='"'>
         </loadData>
     </changeSet>
@@ -901,15 +839,6 @@
                   schemaName="public"
                   separator=","
                   tableName="PROGRESS_NOTE"
-                  quotchar='"'>
-        </loadData>
-    </changeSet>
-    <changeSet author="Michael Iden" id="20170328-patients">
-        <loadData encoding="UTF-8"
-                  file="db.sampledata/patient-details-full.csv"
-                  schemaName="public"
-                  separator=","
-                  tableName="PATIENT_NEW"
                   quotchar='"'>
         </loadData>
     </changeSet>

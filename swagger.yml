@@ -58,7 +58,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/definitions/Patient'
+                $ref: '#/definitions/PatientDto'
   /patients/{id}:
     get:
       summary: Patient by ID
@@ -74,9 +74,9 @@ paths:
           format: int64
       responses:
         200:
-          description: Rule
+          description: Patient
           schema:
-            $ref: '#/definitions/Patient'
+            $ref: '#/definitions/PatientDto'
         default:
           description: Unexpected error
           schema:
@@ -101,7 +101,7 @@ definitions:
           - val4
       name:
         type: string
-  Patient:
+  PatientDto:
     type: object
     properties:
       id:

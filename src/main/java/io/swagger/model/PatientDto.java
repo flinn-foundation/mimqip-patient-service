@@ -8,11 +8,11 @@ import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDate;
 import java.util.Objects;
 /**
- * Patient
+ * PatientDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-29T21:58:24.855-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-30T15:14:24.034-04:00")
 
-public class Patient   {
+public class PatientDto   {
   @JsonProperty("id")
   private Long id = null;
 
@@ -62,7 +62,7 @@ public class Patient   {
   @JsonProperty("valid")
   private Boolean valid = null;
 
-  public Patient id(Long id) {
+  public PatientDto id(Long id) {
     this.id = id;
     return this;
   }
@@ -80,7 +80,7 @@ public class Patient   {
     this.id = id;
   }
 
-  public Patient firstName(String firstName) {
+  public PatientDto firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -98,7 +98,7 @@ public class Patient   {
     this.firstName = firstName;
   }
 
-  public Patient lastName(String lastName) {
+  public PatientDto lastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
@@ -116,7 +116,7 @@ public class Patient   {
     this.lastName = lastName;
   }
 
-  public Patient sex(SexEnum sex) {
+  public PatientDto sex(SexEnum sex) {
     this.sex = sex;
     return this;
   }
@@ -134,7 +134,7 @@ public class Patient   {
     this.sex = sex;
   }
 
-  public Patient dateOfBirth(LocalDate dateOfBirth) {
+  public PatientDto dateOfBirth(LocalDate dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
     return this;
   }
@@ -152,7 +152,7 @@ public class Patient   {
     this.dateOfBirth = dateOfBirth;
   }
 
-  public Patient valid(Boolean valid) {
+  public PatientDto valid(Boolean valid) {
     this.valid = valid;
     return this;
   }
@@ -179,13 +179,13 @@ public class Patient   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Patient patient = (Patient) o;
-    return Objects.equals(this.id, patient.id) &&
-        Objects.equals(this.firstName, patient.firstName) &&
-        Objects.equals(this.lastName, patient.lastName) &&
-        Objects.equals(this.sex, patient.sex) &&
-        Objects.equals(this.dateOfBirth, patient.dateOfBirth) &&
-        Objects.equals(this.valid, patient.valid);
+    PatientDto patientDto = (PatientDto) o;
+    return Objects.equals(this.id, patientDto.id) &&
+        Objects.equals(this.firstName, patientDto.firstName) &&
+        Objects.equals(this.lastName, patientDto.lastName) &&
+        Objects.equals(this.sex, patientDto.sex) &&
+        Objects.equals(this.dateOfBirth, patientDto.dateOfBirth) &&
+        Objects.equals(this.valid, patientDto.valid);
   }
 
   @Override
@@ -196,7 +196,7 @@ public class Patient   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Patient {\n");
+    sb.append("class PatientDto {\n");
 
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");

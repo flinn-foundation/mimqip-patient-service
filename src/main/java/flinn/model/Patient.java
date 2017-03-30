@@ -2,20 +2,25 @@ package flinn.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Entity
 public class Patient {
 
     @Id
-    @GeneratedValue
     private long id;
+
+    private String firstName;
+
+    private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    private PatientSex sex;
+
+    private LocalDate dateOfBirth;
 
     private int facilityId;
 
@@ -25,7 +30,11 @@ public class Patient {
 
     private LocalDateTime rcopiaLastUpdatedDate;
 
-    @OneToMany
-    private List<PatientDetail> patientDetails;
+    @Embedded
+    private PatientDetails patientDetails;
+
+    public enum PatientSex {
+        MALE, FEMALE
+    }
 
 }
