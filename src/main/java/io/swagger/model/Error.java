@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 /**
  * Error
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-27T14:18:48.125-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-29T21:58:24.855-04:00")
 
 public class Error   {
   @JsonProperty("code")
@@ -99,7 +99,7 @@ public class Error   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Error {\n");
-    
+
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    fields: ").append(toIndentedString(fields)).append("\n");

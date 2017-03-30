@@ -24,6 +24,7 @@ public class PatientController implements PatientsApi {
 
     @Override
     public ResponseEntity<List<Patient>> patientsGet() {
+        log.info("HERE");
         return new ResponseEntity<>(patientService.getPatientsData(), HttpStatus.OK);
     }
 

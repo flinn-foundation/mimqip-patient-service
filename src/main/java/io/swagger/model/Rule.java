@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Rule
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-27T14:18:48.125-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-29T21:58:24.855-04:00")
 
 public class Rule   {
   @JsonProperty("id")
@@ -26,11 +26,11 @@ public class Rule   {
    */
   public enum RuleTypeEnum {
     VAL1("val1"),
-    
+
     VAL2("val2"),
-    
+
     VAL3("val3"),
-    
+
     VAL4("val4");
 
     private String value;
@@ -178,7 +178,7 @@ public class Rule   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Rule {\n");
-    
+
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    priority: ").append(toIndentedString(priority)).append("\n");
     sb.append("    valid: ").append(toIndentedString(valid)).append("\n");

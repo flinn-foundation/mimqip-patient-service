@@ -1,32 +1,66 @@
 package io.swagger.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
-import java.time.OffsetDateTime;
-import javax.validation.constraints.*;
+
+import java.time.LocalDate;
+import java.util.Objects;
 /**
  * Patient
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-27T14:18:48.125-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-29T21:58:24.855-04:00")
 
 public class Patient   {
   @JsonProperty("id")
   private Long id = null;
 
-  @JsonProperty("facilityId")
-  private Long facilityId = null;
+  @JsonProperty("firstName")
+  private String firstName = null;
+
+  @JsonProperty("lastName")
+  private String lastName = null;
+
+  /**
+   * Gets or Sets sex
+   */
+  public enum SexEnum {
+    MALE("MALE"),
+
+    FEMALE("FEMALE");
+
+    private String value;
+
+    SexEnum(String value) {
+      this.value = value;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static SexEnum fromValue(String text) {
+      for (SexEnum b : SexEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+  }
+
+  @JsonProperty("sex")
+  private SexEnum sex = null;
+
+  @JsonProperty("dateOfBirth")
+  private LocalDate dateOfBirth = null;
 
   @JsonProperty("valid")
   private Boolean valid = null;
-
-  @JsonProperty("startDate")
-  private OffsetDateTime startDate = null;
-
-  @JsonProperty("rcopiaLastUpdatedDate")
-  private OffsetDateTime rcopiaLastUpdatedDate = null;
 
   public Patient id(Long id) {
     this.id = id;
@@ -46,22 +80,76 @@ public class Patient   {
     this.id = id;
   }
 
-  public Patient facilityId(Long facilityId) {
-    this.facilityId = facilityId;
+  public Patient firstName(String firstName) {
+    this.firstName = firstName;
     return this;
   }
 
    /**
-   * Get facilityId
-   * @return facilityId
+   * Get firstName
+   * @return firstName
   **/
   @ApiModelProperty(value = "")
-  public Long getFacilityId() {
-    return facilityId;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setFacilityId(Long facilityId) {
-    this.facilityId = facilityId;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public Patient lastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+
+   /**
+   * Get lastName
+   * @return lastName
+  **/
+  @ApiModelProperty(value = "")
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public Patient sex(SexEnum sex) {
+    this.sex = sex;
+    return this;
+  }
+
+   /**
+   * Get sex
+   * @return sex
+  **/
+  @ApiModelProperty(value = "")
+  public SexEnum getSex() {
+    return sex;
+  }
+
+  public void setSex(SexEnum sex) {
+    this.sex = sex;
+  }
+
+  public Patient dateOfBirth(LocalDate dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+    return this;
+  }
+
+   /**
+   * Get dateOfBirth
+   * @return dateOfBirth
+  **/
+  @ApiModelProperty(value = "")
+  public LocalDate getDateOfBirth() {
+    return dateOfBirth;
+  }
+
+  public void setDateOfBirth(LocalDate dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
   }
 
   public Patient valid(Boolean valid) {
@@ -82,42 +170,6 @@ public class Patient   {
     this.valid = valid;
   }
 
-  public Patient startDate(OffsetDateTime startDate) {
-    this.startDate = startDate;
-    return this;
-  }
-
-   /**
-   * Get startDate
-   * @return startDate
-  **/
-  @ApiModelProperty(value = "")
-  public OffsetDateTime getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(OffsetDateTime startDate) {
-    this.startDate = startDate;
-  }
-
-  public Patient rcopiaLastUpdatedDate(OffsetDateTime rcopiaLastUpdatedDate) {
-    this.rcopiaLastUpdatedDate = rcopiaLastUpdatedDate;
-    return this;
-  }
-
-   /**
-   * Get rcopiaLastUpdatedDate
-   * @return rcopiaLastUpdatedDate
-  **/
-  @ApiModelProperty(value = "")
-  public OffsetDateTime getRcopiaLastUpdatedDate() {
-    return rcopiaLastUpdatedDate;
-  }
-
-  public void setRcopiaLastUpdatedDate(OffsetDateTime rcopiaLastUpdatedDate) {
-    this.rcopiaLastUpdatedDate = rcopiaLastUpdatedDate;
-  }
-
 
   @Override
   public boolean equals(Object o) {
@@ -129,27 +181,29 @@ public class Patient   {
     }
     Patient patient = (Patient) o;
     return Objects.equals(this.id, patient.id) &&
-        Objects.equals(this.facilityId, patient.facilityId) &&
-        Objects.equals(this.valid, patient.valid) &&
-        Objects.equals(this.startDate, patient.startDate) &&
-        Objects.equals(this.rcopiaLastUpdatedDate, patient.rcopiaLastUpdatedDate);
+        Objects.equals(this.firstName, patient.firstName) &&
+        Objects.equals(this.lastName, patient.lastName) &&
+        Objects.equals(this.sex, patient.sex) &&
+        Objects.equals(this.dateOfBirth, patient.dateOfBirth) &&
+        Objects.equals(this.valid, patient.valid);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, facilityId, valid, startDate, rcopiaLastUpdatedDate);
+    return Objects.hash(id, firstName, lastName, sex, dateOfBirth, valid);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Patient {\n");
-    
+
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    facilityId: ").append(toIndentedString(facilityId)).append("\n");
+    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
+    sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+    sb.append("    sex: ").append(toIndentedString(sex)).append("\n");
+    sb.append("    dateOfBirth: ").append(toIndentedString(dateOfBirth)).append("\n");
     sb.append("    valid: ").append(toIndentedString(valid)).append("\n");
-    sb.append("    startDate: ").append(toIndentedString(startDate)).append("\n");
-    sb.append("    rcopiaLastUpdatedDate: ").append(toIndentedString(rcopiaLastUpdatedDate)).append("\n");
     sb.append("}");
     return sb.toString();
   }

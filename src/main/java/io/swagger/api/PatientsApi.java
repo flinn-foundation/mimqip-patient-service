@@ -1,24 +1,32 @@
 package io.swagger.api;
 
-import io.swagger.annotations.*;
+import io.swagger.model.Error;
 import io.swagger.model.Patient;
+
+import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-27T14:18:48.125-04:00")
+import javax.validation.constraints.*;
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-29T21:58:24.855-04:00")
 
 @Api(value = "patients", description = "the patients API")
 public interface PatientsApi {
 
     @ApiOperation(value = "Patients", notes = "Endpoint returns a list of patients", response = Patient.class, responseContainer = "List", tags={ "patient", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Array of rules", response = Patient.class) })
     @RequestMapping(value = "/patients",
-        produces = { "application/json" }, 
+        produces = { "application/json" },
         method = RequestMethod.GET)
     default ResponseEntity<List<Patient>> patientsGet() {
         // do some magic!
@@ -27,11 +35,11 @@ public interface PatientsApi {
 
 
     @ApiOperation(value = "Patient by ID", notes = "Access a single patient by ID", response = Patient.class, tags={ "patient", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Rule", response = Patient.class),
         @ApiResponse(code = 200, message = "Unexpected error", response = Patient.class) })
     @RequestMapping(value = "/patients/{id}",
-        produces = { "application/json" }, 
+        produces = { "application/json" },
         method = RequestMethod.GET)
     default ResponseEntity<Patient> patientsIdGet(@ApiParam(value = "ID of rule to fetch", required = true) @PathVariable("id") Long id) {
         // do some magic!

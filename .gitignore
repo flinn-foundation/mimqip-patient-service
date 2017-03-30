@@ -10,3 +10,4 @@
 *.DS_Store
 
 /tmp/
+/tmp-angular2/

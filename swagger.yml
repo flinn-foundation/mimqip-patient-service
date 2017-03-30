@@ -107,17 +107,20 @@ definitions:
       id:
         type: integer
         format: int64
-      facilityId:
-        type: integer
-        format: int64
+      firstName:
+        type: string
+      lastName:
+        type: string
+      sex:
+        type: string
+        enum:
+          - MALE
+          - FEMALE
+      dateOfBirth:
+        type: string
+        format: 'date'
       valid:
         type: boolean
-      startDate:
-        type: string
-        format: 'date-time'
-      rcopiaLastUpdatedDate:
-        type: string
-        format: 'date-time'
   Error:
     type: object
     properties:

@@ -5,20 +5,25 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-public class PatientDetail {
+public class ProgressNote {
 
     @Id
     @GeneratedValue
     private long id;
 
-    private String key;
+    private long patientId;
 
-    private String value;
+    private long appUserId;
 
     private LocalDateTime entryDate;
 
+    private String doctorName;
+
+    @Lob
+    private String noteText;
 }
