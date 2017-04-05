@@ -1,4 +1,7 @@
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %><%
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.AppUserRoleBean" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %><%
 String admin_section = "Manage Progress Note Tags";
 String admin_subsection = "Progress Note Tags";
 String sub_section = "";
@@ -9,20 +12,20 @@ String admin_protocol = "http";
 int roleid = -1;
 
 
-String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+String authcode = CookieHandler.getCookie("authcode", request);
 if (authcode == null || authcode.equals("")){
 	response.sendRedirect(admin_protocol+"://"+serverName+"/sample");
 	return;
 }
 else {
 	DaoAppManager dm = new DaoAppManager();
-	flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+	ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 
 	if (userSession != null){
 		userlogin = userSession.getUser().getLogin();
 
-		flinn.old.dao.beans.AppUserRoleBean[] ar = userSession.getUser().getRoles();
-		flinn.old.dao.beans.AppUserRoleBean userRole = (flinn.old.dao.beans.AppUserRoleBean)ar[0];
+		AppUserRoleBean[] ar = userSession.getUser().getRoles();
+		AppUserRoleBean userRole = (AppUserRoleBean)ar[0];
 		role = userRole.getApprole();
 		roleid = userRole.getApproleid();
 

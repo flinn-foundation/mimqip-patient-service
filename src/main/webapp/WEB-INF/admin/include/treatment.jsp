@@ -1,6 +1,8 @@
-<%@page import="flinn.old.dao.beans.response.ResponseSessionContainerBean"%>
+<%@page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean"%>
 <%@page import="java.util.List"%>
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseTreatmentBean" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -118,23 +120,23 @@ if (qsOrder2 != 1){
 boolean first = true;
 String orderby = "TreatmentName";
 String criteria = "false";
-String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+String authcode = CookieHandler.getCookie("authcode", request);
 
 if (request.getParameter("order") != null) {
 	if (request.getParameter("order").equals("1")) orderby = "T.TreatmentAbbr ASC";
 	if (request.getParameter("order").equals("2")) orderby = "TG.TreatmentGroupName ASC";
 }
 
-List<flinn.old.dao.beans.response.ResponseTreatmentBean> dataList = null;
+List<ResponseTreatmentBean> dataList = null;
 DaoAppManager dm = new DaoAppManager();
 ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 int lastactivity = -1;
 Boolean isAdmin = false, isSuperAdmin = false;
 
-if (flinn.old.dao.util.AdminRole.isAdmin(userSession))
+if (org.flinnfoundation.old.dao.util.AdminRole.isAdmin(userSession))
 {
 	  isSuperAdmin = true;
-	  if(flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+	  if(org.flinnfoundation.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
 }
 
 try{
@@ -189,7 +191,7 @@ for (int i=0; i<dataList.size(); i++) {
 	</table>
 
 <%!
-public int data_is_not_valid(flinn.old.dao.beans.response.ResponseTreatmentBean bean) throws Exception {
+public int data_is_not_valid(ResponseTreatmentBean bean) throws Exception {
   if (!bean.getValid()) {
 	  	return 1;
 	  }

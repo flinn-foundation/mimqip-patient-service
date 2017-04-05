@@ -1,13 +1,17 @@
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %><%
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.recommend.beans.response.ResponseMessageBean" %>
+<%@ page import="org.flinnfoundation.old.dao.recommend.beans.request.RequestMessageBean" %>
+<%@ page import="org.flinnfoundation.old.dao.recommend.dao.imp.MessageDaoImp" %>
+<%@ page import="org.flinnfoundation.old.dao.dao.imp.PatientDaoImp" %><%
 int diagnosisid = Integer.parseInt(request.getParameter("d"));
 DaoAppManager dm = new DaoAppManager();
 java.sql.Connection conn = null;
 java.util.HashMap<String,Float> totals = null;
-flinn.old.dao.recommend.dao.imp.MessageDaoImp md = new flinn.old.dao.recommend.dao.imp.MessageDaoImp();
+MessageDaoImp md = new MessageDaoImp();
 
 try {
 	conn = dm.getConnection();
-	totals = new flinn.old.dao.dao.imp.PatientDaoImp().handlePatientPrescriptionByDiagnosis(diagnosisid, conn);
+	totals = new PatientDaoImp().handlePatientPrescriptionByDiagnosis(diagnosisid, conn);
 } catch (Exception e) {
 } finally {
 	conn.close();
@@ -43,11 +47,11 @@ if (totals != null) {
 String message = "SAVED";
 try {
 	conn = dm.getConnection();
-	flinn.old.dao.recommend.beans.request.RequestMessageBean rmb = new flinn.old.dao.recommend.beans.request.RequestMessageBean();
+	RequestMessageBean rmb = new RequestMessageBean();
 	rmb.setMessageid(messageid);
-	java.util.List<flinn.old.dao.recommend.beans.response.ResponseMessageBean> messages = md.find(rmb, null, conn);
+	java.util.List<ResponseMessageBean> messages = md.find(rmb, null, conn);
 	if (messages != null && messages.size() > 0) {
-		rmb = new flinn.old.dao.recommend.beans.request.RequestMessageBean(messages.get(0));
+		rmb = new RequestMessageBean(messages.get(0));
 		rmb.setMessageid(messageid);
 		rmb.setMessage(outbuff.toString());
 		md.update(rmb, messages.get(0), conn);

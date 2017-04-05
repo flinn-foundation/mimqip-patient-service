@@ -66,11 +66,17 @@ dependencies {
     compile "io.springfox:springfox-swagger-ui:2.5.0"
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.0.pr2'
 
-
-
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.4.1'
+}
+
+task generateSwaggerApi(type:Exec) {
+    commandLine 'swagger-codegen', 'generate', '-i', 'swagger.yml', '-l', 'spring', '-DdateLibrary=java8', '-DinterfaceOnly=true'
+}
+
+task generateSwaggerAngularClient(type:Exec) {
+    commandLine 'swagger-codegen', 'generate', '-i','swagger.yml', '-l', 'typescript-angular2', '-o', 'tmp-angular2'
 }
 

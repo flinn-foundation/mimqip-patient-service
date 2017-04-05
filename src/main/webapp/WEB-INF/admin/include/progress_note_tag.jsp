@@ -1,5 +1,9 @@
-<%@page import="flinn.old.dao.beans.response.ResponseSessionContainerBean"%>
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
+<%@page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean"%>
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseProgressNoteTagsContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.request.RequestContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.ProgressNoteTagBean" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -77,21 +81,21 @@ if (request.getParameter("order") != null) {
 boolean first = true;
 String orderby = "TagName";
 String criteria = "false";
-String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+String authcode = CookieHandler.getCookie("authcode", request);
 
 if (request.getParameter("order") != null) {
 	if (request.getParameter("order").equals("1")) orderby = "TagDescription ASC";
 }
 
-flinn.old.dao.beans.response.ResponseProgressNoteTagsContainerBean rcb = new flinn.old.dao.beans.response.ResponseProgressNoteTagsContainerBean();
-flinn.old.dao.beans.ProgressNoteTagBean[] tagList = null;
+ResponseProgressNoteTagsContainerBean rcb = new ResponseProgressNoteTagsContainerBean();
+ProgressNoteTagBean[] tagList = null;
 DaoAppManager dm = new DaoAppManager();
-flinn.old.dao.beans.request.RequestContainerBean input = new flinn.old.dao.beans.request.RequestContainerBean();
+RequestContainerBean input = new RequestContainerBean();
 ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 int lastactivity = -1;
 
 try{
-rcb = (flinn.old.dao.beans.response.ResponseProgressNoteTagsContainerBean)dm.findAllNoteTags(input, userSession, invalid); //function call to return user
+rcb = (ResponseProgressNoteTagsContainerBean)dm.findAllNoteTags(input, userSession, invalid); //function call to return user
 tagList =  rcb.getTags();
 	try{
 		//function call to update user's last activity
@@ -111,7 +115,7 @@ finally{dm.disposeConnection("findAllNoteTags");}
 if (tagList != null)
 {
 for (int i=0; i<tagList.length; i++) {
-  flinn.old.dao.beans.ProgressNoteTagBean tagBean = tagList[i];
+  ProgressNoteTagBean tagBean = tagList[i];
   if (!first) {
     %>
 	<tr>
@@ -142,7 +146,7 @@ for (int i=0; i<tagList.length; i++) {
 	</tr>
 	</table>
 <%!
-public int data_is_not_valid(flinn.old.dao.beans.ProgressNoteTagBean bean) throws Exception {
+public int data_is_not_valid(ProgressNoteTagBean bean) throws Exception {
   if (!bean.getValid()) {
 	  	return 1;
 	  }

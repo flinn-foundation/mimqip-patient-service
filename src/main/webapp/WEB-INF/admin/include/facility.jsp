@@ -1,6 +1,9 @@
-<%@page import="flinn.old.dao.beans.response.ResponseSessionContainerBean"%>
+<%@page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean"%>
 <%@page import="java.util.List"%>
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseFacilityBean" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %>
+<%@ page import="org.flinnfoundation.old.dao.util.DateString" %>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -121,19 +124,19 @@ if (qsOrder2 != 1) {
 boolean first = true;
 String orderby = "FacilityName";
 String criteria = "false";
-String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+String authcode = CookieHandler.getCookie("authcode", request);
 
 if (request.getParameter("order") != null) {
 	if (request.getParameter("order").equals("1")) orderby = "FacilityShortcut DESC";
 	if (request.getParameter("order").equals("2")) orderby = "FacilityEmail DESC";
 }
 
-List<flinn.old.dao.beans.response.ResponseFacilityBean> dbList = null;
+List<ResponseFacilityBean> dbList = null;
 DaoAppManager dm = new DaoAppManager();
 ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 int lastactivity = -1;
 Boolean isSuperAdmin = false;
-if (flinn.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
+if (org.flinnfoundation.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
 
 try{
 	dbList = dm.findAllFacilities(null, userSession, !invalid, isSuperAdmin, orderby); //function call to return user
@@ -190,20 +193,20 @@ for (int i=0; i<dbList.size(); i++) {
 	</table>
 
 <%!
-public int date_is_not_valid(flinn.old.dao.beans.response.ResponseFacilityBean bean) throws Exception {
-  String now = flinn.old.dao.util.DateString.now();
+public int date_is_not_valid(ResponseFacilityBean bean) throws Exception {
+  String now = DateString.now();
   java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   if (!bean.getValid()) {
 	  	return 1;
 	  }
 
-  if (flinn.old.dao.util.DateString.interpret(bean.getLaunch()) != null) {
+  if (DateString.interpret(bean.getLaunch()) != null) {
     if (df.parse(now).compareTo(df.parse(bean.getLaunch())) < 0) {
       return 2;
     }
   }
-  if (flinn.old.dao.util.DateString.interpret(bean.getExpiration()) != null) {
+  if (DateString.interpret(bean.getExpiration()) != null) {
     if (df.parse(now).compareTo(df.parse(bean.getExpiration())) > 0) {
       return 3;
     }

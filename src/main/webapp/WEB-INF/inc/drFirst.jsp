@@ -1,9 +1,11 @@
-<%@ page import="flinn.old.dao.util.DrFirstUtils"%>
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %><%
+<%@ page import="org.flinnfoundation.old.dao.util.DrFirstUtils"%>
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %><%
 String serverName = request.getServerName();
 String admin_protocol = "https";
 
-String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+String authcode = CookieHandler.getCookie("authcode", request);
 String userID = null;
 String practiceUserName = null;
 String patientId = request.getParameter("patientid");
@@ -14,7 +16,7 @@ if (authcode == null || authcode.equals("")){
 }
 else {
         DaoAppManager dm = new DaoAppManager();
-        flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+        ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 
         if (userSession != null){
         	userID = userSession.getUser().getSettings().get("UserExternalID");

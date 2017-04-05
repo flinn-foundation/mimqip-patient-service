@@ -28,7 +28,7 @@
 
 	<servlet>
 		<servlet-name>InitWebTierDBConnectionServlet</servlet-name>
-		<servlet-class>flinn.old.dao.dao.dbconnection.WebTierDBConnectionServlet</servlet-class>
+		<servlet-class>org.flinnfoundation.old.dao.dao.dbconnection.WebTierDBConnectionServlet</servlet-class>
 		<init-param>
 			<param-name>useflag</param-name>
 			<!-- useflag is either "datasourcejndiname" or "mysql" -->
@@ -43,7 +43,7 @@
 
 	<servlet>
 		<servlet-name>FlinnServlet</servlet-name>
-		<servlet-class>flinn.old.dao.servlet.FlinnServlet</servlet-class>
+		<servlet-class>org.flinnfoundation.old.dao.servlet.FlinnServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FlinnServlet</servlet-name>
@@ -52,7 +52,7 @@
 
 	<servlet>
 		<servlet-name>FlinnTrainingServlet</servlet-name>
-		<servlet-class>flinn.old.dao.servlet.FlinnTrainingServlet</servlet-class>
+		<servlet-class>org.flinnfoundation.old.dao.servlet.FlinnTrainingServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FlinnTrainingServlet</servlet-name>

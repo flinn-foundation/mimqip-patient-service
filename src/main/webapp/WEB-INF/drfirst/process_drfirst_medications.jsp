@@ -1,6 +1,6 @@
-<%@ page import="flinn.old.dao.rcopia.model.RcExtResponseType"%>
-<%@ page import="flinn.old.dao.rcopia.service.RcopiaService"%>
-<%@ page import="flinn.old.dao.rcopia.service.RcopiaTransformationService"%>
+<%@ page import="org.flinnfoundation.old.dao.rcopia.model.RcExtResponseType"%>
+<%@ page import="org.flinnfoundation.old.dao.rcopia.service.RcopiaService"%>
+<%@ page import="org.flinnfoundation.old.dao.rcopia.service.RcopiaTransformationService"%>
 
 <%
 	RcopiaService service = new RcopiaService();

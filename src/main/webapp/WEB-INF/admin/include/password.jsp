@@ -1,5 +1,9 @@
-<%@page import="flinn.old.dao.beans.response.ResponseSessionContainerBean"%>
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
+<%@page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean"%>
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseAppUserContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.request.RequestContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.request.RequestAppUserBean" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %>
 <%
 String jspSelf = request.getRequestURL().toString();
 String upassword = "-1", upassword2 = "-2";
@@ -9,7 +13,7 @@ Boolean changed = false;
 Boolean match = false;
 
 
-String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+String authcode = CookieHandler.getCookie("authcode", request);
 ResponseSessionContainerBean userSession = (new DaoAppManager()).getSession(authcode, request);
 
 userid = userSession.getUser().getAppuserid();
@@ -29,23 +33,23 @@ if (request.getParameter("userpasswd2") != null){ upassword2 = request.getParame
 if (upassword.equals(upassword2))match=true;
 
 if (userid > 0 && changed && match){//Update user
-	flinn.old.dao.beans.request.RequestContainerBean rqcont = new flinn.old.dao.beans.request.RequestContainerBean();
-	flinn.old.dao.beans.request.RequestAppUserBean input= new flinn.old.dao.beans.request.RequestAppUserBean();
+	RequestContainerBean rqcont = new RequestContainerBean();
+	RequestAppUserBean input= new RequestAppUserBean();
 	DaoAppManager dm = new DaoAppManager();
 
-	flinn.old.dao.beans.response.ResponseAppUserContainerBean adminUser = null;
+	ResponseAppUserContainerBean adminUser = null;
 	input.setAppuserid(userid);
 	rqcont.setUser(input);
-	adminUser = (flinn.old.dao.beans.response.ResponseAppUserContainerBean)dm.findUser(rqcont, userSession);
+	adminUser = (ResponseAppUserContainerBean)dm.findUser(rqcont, userSession);
 	input.setSettings(adminUser.getUser().getSettings());
 	input.setRoles(adminUser.getUser().getRoles());
 	input.setPassword(upassword);
 	rqcont.setUser(input);
 
 	//Change password
-    flinn.old.dao.beans.response.ResponseAppUserContainerBean rspUser = null;
+    ResponseAppUserContainerBean rspUser = null;
 	try{
-	    rspUser = (flinn.old.dao.beans.response.ResponseAppUserContainerBean)dm.updateUser(rqcont, userSession);
+	    rspUser = (ResponseAppUserContainerBean)dm.updateUser(rqcont, userSession);
 	    uid = rspUser.getUser().getAppuserid();
 	}
 	catch(Exception e) {

@@ -1,5 +1,10 @@
-<%@page import="flinn.old.dao.beans.response.ResponseSessionContainerBean"%>
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
+<%@page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean"%>
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponsePrescriptionSearchContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.request.RequestContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.request.RequestPrescriptionSearchBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.request.RequestPatientBean" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -117,35 +122,35 @@ if (qsOrder2 != 1){
 boolean first = true;
 String orderby = "Login";
 String criteria = "false";
-String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+String authcode = CookieHandler.getCookie("authcode", request);
 
 if (request.getParameter("order") != null) {
 	if (request.getParameter("order").equals("1")) orderby = "LastLoggedIn DESC";
 	if (request.getParameter("order").equals("2")) orderby = "LastActivity DESC";
 }
 
-flinn.old.dao.beans.response.ResponsePrescriptionSearchContainerBean userList = null;
+ResponsePrescriptionSearchContainerBean userList = null;
 DaoAppManager dm = new DaoAppManager();
 
 ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 
 Boolean isAdmin = false, isSuperAdmin = false;
-if (flinn.old.dao.util.AdminRole.isAdmin(userSession))
+if (org.flinnfoundation.old.dao.util.AdminRole.isAdmin(userSession))
 {
 	  isSuperAdmin = true;
-	  if(flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+	  if(org.flinnfoundation.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
 }
 
 int lastactivity = -1;
 lastactivity = dm.updateLastActivity(userSession);
-flinn.old.dao.beans.request.RequestContainerBean rqcont = new flinn.old.dao.beans.request.RequestContainerBean();
-flinn.old.dao.beans.request.RequestPatientBean rpbean = new flinn.old.dao.beans.request.RequestPatientBean();
-flinn.old.dao.beans.request.RequestPrescriptionSearchBean psbean = new flinn.old.dao.beans.request.RequestPrescriptionSearchBean();
+RequestContainerBean rqcont = new RequestContainerBean();
+RequestPatientBean rpbean = new RequestPatientBean();
+RequestPrescriptionSearchBean psbean = new RequestPrescriptionSearchBean();
 rpbean.setPatientid(1);
 psbean.setPatientid(1);
 rqcont.setPatient(rpbean);
 rqcont.setPrescriptionsearch(psbean);
-userList = (flinn.old.dao.beans.response.ResponsePrescriptionSearchContainerBean)dm.searchPrescriptions(rqcont, userSession); //function call to return user
+userList = (ResponsePrescriptionSearchContainerBean)dm.searchPrescriptions(rqcont, userSession); //function call to return user
 %>
 
 

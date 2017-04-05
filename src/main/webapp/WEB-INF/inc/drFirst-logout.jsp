@@ -1,7 +1,7 @@
-<%@ page import="flinn.old.dao.rcopia.model.RcExtResponseType"%>
-<%@ page import="flinn.old.dao.rcopia.service.RcopiaService"%>
-<%@ page import="flinn.old.dao.rcopia.service.RcopiaTransformationService"%>
-<%@ page import="flinn.old.dao.dao.Recommendation" %>
+<%@ page import="org.flinnfoundation.old.dao.rcopia.model.RcExtResponseType"%>
+<%@ page import="org.flinnfoundation.old.dao.rcopia.service.RcopiaService"%>
+<%@ page import="org.flinnfoundation.old.dao.rcopia.service.RcopiaTransformationService"%>
+<%@ page import="org.flinnfoundation.old.dao.dao.Recommendation" %>
 
 <%
 	String patientIdString = request.getQueryString();

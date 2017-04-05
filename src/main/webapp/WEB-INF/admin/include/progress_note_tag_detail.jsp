@@ -1,4 +1,7 @@
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.ProgressNoteTagBean" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %>
 <%@page contentType="text/html" %>
 
 <%
@@ -14,9 +17,9 @@
   String tagName = "", tagDesc = "";
   int lastactivity = -1;
 
-  String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+  String authcode = CookieHandler.getCookie("authcode", request);
   DaoAppManager dm = new DaoAppManager();
-  flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+  ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 	try{
 		//function call to update user's last activity
 		lastactivity = dm.updateLastActivity(userSession);
@@ -34,8 +37,8 @@
 	  tagid = Integer.parseInt(request.getParameter("id"));
   }
 
-  if (flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
-  if (flinn.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
+  if (org.flinnfoundation.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+  if (org.flinnfoundation.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
 
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
@@ -55,7 +58,7 @@
 
 
   if (isAdmin && postType) {
-		flinn.old.dao.beans.ProgressNoteTagBean input= new flinn.old.dao.beans.ProgressNoteTagBean();
+		ProgressNoteTagBean input= new ProgressNoteTagBean();
 		input.setProgressnotetagid(tagid);
 		input.setProgressnotetag(tagName);
 		input.setProgressnotetagdescription(tagDesc);
@@ -95,7 +98,7 @@
   }
 
 
-flinn.old.dao.beans.ProgressNoteTagBean adminTag = new flinn.old.dao.beans.ProgressNoteTagBean();
+ProgressNoteTagBean adminTag = new ProgressNoteTagBean();
 if (tagid > 0){
 
 try{

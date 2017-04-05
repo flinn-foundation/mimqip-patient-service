@@ -1,4 +1,7 @@
-<%
+<%@ page import="org.flinnfoundation.old.dao.dao.dbconnection.DBConnectionPool" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseFacilityBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.request.RequestFacilityBean" %>
+<%@ page import="org.flinnfoundation.old.dao.dao.imp.FacilityDaoImp" %><%
 /* */
 java.lang.String facidString = request.getParameter("facilityid");
 int facilityid = 0;
@@ -8,12 +11,12 @@ try {
 } catch (NumberFormatException e) {
 	facilityid = 0;
 }
-flinn.old.dao.beans.response.ResponseFacilityBean facility = null;
+ResponseFacilityBean facility = null;
 
 if (facilityid > 0) {
 	java.sql.Connection connection = null;
 	try {
-		connection = flinn.old.dao.dao.dbconnection.DBConnectionPool.getConnection();
+		connection = DBConnectionPool.getConnection();
 		if (connection == null || connection.isClosed()) {
 			// LOG.debug("Unable to get DB Connection");
 		}
@@ -21,9 +24,9 @@ if (facilityid > 0) {
 		// LOG.debug("Unable to get DB Connection: "+e);
 	}
 
-	flinn.old.dao.beans.request.RequestFacilityBean facreq = new flinn.old.dao.beans.request.RequestFacilityBean();
+	RequestFacilityBean facreq = new RequestFacilityBean();
 	facreq.setFacilityid(facilityid);
-	java.util.List<flinn.old.dao.beans.response.ResponseFacilityBean> facilities = new flinn.old.dao.dao.imp.FacilityDaoImp().find(facreq, null, connection);
+	java.util.List<ResponseFacilityBean> facilities = new FacilityDaoImp().find(facreq, null, connection);
 
 	if (facilities != null && facilities.size() > 0) {
 		facility = facilities.get(0);

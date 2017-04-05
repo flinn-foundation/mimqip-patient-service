@@ -1,6 +1,10 @@
-<%@page import="flinn.old.dao.beans.response.ResponseSessionContainerBean"%>
+<%@page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean"%>
 <%@page import="java.util.List"%>
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseTreatmentGroupContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.request.RequestContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.TreatmentGroupBean" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -114,28 +118,28 @@ if (request.getParameter("order") != null) {
 boolean first = true;
 String orderby = "TreatmentGroupName";
 String criteria = "false";
-String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+String authcode = CookieHandler.getCookie("authcode", request);
 
 if (request.getParameter("order") != null) {
 	if (request.getParameter("order").equals("1")) orderby = "TreatmentGroupAbbr DESC";
 }
 else {orderby = "TreatmentGroupName DESC";}
 
-List<flinn.old.dao.beans.TreatmentGroupBean> dataList = null;
+List<TreatmentGroupBean> dataList = null;
 DaoAppManager dm = new DaoAppManager();
 ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 int lastactivity = -1;
 Boolean isAdmin = false, isSuperAdmin = false;
-if (flinn.old.dao.util.AdminRole.isAdmin(userSession))
+if (org.flinnfoundation.old.dao.util.AdminRole.isAdmin(userSession))
 {
 	  isSuperAdmin = true;
-	  if(flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+	  if(org.flinnfoundation.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
 }
-flinn.old.dao.beans.request.RequestContainerBean input = new flinn.old.dao.beans.request.RequestContainerBean();
-flinn.old.dao.beans.response.ResponseTreatmentGroupContainerBean adminTreatmentGroup;
+RequestContainerBean input = new RequestContainerBean();
+ResponseTreatmentGroupContainerBean adminTreatmentGroup;
 
 try{
-	adminTreatmentGroup = (flinn.old.dao.beans.response.ResponseTreatmentGroupContainerBean)dm.findAllTreatmentGroups(input, userSession, !invalid, isSuperAdmin, orderby); //function call to return user
+	adminTreatmentGroup = (ResponseTreatmentGroupContainerBean)dm.findAllTreatmentGroups(input, userSession, !invalid, isSuperAdmin, orderby); //function call to return user
 	dataList = java.util.Arrays.asList(adminTreatmentGroup.getGroups());
 	try{
 			//function call to update user's last activity
@@ -187,7 +191,7 @@ for (int i=0; i<dataList.size(); i++) {
 	</table>
 
 <%!
-public int data_is_not_valid(flinn.old.dao.beans.TreatmentGroupBean bean) throws Exception {
+public int data_is_not_valid(TreatmentGroupBean bean) throws Exception {
   if (!bean.getValid()) {
 	  	return 1;
 	  }

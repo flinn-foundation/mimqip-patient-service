@@ -1,4 +1,12 @@
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseTreatmentGroupContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseTreatmentBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseTreatmentContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.request.RequestContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.request.RequestTreatmentBean" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.TreatmentGroupBean" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %>
 <%@page contentType="text/html" %>
 
 <%
@@ -23,9 +31,9 @@
   int mGroupID = -1;
   int lastactivity = -1;
 
-  String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+  String authcode = CookieHandler.getCookie("authcode", request);
   DaoAppManager dm = new DaoAppManager();
-  flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+  ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 	try{
 		//function call to update user's last activity
 		lastactivity = dm.updateLastActivity(userSession);
@@ -73,8 +81,8 @@
   if (request.getParameter("SerumLevelHigh") != null) mSerumLevelHigh = request.getParameter("SerumLevelHigh");
   if (request.getParameter("SerumLevelUnit") != null) mSerumLevelUnit = request.getParameter("SerumLevelUnit");
 
-  if(flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
-  if (flinn.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
+  if(org.flinnfoundation.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+  if (org.flinnfoundation.old.dao.util.AdminRole.isAdmin(userSession))isSuperAdmin = true;
 
   if (request.getMethod() != null){
 	  	if(request.getMethod().equals("POST")) postType = true;
@@ -86,8 +94,8 @@
 
 
   if (isAdmin && postType) {
-		flinn.old.dao.beans.request.RequestContainerBean rqcont = new flinn.old.dao.beans.request.RequestContainerBean();
-		flinn.old.dao.beans.request.RequestTreatmentBean rqTreatmentBean = new flinn.old.dao.beans.request.RequestTreatmentBean();
+		RequestContainerBean rqcont = new RequestContainerBean();
+		RequestTreatmentBean rqTreatmentBean = new RequestTreatmentBean();
 
 		rqTreatmentBean.setTreatmentid(medid);
 		rqTreatmentBean.setTreatmentname(mName);
@@ -133,8 +141,8 @@
     	if (medid > 0){//Update treatment
     		try{
         		rqcont.setTreatment(rqTreatmentBean);
-        		flinn.old.dao.beans.response.ResponseTreatmentContainerBean rspBean= new flinn.old.dao.beans.response.ResponseTreatmentContainerBean();
-        		rspBean = (flinn.old.dao.beans.response.ResponseTreatmentContainerBean)dm.updateTreatment(rqcont, userSession);
+        		ResponseTreatmentContainerBean rspBean= new ResponseTreatmentContainerBean();
+        		rspBean = (ResponseTreatmentContainerBean)dm.updateTreatment(rqcont, userSession);
         		mid = rspBean.getTreatment().getTreatmentid();
     		}
     		catch(Exception e) {
@@ -164,7 +172,7 @@
   }
 
 
-flinn.old.dao.beans.response.ResponseTreatmentBean adminTreatment = new flinn.old.dao.beans.response.ResponseTreatmentBean();
+ResponseTreatmentBean adminTreatment = new ResponseTreatmentBean();
 if (medid > 0){
 
 try{
@@ -636,10 +644,10 @@ if (isAdmin && hasEdit) editable = true;
 		<td align="right">
 			<p class="formText" style="text-align:left;">
 			<% if (editable) {
-				flinn.old.dao.beans.request.RequestContainerBean input = new flinn.old.dao.beans.request.RequestContainerBean();
+				RequestContainerBean input = new RequestContainerBean();
 				try{
-					flinn.old.dao.beans.response.ResponseTreatmentGroupContainerBean adminTreatmentGroup = (flinn.old.dao.beans.response.ResponseTreatmentGroupContainerBean)dm.findAllTreatmentGroups(input, userSession, true, isSuperAdmin, null);
-					flinn.old.dao.beans.TreatmentGroupBean[] tgBean = adminTreatmentGroup.getGroups();
+					ResponseTreatmentGroupContainerBean adminTreatmentGroup = (ResponseTreatmentGroupContainerBean)dm.findAllTreatmentGroups(input, userSession, true, isSuperAdmin, null);
+					TreatmentGroupBean[] tgBean = adminTreatmentGroup.getGroups();
 					if(tgBean.length > 0){
 						out.print("<SELECT name='MedGroup'>");
 						for(int i=0; i < tgBean.length; i++)

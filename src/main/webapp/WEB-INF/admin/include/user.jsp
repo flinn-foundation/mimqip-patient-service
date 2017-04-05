@@ -1,6 +1,10 @@
-<%@page import="flinn.old.dao.beans.response.ResponseSessionContainerBean"%>
+<%@page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean"%>
 <%@page import="java.util.List"%>
-<%@ page import="flinn.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.dao.DaoAppManager" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseAppUserBean" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %>
+<%@ page import="org.flinnfoundation.old.dao.util.AdminFunctions" %>
+<%@ page import="org.flinnfoundation.old.dao.util.DateString" %>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -118,23 +122,23 @@ if (qsOrder2 != 1){
 boolean first = true;
 String orderby = "Login";
 String criteria = "false";
-String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
+String authcode = CookieHandler.getCookie("authcode", request);
 
 if (request.getParameter("order") != null) {
 	if (request.getParameter("order").equals("1")) orderby = "LastLoggedIn DESC";
 	if (request.getParameter("order").equals("2")) orderby = "LastActivity DESC";
 }
 
-List<flinn.old.dao.beans.response.ResponseAppUserBean> userList = null;
+List<ResponseAppUserBean> userList = null;
 DaoAppManager dm = new DaoAppManager();
 
 ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
 
 Boolean isAdmin = false, isSuperAdmin = false;
-if (flinn.old.dao.util.AdminRole.isAdmin(userSession))
+if (org.flinnfoundation.old.dao.util.AdminRole.isAdmin(userSession))
 {
 	  isSuperAdmin = true;
-	  if(flinn.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
+	  if(org.flinnfoundation.old.dao.util.AdminRole.isFacilityAdmin(userSession))isAdmin = true;
 }
 
 int lastactivity = -1;
@@ -177,9 +181,9 @@ for (int i=0; i<userList.size(); i++) {
 		<td>&nbsp;</td>
 		<td><p class="tableText<% if (user_is_not_valid(userList.get(i)) > 0) out.print("Inactive"); %>"><%= userList.get(i).getLogin()%></p></td>
 		<td>&nbsp;</td>
-		<td><p class="tableText<% if (user_is_not_valid(userList.get(i)) > 0) out.print("Inactive"); %>"><%= flinn.old.dao.util.AdminFunctions.formatNulls(userList.get(i).getLastloggedin())%></p></td>
+		<td><p class="tableText<% if (user_is_not_valid(userList.get(i)) > 0) out.print("Inactive"); %>"><%= AdminFunctions.formatNulls(userList.get(i).getLastloggedin())%></p></td>
 		<td>&nbsp;</td>
-		<td><p class="tableText<% if (user_is_not_valid(userList.get(i)) > 0) out.print("Inactive"); %>"><%= flinn.old.dao.util.AdminFunctions.formatNulls(userList.get(i).getLastactivity())%></p></td>
+		<td><p class="tableText<% if (user_is_not_valid(userList.get(i)) > 0) out.print("Inactive"); %>"><%= AdminFunctions.formatNulls(userList.get(i).getLastactivity())%></p></td>
 		<td>&nbsp;</td>
 		<td><p class="tableText<% if (user_is_not_valid(userList.get(i)) > 0) out.print("Inactive"); %>"><%= userList.get(i).getAppuserid()%></p></td>
 		<td>&nbsp;</td>
@@ -196,19 +200,19 @@ for (int i=0; i<userList.size(); i++) {
 	</table>
 
 <%!
-public int user_is_not_valid(flinn.old.dao.beans.response.ResponseAppUserBean user) throws Exception {
-  String now = flinn.old.dao.util.DateString.now();
+public int user_is_not_valid(ResponseAppUserBean user) throws Exception {
+  String now = DateString.now();
   java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
   if (!user.getValid()) {
 	  	return 1;
 	  }
-  if (flinn.old.dao.util.DateString.interpret(user.getLaunch()) != null) {
+  if (DateString.interpret(user.getLaunch()) != null) {
     if (df.parse(now).compareTo(df.parse(user.getLaunch())) < 0) {
       return 2;
     }
   }
-  if (flinn.old.dao.util.DateString.interpret(user.getExpiration()) != null) {
+  if (DateString.interpret(user.getExpiration()) != null) {
     if (df.parse(now).compareTo(df.parse(user.getExpiration())) > 0) {
       return 3;
     }

@@ -468,22 +468,6 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="miden (generated)" id="1489345089097-24">
-        <createTable tableName="RecommendDiagnosis">
-            <column autoIncrement="true" name="DiagnosisID" type="INT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="Diagnosis" type="VARCHAR(250)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="Stage" type="VARCHAR(5)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="Notes" type="TEXT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-25">
         <createTable tableName="RecommendFacility">
             <column autoIncrement="true" name="ID" type="INT">
@@ -500,217 +484,12 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Michael Iden" id="1489345089097-26">
-        <createTable tableName="MESSAGE">
-            <column name="ID" type="BIGINT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="PRIORITY" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="MESSAGE_TAG" type="VARCHAR(20)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TEXT" type="TEXT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Michael Iden" id="1489345089097-27">
-        <createTable tableName="RULE">
-            <column name="ID" type="BIGINT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="NAME" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TYPE" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="PRIORITY" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="VALID" type="BOOLEAN">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TRUE_MESSAGE_ID" type="BIGINT">
-            </column>
-            <column name="FALSE_MESSAGE_ID" type="BIGINT">
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Michael Iden" id="1489345089097-28">
-        <createTable tableName="RULE_CRITERION">
-            <column name="ID" type="BIGINT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="RULE_ID" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="PRIORITY" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TYPE" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="FIELD_NAME" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="OPERATOR" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="VALUE" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="miden (generated)" id="1489345089097-29">
-        <createTable tableName="RecommendRule_RecommendDiagnosis">
-            <column name="RuleID" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DiagnosisID" type="INT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-30">
         <createTable tableName="Sequence">
             <column name="Entity" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="NextID" type="INT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="miden (generated)" id="1489345089097-31">
-        <createTable tableName="TREATMENT">
-            <column name="ID" type="BIGINT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="GROUP_ID" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="NAME" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ABBREVIATION" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="VALID" type="BOOLEAN">
-                <constraints nullable="false"/>
-            </column>
-            <column name="GENERIC_NAME" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="miden (generated)" id="1489345089097-32">
-        <createTable tableName="TREATMENT_DETAIL">
-            <column autoIncrement="true" name="ID" type="BIGINT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="TREATMENT_ID" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="KEY" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="VALUE" type="TEXT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Michael Iden" id="1489345089097-33">
-        <createTable tableName="TREATMENT_GROUP">
-            <column name="ID" type="BIGINT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="NAME" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ABBREVIATION" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="VALID" type="BOOLEAN">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="miden (generated)" id="1489345089097-34">
-        <createTable tableName="Treatment_Diagnosis">
-            <column autoIncrement="true" name="ID" type="INT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="TreatmentID" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DiagnosisID" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="Row" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="Drug" type="INT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="miden (generated)" id="1489345089097-35">
-        <createTable tableName="content">
-            <column autoIncrement="true" name="contentid" type="INT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column defaultValueNumeric="0" name="contenttypeid" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contentorigpurpose" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contentorigtable" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contenttext" type="TEXT">
-                <constraints nullable="false"/>
-            </column>
-            <column defaultValue="0000-00-00 00:00:00" name="createdate" type="datetime(6)">
-                <constraints nullable="false"/>
-            </column>
-            <column defaultValueNumeric="0" name="createuser" type="INT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="miden (generated)" id="1489345089097-36">
-        <createTable tableName="contentjoin">
-            <column autoIncrement="true" name="contentjoinid" type="INT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column defaultValueNumeric="0" name="contentid" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contentjointable" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column defaultValueNumeric="0" name="contentjointablerowid" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contentjoinpurpose" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column defaultValueNumeric="0" name="contentjoinpriority" type="INT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="miden (generated)" id="1489345089097-37">
-        <createTable tableName="contenttype">
-            <column autoIncrement="true" name="contenttypeid" type="INT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="contenttypemime" type="VARCHAR(16)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contenttypedescription" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -746,33 +525,9 @@
             <column name="PATIENT_ID"/>
         </createIndex>
     </changeSet>
-    <changeSet author="miden (generated)" id="1489345089097-47">
-        <createIndex indexName="contentjointable_rowid" tableName="contentjoin">
-            <column name="contentjointable"/>
-            <column name="contentjointablerowid"/>
-        </createIndex>
-    </changeSet>
-    <changeSet author="Michael Iden" id="20170328-load-messages">
-        <loadData encoding="UTF-8"
-                  file="db.sampledata/message-20170328.csv"
-                  schemaName="public"
-                  separator=","
-                  tableName="MESSAGE"
-                  quotchar='"'>
-        </loadData>
-    </changeSet>
-    <changeSet author="Michael Iden" id="20170328-load-rules">
-        <loadData encoding="UTF-8"
-                  file="db.sampledata/rule-20170328.csv"
-                  schemaName="public"
-                  separator=","
-                  tableName="RULE"
-                  quotchar='"'>
-        </loadData>
-    </changeSet>
     <changeSet author="Michael Iden" id="20170328-patients">
         <loadData encoding="UTF-8"
-                  file="db.sampledata/patient-20170330.csv"
+                  file="db/sampledata/patient-20170330.csv"
                   schemaName="public"
                   separator=","
                   tableName="PATIENT"
@@ -781,7 +536,7 @@
     </changeSet>
     <changeSet author="Michael Iden" id="20170328-load-patient-status">
         <loadData encoding="UTF-8"
-                  file="db.sampledata/patient-status-20170328.csv"
+                  file="db/sampledata/patient-status-20170328.csv"
                   schemaName="public"
                   separator=","
                   tableName="PATIENT_STATUS"
@@ -790,52 +545,16 @@
     </changeSet>
     <changeSet author="Michael Iden" id="20170328-load-patient-medications">
         <loadData encoding="UTF-8"
-                  file="db.sampledata/patient-medication-20170328.csv"
+                  file="db/sampledata/patient-medication-20170328.csv"
                   schemaName="public"
                   separator=","
                   tableName="PATIENT_MEDICATION"
                   quotchar='"'>
         </loadData>
     </changeSet>
-    <changeSet author="Michael Iden" id="20170328-load-rule-criteria">
-        <loadData encoding="UTF-8"
-                  file="db.sampledata/rule-criterion-20170329.csv"
-                  schemaName="public"
-                  separator=","
-                  tableName="RULE_CRITERION"
-                  quotchar='"'>
-        </loadData>
-    </changeSet>
-    <changeSet author="Michael Iden" id="20170328-load-treatments">
-        <loadData encoding="UTF-8"
-                  file="db.sampledata/treatment-20170329.csv"
-                  schemaName="public"
-                  separator=","
-                  tableName="TREATMENT"
-                  quotchar='"'>
-        </loadData>
-    </changeSet>
-    <changeSet author="Michael Iden" id="20170328-load-treatment-groups">
-        <loadData encoding="UTF-8"
-                  file="db.sampledata/treatment-group-20170329.csv"
-                  schemaName="public"
-                  separator=","
-                  tableName="TREATMENT_GROUP"
-                  quotchar='"'>
-        </loadData>
-    </changeSet>
-    <changeSet author="Michael Iden" id="20170328-load-treatment-details">
-        <loadData encoding="UTF-8"
-                  file="db.sampledata/treatment-detail-20170329.csv"
-                  schemaName="public"
-                  separator=","
-                  tableName="TREATMENT_DETAIL"
-                  quotchar='"'>
-        </loadData>
-    </changeSet>
     <changeSet author="Michael Iden" id="20170328-load-progress-notes">
         <loadData encoding="UTF-8"
-                  file="db.sampledata/progress-note-20170329.csv"
+                  file="db/sampledata/progress-note-20170329.csv"
                   schemaName="public"
                   separator=","
                   tableName="PROGRESS_NOTE"

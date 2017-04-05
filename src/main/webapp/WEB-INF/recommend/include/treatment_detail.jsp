@@ -1,11 +1,14 @@
 <%@page contentType="text/html" %>
-<%@page import="flinn.old.dao.beans.response.ResponseTreatmentBean"%>
-<%@page import="flinn.old.dao.recommend.beans.RecommendDiagnosisBean"%>
-<%@page import="flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean"%>
-<%@page import="flinn.old.dao.recommend.dao.imp.RuleDaoImp"%>
+<%@page import="org.flinnfoundation.old.dao.beans.response.ResponseTreatmentBean"%>
+<%@page import="org.flinnfoundation.old.dao.recommend.beans.RecommendDiagnosisBean"%>
+<%@page import="org.flinnfoundation.old.dao.recommend.beans.RecommendTreatmentGuidelineBean"%>
+<%@page import="org.flinnfoundation.old.dao.recommend.dao.imp.RuleDaoImp"%>
 <%@page import= "java.util.ArrayList"%>
 <%@page import="java.util.Arrays" %>
 <%@page import="java.util.List" %>
+<%@ page import="org.flinnfoundation.old.dao.beans.response.ResponseSessionContainerBean" %>
+<%@ page import="org.flinnfoundation.old.dao.recommend.dao.DaoRecommendManager" %>
+<%@ page import="org.flinnfoundation.old.dao.util.CookieHandler" %>
 
 
 <%
@@ -37,9 +40,9 @@
 
             RecommendDiagnosisBean diagnosis = null;
 
-            String authcode = flinn.old.dao.util.CookieHandler.getCookie("authcode", request);
-            flinn.old.dao.recommend.dao.DaoRecommendManager dm = new flinn.old.dao.recommend.dao.DaoRecommendManager();
-            flinn.old.dao.beans.response.ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
+            String authcode = CookieHandler.getCookie("authcode", request);
+            DaoRecommendManager dm = new DaoRecommendManager();
+            ResponseSessionContainerBean userSession = dm.getSession(authcode, request);
             try {
                 //function call to update user's last activity
                 lastactivity = dm.updateLastActivity(userSession);
@@ -82,10 +85,10 @@
             }
 
 
-            if (flinn.old.dao.util.AdminRole.isRecommendAdmin(userSession)) {
+            if (org.flinnfoundation.old.dao.util.AdminRole.isRecommendAdmin(userSession)) {
                 isAdmin = true;
             }
-            if (flinn.old.dao.util.AdminRole.isAdmin(userSession)) {
+            if (org.flinnfoundation.old.dao.util.AdminRole.isAdmin(userSession)) {
                 isSuperAdmin = true;
             }
 
@@ -106,7 +109,7 @@
                         dm.LOG.debug("Deleting guideline id = " + guidelineid);
 
                         // convert array to arraylist and back again to delete an element
-                        List<flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean> guideList = new ArrayList<flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean>();
+                        List<RecommendTreatmentGuidelineBean> guideList = new ArrayList<RecommendTreatmentGuidelineBean>();
 
                         for (int i = 0; i < treatments.length; i++) {
                             if (treatments[i].getTreatmentguidelineid() != guidelineid) {
@@ -135,7 +138,7 @@
                 } else {
                     // create guideline
                     dm.LOG.debug("Creating guideline");
-                    flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean rtgb = new flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean();
+                    RecommendTreatmentGuidelineBean rtgb = new RecommendTreatmentGuidelineBean();
 
                     rtgb.setTreatmentid(treatmentid);
                     rtgb.setDiagnosisid(diagnosisid);
@@ -144,7 +147,7 @@
                     rtgb.setDrug(drug);
 
                     // convert array to arraylist and back again to add another element
-                    List<flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean> guideList = new ArrayList<flinn.old.dao.recommend.beans.RecommendTreatmentGuidelineBean>();
+                    List<RecommendTreatmentGuidelineBean> guideList = new ArrayList<RecommendTreatmentGuidelineBean>();
                     if (treatments != null) {
                         guideList.addAll(Arrays.asList(treatments));
                     }
