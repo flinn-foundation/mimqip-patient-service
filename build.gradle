@@ -42,11 +42,11 @@ dependencies {
     compile group: 'com.timgroup', name: 'java-statsd-client'
     compile group: 'com.getsentry.raven', name: 'raven-logback', version: '7.8.2'
     runtime group: 'com.h2database', name: 'h2'
+    compile 'org.hibernate:hibernate-java8:5.0.0.Final'
     compile group: 'mysql', name: 'mysql-connector-java'
     compileOnly group: 'org.projectlombok', name: 'lombok'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.2'
-
 
     compile group: 'javax.servlet', name: 'jstl'
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper'

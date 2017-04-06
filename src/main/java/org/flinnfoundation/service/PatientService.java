@@ -1,10 +1,10 @@
 package org.flinnfoundation.service;
 
-import org.flinnfoundation.mapper.PatientMapper;
-import org.flinnfoundation.repository.PatientRepository;
-import org.flinnfoundation.repository.PatientStatusRepository;
 import io.swagger.model.PatientDto;
 import lombok.extern.slf4j.Slf4j;
+import org.flinnfoundation.mapper.PatientMapper;
+import org.flinnfoundation.model.Patient;
+import org.flinnfoundation.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,24 +15,28 @@ import java.util.List;
 public class PatientService {
 
     private PatientRepository patientRepository;
-    private PatientStatusRepository patientStatusRepository;
 
-    private PatientMapper patientConverter;
+    private PatientMapper patientMapper;
 
     @Autowired
-    public PatientService(PatientRepository patientRepository, PatientStatusRepository patientStatusRepository, PatientMapper patientConverter) {
+    public PatientService(PatientRepository patientRepository, PatientMapper patientMapper) {
         this.patientRepository = patientRepository;
-        this.patientStatusRepository = patientStatusRepository;
-        this.patientConverter = patientConverter;
+        this.patientMapper = patientMapper;
     }
 
     public List<PatientDto> getPatientsData() {
 
-        return patientConverter.convertModelToApiDto(patientRepository.findAll());
+        return patientMapper.convertModelToApiDto(patientRepository.findAll());
     }
 
     public PatientDto getPatientData(Long patientId) {
-        return patientConverter.convertModelToApiDto(patientRepository.findOne(patientId));
+        return patientMapper.convertModelToApiDto(patientRepository.findOne(patientId));
+    }
+
+    public void createPatient(PatientDto patientDto) {
+        Patient patient = patientMapper.convertApiDtoToModel(patientDto);
+
+        patientRepository.save(patient);
     }
 
 }

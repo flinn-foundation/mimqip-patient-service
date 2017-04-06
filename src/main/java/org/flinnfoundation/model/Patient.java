@@ -1,16 +1,21 @@
 package org.flinnfoundation.model;
 
 import lombok.Data;
+import lombok.ToString;
+import org.flinnfoundation.model.evaluation.PsychiatricEvaluation;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
+@ToString(exclude = "psychiatricEvaluations")
 public class Patient {
 
     @Id
+    @GeneratedValue
     private long id;
 
     private String firstName;
@@ -22,11 +27,9 @@ public class Patient {
 
     private LocalDate dateOfBirth;
 
-    private int facilityId;
-
     private boolean valid;
 
-    private LocalDateTime startDate;
+    private LocalDateTime startDate = LocalDateTime.now();
 
     private LocalDateTime rcopiaLastUpdatedDate;
 
@@ -36,5 +39,8 @@ public class Patient {
     public enum PatientSex {
         MALE, FEMALE
     }
+
+    @OneToMany(mappedBy = "patient")
+    private List<PsychiatricEvaluation> psychiatricEvaluations;
 
 }
