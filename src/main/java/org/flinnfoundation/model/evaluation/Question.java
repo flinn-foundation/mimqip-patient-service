@@ -2,10 +2,7 @@ package org.flinnfoundation.model.evaluation;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -15,8 +12,9 @@ public class Question {
     @GeneratedValue
     private long id;
 
-    @Lob
-    private String prompt;
+
+    @Enumerated
+    private PsychiatricEvaluationPrompts prompt;
 
     @Lob
     private String response;

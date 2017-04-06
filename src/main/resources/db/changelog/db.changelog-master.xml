@@ -208,7 +208,7 @@
     <changeSet author="Michael Iden" id="questions-create-table">
         <createTable tableName="QUESTION">
             <column name="ID" type="BIGINT" autoIncrement="true"/>
-            <column name="PROMPT" type="TEXT"/>
+            <column name="PROMPT" type="INT"/>
             <column name="RESPONSE" type="TEXT"/>
         </createTable>
     </changeSet>

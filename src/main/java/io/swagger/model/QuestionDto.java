@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 /**
  * QuestionDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-06T12:19:13.321-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-06T13:58:51.528-04:00")
 
 public class QuestionDto   {
   @JsonProperty("prompt")

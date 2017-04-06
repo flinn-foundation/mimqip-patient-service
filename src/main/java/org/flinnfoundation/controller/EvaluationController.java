@@ -24,8 +24,13 @@ public class EvaluationController implements EvaluationsApi {
     }
 
     @Override
+    public ResponseEntity<EvaluationDto> getBlankPsychEvaluation() {
+        return ResponseEntity.ok(evaluationService.getBlankPsychiatricEvaluation());
+    }
+
+    @Override
     public ResponseEntity<List<EvaluationDto>> getEvaluationsByPatientId(@RequestParam("patientId") Long patientId) {
-        return null;
+        return ResponseEntity.ok(evaluationService.getEvaluations(patientId));
     }
 
     @Override

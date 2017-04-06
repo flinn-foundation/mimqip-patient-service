@@ -156,6 +156,22 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+  /evaluations/blank/psychiatric:
+    get:
+      summary: Get blank psychiatric evaluation
+      description: Get blank psychiatric evaluation
+      operationId: getBlankPsychEvaluation
+      tags:
+         - evaluation
+      responses:
+        200:
+          description: Evaluation
+          schema:
+            $ref: '#/definitions/EvaluationDto'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
 definitions:
   PatientDto:
     type: object

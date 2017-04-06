@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-06T12:19:13.321-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-06T13:58:51.528-04:00")
 
 @Api(value = "evaluations", description = "the evaluations API")
 public interface EvaluationsApi {
@@ -28,6 +28,16 @@ public interface EvaluationsApi {
         produces = { "application/json" }, 
         method = RequestMethod.POST)
     ResponseEntity<EvaluationDto> createPatientPsychEvaluation(@ApiParam(value = "Evaluation to submit" ,required=true ) @RequestBody EvaluationDto evaluation);
+
+
+    @ApiOperation(value = "Get blank psychiatric evaluation", notes = "Get blank psychiatric evaluation", response = EvaluationDto.class, tags={ "evaluation", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Evaluation", response = EvaluationDto.class),
+        @ApiResponse(code = 200, message = "Unexpected error", response = EvaluationDto.class) })
+    @RequestMapping(value = "/evaluations/blank/psychiatric",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<EvaluationDto> getBlankPsychEvaluation();
 
 
     @ApiOperation(value = "Get all evaluations for patient", notes = "Get all evaluations for patient", response = EvaluationDto.class, responseContainer = "List", tags={ "evaluation", })
