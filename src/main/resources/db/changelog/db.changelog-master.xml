@@ -27,9 +27,6 @@
             <column name="ZIP_CODE" type="VARCHAR(6)">
                 <constraints nullable="false"/>
             </column>
-            <column name="RACE" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="ETHNICITY" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -46,7 +43,13 @@
             <column name="ENTRY_DATE" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </createTable>
     </changeSet>
-    <changeSet author="Michael Iden" id="1489345089097-12">
+    <changeSet author="Michael Iden" id="create-patient-race-table">
+        <createTable tableName="PATIENT_RACE">
+            <column name="PATIENT_ID" type="BIGINT"/>
+            <column name="RACE" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="create-patient-medications-table">
         <createTable tableName="PATIENT_MEDICATION">
             <column name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -194,21 +197,22 @@
             <column name="ID" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Michael Iden" id="psychiatric-evaluations-create-table">
-        <createTable tableName="PSYCHIATRIC_EVALUATION">
+    <changeSet author="Michael Iden" id="evaluations-create-table">
+        <createTable tableName="EVALUATION">
             <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="EVALUATION_TYPE" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
     <changeSet author="Michael Iden" id="psychiatric-evaluation-questions-create-table">
-        <createTable tableName="PSYCHIATRIC_EVALUATION_QUESTIONS">
-            <column name="PSYCHIATRIC_EVALUATION_ID" type="BIGINT"/>
+        <createTable tableName="EVALUATION_QUESTIONS">
+            <column name="EVALUATION_ID" type="BIGINT"/>
             <column name="QUESTIONS_ID" type="BIGINT"/>
         </createTable>
     </changeSet>
     <changeSet author="Michael Iden" id="questions-create-table">
         <createTable tableName="QUESTION">
             <column name="ID" type="BIGINT" autoIncrement="true"/>
-            <column name="PROMPT" type="INT"/>
+            <column name="PROMPT" type="VARCHAR(255)"/>
             <column name="RESPONSE" type="TEXT"/>
         </createTable>
     </changeSet>
@@ -237,6 +241,15 @@
                   schemaName="public"
                   separator=","
                   tableName="PATIENT"
+                  quotchar='"'>
+        </loadData>
+    </changeSet>
+    <changeSet author="Michael Iden" id="20170409-load-patient-race">
+        <loadData encoding="UTF-8"
+                  file="db/sampledata/patient-race-20170409.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="PATIENT_RACE"
                   quotchar='"'>
         </loadData>
     </changeSet>

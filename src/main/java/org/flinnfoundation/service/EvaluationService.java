@@ -1,14 +1,9 @@
 package org.flinnfoundation.service;
 
-import io.swagger.model.EvaluationDto;
 import lombok.extern.slf4j.Slf4j;
-import org.flinnfoundation.mapper.EvaluationMapper;
 import org.flinnfoundation.model.Patient;
-import org.flinnfoundation.model.evaluation.PsychiatricEvaluation;
-import org.flinnfoundation.model.evaluation.PsychiatricEvaluationPrompts;
-import org.flinnfoundation.model.evaluation.Question;
+import org.flinnfoundation.model.evaluation.*;
 import org.flinnfoundation.repository.EvaluationRepository;
-import org.flinnfoundation.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,58 +14,50 @@ import java.util.List;
 @Service
 public class EvaluationService {
 
+    private PatientService patientService;
     private EvaluationRepository evaluationRepository;
-    private PatientRepository patientRepository;
-
-    private EvaluationMapper evaluationMapper;
 
     @Autowired
-    public EvaluationService(EvaluationRepository evaluationRepository, PatientRepository patientRepository, EvaluationMapper evaluationMapper) {
+    public EvaluationService(PatientService patientService, EvaluationRepository evaluationRepository) {
+        this.patientService = patientService;
         this.evaluationRepository = evaluationRepository;
-        this.patientRepository = patientRepository;
-        this.evaluationMapper = evaluationMapper;
     }
 
-    public PsychiatricEvaluation getEvaluation(long evaluationId) {
+    public Evaluation getEvaluation(long evaluationId) {
         return evaluationRepository.findOne(evaluationId);
     }
 
-    public EvaluationDto getBlankPsychiatricEvaluation() {
-        PsychiatricEvaluation psychiatricEvaluation = new PsychiatricEvaluation();
+    public List<Evaluation> getEvaluationsByPatientId(long patientId) {
+
+        Patient patient = patientService.getPatient(patientId);
+        return evaluationRepository.findEvaluationByPatient(patient);
+    }
+
+    public List<Evaluation> getEvaluationsByPatientIdAndEvaluationType(long patientId, EvaluationType evaluationType) {
+
+        Patient patient = patientService.getPatient(patientId);
+        return evaluationRepository.findEvaluationByPatientAndEvaluationType(patient, evaluationType);
+    }
+
+    public Evaluation getBlankEvaluation(EvaluationType evaluationType) {
+        Evaluation evaluation = new Evaluation();
         List<Question> questions = new ArrayList<>();
 
         log.info("Printing questions");
-        for(PsychiatricEvaluationPrompts prompt : PsychiatricEvaluationPrompts.values()) {
-            log.info(prompt.toString());
+        for(String prompt : evaluationType.getEvaluationPrompts()) {
+            log.info(prompt);
             Question question = new Question();
             question.setPrompt(prompt);
 
             questions.add(question);
         }
-        psychiatricEvaluation.setQuestions(questions);
+        evaluation.setQuestions(questions);
 
-        return evaluationMapper.convertModelToApiDto(psychiatricEvaluation);
+        return evaluation;
     }
 
-    public void savePsychiatricEvaluation(EvaluationDto evaluation) {
+    public void saveEvaluation(Evaluation evaluation) {
 
-        Patient patient = patientRepository.findOne(evaluation.getPatientId());
-
-        PsychiatricEvaluation psychiatricEvaluation = evaluationMapper.convertApiDtoToModel(evaluation);
-        psychiatricEvaluation.setPatient(patient);
-        log.info(psychiatricEvaluation.toString());
-        evaluationRepository.save(psychiatricEvaluation);
-    }
-
-    public List<EvaluationDto> getEvaluations(long patientId) {
-        List<PsychiatricEvaluation> evaluations = new ArrayList<>();
-
-        evaluationRepository.findAll().forEach(evaluation -> {
-            if(evaluation.getPatient().getId() == patientId) {
-                evaluations.add(evaluation);
-            }
-        });
-
-        return evaluationMapper.convertModelToApiDto(evaluations);
+        evaluationRepository.save(evaluation);
     }
 }

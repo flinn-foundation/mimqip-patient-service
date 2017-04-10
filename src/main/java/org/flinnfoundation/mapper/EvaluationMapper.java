@@ -1,14 +1,14 @@
 package org.flinnfoundation.mapper;
 
 import io.swagger.model.EvaluationDto;
-import org.flinnfoundation.model.evaluation.PsychiatricEvaluation;
+import org.flinnfoundation.model.evaluation.Evaluation;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class EvaluationMapper extends OrikaMapper<PsychiatricEvaluation, EvaluationDto> {
+public class EvaluationMapper extends OrikaMapper<Evaluation, EvaluationDto> {
 
     protected EvaluationMapper() {
-        super(PsychiatricEvaluation.class, EvaluationDto.class);
+        super(Evaluation.class, EvaluationDto.class);
     }
 }

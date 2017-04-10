@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class MedicationService extends BaseService
+public class OldMedicationService extends BaseService
 {
 
-	static final Logger LOG = Logger.getLogger(MedicationService.class);
+	static final Logger LOG = Logger.getLogger(OldMedicationService.class);
 
 	private final MedicationDao medicationDao = new MedicationDao();
 	private final PatientDaoImp patientDao = new PatientDaoImp();

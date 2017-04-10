@@ -29,11 +29,16 @@ abstract public class OrikaMapper<T, K> {
         return boundMapper.mapReverse(api);
     }
 
-    public List<K> convertModelToApiDto(Iterable<T> ruleEntities) {
-        return StreamSupport.stream(ruleEntities.spliterator(), false)
+    public List<K> convertModelToApiDto(Iterable<T> models) {
+        return StreamSupport.stream(models.spliterator(), false)
                 .map(this::convertModelToApiDto)
                 .collect(Collectors.toList());
     }
 
+    public List<T> convertApiDtoToModel(Iterable<K> dtos) {
+        return StreamSupport.stream(dtos.spliterator(), false)
+                .map(this::convertApiDtoToModel)
+                .collect(Collectors.toList());
+    }
 
 }

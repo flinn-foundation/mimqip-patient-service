@@ -12,9 +12,7 @@ public class Question {
     @GeneratedValue
     private long id;
 
-
-    @Enumerated
-    private PsychiatricEvaluationPrompts prompt;
+    private String prompt;
 
     @Lob
     private String response;

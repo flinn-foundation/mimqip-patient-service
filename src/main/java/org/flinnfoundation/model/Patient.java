@@ -2,7 +2,7 @@ package org.flinnfoundation.model;
 
 import lombok.Data;
 import lombok.ToString;
-import org.flinnfoundation.model.evaluation.PsychiatricEvaluation;
+import org.flinnfoundation.model.evaluation.Evaluation;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 @Entity
-@ToString(exclude = "psychiatricEvaluations")
+@ToString(exclude = "evaluations")
 public class Patient {
 
     @Id
@@ -41,6 +41,9 @@ public class Patient {
     }
 
     @OneToMany(mappedBy = "patient")
-    private List<PsychiatricEvaluation> psychiatricEvaluations;
+    private List<Evaluation> evaluations;
+
+    @OneToMany(mappedBy = "patient")
+    private List<PatientMedication> patientMedications;
 
 }

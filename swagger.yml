@@ -65,6 +65,20 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+  /medications:
+    get:
+      summary: Get all medications for patient
+      description: Get all medications for patient
+      operationId: getPatientMedicationsByPatientId
+      tags:
+        - medication
+      parameters:
+        - name: patientId
+          in: query
+          description: ID of patient to fetch
+          required: true
+          type: integer
+          format: int64
   /evaluations:
     get:
       summary: Get all evaluations for patient
@@ -75,35 +89,17 @@ paths:
       parameters:
         - name: patientId
           in: query
-          description: Id of patient to fetch
+          description: Id of patient evaluations to fetch
           required: true
           type: integer
           format: int64
-      responses:
-        200:
-          description: Array of evaluations
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/EvaluationDto'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /evaluations/psychiatric:
-    get:
-      summary: Get psychiatric evaluations for patient
-      description: Get psychiatric evaluations for patient
-      operationId: getPsychEvaluationsByPatientId
-      tags:
-         - evaluation
-      parameters:
-        - name: patientId
+        - name: evaluationType
           in: query
-          description: Id of patient to fetch
+          description: type of evaluation to pull
           required: true
-          type: integer
-          format: int64
+          type: string
+          schema:
+           $ref: '#/definitions/EvaluationTypeDto'
       responses:
         200:
           description: Array of evaluations
@@ -116,9 +112,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
-      summary: Post results of new psychiatric evaluations
-      description: Post results of new psychiatric evaluations
-      operationId: createPatientPsychEvaluation
+      summary: Post results of new evaluation
+      description: Post results of new evaluation
+      operationId: createPatientEvaluation
       tags:
          - evaluation
       parameters:
@@ -133,11 +129,11 @@ paths:
           description: Evaluation
           schema:
             $ref: '#/definitions/EvaluationDto'
-  /evaluations/psychiatric/{evaluationId}:
+  /evaluations/{evaluationId}:
     get:
-      summary: Get psychiatric evaluation by id
-      description: Get psychiatric evaluation by id
-      operationId: getPsychEvaluationById
+      summary: Get evaluation by id
+      description: Get evaluation by id
+      operationId: getEvaluationById
       tags:
          - evaluation
       parameters:
@@ -156,13 +152,21 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /evaluations/blank/psychiatric:
+  /evaluations/blank:
     get:
-      summary: Get blank psychiatric evaluation
-      description: Get blank psychiatric evaluation
-      operationId: getBlankPsychEvaluation
+      summary: Get blank evaluation
+      description: Get blank evaluation
+      operationId: getBlankEvaluation
       tags:
          - evaluation
+      parameters:
+        - name: evaluationType
+          in: query
+          description: type of evaluation
+          required: true
+          type: string
+          schema:
+           $ref: '#/definitions/EvaluationTypeDto'
       responses:
         200:
           description: Evaluation
@@ -196,18 +200,60 @@ definitions:
       zipCode:
         type: string
       race:
-        type: string
+        type: array
+        items:
+          type: string
+          enum:
+            - WHITE
+            - BLACK
+            - INDIAN_AMERICAN
+            - ASIAN
+            - PACIFIC_ISLANDER
+            - NO_RESPONSE
       ethnicity:
         type: string
+        enum:
+          - HISPANIC
+          - NON_HISPANIC
+          - NO_RESPONSE
       marital:
         type: string
+        enum:
+          - MARRIED
+          - SINGLE
+          - SEPARATED
+          - DIVORCED
+          - WIDOWED
       living:
         type: string
+        enum:
+          - ALONE
+          - WITH_ROOMMATES
+          - WITH_SPOUSE
+          - WITH_SPOUSE_AND_CHILDREN
+          - WITH_PARENTS
+          - GROUP_HOME
       employment:
+        type: string
+        enum:
+          - UNEMPLOYED
+          - FULL TIME_SALARIED
+          - PART_TIME_SALARIED
+          - FULL_TIME_NON_SALARIED
+          - PART_TIME_NON_SALARIED
+          - SELF_EMPLOYED
+      primaryCarePhysicianName:
+        type: string
+      primaryCarePhysicianEmail:
         type: string
       startDate:
         type: string
         format: 'date-time'
+  PatientMedicationDto:
+    type: object
+    properties:
+      genericName:
+        type: string
   QuestionDto:
     type: object
     properties:
@@ -228,6 +274,15 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/QuestionDto'
+      evaluation:
+        type: string
+        schema:
+          $ref: '#/definitions/EvaluationTypeDto'
+  EvaluationTypeDto:
+    type: string
+    enum:
+      - PSYCHIATRIC
+      - OTHER_VALUE
   Error:
     type: object
     properties:

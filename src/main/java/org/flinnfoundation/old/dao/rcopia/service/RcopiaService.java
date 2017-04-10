@@ -18,7 +18,7 @@ public class RcopiaService extends BaseService
 	private final RcopiaSenderService sender = new RcopiaSenderService();
 
 	private final PrescriptionEventService prescriptionEventService = new PrescriptionEventService();
-	private final MedicationService medicationService = new MedicationService();
+	private final OldMedicationService oldMedicationService = new OldMedicationService();
 	private final OldPatientService oldPatientService = new OldPatientService();
 
 	public RcExtResponseType updateMedications(Date lastUpdatedDate) throws RcopiaTransformationException, RcopiaSenderException, RcopiaServiceException, ServiceException
@@ -125,7 +125,7 @@ public class RcopiaService extends BaseService
 		 * Note: This uses the flinn.service to keep in it's own transaction
 		 */
 		LOG.debug("Updating medication list in database");
-		List<Medication> modifiedMedications = medicationService.mergeMedications(medications);
+		List<Medication> modifiedMedications = oldMedicationService.mergeMedications(medications);
 
 		LOG.debug("Updating PrescriptionEvent table");
 		prescriptionEventService.updatePrescriptionEvents(modifiedMedications);

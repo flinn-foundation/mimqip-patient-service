@@ -7,51 +7,30 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 /**
- * QuestionDto
+ * PatientMedicationDto
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-09T20:56:30.452-04:00")
 
-public class QuestionDto   {
-  @JsonProperty("prompt")
-  private String prompt = null;
+public class PatientMedicationDto   {
+  @JsonProperty("genericName")
+  private String genericName = null;
 
-  @JsonProperty("response")
-  private String response = null;
-
-  public QuestionDto prompt(String prompt) {
-    this.prompt = prompt;
+  public PatientMedicationDto genericName(String genericName) {
+    this.genericName = genericName;
     return this;
   }
 
    /**
-   * Get prompt
-   * @return prompt
+   * Get genericName
+   * @return genericName
   **/
   @ApiModelProperty(value = "")
-  public String getPrompt() {
-    return prompt;
+  public String getGenericName() {
+    return genericName;
   }
 
-  public void setPrompt(String prompt) {
-    this.prompt = prompt;
-  }
-
-  public QuestionDto response(String response) {
-    this.response = response;
-    return this;
-  }
-
-   /**
-   * Get response
-   * @return response
-  **/
-  @ApiModelProperty(value = "")
-  public String getResponse() {
-    return response;
-  }
-
-  public void setResponse(String response) {
-    this.response = response;
+  public void setGenericName(String genericName) {
+    this.genericName = genericName;
   }
 
 
@@ -63,23 +42,21 @@ public class QuestionDto   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    QuestionDto questionDto = (QuestionDto) o;
-    return Objects.equals(this.prompt, questionDto.prompt) &&
-        Objects.equals(this.response, questionDto.response);
+    PatientMedicationDto patientMedicationDto = (PatientMedicationDto) o;
+    return Objects.equals(this.genericName, patientMedicationDto.genericName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(prompt, response);
+    return Objects.hash(genericName);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class QuestionDto {\n");
+    sb.append("class PatientMedicationDto {\n");
     
-    sb.append("    prompt: ").append(toIndentedString(prompt)).append("\n");
-    sb.append("    response: ").append(toIndentedString(response)).append("\n");
+    sb.append("    genericName: ").append(toIndentedString(genericName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

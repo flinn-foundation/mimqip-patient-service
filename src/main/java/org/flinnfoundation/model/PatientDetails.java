@@ -2,8 +2,10 @@ package org.flinnfoundation.model;
 
 import lombok.Data;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Embeddable
@@ -15,7 +17,8 @@ public class PatientDetails {
 
     private String zipCode;
 
-    private String race;
+    @ElementCollection
+    private List<String> race;
 
     private String ethnicity;
 

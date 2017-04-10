@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class PsychiatricEvaluation {
+public class Evaluation {
 
     @Id
     @GeneratedValue
@@ -20,5 +20,8 @@ public class PsychiatricEvaluation {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Question> questions;
+
+    @Enumerated(EnumType.STRING)
+    private EvaluationType evaluationType;
 
 }

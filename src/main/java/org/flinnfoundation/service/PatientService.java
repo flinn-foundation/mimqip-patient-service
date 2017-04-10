@@ -1,8 +1,7 @@
 package org.flinnfoundation.service;
 
-import io.swagger.model.PatientDto;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import org.flinnfoundation.mapper.PatientMapper;
 import org.flinnfoundation.model.Patient;
 import org.flinnfoundation.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,25 +15,21 @@ public class PatientService {
 
     private PatientRepository patientRepository;
 
-    private PatientMapper patientMapper;
-
     @Autowired
-    public PatientService(PatientRepository patientRepository, PatientMapper patientMapper) {
+    public PatientService(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
-        this.patientMapper = patientMapper;
     }
 
-    public List<PatientDto> getPatientsData() {
+    public List<Patient> getPatients() {
 
-        return patientMapper.convertModelToApiDto(patientRepository.findAll());
+        return Lists.newArrayList(patientRepository.findAll());
     }
 
-    public PatientDto getPatientData(Long patientId) {
-        return patientMapper.convertModelToApiDto(patientRepository.findOne(patientId));
+    public Patient getPatient(Long patientId) {
+        return patientRepository.findOne(patientId);
     }
 
-    public void createPatient(PatientDto patientDto) {
-        Patient patient = patientMapper.convertApiDtoToModel(patientDto);
+    public void createPatient(Patient patient) {
 
         patientRepository.save(patient);
     }

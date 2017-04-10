@@ -3,6 +3,9 @@ package org.flinnfoundation.controller;
 import io.swagger.api.EvaluationsApi;
 import io.swagger.model.EvaluationDto;
 import lombok.extern.slf4j.Slf4j;
+import org.flinnfoundation.mapper.EvaluationMapper;
+import org.flinnfoundation.model.evaluation.Evaluation;
+import org.flinnfoundation.model.evaluation.EvaluationType;
 import org.flinnfoundation.service.EvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,36 +20,36 @@ import java.util.List;
 public class EvaluationController implements EvaluationsApi {
 
     private EvaluationService evaluationService;
+    private EvaluationMapper evaluationMapper;
 
     @Autowired
-    public EvaluationController(EvaluationService evaluationService) {
+    public EvaluationController(EvaluationService evaluationService, EvaluationMapper evaluationMapper) {
         this.evaluationService = evaluationService;
+        this.evaluationMapper = evaluationMapper;
     }
 
     @Override
-    public ResponseEntity<EvaluationDto> getBlankPsychEvaluation() {
-        return ResponseEntity.ok(evaluationService.getBlankPsychiatricEvaluation());
-    }
-
-    @Override
-    public ResponseEntity<List<EvaluationDto>> getEvaluationsByPatientId(@RequestParam("patientId") Long patientId) {
-        return ResponseEntity.ok(evaluationService.getEvaluations(patientId));
-    }
-
-    @Override
-    public ResponseEntity<List<EvaluationDto>> getPsychEvaluationsByPatientId(@RequestParam("patientId") Long patientId) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<EvaluationDto> createPatientPsychEvaluation(@RequestBody EvaluationDto evaluation) {
-        evaluationService.savePsychiatricEvaluation(evaluation);
+    public ResponseEntity<EvaluationDto> createPatientEvaluation(@RequestBody EvaluationDto evaluationDto) {
+        Evaluation evaluation = evaluationMapper.convertApiDtoToModel(evaluationDto);
+        evaluationService.saveEvaluation(evaluation);
 
         return null;
     }
 
     @Override
-    public ResponseEntity<EvaluationDto> getPsychEvaluationById(@RequestParam Long evaluationId) {
-        return null;
+    public ResponseEntity<EvaluationDto> getBlankEvaluation(@RequestParam String evaluationType) {
+        return ResponseEntity.ok(evaluationMapper.convertModelToApiDto(evaluationService.getBlankEvaluation(EvaluationType.valueOf(evaluationType))));
     }
+
+    @Override
+    public ResponseEntity<EvaluationDto> getEvaluationById(@RequestParam Long evaluationId) {
+        return ResponseEntity.ok(evaluationMapper.convertModelToApiDto(evaluationService.getEvaluation(evaluationId)));
+    }
+
+    @Override
+    public ResponseEntity<List<EvaluationDto>> getEvaluationsByPatientId(@RequestParam  Long patientId, @RequestParam String evaluationType) {
+        List<Evaluation> evaluations = evaluationService.getEvaluationsByPatientIdAndEvaluationType(patientId, EvaluationType.valueOf(evaluationType));
+        return ResponseEntity.ok(evaluationMapper.convertModelToApiDto(evaluations));
+    }
+
 }

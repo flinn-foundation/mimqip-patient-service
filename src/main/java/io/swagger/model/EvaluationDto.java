@@ -1,15 +1,18 @@
 package io.swagger.model;
 
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
+import io.swagger.model.QuestionDto;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import javax.validation.constraints.*;
 /**
  * EvaluationDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-06T13:58:51.528-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-09T20:56:30.452-04:00")
 
 public class EvaluationDto   {
   @JsonProperty("id")
@@ -20,6 +23,9 @@ public class EvaluationDto   {
 
   @JsonProperty("questions")
   private List<QuestionDto> questions = new ArrayList<QuestionDto>();
+
+  @JsonProperty("evaluation")
+  private String evaluation = null;
 
   public EvaluationDto id(Long id) {
     this.id = id;
@@ -80,6 +86,24 @@ public class EvaluationDto   {
     this.questions = questions;
   }
 
+  public EvaluationDto evaluation(String evaluation) {
+    this.evaluation = evaluation;
+    return this;
+  }
+
+   /**
+   * Get evaluation
+   * @return evaluation
+  **/
+  @ApiModelProperty(value = "")
+  public String getEvaluation() {
+    return evaluation;
+  }
+
+  public void setEvaluation(String evaluation) {
+    this.evaluation = evaluation;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -92,22 +116,24 @@ public class EvaluationDto   {
     EvaluationDto evaluationDto = (EvaluationDto) o;
     return Objects.equals(this.id, evaluationDto.id) &&
         Objects.equals(this.patientId, evaluationDto.patientId) &&
-        Objects.equals(this.questions, evaluationDto.questions);
+        Objects.equals(this.questions, evaluationDto.questions) &&
+        Objects.equals(this.evaluation, evaluationDto.evaluation);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, patientId, questions);
+    return Objects.hash(id, patientId, questions, evaluation);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EvaluationDto {\n");
-    
+
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
     sb.append("    questions: ").append(toIndentedString(questions)).append("\n");
+    sb.append("    evaluation: ").append(toIndentedString(evaluation)).append("\n");
     sb.append("}");
     return sb.toString();
   }
