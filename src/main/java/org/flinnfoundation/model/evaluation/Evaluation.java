@@ -2,8 +2,10 @@ package org.flinnfoundation.model.evaluation;
 
 import lombok.Data;
 import org.flinnfoundation.model.Patient;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -23,5 +25,10 @@ public class Evaluation {
 
     @Enumerated(EnumType.STRING)
     private EvaluationType evaluationType;
+
+    //TODO: Change this to a Java8 Time (LocalDateTime, Offset, whatever) once SpringBoot 1.5.3 supports Hibernate 5.2.x
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
 
 }

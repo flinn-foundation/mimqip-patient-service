@@ -152,7 +152,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /evaluations/blank:
+  /evaluations/blank/{evaluationType}:
     get:
       summary: Get blank evaluation
       description: Get blank evaluation
@@ -161,7 +161,7 @@ paths:
          - evaluation
       parameters:
         - name: evaluationType
-          in: query
+          in: path
           description: type of evaluation
           required: true
           type: string
@@ -274,7 +274,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/QuestionDto'
-      evaluation:
+      created:
+        type: string
+        format: 'date-time'
+      evaluationType:
         type: string
         schema:
           $ref: '#/definitions/EvaluationTypeDto'

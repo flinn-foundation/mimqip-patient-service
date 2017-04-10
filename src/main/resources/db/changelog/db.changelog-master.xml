@@ -201,6 +201,7 @@
         <createTable tableName="EVALUATION">
             <column name="ID" type="BIGINT" autoIncrement="true"/>
             <column name="EVALUATION_TYPE" type="VARCHAR(255)"/>
+            <column name="CREATED" type="DATETIME"/>
         </createTable>
     </changeSet>
     <changeSet author="Michael Iden" id="psychiatric-evaluation-questions-create-table">

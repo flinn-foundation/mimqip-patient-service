@@ -30,7 +30,7 @@ public class EvaluationService {
     public List<Evaluation> getEvaluationsByPatientId(long patientId) {
 
         Patient patient = patientService.getPatient(patientId);
-        return evaluationRepository.findEvaluationByPatient(patient);
+        return patient.getEvaluations();
     }
 
     public List<Evaluation> getEvaluationsByPatientIdAndEvaluationType(long patientId, EvaluationType evaluationType) {
@@ -43,15 +43,14 @@ public class EvaluationService {
         Evaluation evaluation = new Evaluation();
         List<Question> questions = new ArrayList<>();
 
-        log.info("Printing questions");
         for(String prompt : evaluationType.getEvaluationPrompts()) {
-            log.info(prompt);
             Question question = new Question();
             question.setPrompt(prompt);
 
             questions.add(question);
         }
         evaluation.setQuestions(questions);
+        evaluation.setEvaluationType(evaluationType);
 
         return evaluation;
     }

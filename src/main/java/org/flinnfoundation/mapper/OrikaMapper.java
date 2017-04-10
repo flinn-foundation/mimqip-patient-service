@@ -10,12 +10,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-abstract public class OrikaMapper<T, K> {
+public abstract class OrikaMapper<T, K> {
 
     private BoundMapperFacade<T, K> boundMapper;
 
     protected OrikaMapper(Class<T> clazzT, Class<K> clazzK) {
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+        mapperFactory.getConverterFactory().registerConverter(new DateConverter());
         mapperFactory.getConverterFactory().registerConverter(new LocalDateTimeConverter());
         mapperFactory.getConverterFactory().registerConverter(new PassThroughConverter(LocalDate.class));
         boundMapper = mapperFactory.getMapperFacade(clazzT, clazzK);

@@ -1,4 +1,4 @@
-package org.flinnfoundation.controller.recommend;
+package org.flinnfoundation.controller;
 
 import io.swagger.api.MedicationsApi;
 import org.flinnfoundation.mapper.PatientMedicationMapper;

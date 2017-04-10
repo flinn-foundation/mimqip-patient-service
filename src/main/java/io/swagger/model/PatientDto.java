@@ -13,7 +13,7 @@ import java.util.Objects;
 /**
  * PatientDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-09T20:56:30.452-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-10T11:13:05.981-04:00")
 
 public class PatientDto   {
   @JsonProperty("id")

@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-09T20:56:30.452-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-10T11:13:05.981-04:00")
 
 @Api(value = "evaluations", description = "the evaluations API")
 public interface EvaluationsApi {
@@ -34,10 +34,10 @@ public interface EvaluationsApi {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Evaluation", response = EvaluationDto.class),
         @ApiResponse(code = 200, message = "Unexpected error", response = EvaluationDto.class) })
-    @RequestMapping(value = "/evaluations/blank",
+    @RequestMapping(value = "/evaluations/blank/{evaluationType}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<EvaluationDto> getBlankEvaluation( @NotNull @ApiParam(value = "type of evaluation", required = true) @RequestParam(value = "evaluationType", required = true) String evaluationType);
+    ResponseEntity<EvaluationDto> getBlankEvaluation(@ApiParam(value = "type of evaluation",required=true ) @PathVariable("evaluationType") String evaluationType);
 
 
     @ApiOperation(value = "Get evaluation by id", notes = "Get evaluation by id", response = EvaluationDto.class, tags={ "evaluation", })

@@ -9,6 +9,7 @@ import org.flinnfoundation.model.evaluation.EvaluationType;
 import org.flinnfoundation.service.EvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +38,7 @@ public class EvaluationController implements EvaluationsApi {
     }
 
     @Override
-    public ResponseEntity<EvaluationDto> getBlankEvaluation(@RequestParam String evaluationType) {
+    public ResponseEntity<EvaluationDto> getBlankEvaluation(@PathVariable String evaluationType) {
         return ResponseEntity.ok(evaluationMapper.convertModelToApiDto(evaluationService.getBlankEvaluation(EvaluationType.valueOf(evaluationType))));
     }
 

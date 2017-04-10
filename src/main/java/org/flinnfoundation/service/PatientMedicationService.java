@@ -18,15 +18,16 @@ public class PatientMedicationService {
 
 
     @Autowired
-    public PatientMedicationService(PatientService patientService) {
+    public PatientMedicationService(PatientService patientService, PatientMedicationRepository patientMedicationRepository) {
         this.patientService = patientService;
+        this.patientMedicationRepository = patientMedicationRepository;
     }
 
 
     public List<PatientMedication> getPatientMedications(long patientId) {
         Patient patient = patientService.getPatient(patientId);
 
-        return patientMedicationRepository.findPatientMedicationByPatient(patient);
+        return patient.getPatientMedications();
     }
 
     public void addPatientMedication(PatientMedication patientMedication) {
