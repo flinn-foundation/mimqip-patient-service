@@ -44,8 +44,8 @@ public class EvaluationMapper {
         return boundMapper.mapReverse(api);
     }
 
-    public List<EvaluationDto> convertModelToApiDto(Iterable<Evaluation> ruleEntities) {
-        return StreamSupport.stream(ruleEntities.spliterator(), false)
+    public List<EvaluationDto> convertModelToApiDto(Iterable<Evaluation> evaluations) {
+        return StreamSupport.stream(evaluations.spliterator(), false)
                 .map(this::convertModelToApiDto)
                 .collect(Collectors.toList());
     }

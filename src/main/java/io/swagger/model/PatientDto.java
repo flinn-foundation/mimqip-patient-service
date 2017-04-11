@@ -3,6 +3,10 @@ package io.swagger.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.time.LocalDate;
@@ -13,7 +17,7 @@ import java.util.Objects;
 /**
  * PatientDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-10T11:13:05.981-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-10T12:47:45.331-04:00")
 
 public class PatientDto   {
   @JsonProperty("id")
@@ -60,6 +64,8 @@ public class PatientDto   {
   private SexEnum sex = null;
 
   @JsonProperty("dateOfBirth")
+  @JsonSerialize(using = LocalDateSerializer.class)
+  @JsonDeserialize(using = LocalDateDeserializer.class)
   private LocalDate dateOfBirth = null;
 
   @JsonProperty("valid")

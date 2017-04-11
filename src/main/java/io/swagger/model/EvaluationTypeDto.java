@@ -1,18 +1,28 @@
 package io.swagger.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonValue;
-import javax.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Gets or Sets EvaluationTypeDto
  */
 public enum EvaluationTypeDto {
-  
-  PSYCHIATRIC("PSYCHIATRIC"),
-  
-  OTHER_VALUE("OTHER_VALUE");
+
+  BBDSS("BBDSS"),
+
+  PHQ9("PHQ9"),
+
+  GLOBAL("GLOBAL"),
+
+  MENTAL_STATUS("MENTAL_STATUS"),
+
+  PSRS("PSRS"),
+
+  SUBSTANCE_ABUSE("SUBSTANCE_ABUSE"),
+
+  VITAL_SIGNS("VITAL_SIGNS"),
+
+  PSYCHIATRIC("PSYCHIATRIC");
 
   private String value;
 

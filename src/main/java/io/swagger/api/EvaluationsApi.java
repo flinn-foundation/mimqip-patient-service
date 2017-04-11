@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-10T11:13:05.981-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-10T12:47:45.331-04:00")
 
 @Api(value = "evaluations", description = "the evaluations API")
 public interface EvaluationsApi {
@@ -58,6 +58,6 @@ public interface EvaluationsApi {
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     ResponseEntity<List<EvaluationDto>> getEvaluationsByPatientId( @NotNull @ApiParam(value = "Id of patient evaluations to fetch", required = true) @RequestParam(value = "patientId", required = true) Long patientId,
-         @NotNull @ApiParam(value = "type of evaluation to pull", required = true) @RequestParam(value = "evaluationType", required = true) String evaluationType);
+         @ApiParam(value = "type of evaluation to pull") @RequestParam(value = "evaluationType", required = false) String evaluationType);
 
 }

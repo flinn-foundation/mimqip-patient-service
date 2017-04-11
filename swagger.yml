@@ -79,6 +79,15 @@ paths:
           required: true
           type: integer
           format: int64
+      responses:
+        200:
+          description: Patient
+          schema:
+            $ref: '#/definitions/PatientMedicationDto'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
   /evaluations:
     get:
       summary: Get all evaluations for patient
@@ -96,7 +105,7 @@ paths:
         - name: evaluationType
           in: query
           description: type of evaluation to pull
-          required: true
+          required: false
           type: string
           schema:
            $ref: '#/definitions/EvaluationTypeDto'
@@ -284,8 +293,14 @@ definitions:
   EvaluationTypeDto:
     type: string
     enum:
+      - BBDSS
+      - PHQ9
+      - GLOBAL
+      - MENTAL_STATUS
+      - PSRS
+      - SUBSTANCE_ABUSE
+      - VITAL_SIGNS
       - PSYCHIATRIC
-      - OTHER_VALUE
   Error:
     type: object
     properties:
