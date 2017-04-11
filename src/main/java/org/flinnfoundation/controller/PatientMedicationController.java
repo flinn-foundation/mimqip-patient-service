@@ -1,6 +1,7 @@
 package org.flinnfoundation.controller;
 
 import io.swagger.api.MedicationsApi;
+import io.swagger.model.PatientMedicationDto;
 import org.flinnfoundation.mapper.PatientMedicationMapper;
 import org.flinnfoundation.service.PatientMedicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,7 @@ public class PatientMedicationController implements MedicationsApi {
     }
 
     @Override
-    public ResponseEntity<Void> getPatientMedicationsByPatientId(Long patientId) {
-
-        patientMedicationMapper.convertModelToApiDto(patientMedicationService.getPatientMedications(patientId));
+    public ResponseEntity<PatientMedicationDto> getPatientMedicationsByPatientId(Long patientId) {
         return null;
     }
 }

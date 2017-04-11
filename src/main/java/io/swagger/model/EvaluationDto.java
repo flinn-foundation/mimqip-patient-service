@@ -1,16 +1,19 @@
 package io.swagger.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 /**
  * EvaluationDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-10T23:13:15.691-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-11T00:38:15.354-04:00")
 
 public class EvaluationDto   {
   @JsonProperty("id")
@@ -25,8 +28,51 @@ public class EvaluationDto   {
   @JsonProperty("created")
   private OffsetDateTime created = null;
 
+  /**
+   * Gets or Sets evaluationType
+   */
+  public enum EvaluationTypeEnum {
+    BBDSS("BBDSS"),
+
+    PHQ9("PHQ9"),
+
+    GLOBAL("GLOBAL"),
+
+    MENTAL_STATUS("MENTAL_STATUS"),
+
+    PSRS("PSRS"),
+
+    SUBSTANCE_ABUSE("SUBSTANCE_ABUSE"),
+
+    VITAL_SIGNS("VITAL_SIGNS"),
+
+    PSYCHIATRIC("PSYCHIATRIC");
+
+    private String value;
+
+    EvaluationTypeEnum(String value) {
+      this.value = value;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static EvaluationTypeEnum fromValue(String text) {
+      for (EvaluationTypeEnum b : EvaluationTypeEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+  }
+
   @JsonProperty("evaluationType")
-  private String evaluationType = null;
+  private EvaluationTypeEnum evaluationType = null;
 
   public EvaluationDto id(Long id) {
     this.id = id;
@@ -105,7 +151,7 @@ public class EvaluationDto   {
     this.created = created;
   }
 
-  public EvaluationDto evaluationType(String evaluationType) {
+  public EvaluationDto evaluationType(EvaluationTypeEnum evaluationType) {
     this.evaluationType = evaluationType;
     return this;
   }
@@ -115,11 +161,11 @@ public class EvaluationDto   {
    * @return evaluationType
   **/
   @ApiModelProperty(value = "")
-  public String getEvaluationType() {
+  public EvaluationTypeEnum getEvaluationType() {
     return evaluationType;
   }
 
-  public void setEvaluationType(String evaluationType) {
+  public void setEvaluationType(EvaluationTypeEnum evaluationType) {
     this.evaluationType = evaluationType;
   }
 

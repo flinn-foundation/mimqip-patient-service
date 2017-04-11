@@ -9,6 +9,181 @@ schemes:
 basePath: /
 produces:
   - application/json
+definitions:
+  List:
+    type: string
+    enum: &evaluation-enum
+      - BBDSS
+      - PHQ9
+      - GLOBAL
+      - MENTAL_STATUS
+      - PSRS
+      - SUBSTANCE_ABUSE
+      - VITAL_SIGNS
+      - PSYCHIATRIC
+  List:
+    type: string
+    enum: &race-enum
+      - WHITE
+      - BLACK
+      - INDIAN_AMERICAN
+      - ASIAN
+      - PACIFIC_ISLANDER
+      - NO_RESPONSE
+  List:
+    type: string
+    enum: &employment-enum
+      - UNEMPLOYED
+      - FULL TIME_SALARIED
+      - PART_TIME_SALARIED
+      - FULL_TIME_NON_SALARIED
+      - PART_TIME_NON_SALARIED
+      - SELF_EMPLOYED
+  List:
+    type: string
+    enum: &living-enum
+      - ALONE
+      - WITH_ROOMMATES
+      - WITH_SPOUSE
+      - WITH_SPOUSE_AND_CHILDREN
+      - WITH_PARENTS
+      - GROUP_HOME
+  List:
+    type: string
+    enum: &marital-enum
+      - MARRIED
+      - SINGLE
+      - SEPARATED
+      - DIVORCED
+      - WIDOWED
+  List:
+    type: string
+    enum: &ethnicity-enum
+      - HISPANIC
+      - NON_HISPANIC
+      - NO_RESPONSE
+  List:
+    type: string
+    enum: &sex-enum
+      - MALE
+      - FEMALE
+  List:
+    type: string
+    enum: &diagnosis-enum
+      - SCHIZOPHRENIC_P
+      - SCHIZOPHRENIC_D
+      - SCHIZOPHRENIC_C
+      - SCHIZOPHRENIC_U
+      - SCHIZOPHRENIC_R
+      - BIPOLAR_SM1
+      - BIPOLAR_SM2
+      - BIPOLAR_SM3
+      - BIPOLAR_SM4
+      - BIPOLAR_MRMH
+      - BIPOLAR_MRM1
+      - BIPOLAR_MRM2
+      - BIPOLAR_MRM3
+      - BIPOLAR_MRM4
+      - BIPOLAR_MRD1
+      - BIPOLAR_MRD2
+      - BIPOLAR_MRD3
+      - BIPOLAR_MRD4
+      - MDD_S1
+      - MDD_S2
+      - MDD_S3
+      - MDD_S4
+      - MDD_R1
+      - MDD_R2
+      - MDD_R3
+      - MDD_R4
+  PatientDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      firstName:
+        type: string
+      lastName:
+        type: string
+      sex:
+        type: string
+        enum: *sex-enum
+      dateOfBirth:
+        type: string
+        format: 'date'
+      valid:
+        type: boolean
+      diagnosis:
+        type: string
+        enum: *diagnosis-enum
+      zipCode:
+        type: string
+      race:
+        type: array
+        items:
+          type: string
+          enum: *race-enum
+      ethnicity:
+        type: string
+        enum: *ethnicity-enum
+      marital:
+        type: string
+        enum: *marital-enum
+      living:
+        type: string
+        enum: *living-enum
+      employment:
+        type: string
+        enum: *employment-enum
+      primaryCarePhysicianName:
+        type: string
+      primaryCarePhysicianEmail:
+        type: string
+      startDate:
+        type: string
+        format: 'date-time'
+  PatientMedicationDto:
+    type: object
+    properties:
+      genericName:
+        type: string
+  QuestionDto:
+    type: object
+    properties:
+      prompt:
+        type: string
+      response:
+        type: string
+  EvaluationDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      patientId:
+        type: integer
+        format: int64
+      questions:
+        type: array
+        items:
+          $ref: '#/definitions/QuestionDto'
+      created:
+        type: string
+        format: 'date-time'
+      evaluationType:
+        type: string
+        enum: *evaluation-enum
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
 paths:
   /patients:
     get:
@@ -83,6 +258,7 @@ paths:
           description: diagnosis
           required: true
           type: string
+          enum: *diagnosis-enum
       responses:
         204:
           description: Patient updated successfully
@@ -132,8 +308,7 @@ paths:
           description: type of evaluation to pull
           required: false
           type: string
-          schema:
-           $ref: '#/definitions/EvaluationTypeDto'
+          enum: *evaluation-enum
       responses:
         200:
           description: Array of evaluations
@@ -186,7 +361,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /evaluations/blank/{evaluationType}:
+  /evaluations/blank:
     get:
       summary: Get blank evaluation
       description: Get blank evaluation
@@ -195,12 +370,11 @@ paths:
          - evaluation
       parameters:
         - name: evaluationType
-          in: path
+          in: query
           description: type of evaluation
           required: true
           type: string
-          schema:
-           $ref: '#/definitions/EvaluationTypeDto'
+          enum: *evaluation-enum
       responses:
         200:
           description: Evaluation
@@ -210,183 +384,3 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-definitions:
-  PatientDto:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      firstName:
-        type: string
-      lastName:
-        type: string
-      sex:
-        type: string
-
-      dateOfBirth:
-        type: string
-        format: 'date'
-      valid:
-        type: boolean
-      diagnosis:
-        type: string
-        schema:
-          $ref: '#/definitions/DiagnosisTypeDto'
-      zipCode:
-        type: string
-      race:
-        type: array
-        items:
-          $ref: '#/definitions/RaceTypeDto'
-      ethnicity:
-        type: string
-        schema:
-          $ref: '#/definitions/EthnicityTypeDto'
-      marital:
-        type: string
-        schema:
-          $ref: '#/definitions/MaritalTypeDto'
-      living:
-        type: string
-        schema:
-          $ref: '#/definitions/LivingTypeDto'
-      employment:
-        type: string
-        schema:
-          $ref: '#/definitions/EmploymentTypeDto'
-      primaryCarePhysicianName:
-        type: string
-      primaryCarePhysicianEmail:
-        type: string
-      startDate:
-        type: string
-        format: 'date-time'
-  PatientMedicationDto:
-    type: object
-    properties:
-      genericName:
-        type: string
-  QuestionDto:
-    type: object
-    properties:
-      prompt:
-        type: string
-      response:
-        type: string
-  EvaluationDto:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int64
-      patientId:
-        type: integer
-        format: int64
-      questions:
-        type: array
-        items:
-          $ref: '#/definitions/QuestionDto'
-      created:
-        type: string
-        format: 'date-time'
-      evaluationType:
-        type: string
-        schema:
-          $ref: '#/definitions/EvaluationTypeDto'
-  EvaluationTypeDto:
-    type: string
-    enum:
-      - BBDSS
-      - PHQ9
-      - GLOBAL
-      - MENTAL_STATUS
-      - PSRS
-      - SUBSTANCE_ABUSE
-      - VITAL_SIGNS
-      - PSYCHIATRIC
-  SexTypeDto:
-    type: string
-    enum:
-      - MALE
-      - FEMALE
-  DiagnosisTypeDto:
-    type: string
-    enum:
-      - SCHIZOPHRENIC_P
-      - SCHIZOPHRENIC_D
-      - SCHIZOPHRENIC_C
-      - SCHIZOPHRENIC_U
-      - SCHIZOPHRENIC_R
-      - BIPOLAR_SM1
-      - BIPOLAR_SM2
-      - BIPOLAR_SM3
-      - BIPOLAR_SM4
-      - BIPOLAR_MRMH
-      - BIPOLAR_MRM1
-      - BIPOLAR_MRM2
-      - BIPOLAR_MRM3
-      - BIPOLAR_MRM4
-      - BIPOLAR_MRD1
-      - BIPOLAR_MRD2
-      - BIPOLAR_MRD3
-      - BIPOLAR_MRD4
-      - MDD_S1
-      - MDD_S2
-      - MDD_S3
-      - MDD_S4
-      - MDD_R1
-      - MDD_R2
-      - MDD_R3
-      - MDD_R4
-  RaceTypeDto:
-    type: string
-    enum:
-      - WHITE
-      - BLACK
-      - INDIAN_AMERICAN
-      - ASIAN
-      - PACIFIC_ISLANDER
-      - NO_RESPONSE
-  EmploymentTypeDto:
-    type: string
-    enum:
-      - UNEMPLOYED
-      - FULL TIME_SALARIED
-      - PART_TIME_SALARIED
-      - FULL_TIME_NON_SALARIED
-      - PART_TIME_NON_SALARIED
-      - SELF_EMPLOYED
-  LivingTypeDto:
-    type: string
-    enum:
-      - ALONE
-      - WITH_ROOMMATES
-      - WITH_SPOUSE
-      - WITH_SPOUSE_AND_CHILDREN
-      - WITH_PARENTS
-      - GROUP_HOME
-  MaritalTypeDto:
-    type: string
-    enum:
-      - MARRIED
-      - SINGLE
-      - SEPARATED
-      - DIVORCED
-      - WIDOWED
-  EthnicityTypeDto:
-      type: string
-      enum:
-        - HISPANIC
-        - NON_HISPANIC
-        - NO_RESPONSE
-  Error:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-      message:
-        type: string
-      fields:
-        type: string
