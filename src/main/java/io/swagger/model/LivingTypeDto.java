@@ -6,29 +6,25 @@ import javax.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
- * Gets or Sets EvaluationTypeDto
+ * Gets or Sets LivingTypeDto
  */
-public enum EvaluationTypeDto {
+public enum LivingTypeDto {
   
-  BBDSS("BBDSS"),
+  ALONE("ALONE"),
   
-  PHQ9("PHQ9"),
+  WITH_ROOMMATES("WITH_ROOMMATES"),
   
-  GLOBAL("GLOBAL"),
+  WITH_SPOUSE("WITH_SPOUSE"),
   
-  MENTAL_STATUS("MENTAL_STATUS"),
+  WITH_SPOUSE_AND_CHILDREN("WITH_SPOUSE_AND_CHILDREN"),
   
-  PSRS("PSRS"),
+  WITH_PARENTS("WITH_PARENTS"),
   
-  SUBSTANCE_ABUSE("SUBSTANCE_ABUSE"),
-  
-  VITAL_SIGNS("VITAL_SIGNS"),
-  
-  PSYCHIATRIC("PSYCHIATRIC");
+  GROUP_HOME("GROUP_HOME");
 
   private String value;
 
-  EvaluationTypeDto(String value) {
+  LivingTypeDto(String value) {
     this.value = value;
   }
 
@@ -39,8 +35,8 @@ public enum EvaluationTypeDto {
   }
 
   @JsonCreator
-  public static EvaluationTypeDto fromValue(String text) {
-    for (EvaluationTypeDto b : EvaluationTypeDto.values()) {
+  public static LivingTypeDto fromValue(String text) {
+    for (LivingTypeDto b : LivingTypeDto.values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }

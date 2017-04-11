@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 /**
  * PatientMedicationDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-10T12:47:45.331-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-10T23:13:15.691-04:00")
 
 public class PatientMedicationDto   {
   @JsonProperty("genericName")
@@ -35,7 +35,7 @@ public class PatientMedicationDto   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -55,7 +55,7 @@ public class PatientMedicationDto   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PatientMedicationDto {\n");
-    
+
     sb.append("    genericName: ").append(toIndentedString(genericName)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -65,7 +65,7 @@ public class PatientMedicationDto   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

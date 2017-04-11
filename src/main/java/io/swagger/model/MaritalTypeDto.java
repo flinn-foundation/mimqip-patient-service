@@ -6,29 +6,23 @@ import javax.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
- * Gets or Sets EvaluationTypeDto
+ * Gets or Sets MaritalTypeDto
  */
-public enum EvaluationTypeDto {
+public enum MaritalTypeDto {
   
-  BBDSS("BBDSS"),
+  MARRIED("MARRIED"),
   
-  PHQ9("PHQ9"),
+  SINGLE("SINGLE"),
   
-  GLOBAL("GLOBAL"),
+  SEPARATED("SEPARATED"),
   
-  MENTAL_STATUS("MENTAL_STATUS"),
+  DIVORCED("DIVORCED"),
   
-  PSRS("PSRS"),
-  
-  SUBSTANCE_ABUSE("SUBSTANCE_ABUSE"),
-  
-  VITAL_SIGNS("VITAL_SIGNS"),
-  
-  PSYCHIATRIC("PSYCHIATRIC");
+  WIDOWED("WIDOWED");
 
   private String value;
 
-  EvaluationTypeDto(String value) {
+  MaritalTypeDto(String value) {
     this.value = value;
   }
 
@@ -39,8 +33,8 @@ public enum EvaluationTypeDto {
   }
 
   @JsonCreator
-  public static EvaluationTypeDto fromValue(String text) {
-    for (EvaluationTypeDto b : EvaluationTypeDto.values()) {
+  public static MaritalTypeDto fromValue(String text) {
+    for (MaritalTypeDto b : MaritalTypeDto.values()) {
       if (String.valueOf(b.value).equals(text)) {
         return b;
       }

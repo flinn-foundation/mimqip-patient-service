@@ -65,6 +65,31 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+    patch:
+      summary: Update patient with the diagnosis
+      description: Update patient with the diagnosis
+      operationId: updatePatientById
+      tags:
+        - patient
+      parameters:
+        - name: patientId
+          in: path
+          description: ID of patient to fetch
+          required: true
+          type: integer
+          format: int64
+        - name: diagnosis
+          in: query
+          description: diagnosis
+          required: true
+          type: string
+      responses:
+        204:
+          description: Patient updated successfully
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
   /medications:
     get:
       summary: Get all medications for patient
@@ -198,59 +223,38 @@ definitions:
         type: string
       sex:
         type: string
-        enum:
-          - MALE
-          - FEMALE
+
       dateOfBirth:
         type: string
         format: 'date'
       valid:
         type: boolean
+      diagnosis:
+        type: string
+        schema:
+          $ref: '#/definitions/DiagnosisTypeDto'
       zipCode:
         type: string
       race:
         type: array
         items:
-          type: string
-          enum:
-            - WHITE
-            - BLACK
-            - INDIAN_AMERICAN
-            - ASIAN
-            - PACIFIC_ISLANDER
-            - NO_RESPONSE
+          $ref: '#/definitions/RaceTypeDto'
       ethnicity:
         type: string
-        enum:
-          - HISPANIC
-          - NON_HISPANIC
-          - NO_RESPONSE
+        schema:
+          $ref: '#/definitions/EthnicityTypeDto'
       marital:
         type: string
-        enum:
-          - MARRIED
-          - SINGLE
-          - SEPARATED
-          - DIVORCED
-          - WIDOWED
+        schema:
+          $ref: '#/definitions/MaritalTypeDto'
       living:
         type: string
-        enum:
-          - ALONE
-          - WITH_ROOMMATES
-          - WITH_SPOUSE
-          - WITH_SPOUSE_AND_CHILDREN
-          - WITH_PARENTS
-          - GROUP_HOME
+        schema:
+          $ref: '#/definitions/LivingTypeDto'
       employment:
         type: string
-        enum:
-          - UNEMPLOYED
-          - FULL TIME_SALARIED
-          - PART_TIME_SALARIED
-          - FULL_TIME_NON_SALARIED
-          - PART_TIME_NON_SALARIED
-          - SELF_EMPLOYED
+        schema:
+          $ref: '#/definitions/EmploymentTypeDto'
       primaryCarePhysicianName:
         type: string
       primaryCarePhysicianEmail:
@@ -301,6 +305,81 @@ definitions:
       - SUBSTANCE_ABUSE
       - VITAL_SIGNS
       - PSYCHIATRIC
+  SexTypeDto:
+    type: string
+    enum:
+      - MALE
+      - FEMALE
+  DiagnosisTypeDto:
+    type: string
+    enum:
+      - SCHIZOPHRENIC_P
+      - SCHIZOPHRENIC_D
+      - SCHIZOPHRENIC_C
+      - SCHIZOPHRENIC_U
+      - SCHIZOPHRENIC_R
+      - BIPOLAR_SM1
+      - BIPOLAR_SM2
+      - BIPOLAR_SM3
+      - BIPOLAR_SM4
+      - BIPOLAR_MRMH
+      - BIPOLAR_MRM1
+      - BIPOLAR_MRM2
+      - BIPOLAR_MRM3
+      - BIPOLAR_MRM4
+      - BIPOLAR_MRD1
+      - BIPOLAR_MRD2
+      - BIPOLAR_MRD3
+      - BIPOLAR_MRD4
+      - MDD_S1
+      - MDD_S2
+      - MDD_S3
+      - MDD_S4
+      - MDD_R1
+      - MDD_R2
+      - MDD_R3
+      - MDD_R4
+  RaceTypeDto:
+    type: string
+    enum:
+      - WHITE
+      - BLACK
+      - INDIAN_AMERICAN
+      - ASIAN
+      - PACIFIC_ISLANDER
+      - NO_RESPONSE
+  EmploymentTypeDto:
+    type: string
+    enum:
+      - UNEMPLOYED
+      - FULL TIME_SALARIED
+      - PART_TIME_SALARIED
+      - FULL_TIME_NON_SALARIED
+      - PART_TIME_NON_SALARIED
+      - SELF_EMPLOYED
+  LivingTypeDto:
+    type: string
+    enum:
+      - ALONE
+      - WITH_ROOMMATES
+      - WITH_SPOUSE
+      - WITH_SPOUSE_AND_CHILDREN
+      - WITH_PARENTS
+      - GROUP_HOME
+  MaritalTypeDto:
+    type: string
+    enum:
+      - MARRIED
+      - SINGLE
+      - SEPARATED
+      - DIVORCED
+      - WIDOWED
+  EthnicityTypeDto:
+      type: string
+      enum:
+        - HISPANIC
+        - NON_HISPANIC
+        - NO_RESPONSE
   Error:
     type: object
     properties:

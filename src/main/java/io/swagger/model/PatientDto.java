@@ -1,8 +1,6 @@
 package io.swagger.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -17,7 +15,7 @@ import java.util.Objects;
 /**
  * PatientDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-10T12:47:45.331-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-10T23:13:15.691-04:00")
 
 public class PatientDto   {
   @JsonProperty("id")
@@ -29,39 +27,8 @@ public class PatientDto   {
   @JsonProperty("lastName")
   private String lastName = null;
 
-  /**
-   * Gets or Sets sex
-   */
-  public enum SexEnum {
-    MALE("MALE"),
-
-    FEMALE("FEMALE");
-
-    private String value;
-
-    SexEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static SexEnum fromValue(String text) {
-      for (SexEnum b : SexEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
-
   @JsonProperty("sex")
-  private SexEnum sex = null;
+  private String sex = null;
 
   @JsonProperty("dateOfBirth")
   @JsonSerialize(using = LocalDateSerializer.class)
@@ -71,210 +38,26 @@ public class PatientDto   {
   @JsonProperty("valid")
   private Boolean valid = null;
 
+  @JsonProperty("diagnosis")
+  private String diagnosis = null;
+
   @JsonProperty("zipCode")
   private String zipCode = null;
 
-  /**
-   * Gets or Sets race
-   */
-  public enum RaceEnum {
-    WHITE("WHITE"),
-
-    BLACK("BLACK"),
-
-    INDIAN_AMERICAN("INDIAN_AMERICAN"),
-
-    ASIAN("ASIAN"),
-
-    PACIFIC_ISLANDER("PACIFIC_ISLANDER"),
-
-    NO_RESPONSE("NO_RESPONSE");
-
-    private String value;
-
-    RaceEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static RaceEnum fromValue(String text) {
-      for (RaceEnum b : RaceEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
-
   @JsonProperty("race")
-  private List<RaceEnum> race = new ArrayList<RaceEnum>();
-
-  /**
-   * Gets or Sets ethnicity
-   */
-  public enum EthnicityEnum {
-    HISPANIC("HISPANIC"),
-
-    NON_HISPANIC("NON_HISPANIC"),
-
-    NO_RESPONSE("NO_RESPONSE");
-
-    private String value;
-
-    EthnicityEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static EthnicityEnum fromValue(String text) {
-      for (EthnicityEnum b : EthnicityEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
+  private List<RaceTypeDto> race = new ArrayList<RaceTypeDto>();
 
   @JsonProperty("ethnicity")
-  private EthnicityEnum ethnicity = null;
-
-  /**
-   * Gets or Sets marital
-   */
-  public enum MaritalEnum {
-    MARRIED("MARRIED"),
-
-    SINGLE("SINGLE"),
-
-    SEPARATED("SEPARATED"),
-
-    DIVORCED("DIVORCED"),
-
-    WIDOWED("WIDOWED");
-
-    private String value;
-
-    MaritalEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static MaritalEnum fromValue(String text) {
-      for (MaritalEnum b : MaritalEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
+  private String ethnicity = null;
 
   @JsonProperty("marital")
-  private MaritalEnum marital = null;
-
-  /**
-   * Gets or Sets living
-   */
-  public enum LivingEnum {
-    ALONE("ALONE"),
-
-    WITH_ROOMMATES("WITH_ROOMMATES"),
-
-    WITH_SPOUSE("WITH_SPOUSE"),
-
-    WITH_SPOUSE_AND_CHILDREN("WITH_SPOUSE_AND_CHILDREN"),
-
-    WITH_PARENTS("WITH_PARENTS"),
-
-    GROUP_HOME("GROUP_HOME");
-
-    private String value;
-
-    LivingEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static LivingEnum fromValue(String text) {
-      for (LivingEnum b : LivingEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
+  private String marital = null;
 
   @JsonProperty("living")
-  private LivingEnum living = null;
-
-  /**
-   * Gets or Sets employment
-   */
-  public enum EmploymentEnum {
-    UNEMPLOYED("UNEMPLOYED"),
-
-    FULL_TIME_SALARIED("FULL TIME_SALARIED"),
-
-    PART_TIME_SALARIED("PART_TIME_SALARIED"),
-
-    FULL_TIME_NON_SALARIED("FULL_TIME_NON_SALARIED"),
-
-    PART_TIME_NON_SALARIED("PART_TIME_NON_SALARIED"),
-
-    SELF_EMPLOYED("SELF_EMPLOYED");
-
-    private String value;
-
-    EmploymentEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static EmploymentEnum fromValue(String text) {
-      for (EmploymentEnum b : EmploymentEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
+  private String living = null;
 
   @JsonProperty("employment")
-  private EmploymentEnum employment = null;
+  private String employment = null;
 
   @JsonProperty("primaryCarePhysicianName")
   private String primaryCarePhysicianName = null;
@@ -339,7 +122,7 @@ public class PatientDto   {
     this.lastName = lastName;
   }
 
-  public PatientDto sex(SexEnum sex) {
+  public PatientDto sex(String sex) {
     this.sex = sex;
     return this;
   }
@@ -349,11 +132,11 @@ public class PatientDto   {
    * @return sex
   **/
   @ApiModelProperty(value = "")
-  public SexEnum getSex() {
+  public String getSex() {
     return sex;
   }
 
-  public void setSex(SexEnum sex) {
+  public void setSex(String sex) {
     this.sex = sex;
   }
 
@@ -393,6 +176,24 @@ public class PatientDto   {
     this.valid = valid;
   }
 
+  public PatientDto diagnosis(String diagnosis) {
+    this.diagnosis = diagnosis;
+    return this;
+  }
+
+   /**
+   * Get diagnosis
+   * @return diagnosis
+  **/
+  @ApiModelProperty(value = "")
+  public String getDiagnosis() {
+    return diagnosis;
+  }
+
+  public void setDiagnosis(String diagnosis) {
+    this.diagnosis = diagnosis;
+  }
+
   public PatientDto zipCode(String zipCode) {
     this.zipCode = zipCode;
     return this;
@@ -411,12 +212,12 @@ public class PatientDto   {
     this.zipCode = zipCode;
   }
 
-  public PatientDto race(List<RaceEnum> race) {
+  public PatientDto race(List<RaceTypeDto> race) {
     this.race = race;
     return this;
   }
 
-  public PatientDto addRaceItem(RaceEnum raceItem) {
+  public PatientDto addRaceItem(RaceTypeDto raceItem) {
     this.race.add(raceItem);
     return this;
   }
@@ -426,15 +227,15 @@ public class PatientDto   {
    * @return race
   **/
   @ApiModelProperty(value = "")
-  public List<RaceEnum> getRace() {
+  public List<RaceTypeDto> getRace() {
     return race;
   }
 
-  public void setRace(List<RaceEnum> race) {
+  public void setRace(List<RaceTypeDto> race) {
     this.race = race;
   }
 
-  public PatientDto ethnicity(EthnicityEnum ethnicity) {
+  public PatientDto ethnicity(String ethnicity) {
     this.ethnicity = ethnicity;
     return this;
   }
@@ -444,15 +245,15 @@ public class PatientDto   {
    * @return ethnicity
   **/
   @ApiModelProperty(value = "")
-  public EthnicityEnum getEthnicity() {
+  public String getEthnicity() {
     return ethnicity;
   }
 
-  public void setEthnicity(EthnicityEnum ethnicity) {
+  public void setEthnicity(String ethnicity) {
     this.ethnicity = ethnicity;
   }
 
-  public PatientDto marital(MaritalEnum marital) {
+  public PatientDto marital(String marital) {
     this.marital = marital;
     return this;
   }
@@ -462,15 +263,15 @@ public class PatientDto   {
    * @return marital
   **/
   @ApiModelProperty(value = "")
-  public MaritalEnum getMarital() {
+  public String getMarital() {
     return marital;
   }
 
-  public void setMarital(MaritalEnum marital) {
+  public void setMarital(String marital) {
     this.marital = marital;
   }
 
-  public PatientDto living(LivingEnum living) {
+  public PatientDto living(String living) {
     this.living = living;
     return this;
   }
@@ -480,15 +281,15 @@ public class PatientDto   {
    * @return living
   **/
   @ApiModelProperty(value = "")
-  public LivingEnum getLiving() {
+  public String getLiving() {
     return living;
   }
 
-  public void setLiving(LivingEnum living) {
+  public void setLiving(String living) {
     this.living = living;
   }
 
-  public PatientDto employment(EmploymentEnum employment) {
+  public PatientDto employment(String employment) {
     this.employment = employment;
     return this;
   }
@@ -498,11 +299,11 @@ public class PatientDto   {
    * @return employment
   **/
   @ApiModelProperty(value = "")
-  public EmploymentEnum getEmployment() {
+  public String getEmployment() {
     return employment;
   }
 
-  public void setEmployment(EmploymentEnum employment) {
+  public void setEmployment(String employment) {
     this.employment = employment;
   }
 
@@ -562,7 +363,7 @@ public class PatientDto   {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -576,6 +377,7 @@ public class PatientDto   {
         Objects.equals(this.sex, patientDto.sex) &&
         Objects.equals(this.dateOfBirth, patientDto.dateOfBirth) &&
         Objects.equals(this.valid, patientDto.valid) &&
+        Objects.equals(this.diagnosis, patientDto.diagnosis) &&
         Objects.equals(this.zipCode, patientDto.zipCode) &&
         Objects.equals(this.race, patientDto.race) &&
         Objects.equals(this.ethnicity, patientDto.ethnicity) &&
@@ -589,7 +391,7 @@ public class PatientDto   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, sex, dateOfBirth, valid, zipCode, race, ethnicity, marital, living, employment, primaryCarePhysicianName, primaryCarePhysicianEmail, startDate);
+    return Objects.hash(id, firstName, lastName, sex, dateOfBirth, valid, diagnosis, zipCode, race, ethnicity, marital, living, employment, primaryCarePhysicianName, primaryCarePhysicianEmail, startDate);
   }
 
   @Override
@@ -603,6 +405,7 @@ public class PatientDto   {
     sb.append("    sex: ").append(toIndentedString(sex)).append("\n");
     sb.append("    dateOfBirth: ").append(toIndentedString(dateOfBirth)).append("\n");
     sb.append("    valid: ").append(toIndentedString(valid)).append("\n");
+    sb.append("    diagnosis: ").append(toIndentedString(diagnosis)).append("\n");
     sb.append("    zipCode: ").append(toIndentedString(zipCode)).append("\n");
     sb.append("    race: ").append(toIndentedString(race)).append("\n");
     sb.append("    ethnicity: ").append(toIndentedString(ethnicity)).append("\n");
@@ -620,7 +423,7 @@ public class PatientDto   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }

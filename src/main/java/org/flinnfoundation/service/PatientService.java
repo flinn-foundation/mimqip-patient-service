@@ -2,6 +2,7 @@ package org.flinnfoundation.service;
 
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
+import org.flinnfoundation.model.DiagnosisType;
 import org.flinnfoundation.model.Patient;
 import org.flinnfoundation.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,12 @@ public class PatientService {
 
     public void createPatient(Patient patient) {
 
+        patientRepository.save(patient);
+    }
+
+    public void updatePatientWithDiagnosis(Long patientId, DiagnosisType diagnosisType) {
+        Patient patient = getPatient(patientId);
+        patient.setDiagnosisType(diagnosisType);
         patientRepository.save(patient);
     }
 

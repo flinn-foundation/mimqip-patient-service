@@ -24,6 +24,7 @@
             <column name="DATE_OF_BIRTH" type="DATE">
                 <constraints nullable="false"/>
             </column>
+            <column name="DIAGNOSIS_TYPE" type="VARCHAR(255)"/>
             <column name="ZIP_CODE" type="VARCHAR(6)">
                 <constraints nullable="false"/>
             </column>

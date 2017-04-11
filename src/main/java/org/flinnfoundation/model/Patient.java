@@ -33,6 +33,9 @@ public class Patient {
 
     private LocalDateTime rcopiaLastUpdatedDate;
 
+    @Enumerated(EnumType.STRING)
+    private DiagnosisType diagnosisType;
+
     @Embedded
     private PatientDetails patientDetails;
 
