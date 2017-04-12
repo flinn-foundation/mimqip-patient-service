@@ -17,11 +17,11 @@ public class Evaluation {
     private long id;
 
     @ManyToOne
-    @JoinTable(name = "PATIENT_EVALUATION")
+    @JoinTable(name = "PATIENT_EVALUATIONS")
     private Patient patient;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Question> questions;
+    private List<EvaluationResponse> evaluationResponses;
 
     @Enumerated(EnumType.STRING)
     private EvaluationType evaluationType;

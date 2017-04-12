@@ -1,6 +1,6 @@
 package org.flinnfoundation.controller;
 
-import io.swagger.api.EvaluationsApi;
+import io.swagger.api.EvaluationApi;
 import io.swagger.model.EvaluationDto;
 import lombok.extern.slf4j.Slf4j;
 import org.flinnfoundation.mapper.EvaluationMapper;
@@ -18,7 +18,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-public class EvaluationController implements EvaluationsApi {
+public class EvaluationController implements EvaluationApi {
 
     private EvaluationService evaluationService;
     private EvaluationMapper evaluationMapper;
@@ -38,18 +38,20 @@ public class EvaluationController implements EvaluationsApi {
     }
 
     @Override
-    public ResponseEntity<EvaluationDto> getBlankEvaluation(@PathVariable String evaluationType) {
-        return ResponseEntity.ok(evaluationMapper.convertModelToApiDto(evaluationService.getBlankEvaluation(EvaluationType.valueOf(evaluationType))));
-    }
-
-    @Override
-    public ResponseEntity<EvaluationDto> getEvaluationById(@RequestParam Long evaluationId) {
+    public ResponseEntity<EvaluationDto> getEvaluationById(@PathVariable Long evaluationId) {
         return ResponseEntity.ok(evaluationMapper.convertModelToApiDto(evaluationService.getEvaluation(evaluationId)));
     }
 
     @Override
-    public ResponseEntity<List<EvaluationDto>> getEvaluationsByPatientId(@RequestParam  Long patientId, @RequestParam String evaluationType) {
-        List<Evaluation> evaluations = evaluationService.getEvaluationsByPatientIdAndEvaluationType(patientId, EvaluationType.valueOf(evaluationType));
+    public ResponseEntity<List<EvaluationDto>> getEvaluationsByPatientId(@PathVariable Long patientId, @RequestParam(required = false) String evaluationType) {
+        List<Evaluation> evaluations;
+        if (evaluationType == null) {
+            evaluations = evaluationService.getEvaluationsByPatientId(patientId);
+        } else {
+            EvaluationType evaluation = EvaluationType.valueOf(evaluationType);
+            evaluations = evaluationService.getEvaluationsByPatientIdAndEvaluationType(patientId, evaluation);
+        }
+
         return ResponseEntity.ok(evaluationMapper.convertModelToApiDto(evaluations));
     }
 

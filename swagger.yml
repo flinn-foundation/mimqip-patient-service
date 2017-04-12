@@ -114,7 +114,7 @@ definitions:
         format: 'date'
       valid:
         type: boolean
-      diagnosis:
+      diagnosisType:
         type: string
         enum: *diagnosis-enum
       zipCode:
@@ -148,12 +148,12 @@ definitions:
     properties:
       genericName:
         type: string
-  QuestionDto:
+  EvaluationResponseDto:
     type: object
     properties:
       prompt:
         type: string
-      response:
+      answer:
         type: string
   EvaluationDto:
     type: object
@@ -164,10 +164,10 @@ definitions:
       patientId:
         type: integer
         format: int64
-      questions:
+      evaluationResponses:
         type: array
         items:
-          $ref: '#/definitions/QuestionDto'
+          $ref: '#/definitions/EvaluationResponseDto'
       created:
         type: string
         format: 'date-time'
@@ -204,7 +204,7 @@ paths:
       description: Post new patient
       operationId: createPatient
       tags:
-         - evaluation
+         - patient
       parameters:
         - name: patient
           in: body
@@ -214,7 +214,7 @@ paths:
             $ref: '#/definitions/PatientDto'
       responses:
         201:
-          description: Evaluation
+          description: Patient
           schema:
             $ref: '#/definitions/EvaluationDto'
   /patients/{patientId}:
@@ -289,7 +289,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /evaluations:
+  /patients/{patientId}/evaluations:
     get:
       summary: Get all evaluations for patient
       description: Get all evaluations for patient
@@ -298,7 +298,7 @@ paths:
         - evaluation
       parameters:
         - name: patientId
-          in: query
+          in: path
           description: Id of patient evaluations to fetch
           required: true
           type: integer
@@ -338,7 +338,7 @@ paths:
           description: Evaluation
           schema:
             $ref: '#/definitions/EvaluationDto'
-  /evaluations/{evaluationId}:
+  /patients/{patientId}/evaluations/{evaluationId}:
     get:
       summary: Get evaluation by id
       description: Get evaluation by id
@@ -352,29 +352,6 @@ paths:
           required: true
           type: integer
           format: int64
-      responses:
-        200:
-          description: Evaluation
-          schema:
-            $ref: '#/definitions/EvaluationDto'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /evaluations/blank:
-    get:
-      summary: Get blank evaluation
-      description: Get blank evaluation
-      operationId: getBlankEvaluation
-      tags:
-         - evaluation
-      parameters:
-        - name: evaluationType
-          in: query
-          description: type of evaluation
-          required: true
-          type: string
-          enum: *evaluation-enum
       responses:
         200:
           description: Evaluation

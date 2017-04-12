@@ -9,11 +9,10 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 /**
  * EvaluationDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-11T00:38:15.354-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-11T22:52:19.405-04:00")
 
 public class EvaluationDto   {
   @JsonProperty("id")
@@ -22,8 +21,8 @@ public class EvaluationDto   {
   @JsonProperty("patientId")
   private Long patientId = null;
 
-  @JsonProperty("questions")
-  private List<QuestionDto> questions = new ArrayList<QuestionDto>();
+  @JsonProperty("evaluationResponses")
+  private List<EvaluationResponseDto> evaluationResponses = new ArrayList<EvaluationResponseDto>();
 
   @JsonProperty("created")
   private OffsetDateTime created = null;
@@ -110,27 +109,27 @@ public class EvaluationDto   {
     this.patientId = patientId;
   }
 
-  public EvaluationDto questions(List<QuestionDto> questions) {
-    this.questions = questions;
+  public EvaluationDto evaluationResponses(List<EvaluationResponseDto> evaluationResponses) {
+    this.evaluationResponses = evaluationResponses;
     return this;
   }
 
-  public EvaluationDto addQuestionsItem(QuestionDto questionsItem) {
-    this.questions.add(questionsItem);
+  public EvaluationDto addEvaluationResponsesItem(EvaluationResponseDto evaluationResponsesItem) {
+    this.evaluationResponses.add(evaluationResponsesItem);
     return this;
   }
 
    /**
-   * Get questions
-   * @return questions
+   * Get evaluationResponses
+   * @return evaluationResponses
   **/
   @ApiModelProperty(value = "")
-  public List<QuestionDto> getQuestions() {
-    return questions;
+  public List<EvaluationResponseDto> getEvaluationResponses() {
+    return evaluationResponses;
   }
 
-  public void setQuestions(List<QuestionDto> questions) {
-    this.questions = questions;
+  public void setEvaluationResponses(List<EvaluationResponseDto> evaluationResponses) {
+    this.evaluationResponses = evaluationResponses;
   }
 
   public EvaluationDto created(OffsetDateTime created) {
@@ -181,14 +180,14 @@ public class EvaluationDto   {
     EvaluationDto evaluationDto = (EvaluationDto) o;
     return Objects.equals(this.id, evaluationDto.id) &&
         Objects.equals(this.patientId, evaluationDto.patientId) &&
-        Objects.equals(this.questions, evaluationDto.questions) &&
+        Objects.equals(this.evaluationResponses, evaluationDto.evaluationResponses) &&
         Objects.equals(this.created, evaluationDto.created) &&
         Objects.equals(this.evaluationType, evaluationDto.evaluationType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, patientId, questions, created, evaluationType);
+    return Objects.hash(id, patientId, evaluationResponses, created, evaluationType);
   }
 
   @Override
@@ -198,7 +197,7 @@ public class EvaluationDto   {
 
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
-    sb.append("    questions: ").append(toIndentedString(questions)).append("\n");
+    sb.append("    evaluationResponses: ").append(toIndentedString(evaluationResponses)).append("\n");
     sb.append("    created: ").append(toIndentedString(created)).append("\n");
     sb.append("    evaluationType: ").append(toIndentedString(evaluationType)).append("\n");
     sb.append("}");

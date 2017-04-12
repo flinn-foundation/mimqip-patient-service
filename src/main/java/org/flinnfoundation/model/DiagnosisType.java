@@ -1,10 +1,11 @@
 package org.flinnfoundation.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.flinnfoundation.model.evaluation.EvaluationType;
 
 
-
+@Getter
 @AllArgsConstructor
 public enum DiagnosisType {
     SCHIZOPHRENIC_P(MajorDiagnosis.SCHIZOPHRENIC, SchizophreniaMinorDiagnosis.PARANOID, Stage.UNSPECIFIED,  "295.30", "F20.0", "Paranoid schizophrenia", EvaluationType.PSRS),

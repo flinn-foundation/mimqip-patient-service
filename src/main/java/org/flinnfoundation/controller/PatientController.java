@@ -1,11 +1,10 @@
 package org.flinnfoundation.controller;
 
-import io.swagger.api.PatientsApi;
+import io.swagger.api.PatientApi;
 import io.swagger.model.EvaluationDto;
 import io.swagger.model.PatientDto;
 import lombok.extern.slf4j.Slf4j;
 import org.flinnfoundation.mapper.PatientMapper;
-import org.flinnfoundation.model.DiagnosisType;
 import org.flinnfoundation.model.DiagnosisType;
 import org.flinnfoundation.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-public class PatientController implements PatientsApi {
+public class PatientController implements PatientApi {
 
     private PatientService patientService;
     private PatientMapper patientMapper;

@@ -193,7 +193,7 @@
         </createTable>
     </changeSet>
     <changeSet author="Michael Iden" id="patient-evaluations-create-table">
-        <createTable tableName="PATIENT_EVALUATION">
+        <createTable tableName="PATIENT_EVALUATIONS">
             <column name="PATIENT_ID" type="BIGINT"/>
             <column name="ID" type="BIGINT"/>
         </createTable>
@@ -205,17 +205,17 @@
             <column name="CREATED" type="DATETIME"/>
         </createTable>
     </changeSet>
-    <changeSet author="Michael Iden" id="psychiatric-evaluation-questions-create-table">
-        <createTable tableName="EVALUATION_QUESTIONS">
+    <changeSet author="Michael Iden" id="evaluation-evaluation-responses-create-table">
+        <createTable tableName="EVALUATION_EVALUATION_RESPONSES">
             <column name="EVALUATION_ID" type="BIGINT"/>
-            <column name="QUESTIONS_ID" type="BIGINT"/>
+            <column name="EVALUATION_RESPONSES_ID" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Michael Iden" id="questions-create-table">
-        <createTable tableName="QUESTION">
+    <changeSet author="Michael Iden" id="evaluation-responses-create-table">
+        <createTable tableName="EVALUATION_RESPONSE">
             <column name="ID" type="BIGINT" autoIncrement="true"/>
-            <column name="PROMPT" type="VARCHAR(255)"/>
-            <column name="RESPONSE" type="TEXT"/>
+            <column name="PROMPT" type="TEXT"/>
+            <column name="ANSWER" type="TEXT"/>
         </createTable>
     </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-42">
