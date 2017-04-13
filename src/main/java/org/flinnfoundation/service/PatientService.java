@@ -2,6 +2,7 @@ package org.flinnfoundation.service;
 
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
+import org.flinnfoundation.exception.PatientNotFoundException;
 import org.flinnfoundation.model.DiagnosisType;
 import org.flinnfoundation.model.Patient;
 import org.flinnfoundation.repository.PatientRepository;
@@ -27,12 +28,17 @@ public class PatientService {
     }
 
     public Patient getPatient(Long patientId) {
-        return patientRepository.findOne(patientId);
+        Patient patient = patientRepository.findOne(patientId);
+        if(patient == null) {
+            throw new PatientNotFoundException("Unable to locate patient with ID: " + patientId);
+        }
+
+        return patient;
     }
 
-    public void createPatient(Patient patient) {
+    public Patient createPatient(Patient patient) {
 
-        patientRepository.save(patient);
+        return patientRepository.save(patient);
     }
 
     public void updatePatientWithDiagnosis(Long patientId, DiagnosisType diagnosisType) {

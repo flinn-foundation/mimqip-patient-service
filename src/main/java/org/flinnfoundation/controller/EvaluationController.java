@@ -30,7 +30,8 @@ public class EvaluationController implements EvaluationApi {
     }
 
     @Override
-    public ResponseEntity<EvaluationDto> createPatientEvaluation(@RequestBody EvaluationDto evaluationDto) {
+    public ResponseEntity<EvaluationDto> createPatientEvaluation(@PathVariable Long patientId, @RequestBody EvaluationDto evaluationDto) {
+        evaluationDto.setPatientId(patientId);
         Evaluation evaluation = evaluationMapper.convertApiDtoToModel(evaluationDto);
         evaluationService.saveEvaluation(evaluation);
 
@@ -38,8 +39,8 @@ public class EvaluationController implements EvaluationApi {
     }
 
     @Override
-    public ResponseEntity<EvaluationDto> getEvaluationById(@PathVariable Long evaluationId) {
-        return ResponseEntity.ok(evaluationMapper.convertModelToApiDto(evaluationService.getEvaluation(evaluationId)));
+    public ResponseEntity<EvaluationDto> getEvaluationById(@PathVariable Long patientId, @PathVariable Long evaluationId) {
+        return ResponseEntity.ok(evaluationMapper.convertModelToApiDto(evaluationService.getEvaluation(patientId, evaluationId)));
     }
 
     @Override

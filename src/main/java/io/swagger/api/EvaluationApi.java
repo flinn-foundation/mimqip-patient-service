@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-11T22:52:19.405-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-12T10:55:56.619-04:00")
 
 @Api(value = "Evaluation", description = "the Evaluation API")
 public interface EvaluationApi {
@@ -18,7 +18,8 @@ public interface EvaluationApi {
     @RequestMapping(value = "/patients/{patientId}/evaluations",
         produces = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<EvaluationDto> createPatientEvaluation(@ApiParam(value = "Evaluation to submit", required = true) @RequestBody EvaluationDto evaluation) {
+    default ResponseEntity<EvaluationDto> createPatientEvaluation(@ApiParam(value = "Id of patient evaluations to fetch", required = true) @PathVariable("patientId") Long patientId,
+                                                                  @ApiParam(value = "Evaluation to submit", required = true) @RequestBody EvaluationDto evaluation) {
         // do some magic!
         return new ResponseEntity<EvaluationDto>(HttpStatus.OK);
     }
@@ -31,7 +32,8 @@ public interface EvaluationApi {
     @RequestMapping(value = "/patients/{patientId}/evaluations/{evaluationId}",
         produces = { "application/json" },
         method = RequestMethod.GET)
-    default ResponseEntity<EvaluationDto> getEvaluationById(@ApiParam(value = "Id of evaluation to fetch", required = true) @PathVariable("evaluationId") Long evaluationId) {
+    default ResponseEntity<EvaluationDto> getEvaluationById(@ApiParam(value = "Id of patient evaluations to fetch", required = true) @PathVariable("patientId") Long patientId,
+                                                            @ApiParam(value = "Id of evaluation to fetch", required = true) @PathVariable("evaluationId") Long evaluationId) {
         // do some magic!
         return new ResponseEntity<EvaluationDto>(HttpStatus.OK);
     }

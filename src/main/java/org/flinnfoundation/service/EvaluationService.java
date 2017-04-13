@@ -23,7 +23,9 @@ public class EvaluationService {
         this.evaluationRepository = evaluationRepository;
     }
 
-    public Evaluation getEvaluation(long evaluationId) {
+    public Evaluation getEvaluation(long patientId, long evaluationId) {
+        patientService.getPatient(patientId);
+
         return evaluationRepository.findOne(evaluationId);
     }
 

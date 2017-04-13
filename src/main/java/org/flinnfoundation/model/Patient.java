@@ -3,10 +3,12 @@ package org.flinnfoundation.model;
 import lombok.Data;
 import lombok.ToString;
 import org.flinnfoundation.model.evaluation.Evaluation;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -29,7 +31,10 @@ public class Patient {
 
     private boolean valid;
 
-    private LocalDateTime startDate = LocalDateTime.now();
+    //TODO: Change this to a Java8 Time (LocalDateTime, Offset, whatever) once SpringBoot 1.5.3 supports Hibernate 5.2.x
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startDate;
 
     private LocalDateTime rcopiaLastUpdatedDate;
 
@@ -39,14 +44,14 @@ public class Patient {
     @Embedded
     private PatientDetails patientDetails;
 
-    public enum PatientSex {
-        MALE, FEMALE
-    }
-
     @OneToMany(mappedBy = "patient")
     private List<Evaluation> evaluations;
 
     @OneToMany(mappedBy = "patient")
     private List<PatientMedication> patientMedications;
+
+    public enum PatientSex {
+        MALE, FEMALE
+    }
 
 }

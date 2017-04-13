@@ -26,7 +26,7 @@ definitions:
     enum: &race-enum
       - WHITE
       - BLACK
-      - INDIAN_AMERICAN
+      - AMERICAN_INDIAN
       - ASIAN
       - PACIFIC_ISLANDER
       - NO_RESPONSE
@@ -96,6 +96,24 @@ definitions:
       - MDD_R2
       - MDD_R3
       - MDD_R4
+  PatientSimpleDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      firstName:
+        type: string
+      lastName:
+        type: string
+      sex:
+        type: string
+        enum: *sex-enum
+      dateOfBirth:
+        type: string
+        format: 'date'
+      valid:
+        type: boolean
   PatientDto:
     type: object
     properties:
@@ -185,6 +203,39 @@ definitions:
       fields:
         type: string
 paths:
+  /patients/simple:
+    get:
+      summary: Patients Simple
+      description: Patients Simple
+      operationId: getPatientsSimple
+      tags:
+        - patient
+      responses:
+         200:
+          description: Array of simple patients
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PatientSimpleDto'
+  /patients/{patientId}/simple:
+      get:
+        summary: Patient Simple
+        description: Patient Simple
+        operationId: getPatientSimpleById
+        tags:
+          - patient
+        parameters:
+          - name: patientId
+            in: path
+            description: ID of patient to fetch
+            required: true
+            type: integer
+            format: int64
+        responses:
+           200:
+             description: PatientSimple
+             schema:
+               $ref: '#/definitions/PatientSimpleDto'
   /patients:
     get:
       summary: Patients
@@ -216,7 +267,7 @@ paths:
         201:
           description: Patient
           schema:
-            $ref: '#/definitions/EvaluationDto'
+            type: string
   /patients/{patientId}:
     get:
       summary: Patient by ID
@@ -327,6 +378,12 @@ paths:
       tags:
          - evaluation
       parameters:
+        - name: patientId
+          in: path
+          description: Id of patient evaluations to fetch
+          required: true
+          type: integer
+          format: int64
         - name: evaluation
           in: body
           description: Evaluation to submit
@@ -346,6 +403,12 @@ paths:
       tags:
          - evaluation
       parameters:
+        - name: patientId
+          in: path
+          description: Id of patient evaluations to fetch
+          required: true
+          type: integer
+          format: int64
         - name: evaluationId
           in: path
           description: Id of evaluation to fetch

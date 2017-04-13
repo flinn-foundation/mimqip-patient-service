@@ -165,7 +165,7 @@ public class PatientDto {
 
         BLACK("BLACK"),
 
-        INDIAN_AMERICAN("INDIAN_AMERICAN"),
+        AMERICAN_INDIAN("AMERICAN_INDIAN"),
 
         ASIAN("ASIAN"),
 

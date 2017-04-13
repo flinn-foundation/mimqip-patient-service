@@ -1,28 +1,28 @@
 package io.swagger.api;
 
 import io.swagger.annotations.*;
-import io.swagger.model.EvaluationDto;
 import io.swagger.model.PatientDto;
+import io.swagger.model.PatientSimpleDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-11T15:29:29.097-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-13T16:09:34.281-04:00")
 
 @Api(value = "Patient", description = "the Patient API")
 public interface PatientApi {
 
-    @ApiOperation(value = "Post new patient", notes = "Post new patient", response = EvaluationDto.class, tags={ "patient", })
+    @ApiOperation(value = "Post new patient", notes = "Post new patient", response = String.class, tags={ "patient", })
     @ApiResponses(value = {
-        @ApiResponse(code = 201, message = "Patient", response = EvaluationDto.class) })
+        @ApiResponse(code = 201, message = "Patient", response = String.class) })
     @RequestMapping(value = "/patients",
         produces = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<EvaluationDto> createPatient(@ApiParam(value = "Patient to add", required = true) @RequestBody PatientDto patient) {
+    default ResponseEntity<String> createPatient(@ApiParam(value = "Patient to add", required = true) @RequestBody PatientDto patient) {
         // do some magic!
-        return new ResponseEntity<EvaluationDto>(HttpStatus.OK);
+        return new ResponseEntity<String>(HttpStatus.OK);
     }
 
 
@@ -39,6 +39,18 @@ public interface PatientApi {
     }
 
 
+    @ApiOperation(value = "Patient Simple", notes = "Patient Simple", response = PatientSimpleDto.class, tags={ "patient", })
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "PatientSimple", response = PatientSimpleDto.class) })
+    @RequestMapping(value = "/patients/{patientId}/simple",
+        produces = { "application/json" },
+        method = RequestMethod.GET)
+    default ResponseEntity<PatientSimpleDto> getPatientSimpleById(@ApiParam(value = "ID of patient to fetch", required = true) @PathVariable("patientId") Long patientId) {
+        // do some magic!
+        return new ResponseEntity<PatientSimpleDto>(HttpStatus.OK);
+    }
+
+
     @ApiOperation(value = "Patients", notes = "Endpoint returns a list of patients", response = PatientDto.class, responseContainer = "List", tags={ "patient", })
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Array of patients", response = PatientDto.class) })
@@ -48,6 +60,18 @@ public interface PatientApi {
     default ResponseEntity<List<PatientDto>> getPatients() {
         // do some magic!
         return new ResponseEntity<List<PatientDto>>(HttpStatus.OK);
+    }
+
+
+    @ApiOperation(value = "Patients Simple", notes = "Patients Simple", response = PatientSimpleDto.class, responseContainer = "List", tags={ "patient", })
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Array of simple patients", response = PatientSimpleDto.class) })
+    @RequestMapping(value = "/patients/simple",
+        produces = { "application/json" },
+        method = RequestMethod.GET)
+    default ResponseEntity<List<PatientSimpleDto>> getPatientsSimple() {
+        // do some magic!
+        return new ResponseEntity<List<PatientSimpleDto>>(HttpStatus.OK);
     }
 
 
