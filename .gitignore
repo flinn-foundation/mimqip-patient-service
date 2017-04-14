@@ -1,3 +1,14 @@
 .gradle
-.idea
 /build/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+*.DS_Store
+
+/tmp/
+/tmp-angular2/
+/tmp-java-client/

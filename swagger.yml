@@ -1,0 +1,485 @@
+swagger: '2.0'
+info:
+  title: MiMQIP API
+  description: Endpoints for the MiMQIP API
+  version: "1.0.0"
+host: api.mimqip
+schemes:
+  - https
+basePath: /
+produces:
+  - application/json
+definitions:
+  List:
+    type: string
+    enum: &evaluation-enum
+      - BBDSS
+      - PHQ9
+      - GLOBAL
+      - MENTAL_STATUS
+      - PSRS
+      - SUBSTANCE_ABUSE
+      - VITAL_SIGNS
+      - PSYCHIATRIC
+  List:
+    type: string
+    enum: &race-enum
+      - WHITE
+      - BLACK
+      - AMERICAN_INDIAN
+      - ASIAN
+      - PACIFIC_ISLANDER
+      - NO_RESPONSE
+  List:
+    type: string
+    enum: &employment-enum
+      - UNEMPLOYED
+      - FULL TIME_SALARIED
+      - PART_TIME_SALARIED
+      - FULL_TIME_NON_SALARIED
+      - PART_TIME_NON_SALARIED
+      - SELF_EMPLOYED
+  List:
+    type: string
+    enum: &living-enum
+      - ALONE
+      - WITH_ROOMMATES
+      - WITH_SPOUSE
+      - WITH_SPOUSE_AND_CHILDREN
+      - WITH_PARENTS
+      - GROUP_HOME
+  List:
+    type: string
+    enum: &marital-enum
+      - MARRIED
+      - SINGLE
+      - SEPARATED
+      - DIVORCED
+      - WIDOWED
+  List:
+    type: string
+    enum: &ethnicity-enum
+      - HISPANIC
+      - NON_HISPANIC
+      - NO_RESPONSE
+  List:
+    type: string
+    enum: &sex-enum
+      - MALE
+      - FEMALE
+  List:
+    type: string
+    enum: &diagnosis-enum
+      - SCHIZOPHRENIC_P
+      - SCHIZOPHRENIC_D
+      - SCHIZOPHRENIC_C
+      - SCHIZOPHRENIC_U
+      - SCHIZOPHRENIC_R
+      - BIPOLAR_SM1
+      - BIPOLAR_SM2
+      - BIPOLAR_SM3
+      - BIPOLAR_SM4
+      - BIPOLAR_MRMH
+      - BIPOLAR_MRM1
+      - BIPOLAR_MRM2
+      - BIPOLAR_MRM3
+      - BIPOLAR_MRM4
+      - BIPOLAR_MRD1
+      - BIPOLAR_MRD2
+      - BIPOLAR_MRD3
+      - BIPOLAR_MRD4
+      - MDD_S1
+      - MDD_S2
+      - MDD_S3
+      - MDD_S4
+      - MDD_R1
+      - MDD_R2
+      - MDD_R3
+      - MDD_R4
+  PatientSimpleDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      firstName:
+        type: string
+      lastName:
+        type: string
+      sex:
+        type: string
+        enum: *sex-enum
+      dateOfBirth:
+        type: string
+        format: 'date'
+      valid:
+        type: boolean
+  PatientDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      firstName:
+        type: string
+      lastName:
+        type: string
+      sex:
+        type: string
+        enum: *sex-enum
+      dateOfBirth:
+        type: string
+        format: 'date'
+      valid:
+        type: boolean
+      zipCode:
+        type: string
+      race:
+        type: array
+        items:
+          type: string
+          enum: *race-enum
+      ethnicity:
+        type: string
+        enum: *ethnicity-enum
+      marital:
+        type: string
+        enum: *marital-enum
+      living:
+        type: string
+        enum: *living-enum
+      employment:
+        type: string
+        enum: *employment-enum
+      primaryCarePhysicianName:
+        type: string
+      primaryCarePhysicianEmail:
+        type: string
+      startDate:
+        type: string
+        format: 'date-time'
+  PatientMedicationDto:
+    type: object
+    properties:
+      genericName:
+        type: string
+  EvaluationResponseDto:
+    type: object
+    properties:
+      prompt:
+        type: string
+      answer:
+        type: string
+  EvaluationDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      patientId:
+        type: integer
+        format: int64
+      evaluationResponses:
+        type: array
+        items:
+          $ref: '#/definitions/EvaluationResponseDto'
+      created:
+        type: string
+        format: 'date-time'
+      evaluationType:
+        type: string
+        enum: *evaluation-enum
+  DiagnosisDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      patientId:
+        type: integer
+        format: int64
+      diagnosisType:
+        type: string
+        enum: *diagnosis-enum
+      secondaryDiagnosis:
+        type: string
+      stage:
+        type: integer
+        format: int32
+      createdTimestamp:
+        type: string
+        format: 'date-time'
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
+paths:
+  /patients/simple:
+    get:
+      summary: Patients Simple
+      description: Patients Simple
+      operationId: getPatientsSimple
+      tags:
+        - patient
+      responses:
+         200:
+          description: Array of simple patients
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PatientSimpleDto'
+  /patients/{patientId}/simple:
+      get:
+        summary: Patient Simple
+        description: Patient Simple
+        operationId: getPatientSimpleById
+        tags:
+          - patient
+        parameters:
+          - name: patientId
+            in: path
+            description: ID of patient to fetch
+            required: true
+            type: integer
+            format: int64
+        responses:
+           200:
+             description: PatientSimple
+             schema:
+               $ref: '#/definitions/PatientSimpleDto'
+  /patients:
+    get:
+      summary: Patients
+      description: Endpoint returns a list of patients
+      operationId: getPatients
+      tags:
+        - patient
+      responses:
+        200:
+          description: Array of patients
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PatientDto'
+    post:
+      summary: Post new patient
+      description: Post new patient
+      operationId: createPatient
+      tags:
+         - patient
+      parameters:
+        - name: patient
+          in: body
+          description: Patient to add
+          required: true
+          schema:
+            $ref: '#/definitions/PatientDto'
+      responses:
+        201:
+          description: Patient
+          schema:
+            type: string
+  /patients/{patientId}:
+    get:
+      summary: Patient by ID
+      description: Access a single patient by ID
+      operationId: getPatientById
+      tags:
+        - patient
+      parameters:
+        - name: patientId
+          in: path
+          description: ID of patient to fetch
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Patient
+          schema:
+            $ref: '#/definitions/PatientDto'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /patients/{patientId}/diagnoses:
+    get:
+      summary: Get diagnoses by patient ID
+      description: Get diagnoses by patient ID
+      operationId: getDiagnosesByPatientId
+      tags:
+        - diagnosis
+      parameters:
+        - name: patientId
+          in: path
+          description: ID of patient diagnoses to fetch
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Diagnoses
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DiagnosisDto'
+    post:
+      summary: Submit new diagnosis for patient
+      description: Submit new diagnosis for patient
+      operationId: savePatientDiagnosis
+      tags:
+        - diagnosis
+      parameters:
+        - name: patientId
+          in: path
+          description: ID of patient to fetch
+          required: true
+          type: integer
+          format: int64
+        - name: diagnosis
+          in: body
+          description: Diagnosis to add
+          required: true
+          schema:
+            $ref: '#/definitions/DiagnosisDto'
+      responses:
+        201:
+          description: Patient updated successfully
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /patients/{patientId}/diagnoses/latest:
+    get:
+      summary: Get most recent diagnoses by patient ID
+      description: Get most recent diagnoses by patient ID
+      operationId: getMostRecentDiagnosisByPatientId
+      tags:
+        - diagnosis
+      parameters:
+        - name: patientId
+          in: path
+          description: ID of patient diagnoses to fetch
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Diagnoses
+          schema:
+            $ref: '#/definitions/DiagnosisDto'
+  /medications:
+    get:
+      summary: Get all medications for patient
+      description: Get all medications for patient
+      operationId: getPatientMedicationsByPatientId
+      tags:
+        - medication
+      parameters:
+        - name: patientId
+          in: query
+          description: ID of patient to fetch
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Patient
+          schema:
+            $ref: '#/definitions/PatientMedicationDto'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /patients/{patientId}/evaluations:
+    get:
+      summary: Get all evaluations for patient
+      description: Get all evaluations for patient
+      operationId: getEvaluationsByPatientId
+      tags:
+        - evaluation
+      parameters:
+        - name: patientId
+          in: path
+          description: Id of patient evaluations to fetch
+          required: true
+          type: integer
+          format: int64
+        - name: evaluationType
+          in: query
+          description: type of evaluation to pull
+          required: false
+          type: string
+          enum: *evaluation-enum
+      responses:
+        200:
+          description: Array of evaluations
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EvaluationDto'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Post results of new evaluation
+      description: Post results of new evaluation
+      operationId: createPatientEvaluation
+      tags:
+         - evaluation
+      parameters:
+        - name: patientId
+          in: path
+          description: Id of patient evaluations to fetch
+          required: true
+          type: integer
+          format: int64
+        - name: evaluation
+          in: body
+          description: Evaluation to submit
+          required: true
+          schema:
+            $ref: '#/definitions/EvaluationDto'
+      responses:
+        201:
+          description: Evaluation
+          schema:
+            $ref: '#/definitions/EvaluationDto'
+  /patients/{patientId}/evaluations/{evaluationId}:
+    get:
+      summary: Get evaluation by id
+      description: Get evaluation by id
+      operationId: getEvaluationById
+      tags:
+         - evaluation
+      parameters:
+        - name: patientId
+          in: path
+          description: Id of patient evaluations to fetch
+          required: true
+          type: integer
+          format: int64
+        - name: evaluationId
+          in: path
+          description: Id of evaluation to fetch
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Evaluation
+          schema:
+            $ref: '#/definitions/EvaluationDto'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'

@@ -1,0 +1,309 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Michael Iden" id="20170330-patient">
+        <createTable tableName="PATIENT">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="VALID" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="START_DATE" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="RCOPIA_LAST_UPDATED_DATE" type="DATETIME"/>
+            <column name="FIRST_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PHYSICIAN_NAME" type="VARCHAR(255)"/>
+            <column name="PHYSICIAN_EMAIL" type="VARCHAR(255)"/>
+            <column name="SEX" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATE_OF_BIRTH" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ZIP_CODE" type="VARCHAR(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ETHNICITY" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MARITAL" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMPLOYMENT" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LIVING" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PATIENT_IDENTIFIER" type="VARCHAR(255)"/>
+            <column name="ENTRY_DATE" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="create-patient-race-table">
+        <createTable tableName="PATIENT_RACE">
+            <column name="PATIENT_ID" type="BIGINT"/>
+            <column name="RACE" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="create-patient-diagnosis-table">
+        <createTable tableName="DIAGNOSIS">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DIAGNOSIS_TYPE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SECONDARY_DIAGNOSIS" type="TEXT"/>
+            <column name="STAGE" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_TIMESTAMP" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="create-patient-medications-table">
+        <createTable tableName="PATIENT_MEDICATION">
+            <column name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="RCOPIA_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="1" name="PRIMARY_FLAG" type="BOOLEAN"/>
+            <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
+            <column name="DELETED_FLAG" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROVIDER_ID" type="VARCHAR(20)"/>
+            <column name="PREPARER_ID" type="VARCHAR(20)"/>
+            <column name="BRAND_NAME" type="VARCHAR(100)"/>
+            <column name="GENERIC_NAME" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DRUG_ROUTE" type="VARCHAR(30)"/>
+            <column name="DRUG_FORM" type="VARCHAR(40)"/>
+            <column name="DRUG_STRENGTH" type="VARCHAR(100)"/>
+            <column name="ACTION" type="VARCHAR(30)"/>
+            <column name="DOSE_AMOUNT" type="VARCHAR(30)"/>
+            <column name="DOSE_UNIT" type="VARCHAR(30)"/>
+            <column name="DOSE_ROUTE" type="VARCHAR(30)"/>
+            <column name="DOSE_TIMING" type="VARCHAR(100)"/>
+            <column name="DOSE_OTHER" type="VARCHAR(100)"/>
+            <column name="REFILLS" type="VARCHAR(20)"/>
+            <column name="DURATION" type="BIGINT"/>
+            <column name="QUANTITY" type="DOUBLE"/>
+            <column name="QUANTITY_UNIT" type="VARCHAR(40)"/>
+            <column name="START_DATE" type="DATETIME"/>
+            <column name="STOP_DATE" type="DATETIME"/>
+            <column name="PRESCRIPTION_RCOPIA_ID" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Michael Iden" id="1489345089097-15">
+        <createTable tableName="PATIENT_STATUS">
+            <column name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="KEY" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VALUE" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTRY_DATE" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-16">
+        <createTable tableName="PrescriptionEvent">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PatientID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TreatmentID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RcopiaId" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EntryDate" type="datetime(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Duration" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Discontinue" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DailyDose" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DoctorName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="1489345089097-17">
+        <createTable tableName="PROGRESS_NOTE">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="APP_USER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTRY_DATE" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DOCTOR_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NOTE_TEXT" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-18">
+        <createTable tableName="ProgressNoteTag">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="Valid" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TagName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TagDescription" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-19">
+        <createTable tableName="ProgressNote_ProgressNoteTag">
+            <column autoIncrement="true" name="ID" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="ProgressNoteId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="ProgressNoteTagId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="patient-evaluations-create-table">
+        <createTable tableName="PATIENT_EVALUATIONS">
+            <column name="PATIENT_ID" type="BIGINT"/>
+            <column name="ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="evaluations-create-table">
+        <createTable tableName="EVALUATION">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="EVALUATION_TYPE" type="VARCHAR(255)"/>
+            <column name="CREATED" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="evaluation-evaluation-responses-create-table">
+        <createTable tableName="EVALUATION_EVALUATION_RESPONSES">
+            <column name="EVALUATION_ID" type="BIGINT"/>
+            <column name="EVALUATION_RESPONSES_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="evaluation-responses-create-table">
+        <createTable tableName="EVALUATION_RESPONSE">
+            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="PROMPT" type="TEXT"/>
+            <column name="ANSWER" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-42">
+        <addUniqueConstraint columnNames="PatientID, TreatmentID, RcopiaId, EntryDate"
+                             constraintName="PrescriptionEvent_UNIQUE" tableName="PrescriptionEvent"/>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-43">
+        <addUniqueConstraint columnNames="RCOPIA_ID, LAST_MODIFIED_DATE" constraintName="rcopiaLastModifiedUK"
+                             tableName="PATIENT_MEDICATION"/>
+    </changeSet>
+    <!--<changeSet author="miden (generated)" id="1489345089097-44">-->
+    <!--<addUniqueConstraint columnNames="RCOPIA_ID, PRIMARY_FLAG" constraintName="rcopiaPrimaryUK" tableName="PATIENT_MEDICATION"/>-->
+    <!--</changeSet>-->
+    <changeSet author="miden (generated)" id="1489345089097-45">
+        <createIndex indexName="BrandNameIndex" tableName="PATIENT_MEDICATION">
+            <column name="BRAND_NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="miden (generated)" id="1489345089097-46">
+        <createIndex indexName="PatientIdFK" tableName="PATIENT_MEDICATION">
+            <column name="PATIENT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Michael Iden" id="20170328-patients">
+        <loadData encoding="UTF-8"
+                  file="db/sampledata/patient-20170330.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="PATIENT"
+                  quotchar='"'>
+        </loadData>
+    </changeSet>
+    <changeSet author="Michael Iden" id="20170409-load-patient-race">
+        <loadData encoding="UTF-8"
+                  file="db/sampledata/patient-race-20170409.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="PATIENT_RACE"
+                  quotchar='"'>
+        </loadData>
+    </changeSet>
+    <changeSet author="Michael Iden" id="20170328-load-patient-status">
+        <loadData encoding="UTF-8"
+                  file="db/sampledata/patient-status-20170328.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="PATIENT_STATUS"
+                  quotchar='"'>
+        </loadData>
+    </changeSet>
+    <changeSet author="Michael Iden" id="20170328-load-patient-medications">
+        <loadData encoding="UTF-8"
+                  file="db/sampledata/patient-medication-20170328.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="PATIENT_MEDICATION"
+                  quotchar='"'>
+        </loadData>
+    </changeSet>
+    <changeSet author="Michael Iden" id="20170328-load-progress-notes">
+        <loadData encoding="UTF-8"
+                  file="db/sampledata/progress-note-20170329.csv"
+                  schemaName="public"
+                  separator=","
+                  tableName="PROGRESS_NOTE"
+                  quotchar='"'>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
