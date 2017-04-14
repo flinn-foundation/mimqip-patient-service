@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * DiagnosisDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-14T09:56:54.398-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-14T10:56:36.931-04:00")
 
 public class DiagnosisDto   {
   @JsonProperty("id")
@@ -107,8 +107,8 @@ public class DiagnosisDto   {
   @JsonProperty("stage")
   private Integer stage = null;
 
-  @JsonProperty("createdTime")
-  private OffsetDateTime createdTime = null;
+  @JsonProperty("createdTimestamp")
+  private OffsetDateTime createdTimestamp = null;
 
   public DiagnosisDto id(Long id) {
     this.id = id;
@@ -200,22 +200,22 @@ public class DiagnosisDto   {
     this.stage = stage;
   }
 
-  public DiagnosisDto createdTime(OffsetDateTime createdTime) {
-    this.createdTime = createdTime;
+  public DiagnosisDto createdTimestamp(OffsetDateTime createdTimestamp) {
+    this.createdTimestamp = createdTimestamp;
     return this;
   }
 
    /**
-   * Get createdTime
-   * @return createdTime
+   * Get createdTimestamp
+   * @return createdTimestamp
   **/
   @ApiModelProperty(value = "")
-  public OffsetDateTime getCreatedTime() {
-    return createdTime;
+  public OffsetDateTime getCreatedTimestamp() {
+    return createdTimestamp;
   }
 
-  public void setCreatedTime(OffsetDateTime createdTime) {
-    this.createdTime = createdTime;
+  public void setCreatedTimestamp(OffsetDateTime createdTimestamp) {
+    this.createdTimestamp = createdTimestamp;
   }
 
 
@@ -233,12 +233,12 @@ public class DiagnosisDto   {
         Objects.equals(this.diagnosisType, diagnosisDto.diagnosisType) &&
         Objects.equals(this.secondaryDiagnosis, diagnosisDto.secondaryDiagnosis) &&
         Objects.equals(this.stage, diagnosisDto.stage) &&
-        Objects.equals(this.createdTime, diagnosisDto.createdTime);
+        Objects.equals(this.createdTimestamp, diagnosisDto.createdTimestamp);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, patientId, diagnosisType, secondaryDiagnosis, stage, createdTime);
+    return Objects.hash(id, patientId, diagnosisType, secondaryDiagnosis, stage, createdTimestamp);
   }
 
   @Override
@@ -251,7 +251,7 @@ public class DiagnosisDto   {
     sb.append("    diagnosisType: ").append(toIndentedString(diagnosisType)).append("\n");
     sb.append("    secondaryDiagnosis: ").append(toIndentedString(secondaryDiagnosis)).append("\n");
     sb.append("    stage: ").append(toIndentedString(stage)).append("\n");
-    sb.append("    createdTime: ").append(toIndentedString(createdTime)).append("\n");
+    sb.append("    createdTimestamp: ").append(toIndentedString(createdTimestamp)).append("\n");
     sb.append("}");
     return sb.toString();
   }

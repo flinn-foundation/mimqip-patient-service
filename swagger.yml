@@ -206,7 +206,7 @@ definitions:
       stage:
         type: integer
         format: int32
-      createdTime:
+      createdTimestamp:
         type: string
         format: 'date-time'
   Error:
