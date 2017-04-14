@@ -6,14 +6,12 @@ import io.swagger.model.PatientSimpleDto;
 import lombok.extern.slf4j.Slf4j;
 import org.flinnfoundation.mapper.PatientMapper;
 import org.flinnfoundation.mapper.PatientSimpleMapper;
-import org.flinnfoundation.model.DiagnosisType;
 import org.flinnfoundation.model.Patient;
 import org.flinnfoundation.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -36,13 +34,6 @@ public class PatientController implements PatientApi {
     @Override
     public ResponseEntity<List<PatientDto>> getPatients() {
         return ResponseEntity.ok(patientMapper.convertModelToApiDto(patientService.getPatients()));
-    }
-
-    @Override
-    public ResponseEntity<Void> updatePatientById(@PathVariable Long patientId, @RequestParam String diagnosis) {
-
-        patientService.updatePatientWithDiagnosis(patientId, DiagnosisType.valueOf(diagnosis));
-        return null;
     }
 
     @Override

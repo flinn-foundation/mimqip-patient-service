@@ -5,11 +5,13 @@ import io.swagger.model.PatientDto;
 import io.swagger.model.PatientSimpleDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-13T16:09:34.281-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-14T09:52:04.518-04:00")
 
 @Api(value = "Patient", description = "the Patient API")
 public interface PatientApi {
@@ -72,20 +74,6 @@ public interface PatientApi {
     default ResponseEntity<List<PatientSimpleDto>> getPatientsSimple() {
         // do some magic!
         return new ResponseEntity<List<PatientSimpleDto>>(HttpStatus.OK);
-    }
-
-
-    @ApiOperation(value = "Update patient with the diagnosis", notes = "Update patient with the diagnosis", response = Void.class, tags={ "patient", })
-    @ApiResponses(value = {
-        @ApiResponse(code = 204, message = "Patient updated successfully", response = Void.class),
-        @ApiResponse(code = 200, message = "Unexpected error", response = Void.class) })
-    @RequestMapping(value = "/patients/{patientId}",
-        produces = { "application/json" },
-        method = RequestMethod.PATCH)
-    default ResponseEntity<Void> updatePatientById(@ApiParam(value = "ID of patient to fetch", required = true) @PathVariable("patientId") Long patientId,
-                                                   @NotNull @ApiParam(value = "diagnosis", required = true, allowableValues = "SCHIZOPHRENIC_P, SCHIZOPHRENIC_D, SCHIZOPHRENIC_C, SCHIZOPHRENIC_U, SCHIZOPHRENIC_R, BIPOLAR_SM1, BIPOLAR_SM2, BIPOLAR_SM3, BIPOLAR_SM4, BIPOLAR_MRMH, BIPOLAR_MRM1, BIPOLAR_MRM2, BIPOLAR_MRM3, BIPOLAR_MRM4, BIPOLAR_MRD1, BIPOLAR_MRD2, BIPOLAR_MRD3, BIPOLAR_MRD4, MDD_S1, MDD_S2, MDD_S3, MDD_S4, MDD_R1, MDD_R2, MDD_R3, MDD_R4") @RequestParam(value = "diagnosis", required = true) String diagnosis) {
-        // do some magic!
-        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
 }

@@ -38,11 +38,11 @@ public class Patient {
 
     private LocalDateTime rcopiaLastUpdatedDate;
 
-    @Enumerated(EnumType.STRING)
-    private DiagnosisType diagnosisType;
-
     @Embedded
     private PatientDetails patientDetails;
+
+    @OneToMany(mappedBy = "patient")
+    private List<Diagnosis> diagnoses;
 
     @OneToMany(mappedBy = "patient")
     private List<Evaluation> evaluations;

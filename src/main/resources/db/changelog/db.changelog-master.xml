@@ -1,5 +1,8 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <changeSet author="Michael Iden" id="20170330-patient">
         <createTable tableName="PATIENT">
             <column autoIncrement="true" name="ID" type="BIGINT">
@@ -24,7 +27,6 @@
             <column name="DATE_OF_BIRTH" type="DATE">
                 <constraints nullable="false"/>
             </column>
-            <column name="DIAGNOSIS_TYPE" type="VARCHAR(255)"/>
             <column name="ZIP_CODE" type="VARCHAR(6)">
                 <constraints nullable="false"/>
             </column>
@@ -48,6 +50,26 @@
         <createTable tableName="PATIENT_RACE">
             <column name="PATIENT_ID" type="BIGINT"/>
             <column name="RACE" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="create-patient-diagnosis-table">
+        <createTable tableName="DIAGNOSIS">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DIAGNOSIS_TYPE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SECONDARY_DIAGNOSIS" type="TEXT"/>
+            <column name="STAGE" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_TIMESTAMP" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet author="Michael Iden" id="create-patient-medications-table">
@@ -219,13 +241,15 @@
         </createTable>
     </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-42">
-        <addUniqueConstraint columnNames="PatientID, TreatmentID, RcopiaId, EntryDate" constraintName="PrescriptionEvent_UNIQUE" tableName="PrescriptionEvent"/>
+        <addUniqueConstraint columnNames="PatientID, TreatmentID, RcopiaId, EntryDate"
+                             constraintName="PrescriptionEvent_UNIQUE" tableName="PrescriptionEvent"/>
     </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-43">
-        <addUniqueConstraint columnNames="RCOPIA_ID, LAST_MODIFIED_DATE" constraintName="rcopiaLastModifiedUK" tableName="PATIENT_MEDICATION"/>
+        <addUniqueConstraint columnNames="RCOPIA_ID, LAST_MODIFIED_DATE" constraintName="rcopiaLastModifiedUK"
+                             tableName="PATIENT_MEDICATION"/>
     </changeSet>
     <!--<changeSet author="miden (generated)" id="1489345089097-44">-->
-        <!--<addUniqueConstraint columnNames="RCOPIA_ID, PRIMARY_FLAG" constraintName="rcopiaPrimaryUK" tableName="PATIENT_MEDICATION"/>-->
+    <!--<addUniqueConstraint columnNames="RCOPIA_ID, PRIMARY_FLAG" constraintName="rcopiaPrimaryUK" tableName="PATIENT_MEDICATION"/>-->
     <!--</changeSet>-->
     <changeSet author="miden (generated)" id="1489345089097-45">
         <createIndex indexName="BrandNameIndex" tableName="PATIENT_MEDICATION">
