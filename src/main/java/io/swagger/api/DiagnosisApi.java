@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-14T10:14:35.586-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-17T14:33:30.618-04:00")
 
 @Api(value = "Diagnosis", description = "the Diagnosis API")
 public interface DiagnosisApi {
@@ -21,7 +21,7 @@ public interface DiagnosisApi {
     @RequestMapping(value = "/patients/{patientId}/diagnoses",
         produces = { "application/json" },
         method = RequestMethod.GET)
-    default ResponseEntity<List<DiagnosisDto>> getDiagnosesByPatientId(@ApiParam(value = "ID of patient diagnoses to fetch", required = true) @PathVariable("patientId") Long patientId) {
+    default ResponseEntity<List<DiagnosisDto>> getDiagnosesByPatientId(@ApiParam(value = "ID of patient diagnoses to fetch",required=true ) @PathVariable("patientId") Long patientId) {
         // do some magic!
         return new ResponseEntity<List<DiagnosisDto>>(HttpStatus.OK);
     }
@@ -33,7 +33,7 @@ public interface DiagnosisApi {
     @RequestMapping(value = "/patients/{patientId}/diagnoses/latest",
         produces = { "application/json" },
         method = RequestMethod.GET)
-    default ResponseEntity<DiagnosisDto> getMostRecentDiagnosisByPatientId(@ApiParam(value = "ID of patient diagnoses to fetch", required = true) @PathVariable("patientId") Long patientId) {
+    default ResponseEntity<DiagnosisDto> getMostRecentDiagnosisByPatientId(@ApiParam(value = "ID of patient diagnoses to fetch",required=true ) @PathVariable("patientId") Long patientId) {
         // do some magic!
         return new ResponseEntity<DiagnosisDto>(HttpStatus.OK);
     }
@@ -46,8 +46,8 @@ public interface DiagnosisApi {
     @RequestMapping(value = "/patients/{patientId}/diagnoses",
         produces = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<String> savePatientDiagnosis(@ApiParam(value = "ID of patient to fetch", required = true) @PathVariable("patientId") Long patientId,
-                                                        @ApiParam(value = "Diagnosis to add", required = true) @RequestBody DiagnosisDto diagnosis) {
+    default ResponseEntity<String> savePatientDiagnosis(@ApiParam(value = "ID of patient to fetch",required=true ) @PathVariable("patientId") Long patientId,
+        @ApiParam(value = "Diagnosis to add" ,required=true ) @RequestBody DiagnosisDto diagnosis) {
         // do some magic!
         return new ResponseEntity<String>(HttpStatus.OK);
     }
