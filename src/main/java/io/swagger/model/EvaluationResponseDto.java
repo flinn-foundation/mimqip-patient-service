@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * EvaluationResponseDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-11T23:15:16.264-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-17T14:33:30.618-04:00")
 
 public class EvaluationResponseDto   {
   @JsonProperty("prompt")
@@ -54,7 +54,7 @@ public class EvaluationResponseDto   {
 
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(java.lang.Object o) {
     if (this == o) {
       return true;
     }
@@ -86,7 +86,7 @@ public class EvaluationResponseDto   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
+  private String toIndentedString(java.lang.Object o) {
     if (o == null) {
       return "null";
     }

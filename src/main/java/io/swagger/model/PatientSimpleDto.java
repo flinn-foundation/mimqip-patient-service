@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * PatientSimpleDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-12T16:18:34.486-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-17T14:33:30.618-04:00")
 
 public class PatientSimpleDto   {
   @JsonProperty("id")
@@ -172,7 +172,7 @@ public class PatientSimpleDto   {
 
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(java.lang.Object o) {
     if (this == o) {
       return true;
     }
@@ -212,7 +212,7 @@ public class PatientSimpleDto   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(Object o) {
+  private String toIndentedString(java.lang.Object o) {
     if (o == null) {
       return "null";
     }
