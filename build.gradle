@@ -36,6 +36,7 @@ repositories {
 
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
     compile group: 'org.liquibase', name: 'liquibase-core'
@@ -48,15 +49,6 @@ dependencies {
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.2'
 
-    compile group: 'javax.servlet', name: 'jstl'
-    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper'
-    compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.3'
-
-    compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
-    compile group: 'commons-lang', name: 'commons-lang', version: '2.2'
-
-    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.2.11'
-    compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.2.11'
     compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
 
     compile group: 'ma.glasnost.orika', name: 'orika-core', version: '1.5.0'
@@ -64,6 +56,7 @@ dependencies {
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.5.0'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.5.0'
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.8.7'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
 
 }
 

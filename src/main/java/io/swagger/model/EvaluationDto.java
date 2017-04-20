@@ -1,18 +1,20 @@
 package io.swagger.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
+import io.swagger.model.EvaluationResponseDto;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import javax.validation.constraints.*;
 /**
  * EvaluationDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-17T14:33:30.618-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-20T11:17:49.707-04:00")
 
 public class EvaluationDto   {
   @JsonProperty("id")
@@ -32,19 +34,19 @@ public class EvaluationDto   {
    */
   public enum EvaluationTypeEnum {
     BBDSS("BBDSS"),
-
+    
     PHQ9("PHQ9"),
-
+    
     GLOBAL("GLOBAL"),
-
+    
     MENTAL_STATUS("MENTAL_STATUS"),
-
+    
     PSRS("PSRS"),
-
+    
     SUBSTANCE_ABUSE("SUBSTANCE_ABUSE"),
-
+    
     VITAL_SIGNS("VITAL_SIGNS"),
-
+    
     PSYCHIATRIC("PSYCHIATRIC");
 
     private String value;
@@ -194,7 +196,7 @@ public class EvaluationDto   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EvaluationDto {\n");
-
+    
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
     sb.append("    evaluationResponses: ").append(toIndentedString(evaluationResponses)).append("\n");

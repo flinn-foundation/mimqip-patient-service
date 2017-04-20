@@ -1,13 +1,15 @@
 package io.swagger.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import javax.validation.constraints.*;
 /**
  * EvaluationResponseDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-17T14:33:30.618-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-20T11:17:49.707-04:00")
 
 public class EvaluationResponseDto   {
   @JsonProperty("prompt")
@@ -75,7 +77,7 @@ public class EvaluationResponseDto   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EvaluationResponseDto {\n");
-
+    
     sb.append("    prompt: ").append(toIndentedString(prompt)).append("\n");
     sb.append("    answer: ").append(toIndentedString(answer)).append("\n");
     sb.append("}");

@@ -1,16 +1,17 @@
 package io.swagger.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModelProperty;
-
-import java.time.LocalDate;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.time.LocalDate;
+import javax.validation.constraints.*;
 /**
  * PatientSimpleDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-17T14:33:30.618-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-20T11:17:49.707-04:00")
 
 public class PatientSimpleDto   {
   @JsonProperty("id")
@@ -27,7 +28,7 @@ public class PatientSimpleDto   {
    */
   public enum SexEnum {
     MALE("MALE"),
-
+    
     FEMALE("FEMALE");
 
     private String value;
@@ -197,7 +198,7 @@ public class PatientSimpleDto   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PatientSimpleDto {\n");
-
+    
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");

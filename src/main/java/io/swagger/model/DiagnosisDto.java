@@ -1,16 +1,17 @@
 package io.swagger.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModelProperty;
-
-import java.time.OffsetDateTime;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.time.OffsetDateTime;
+import javax.validation.constraints.*;
 /**
  * DiagnosisDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-17T14:33:30.618-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-20T11:17:49.707-04:00")
 
 public class DiagnosisDto   {
   @JsonProperty("id")
@@ -24,55 +25,55 @@ public class DiagnosisDto   {
    */
   public enum DiagnosisTypeEnum {
     SCHIZOPHRENIC_P("SCHIZOPHRENIC_P"),
-
+    
     SCHIZOPHRENIC_D("SCHIZOPHRENIC_D"),
-
+    
     SCHIZOPHRENIC_C("SCHIZOPHRENIC_C"),
-
+    
     SCHIZOPHRENIC_U("SCHIZOPHRENIC_U"),
-
+    
     SCHIZOPHRENIC_R("SCHIZOPHRENIC_R"),
-
+    
     BIPOLAR_SM1("BIPOLAR_SM1"),
-
+    
     BIPOLAR_SM2("BIPOLAR_SM2"),
-
+    
     BIPOLAR_SM3("BIPOLAR_SM3"),
-
+    
     BIPOLAR_SM4("BIPOLAR_SM4"),
-
+    
     BIPOLAR_MRMH("BIPOLAR_MRMH"),
-
+    
     BIPOLAR_MRM1("BIPOLAR_MRM1"),
-
+    
     BIPOLAR_MRM2("BIPOLAR_MRM2"),
-
+    
     BIPOLAR_MRM3("BIPOLAR_MRM3"),
-
+    
     BIPOLAR_MRM4("BIPOLAR_MRM4"),
-
+    
     BIPOLAR_MRD1("BIPOLAR_MRD1"),
-
+    
     BIPOLAR_MRD2("BIPOLAR_MRD2"),
-
+    
     BIPOLAR_MRD3("BIPOLAR_MRD3"),
-
+    
     BIPOLAR_MRD4("BIPOLAR_MRD4"),
-
+    
     MDD_S1("MDD_S1"),
-
+    
     MDD_S2("MDD_S2"),
-
+    
     MDD_S3("MDD_S3"),
-
+    
     MDD_S4("MDD_S4"),
-
+    
     MDD_R1("MDD_R1"),
-
+    
     MDD_R2("MDD_R2"),
-
+    
     MDD_R3("MDD_R3"),
-
+    
     MDD_R4("MDD_R4");
 
     private String value;
@@ -245,7 +246,7 @@ public class DiagnosisDto   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class DiagnosisDto {\n");
-
+    
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
     sb.append("    diagnosisType: ").append(toIndentedString(diagnosisType)).append("\n");
