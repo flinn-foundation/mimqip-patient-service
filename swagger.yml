@@ -12,6 +12,14 @@ produces:
 definitions:
   List:
     type: string
+    enum: &progress-note-tag-enum
+      - GENERAL
+      - MEDICATIONS
+      - DIAGNOSIS
+      - LABS
+      - EVALUATIONS
+  List:
+    type: string
     enum: &evaluation-enum
       - BBDSS
       - PHQ9
@@ -209,6 +217,25 @@ definitions:
       createdTimestamp:
         type: string
         format: 'date-time'
+  ProgressNoteDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      patientId:
+        type: integer
+        format: int64
+      progressNoteTagTypes:
+        type: array
+        items:
+          type: string
+          enum: *progress-note-tag-enum
+      noteText:
+        type: string
+      createdTimestamp:
+        type: string
+        format: 'date-time'
   Error:
     type: object
     properties:
@@ -219,6 +246,8 @@ definitions:
         type: string
       fields:
         type: string
+
+
 paths:
   /patients/simple:
     get:
@@ -483,3 +512,50 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+  /patients/{patientId}/progressNotes:
+    get:
+      summary: Get progress notes for patient
+      description: Get progress notes for patient
+      operationId: getProgressNotes
+      tags:
+        - progressNote
+      parameters:
+        - name: patientId
+          in: path
+          description: Id of patient progress notes to fetch
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Progress Notes
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProgressNoteDto'
+    post:
+      summary: Save new progress note for patient
+      description: Save new progress note for patient
+      operationId: saveProgressNote
+      tags:
+        - progressNote
+      parameters:
+        - name: patientId
+          in: path
+          description: Id of patient progress note to create
+          required: true
+          type: integer
+          format: int64
+        - name: progressNote
+          in: body
+          description: Progress note to submit
+          required: true
+          schema:
+            $ref: '#/definitions/ProgressNoteDto'
+      responses:
+        201:
+          description: Progress note Id
+          schema:
+            type: string
+
+

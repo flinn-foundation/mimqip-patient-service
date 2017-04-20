@@ -163,53 +163,28 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Michael Iden" id="1489345089097-17">
+    <changeSet author="Michael Iden" id="create-progress-note-table">
         <createTable tableName="PROGRESS_NOTE">
             <column autoIncrement="true" name="ID" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column defaultValueNumeric="0" name="PATIENT_ID" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column defaultValueNumeric="0" name="APP_USER_ID" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ENTRY_DATE" type="DATETIME">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DOCTOR_NAME" type="VARCHAR(255)">
+            <column name="PATIENT_ID" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="NOTE_TEXT" type="TEXT">
                 <constraints nullable="false"/>
             </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="miden (generated)" id="1489345089097-18">
-        <createTable tableName="ProgressNoteTag">
-            <column autoIncrement="true" name="ID" type="INT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="Valid" type="TINYINT(3)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TagName" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="TagDescription" type="VARCHAR(255)">
+            <column name="CREATED_TIMESTAMP" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="miden (generated)" id="1489345089097-19">
-        <createTable tableName="ProgressNote_ProgressNoteTag">
-            <column autoIncrement="true" name="ID" type="INT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column defaultValueNumeric="0" name="ProgressNoteId" type="INT">
+    <changeSet author="Michael Iden" id="create-progress-note-tag-types-table">
+        <createTable tableName="PROGRESS_NOTE_PROGRESS_NOTE_TAG_TYPES">
+            <column name="PROGRESS_NOTE_ID" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column defaultValueNumeric="0" name="ProgressNoteTagId" type="INT">
+            <column name="PROGRESS_NOTE_TAG_TYPES" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -294,15 +269,6 @@
                   schemaName="public"
                   separator=","
                   tableName="PATIENT_MEDICATION"
-                  quotchar='"'>
-        </loadData>
-    </changeSet>
-    <changeSet author="Michael Iden" id="20170328-load-progress-notes">
-        <loadData encoding="UTF-8"
-                  file="db/sampledata/progress-note-20170329.csv"
-                  schemaName="public"
-                  separator=","
-                  tableName="PROGRESS_NOTE"
                   quotchar='"'>
         </loadData>
     </changeSet>

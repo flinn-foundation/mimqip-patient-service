@@ -50,6 +50,9 @@ public class Patient {
     @OneToMany(mappedBy = "patient")
     private List<PatientMedication> patientMedications;
 
+    @OneToMany(mappedBy = "patient")
+    private List<ProgressNote> progressNotes;
+
     public enum PatientSex {
         MALE, FEMALE
     }
