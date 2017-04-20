@@ -17,21 +17,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-20T11:17:49.707-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-20T17:26:49.963-04:00")
 
 @Api(value = "Evaluation", description = "the Evaluation API")
 public interface EvaluationApi {
 
-    @ApiOperation(value = "Post results of new evaluation", notes = "Post results of new evaluation", response = EvaluationDto.class, tags={ "evaluation", })
+    @ApiOperation(value = "Post results of new evaluation", notes = "Post results of new evaluation", response = String.class, tags={ "evaluation", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "Evaluation", response = EvaluationDto.class) })
+        @ApiResponse(code = 201, message = "Evaluation", response = String.class) })
     @RequestMapping(value = "/patients/{patientId}/evaluations",
         produces = { "application/json" }, 
         method = RequestMethod.POST)
-    default ResponseEntity<EvaluationDto> createPatientEvaluation(@ApiParam(value = "Id of patient evaluations to fetch",required=true ) @PathVariable("patientId") Long patientId,
+    default ResponseEntity<String> createPatientEvaluation(@ApiParam(value = "Id of patient evaluations to fetch",required=true ) @PathVariable("patientId") Long patientId,
         @ApiParam(value = "Evaluation to submit" ,required=true ) @RequestBody EvaluationDto evaluation) {
         // do some magic!
-        return new ResponseEntity<EvaluationDto>(HttpStatus.OK);
+        return new ResponseEntity<String>(HttpStatus.OK);
     }
 
 

@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
 /**
  * PatientDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-20T11:17:49.707-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-20T17:26:49.963-04:00")
 
 public class PatientDto   {
   @JsonProperty("id")
@@ -235,7 +235,7 @@ public class PatientDto   {
   public enum EmploymentEnum {
     UNEMPLOYED("UNEMPLOYED"),
     
-    FULL_TIME_SALARIED("FULL TIME_SALARIED"),
+    FULL_TIME_SALARIED("FULL_TIME_SALARIED"),
     
     PART_TIME_SALARIED("PART_TIME_SALARIED"),
     

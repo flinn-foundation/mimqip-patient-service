@@ -25,9 +25,13 @@ public class DiagnosisService {
         return diagnosisRepository.findDiagnosesByPatientOrderByCreatedTimestampDesc(patient);
     }
 
+    public Diagnosis getMostRecentDiagnosisByPatient(Patient patient) {
+        return diagnosisRepository.findTopByPatientOrderByCreatedTimestampDesc(patient);
+    }
+
     public Diagnosis getMostRecentDiagnosisByPatientId(Long patientId) {
         Patient patient = patientService.getPatient(patientId);
-        return diagnosisRepository.findTopByPatientOrderByCreatedTimestampDesc(patient);
+        return getMostRecentDiagnosisByPatient(patient);
     }
 
     public Diagnosis saveDiagnosis(Diagnosis diagnosis) {

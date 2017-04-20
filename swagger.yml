@@ -42,7 +42,7 @@ definitions:
     type: string
     enum: &employment-enum
       - UNEMPLOYED
-      - FULL TIME_SALARIED
+      - FULL_TIME_SALARIED
       - PART_TIME_SALARIED
       - FULL_TIME_NON_SALARIED
       - PART_TIME_NON_SALARIED
@@ -482,7 +482,7 @@ paths:
         201:
           description: Evaluation
           schema:
-            $ref: '#/definitions/EvaluationDto'
+            type: string
   /patients/{patientId}/evaluations/{evaluationId}:
     get:
       summary: Get evaluation by id

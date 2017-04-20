@@ -1,6 +1,7 @@
 package org.flinnfoundation.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.flinnfoundation.model.Diagnosis;
 import org.flinnfoundation.model.Patient;
 import org.flinnfoundation.model.evaluation.Evaluation;
 import org.flinnfoundation.model.evaluation.EvaluationType;
@@ -14,35 +15,39 @@ import java.util.List;
 @Service
 public class EvaluationService {
 
-    private PatientService patientService;
     private EvaluationRepository evaluationRepository;
+    private DiagnosisService diagnosisService;
 
     @Autowired
-    public EvaluationService(PatientService patientService, EvaluationRepository evaluationRepository) {
-        this.patientService = patientService;
+    public EvaluationService(EvaluationRepository evaluationRepository, DiagnosisService diagnosisService) {
         this.evaluationRepository = evaluationRepository;
+        this.diagnosisService = diagnosisService;
     }
 
-    public Evaluation getEvaluation(long patientId, long evaluationId) {
-        patientService.getPatient(patientId);
+    public Evaluation getEvaluation(Patient patient, long evaluationId) {
+
 
         return evaluationRepository.findOne(evaluationId);
     }
 
-    public List<Evaluation> getEvaluationsByPatientId(long patientId) {
+    public List<Evaluation> getEvaluationsByPatientId(Patient patient) {
 
-        Patient patient = patientService.getPatient(patientId);
         return patient.getEvaluations();
     }
 
-    public List<Evaluation> getEvaluationsByPatientIdAndEvaluationType(long patientId, EvaluationType evaluationType) {
+    public List<Evaluation> getEvaluationsByPatientIdAndEvaluationType(Patient patient, EvaluationType evaluationType) {
 
-        Patient patient = patientService.getPatient(patientId);
         return evaluationRepository.findEvaluationByPatientAndEvaluationType(patient, evaluationType);
     }
 
-    public void saveEvaluation(Evaluation evaluation) {
+    public List<Evaluation> getEvaluationsForDiagnosis(Patient patient) {
 
-        evaluationRepository.save(evaluation);
+        Diagnosis diagnosis = diagnosisService.getMostRecentDiagnosisByPatient(patient);
+
+        return evaluationRepository.findEvaluationByPatientAndEvaluationType(patient, diagnosis.getDiagnosisType().getEvaluationType());
+    }
+
+    public Evaluation saveEvaluation(Evaluation evaluation) {
+        return evaluationRepository.save(evaluation);
     }
 }
