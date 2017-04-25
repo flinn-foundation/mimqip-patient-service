@@ -215,6 +215,34 @@
             <column name="ANSWER" type="TEXT"/>
         </createTable>
     </changeSet>
+    <changeSet author="Michael Iden" id="vital-signs-create-table">
+        <createTable tableName="VITAL_SIGNS">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="WEIGHT" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HEIGHT" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SYSTOLIC" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DIASTOLIC" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HEART_RATE" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_TIMESTAMP" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-42">
         <addUniqueConstraint columnNames="PatientID, TreatmentID, RcopiaId, EntryDate"
                              constraintName="PrescriptionEvent_UNIQUE" tableName="PrescriptionEvent"/>

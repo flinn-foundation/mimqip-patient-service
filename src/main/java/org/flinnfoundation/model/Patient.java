@@ -3,6 +3,7 @@ package org.flinnfoundation.model;
 import lombok.Data;
 import lombok.ToString;
 import org.flinnfoundation.model.evaluation.Evaluation;
+import org.flinnfoundation.model.vitals.VitalSigns;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -31,7 +32,7 @@ public class Patient {
 
     private boolean valid;
 
-    //TODO: Change this to a Java8 Time (LocalDateTime, Offset, whatever) once SpringBoot 1.5.3 supports Hibernate 5.2.x
+    //TODO: Change this to a Java8 Time (LocalDateTime, Offset, whatever) once Spring Boot supports Hibernate 5.2.x
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
@@ -52,6 +53,9 @@ public class Patient {
 
     @OneToMany(mappedBy = "patient")
     private List<ProgressNote> progressNotes;
+
+    @OneToMany(mappedBy = "patient")
+    private List<VitalSigns> vitalSignsList;
 
     public enum PatientSex {
         MALE, FEMALE

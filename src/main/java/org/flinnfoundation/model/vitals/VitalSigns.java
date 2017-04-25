@@ -1,6 +1,7 @@
-package org.flinnfoundation.model;
+package org.flinnfoundation.model.vitals;
 
 import lombok.Data;
+import org.flinnfoundation.model.Patient;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.util.Date;
 
 @Data
 @Entity
-public class Diagnosis {
+public class VitalSigns {
 
     @Id
     @GeneratedValue
@@ -17,15 +18,17 @@ public class Diagnosis {
     @ManyToOne
     private Patient patient;
 
-    @Enumerated(EnumType.STRING)
-    private DiagnosisType diagnosisType;
+    //Weight in lbs
+    private int weight;
 
-    @Lob
-    private String secondaryDiagnosis;
+    //Height in inches
+    private int height;
 
-    private int stage;
+    private BloodPressure bloodPressure;
 
-    //TODO: Change this to a Java8 Time (LocalDateTime, Offset, whatever) once Spring Boot supports Hibernate 5.2.x
+    //In BPM
+    private int heartRate;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdTimestamp;
