@@ -49,4 +49,10 @@ public class EvaluationMapper {
                 .map(this::convertModelToApiDto)
                 .collect(Collectors.toList());
     }
+
+    public List<Evaluation> convertApiDtoToModel(Iterable<EvaluationDto> evaluationDtos) {
+        return StreamSupport.stream(evaluationDtos.spliterator(), false)
+                .map(this::convertApiDtoToModel)
+                .collect(Collectors.toList());
+    }
 }

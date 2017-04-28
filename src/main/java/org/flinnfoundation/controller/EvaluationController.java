@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -63,15 +64,18 @@ public class EvaluationController implements EvaluationApi {
     }
 
     @Override
-    public ResponseEntity<String> createPatientEvaluation(@PathVariable Long patientId, @RequestBody EvaluationDto evaluationDto) {
-        Patient patient = patientService.getPatient(patientId);
-        Evaluation evaluation = evaluationMapper.convertApiDtoToModel(evaluationDto);
-        evaluation.setPatient(patient);
+    public ResponseEntity<List<Long>> createPatientEvaluations(@PathVariable Long patientId, @RequestBody List<EvaluationDto> evaluations) {
 
-        Evaluation savedEvaluation = evaluationService.saveEvaluation(evaluation);
+        for(EvaluationDto evaluationDto : evaluations) {
+            evaluationDto.setPatientId(patientId);
+        }
 
+        Iterable<Evaluation> storedEvaluations = evaluationService.saveEvaluations(evaluationMapper.convertApiDtoToModel(evaluations));
 
-        return ResponseEntity.ok(Long.toString(savedEvaluation.getId()));
+        List<Long> evaluationIds = new ArrayList<>();
+        storedEvaluations.forEach(evaluation -> evaluationIds.add(evaluation.getId()));
+
+        return ResponseEntity.ok(evaluationIds);
     }
 
     @Override
@@ -100,6 +104,4 @@ public class EvaluationController implements EvaluationApi {
 
         return ResponseEntity.ok(evaluationMapper.convertModelToApiDto(evaluationService.getEvaluationsForDiagnosis(patient)));
     }
-
-
 }

@@ -2,6 +2,7 @@ package io.swagger.api;
 
 import io.swagger.model.Error;
 import io.swagger.model.EvaluationDto;
+import java.util.List;
 import io.swagger.model.VitalSignsDto;
 
 import io.swagger.annotations.*;
@@ -18,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-24T22:30:53.710-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-28T13:39:22.515-04:00")
 
 @Api(value = "Evaluation", description = "the Evaluation API")
 public interface EvaluationApi {
@@ -30,22 +31,22 @@ public interface EvaluationApi {
         produces = { "application/json" }, 
         method = RequestMethod.POST)
     default ResponseEntity<String> createNewVitalSignEvaluation(@ApiParam(value = "Patient Id of vital sign evaluations to create",required=true ) @PathVariable("patientId") Long patientId,
-        @ApiParam(value = "Patient vitals"  ) @RequestBody VitalSignsDto vitalSignsEvaluation) {
+        @ApiParam(value = "Patient vitals" ,required=true ) @RequestBody VitalSignsDto vitalSignsEvaluation) {
         // do some magic!
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 
 
-    @ApiOperation(value = "Post results of new evaluation", notes = "Post results of new evaluation", response = String.class, tags={ "evaluation", })
+    @ApiOperation(value = "Save evaluation(s)", notes = "Save evaluation(s)", response = Long.class, responseContainer = "List", tags={ "evaluation", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 201, message = "Evaluation", response = String.class) })
+        @ApiResponse(code = 201, message = "Evaluation", response = Long.class) })
     @RequestMapping(value = "/patients/{patientId}/evaluations",
         produces = { "application/json" }, 
         method = RequestMethod.POST)
-    default ResponseEntity<String> createPatientEvaluation(@ApiParam(value = "Id of patient evaluations to fetch",required=true ) @PathVariable("patientId") Long patientId,
-        @ApiParam(value = "Evaluation to submit" ,required=true ) @RequestBody EvaluationDto evaluation) {
+    default ResponseEntity<List<Long>> createPatientEvaluations(@ApiParam(value = "Id of patient",required=true ) @PathVariable("patientId") Long patientId,
+        @ApiParam(value = "Evaluations to save" ,required=true ) @RequestBody List<EvaluationDto> evaluations) {
         // do some magic!
-        return new ResponseEntity<String>(HttpStatus.OK);
+        return new ResponseEntity<List<Long>>(HttpStatus.OK);
     }
 
 
@@ -71,7 +72,7 @@ public interface EvaluationApi {
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     default ResponseEntity<List<EvaluationDto>> getEvaluationsByPatientId(@ApiParam(value = "Id of patient evaluations to fetch",required=true ) @PathVariable("patientId") Long patientId,
-         @ApiParam(value = "type of evaluation to pull", allowableValues = "BBDSS, PHQ9, GLOBAL, MENTAL_STATUS, PSRS, SUBSTANCE_ABUSE, VITAL_SIGNS, PSYCHIATRIC") @RequestParam(value = "evaluationType", required = false) String evaluationType) {
+         @ApiParam(value = "type of evaluation to pull", allowableValues = "BBDSS, PHQ9, GLOBAL, MENTAL_STATUS, PSRS, BNSAS, SUBSTANCE_ABUSE, VITAL_SIGNS, PSYCHIATRIC") @RequestParam(value = "evaluationType", required = false) String evaluationType) {
         // do some magic!
         return new ResponseEntity<List<EvaluationDto>>(HttpStatus.OK);
     }

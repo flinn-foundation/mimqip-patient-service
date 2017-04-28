@@ -11,6 +11,7 @@ public enum EvaluationType {
     GLOBAL,
     MENTAL_STATUS,
     PSRS,
+    BNSAS,
     SUBSTANCE_ABUSE,
     VITAL_SIGNS,
     PSYCHIATRIC

@@ -26,6 +26,7 @@ definitions:
       - GLOBAL
       - MENTAL_STATUS
       - PSRS
+      - BNSAS
       - SUBSTANCE_ABUSE
       - VITAL_SIGNS
       - PSYCHIATRIC
@@ -538,29 +539,34 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
-      summary: Post results of new evaluation
-      description: Post results of new evaluation
-      operationId: createPatientEvaluation
+      summary: Save evaluation(s)
+      description: Save evaluation(s)
+      operationId: createPatientEvaluations
       tags:
-         - evaluation
+        - evaluation
       parameters:
         - name: patientId
           in: path
-          description: Id of patient evaluations to fetch
+          description: Id of patient
           required: true
           type: integer
           format: int64
-        - name: evaluation
+        - name: evaluations
           in: body
-          description: Evaluation to submit
+          description: Evaluations to save
           required: true
           schema:
-            $ref: '#/definitions/EvaluationDto'
+            type: array
+            items:
+              $ref: '#/definitions/EvaluationDto'
       responses:
         201:
           description: Evaluation
           schema:
-            type: string
+            type: array
+            items:
+              type: integer
+              format: int64
   /patients/{patientId}/evaluations/{evaluationId}:
     get:
       summary: Get evaluation by id
