@@ -26,7 +26,7 @@ public class Evaluation {
     @Enumerated(EnumType.STRING)
     private EvaluationType evaluationType;
 
-    //TODO: Change this to a Java8 Time (LocalDateTime, Offset, whatever) once SpringBoot 1.5.3 supports Hibernate 5.2.x
+    //TODO: Change this to a Java8 Time (LocalDateTime, Offset, whatever) once Spring Boot supports Hibernate 5.2.x
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;

@@ -7,51 +7,51 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 /**
- * EvaluationResponseDto
+ * BloodPressure
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-01T09:57:31.870-04:00")
 
-public class EvaluationResponseDto   {
-  @JsonProperty("prompt")
-  private String prompt = null;
+public class BloodPressure   {
+  @JsonProperty("systolic")
+  private Integer systolic = null;
 
-  @JsonProperty("answer")
-  private String answer = null;
+  @JsonProperty("diastolic")
+  private Integer diastolic = null;
 
-  public EvaluationResponseDto prompt(String prompt) {
-    this.prompt = prompt;
+  public BloodPressure systolic(Integer systolic) {
+    this.systolic = systolic;
     return this;
   }
 
    /**
-   * Get prompt
-   * @return prompt
+   * Get systolic
+   * @return systolic
   **/
   @ApiModelProperty(value = "")
-  public String getPrompt() {
-    return prompt;
+  public Integer getSystolic() {
+    return systolic;
   }
 
-  public void setPrompt(String prompt) {
-    this.prompt = prompt;
+  public void setSystolic(Integer systolic) {
+    this.systolic = systolic;
   }
 
-  public EvaluationResponseDto answer(String answer) {
-    this.answer = answer;
+  public BloodPressure diastolic(Integer diastolic) {
+    this.diastolic = diastolic;
     return this;
   }
 
    /**
-   * Get answer
-   * @return answer
+   * Get diastolic
+   * @return diastolic
   **/
   @ApiModelProperty(value = "")
-  public String getAnswer() {
-    return answer;
+  public Integer getDiastolic() {
+    return diastolic;
   }
 
-  public void setAnswer(String answer) {
-    this.answer = answer;
+  public void setDiastolic(Integer diastolic) {
+    this.diastolic = diastolic;
   }
 
 
@@ -63,23 +63,23 @@ public class EvaluationResponseDto   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EvaluationResponseDto evaluationResponseDto = (EvaluationResponseDto) o;
-    return Objects.equals(this.prompt, evaluationResponseDto.prompt) &&
-        Objects.equals(this.answer, evaluationResponseDto.answer);
+    BloodPressure bloodPressure = (BloodPressure) o;
+    return Objects.equals(this.systolic, bloodPressure.systolic) &&
+        Objects.equals(this.diastolic, bloodPressure.diastolic);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(prompt, answer);
+    return Objects.hash(systolic, diastolic);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EvaluationResponseDto {\n");
+    sb.append("class BloodPressure {\n");
     
-    sb.append("    prompt: ").append(toIndentedString(prompt)).append("\n");
-    sb.append("    answer: ").append(toIndentedString(answer)).append("\n");
+    sb.append("    systolic: ").append(toIndentedString(systolic)).append("\n");
+    sb.append("    diastolic: ").append(toIndentedString(diastolic)).append("\n");
     sb.append("}");
     return sb.toString();
   }

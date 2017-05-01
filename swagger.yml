@@ -26,6 +26,7 @@ definitions:
       - GLOBAL
       - MENTAL_STATUS
       - PSRS
+      - BNSAS
       - SUBSTANCE_ABUSE
       - VITAL_SIGNS
       - PSYCHIATRIC
@@ -236,6 +237,34 @@ definitions:
       createdTimestamp:
         type: string
         format: 'date-time'
+  BloodPressure:
+    type: object
+    properties:
+      systolic:
+        type: integer
+      diastolic:
+        type: integer
+  VitalSignsDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      patientId:
+        type: integer
+        format: int64
+      height:
+        type: integer
+        description: Height in inches
+      weight:
+        type: integer
+        description: Weight in pounds
+      bloodPressure:
+        type: object
+        schema:
+          $ref: '#/definitions/BloodPressure'
+      heartRate:
+        type: integer
   Error:
     type: object
     properties:
@@ -428,6 +457,56 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+  /patients/{patientId}/evaluations/vitals:
+    get:
+      summary: Get all vital sign evaluations
+      description: Get all vital sign evaluations
+      operationId: getVitalSignEvaluations
+      tags:
+        - evaluation
+      parameters:
+        - name: patientId
+          in: path
+          description: Patient Id of vital sign evaluations to fetch
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Array of vital sign evaluations
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/VitalSignsDto'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create new vital sign evaluation
+      description: Create new vital sign evaluation
+      operationId: createNewVitalSignEvaluation
+      tags:
+        - evaluation
+      parameters:
+        - name: patientId
+          in: path
+          description: Patient Id of vital sign evaluations to create
+          required: true
+          type: integer
+          format: int64
+        - name: vitalSignsEvaluation
+          in: body
+          description: Patient vitals
+          required: true
+          type: object
+          schema:
+            $ref: '#/definitions/VitalSignsDto'
+      responses:
+        201:
+          description: Created vital signs
+          schema:
+            type: string
   /patients/{patientId}/evaluations:
     get:
       summary: Get all evaluations for patient
@@ -460,21 +539,21 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
-      summary: Post results of new evaluation
-      description: Post results of new evaluation
-      operationId: createPatientEvaluation
+      summary: Save evaluation(s)
+      description: Save evaluation(s)
+      operationId: createPatientEvaluations
       tags:
-         - evaluation
+        - evaluation
       parameters:
         - name: patientId
           in: path
-          description: Id of patient evaluations to fetch
+          description: Id of patient
           required: true
           type: integer
           format: int64
-        - name: evaluation
+        - name: evaluations
           in: body
-          description: Evaluation to submit
+          description: Evaluations to save
           required: true
           schema:
             $ref: '#/definitions/EvaluationDto'
@@ -482,7 +561,10 @@ paths:
         201:
           description: Evaluation
           schema:
-            type: string
+            type: array
+            items:
+              type: integer
+              format: int64
   /patients/{patientId}/evaluations/{evaluationId}:
     get:
       summary: Get evaluation by id
