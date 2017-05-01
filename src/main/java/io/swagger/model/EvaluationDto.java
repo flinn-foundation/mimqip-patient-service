@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
 /**
  * EvaluationDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-28T13:39:22.515-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-01T09:57:31.870-04:00")
 
 public class EvaluationDto   {
   @JsonProperty("id")

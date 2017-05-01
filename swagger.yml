@@ -556,9 +556,7 @@ paths:
           description: Evaluations to save
           required: true
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/EvaluationDto'
+            $ref: '#/definitions/EvaluationDto'
       responses:
         201:
           description: Evaluation

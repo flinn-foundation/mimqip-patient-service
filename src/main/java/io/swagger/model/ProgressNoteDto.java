@@ -1,18 +1,19 @@
 package io.swagger.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import javax.validation.constraints.*;
 /**
  * ProgressNoteDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-28T13:39:22.515-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-01T09:57:31.870-04:00")
 
 public class ProgressNoteDto   {
   @JsonProperty("id")
@@ -26,13 +27,13 @@ public class ProgressNoteDto   {
    */
   public enum ProgressNoteTagTypesEnum {
     GENERAL("GENERAL"),
-
+    
     MEDICATIONS("MEDICATIONS"),
-
+    
     DIAGNOSIS("DIAGNOSIS"),
-
+    
     LABS("LABS"),
-
+    
     EVALUATIONS("EVALUATIONS");
 
     private String value;
@@ -188,7 +189,7 @@ public class ProgressNoteDto   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ProgressNoteDto {\n");
-
+    
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
     sb.append("    progressNoteTagTypes: ").append(toIndentedString(progressNoteTagTypes)).append("\n");

@@ -2,7 +2,6 @@ package io.swagger.api;
 
 import io.swagger.model.Error;
 import io.swagger.model.EvaluationDto;
-import java.util.List;
 import io.swagger.model.VitalSignsDto;
 
 import io.swagger.annotations.*;
@@ -19,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-04-28T13:39:22.515-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-01T09:57:31.870-04:00")
 
 @Api(value = "Evaluation", description = "the Evaluation API")
 public interface EvaluationApi {
@@ -44,7 +43,7 @@ public interface EvaluationApi {
         produces = { "application/json" }, 
         method = RequestMethod.POST)
     default ResponseEntity<List<Long>> createPatientEvaluations(@ApiParam(value = "Id of patient",required=true ) @PathVariable("patientId") Long patientId,
-        @ApiParam(value = "Evaluations to save" ,required=true ) @RequestBody List<EvaluationDto> evaluations) {
+        @ApiParam(value = "Evaluations to save" ,required=true ) @RequestBody EvaluationDto evaluations) {
         // do some magic!
         return new ResponseEntity<List<Long>>(HttpStatus.OK);
     }

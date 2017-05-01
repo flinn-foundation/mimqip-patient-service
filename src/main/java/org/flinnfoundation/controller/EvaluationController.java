@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -61,21 +60,6 @@ public class EvaluationController implements EvaluationApi {
         } catch (URISyntaxException e) {
             throw new RuntimeException("Unable to build response", e);
         }
-    }
-
-    @Override
-    public ResponseEntity<List<Long>> createPatientEvaluations(@PathVariable Long patientId, @RequestBody List<EvaluationDto> evaluations) {
-
-        for(EvaluationDto evaluationDto : evaluations) {
-            evaluationDto.setPatientId(patientId);
-        }
-
-        Iterable<Evaluation> storedEvaluations = evaluationService.saveEvaluations(evaluationMapper.convertApiDtoToModel(evaluations));
-
-        List<Long> evaluationIds = new ArrayList<>();
-        storedEvaluations.forEach(evaluation -> evaluationIds.add(evaluation.getId()));
-
-        return ResponseEntity.ok(evaluationIds);
     }
 
     @Override
