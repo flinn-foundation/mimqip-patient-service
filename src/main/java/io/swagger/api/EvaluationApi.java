@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-01T09:57:31.870-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-01T10:08:32.341-04:00")
 
 @Api(value = "Evaluation", description = "the Evaluation API")
 public interface EvaluationApi {
@@ -36,16 +36,16 @@ public interface EvaluationApi {
     }
 
 
-    @ApiOperation(value = "Save evaluation(s)", notes = "Save evaluation(s)", response = Long.class, responseContainer = "List", tags={ "evaluation", })
+    @ApiOperation(value = "Save evaluation", notes = "Save evaluation", response = Long.class, tags={ "evaluation", })
     @ApiResponses(value = { 
         @ApiResponse(code = 201, message = "Evaluation", response = Long.class) })
     @RequestMapping(value = "/patients/{patientId}/evaluations",
         produces = { "application/json" }, 
         method = RequestMethod.POST)
-    default ResponseEntity<List<Long>> createPatientEvaluations(@ApiParam(value = "Id of patient",required=true ) @PathVariable("patientId") Long patientId,
-        @ApiParam(value = "Evaluations to save" ,required=true ) @RequestBody EvaluationDto evaluations) {
+    default ResponseEntity<Long> createPatientEvaluation(@ApiParam(value = "Id of patient",required=true ) @PathVariable("patientId") Long patientId,
+        @ApiParam(value = "Evaluation to save" ,required=true ) @RequestBody EvaluationDto evaluation) {
         // do some magic!
-        return new ResponseEntity<List<Long>>(HttpStatus.OK);
+        return new ResponseEntity<Long>(HttpStatus.OK);
     }
 
 

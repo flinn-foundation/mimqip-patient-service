@@ -47,7 +47,7 @@ public class EvaluationService {
         return evaluationRepository.findEvaluationByPatientAndEvaluationType(patient, diagnosis.getDiagnosisType().getEvaluationType());
     }
 
-    public Iterable<Evaluation> saveEvaluations(List<Evaluation> evaluations) {
+    public Evaluation saveEvaluation(Evaluation evaluations) {
         return evaluationRepository.save(evaluations);
     }
 }

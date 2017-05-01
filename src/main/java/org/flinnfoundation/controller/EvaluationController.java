@@ -63,6 +63,17 @@ public class EvaluationController implements EvaluationApi {
     }
 
     @Override
+    public ResponseEntity<Long> createPatientEvaluation(@PathVariable Long patientId, @RequestBody EvaluationDto evaluation) {
+
+        evaluation.setPatientId(patientId);
+
+        Evaluation storedEvaluations = evaluationService.saveEvaluation(evaluationMapper.convertApiDtoToModel(evaluation));
+
+
+        return ResponseEntity.ok(storedEvaluations.getId());
+    }
+
+    @Override
     public ResponseEntity<EvaluationDto> getEvaluationById(@PathVariable Long patientId, @PathVariable Long evaluationId) {
         Patient patient = patientService.getPatient(patientId);
         return ResponseEntity.ok(evaluationMapper.convertModelToApiDto(evaluationService.getEvaluation(patient, evaluationId)));

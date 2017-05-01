@@ -1,19 +1,20 @@
 package io.swagger.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import javax.validation.constraints.*;
 /**
  * PatientDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-01T09:57:31.870-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-01T10:08:32.341-04:00")
 
 public class PatientDto   {
   @JsonProperty("id")
@@ -30,7 +31,7 @@ public class PatientDto   {
    */
   public enum SexEnum {
     MALE("MALE"),
-
+    
     FEMALE("FEMALE");
 
     private String value;
@@ -73,15 +74,15 @@ public class PatientDto   {
    */
   public enum RaceEnum {
     WHITE("WHITE"),
-
+    
     BLACK("BLACK"),
-
+    
     AMERICAN_INDIAN("AMERICAN_INDIAN"),
-
+    
     ASIAN("ASIAN"),
-
+    
     PACIFIC_ISLANDER("PACIFIC_ISLANDER"),
-
+    
     NO_RESPONSE("NO_RESPONSE");
 
     private String value;
@@ -115,9 +116,9 @@ public class PatientDto   {
    */
   public enum EthnicityEnum {
     HISPANIC("HISPANIC"),
-
+    
     NON_HISPANIC("NON_HISPANIC"),
-
+    
     NO_RESPONSE("NO_RESPONSE");
 
     private String value;
@@ -151,13 +152,13 @@ public class PatientDto   {
    */
   public enum MaritalEnum {
     MARRIED("MARRIED"),
-
+    
     SINGLE("SINGLE"),
-
+    
     SEPARATED("SEPARATED"),
-
+    
     DIVORCED("DIVORCED"),
-
+    
     WIDOWED("WIDOWED");
 
     private String value;
@@ -191,15 +192,15 @@ public class PatientDto   {
    */
   public enum LivingEnum {
     ALONE("ALONE"),
-
+    
     WITH_ROOMMATES("WITH_ROOMMATES"),
-
+    
     WITH_SPOUSE("WITH_SPOUSE"),
-
+    
     WITH_SPOUSE_AND_CHILDREN("WITH_SPOUSE_AND_CHILDREN"),
-
+    
     WITH_PARENTS("WITH_PARENTS"),
-
+    
     GROUP_HOME("GROUP_HOME");
 
     private String value;
@@ -233,15 +234,15 @@ public class PatientDto   {
    */
   public enum EmploymentEnum {
     UNEMPLOYED("UNEMPLOYED"),
-
+    
     FULL_TIME_SALARIED("FULL_TIME_SALARIED"),
-
+    
     PART_TIME_SALARIED("PART_TIME_SALARIED"),
-
+    
     FULL_TIME_NON_SALARIED("FULL_TIME_NON_SALARIED"),
-
+    
     PART_TIME_NON_SALARIED("PART_TIME_NON_SALARIED"),
-
+    
     SELF_EMPLOYED("SELF_EMPLOYED");
 
     private String value;
@@ -590,7 +591,7 @@ public class PatientDto   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PatientDto {\n");
-
+    
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
