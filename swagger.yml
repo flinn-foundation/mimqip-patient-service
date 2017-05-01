@@ -539,9 +539,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
-      summary: Save evaluation(s)
-      description: Save evaluation(s)
-      operationId: createPatientEvaluations
+      summary: Save evaluation
+      description: Save evaluation
+      operationId: createPatientEvaluation
       tags:
         - evaluation
       parameters:
@@ -551,9 +551,9 @@ paths:
           required: true
           type: integer
           format: int64
-        - name: evaluations
+        - name: evaluation
           in: body
-          description: Evaluations to save
+          description: Evaluation to save
           required: true
           schema:
             $ref: '#/definitions/EvaluationDto'
@@ -561,10 +561,8 @@ paths:
         201:
           description: Evaluation
           schema:
-            type: array
-            items:
-              type: integer
-              format: int64
+            type: integer
+            format: int64
   /patients/{patientId}/evaluations/{evaluationId}:
     get:
       summary: Get evaluation by id
