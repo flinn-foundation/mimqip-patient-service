@@ -1,7 +1,6 @@
 package io.swagger.api;
 
-import io.swagger.model.Error;
-import io.swagger.model.PatientMedicationDto;
+import io.swagger.model.CbcLabDto;
 
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
@@ -19,19 +18,19 @@ import java.util.List;
 import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T14:26:31.877-04:00")
 
-@Api(value = "Medication", description = "the Medication API")
-public interface MedicationApi {
+@Api(value = "Lab", description = "the Lab API")
+public interface LabApi {
 
-    @ApiOperation(value = "Get all medications for patient", notes = "Get all medications for patient", response = PatientMedicationDto.class, tags={ "medication", })
+    @ApiOperation(value = "Save new cbc lab", notes = "Save new cbc lab", response = Long.class, tags={ "lab", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Patient", response = PatientMedicationDto.class),
-        @ApiResponse(code = 200, message = "Unexpected error", response = PatientMedicationDto.class) })
-    @RequestMapping(value = "/medications",
+        @ApiResponse(code = 201, message = "null", response = Long.class) })
+    @RequestMapping(value = "/patients/{patientId}/labs/cbc",
         produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    default ResponseEntity<PatientMedicationDto> getPatientMedicationsByPatientId( @NotNull @ApiParam(value = "ID of patient to fetch", required = true) @RequestParam(value = "patientId", required = true) Long patientId) {
+        method = RequestMethod.POST)
+    default ResponseEntity<Long> saveCbcLab(@ApiParam(value = "Id of patient",required=true ) @PathVariable("patientId") Long patientId,
+        @ApiParam(value = "CBC" ,required=true ) @RequestBody CbcLabDto cbc) {
         // do some magic!
-        return new ResponseEntity<PatientMedicationDto>(HttpStatus.OK);
+        return new ResponseEntity<Long>(HttpStatus.OK);
     }
 
 }

@@ -4,6 +4,8 @@ import ma.glasnost.orika.BoundMapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.converter.builtin.PassThroughConverter;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
+import org.flinnfoundation.mapper.converter.DateConverter;
+import org.flinnfoundation.mapper.converter.LocalDateTimeConverter;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,6 +21,10 @@ public abstract class OrikaMapper<T, K> {
         mapperFactory.getConverterFactory().registerConverter(new DateConverter());
         mapperFactory.getConverterFactory().registerConverter(new LocalDateTimeConverter());
         mapperFactory.getConverterFactory().registerConverter(new PassThroughConverter(LocalDate.class));
+        mapperFactory.classMap(clazzT, clazzK)
+                .field("patient.id", "patientId")
+                .byDefault()
+                .register();
         boundMapper = mapperFactory.getMapperFacade(clazzT, clazzK);
     }
 

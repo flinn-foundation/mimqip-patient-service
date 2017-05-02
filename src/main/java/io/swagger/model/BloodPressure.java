@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 /**
  * BloodPressure
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-01T10:08:32.341-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T14:26:31.877-04:00")
 
 public class BloodPressure   {
   @JsonProperty("systolic")

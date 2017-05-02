@@ -3,6 +3,7 @@ package org.flinnfoundation.model;
 import lombok.Data;
 import lombok.ToString;
 import org.flinnfoundation.model.evaluation.Evaluation;
+import org.flinnfoundation.model.lab.Lab;
 import org.flinnfoundation.model.vitals.VitalSigns;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -56,6 +57,9 @@ public class Patient {
 
     @OneToMany(mappedBy = "patient")
     private List<VitalSigns> vitalSignsList;
+
+    @OneToMany(mappedBy = "patient")
+    private List<Lab> labs;
 
     public enum PatientSex {
         MALE, FEMALE

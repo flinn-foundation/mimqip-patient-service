@@ -5,6 +5,8 @@ import ma.glasnost.orika.BoundMapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.converter.builtin.PassThroughConverter;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
+import org.flinnfoundation.mapper.converter.DateConverter;
+import org.flinnfoundation.mapper.converter.LocalDateTimeConverter;
 import org.flinnfoundation.model.Patient;
 import org.springframework.stereotype.Component;
 

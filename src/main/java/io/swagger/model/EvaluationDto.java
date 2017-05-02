@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
 /**
  * EvaluationDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-01T10:08:32.341-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T14:26:31.877-04:00")
 
 public class EvaluationDto   {
   @JsonProperty("id")
@@ -26,8 +26,8 @@ public class EvaluationDto   {
   @JsonProperty("evaluationResponses")
   private List<EvaluationResponseDto> evaluationResponses = new ArrayList<EvaluationResponseDto>();
 
-  @JsonProperty("created")
-  private OffsetDateTime created = null;
+  @JsonProperty("createdTimestamp")
+  private OffsetDateTime createdTimestamp = null;
 
   /**
    * Gets or Sets evaluationType
@@ -136,22 +136,22 @@ public class EvaluationDto   {
     this.evaluationResponses = evaluationResponses;
   }
 
-  public EvaluationDto created(OffsetDateTime created) {
-    this.created = created;
+  public EvaluationDto createdTimestamp(OffsetDateTime createdTimestamp) {
+    this.createdTimestamp = createdTimestamp;
     return this;
   }
 
    /**
-   * Get created
-   * @return created
+   * Get createdTimestamp
+   * @return createdTimestamp
   **/
   @ApiModelProperty(value = "")
-  public OffsetDateTime getCreated() {
-    return created;
+  public OffsetDateTime getCreatedTimestamp() {
+    return createdTimestamp;
   }
 
-  public void setCreated(OffsetDateTime created) {
-    this.created = created;
+  public void setCreatedTimestamp(OffsetDateTime createdTimestamp) {
+    this.createdTimestamp = createdTimestamp;
   }
 
   public EvaluationDto evaluationType(EvaluationTypeEnum evaluationType) {
@@ -185,13 +185,13 @@ public class EvaluationDto   {
     return Objects.equals(this.id, evaluationDto.id) &&
         Objects.equals(this.patientId, evaluationDto.patientId) &&
         Objects.equals(this.evaluationResponses, evaluationDto.evaluationResponses) &&
-        Objects.equals(this.created, evaluationDto.created) &&
+        Objects.equals(this.createdTimestamp, evaluationDto.createdTimestamp) &&
         Objects.equals(this.evaluationType, evaluationDto.evaluationType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, patientId, evaluationResponses, created, evaluationType);
+    return Objects.hash(id, patientId, evaluationResponses, createdTimestamp, evaluationType);
   }
 
   @Override
@@ -202,7 +202,7 @@ public class EvaluationDto   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
     sb.append("    evaluationResponses: ").append(toIndentedString(evaluationResponses)).append("\n");
-    sb.append("    created: ").append(toIndentedString(created)).append("\n");
+    sb.append("    createdTimestamp: ").append(toIndentedString(createdTimestamp)).append("\n");
     sb.append("    evaluationType: ").append(toIndentedString(evaluationType)).append("\n");
     sb.append("}");
     return sb.toString();

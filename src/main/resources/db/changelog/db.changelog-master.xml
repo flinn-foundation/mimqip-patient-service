@@ -191,15 +191,23 @@
     </changeSet>
     <changeSet author="Michael Iden" id="patient-evaluations-create-table">
         <createTable tableName="PATIENT_EVALUATIONS">
-            <column name="PATIENT_ID" type="BIGINT"/>
             <column name="ID" type="BIGINT"/>
         </createTable>
     </changeSet>
     <changeSet author="Michael Iden" id="evaluations-create-table">
         <createTable tableName="EVALUATION">
-            <column name="ID" type="BIGINT" autoIncrement="true"/>
-            <column name="EVALUATION_TYPE" type="VARCHAR(255)"/>
-            <column name="CREATED" type="DATETIME"/>
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EVALUATION_TYPE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_TIMESTAMP" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet author="Michael Iden" id="evaluation-evaluation-responses-create-table">
@@ -210,7 +218,10 @@
     </changeSet>
     <changeSet author="Michael Iden" id="evaluation-responses-create-table">
         <createTable tableName="EVALUATION_RESPONSE">
-            <column name="ID" type="BIGINT" autoIncrement="true"/>
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="EVALUATION_ID" type="BIGINT"/>
             <column name="PROMPT" type="TEXT"/>
             <column name="ANSWER" type="TEXT"/>
         </createTable>
@@ -241,6 +252,140 @@
             <column name="CREATED_TIMESTAMP" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="carbamazepine-create-table">
+        <createTable tableName="CARBAMAZEPINE_LAB">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BLOOD_LEVEL" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_TIMESTAMP" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="divalproex-create-table">
+        <createTable tableName="DIVALPROEX_LAB">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BLOOD_LEVEL" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_TIMESTAMP" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="lithium-create-table">
+        <createTable tableName="LITHIUM_LAB">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BLOOD_LEVEL" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_TIMESTAMP" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="lipid-panel-create-table">
+        <createTable tableName="LIPID_PANEL_LAB">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CHOLESTEROL" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HDL" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LDL" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TRIGLYCERIDES" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_TIMESTAMP" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="liver-enzymes-create-table">
+        <createTable tableName="LIVER_ENZYMES_LAB">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ALT" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AST" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ALP" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GGT" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_TIMESTAMP" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Michael Iden" id="complete-blood-count-create-table">
+        <createTable tableName="COMPLETE_BLOOD_COUNT_LAB">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HEMATOCRIT" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HEMOGLOBIN" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLATELETS" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RBC" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="WBC" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_TIMESTAMP" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="create-hibernate-sequences-table" author="Michael Iden">
+        <createTable tableName="HIBERNATE_SEQUENCES">
+            <column name="SEQUENCE_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEQUENCE_NEXT_HI_VALUE" type="BIGINT"/>
         </createTable>
     </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-42">

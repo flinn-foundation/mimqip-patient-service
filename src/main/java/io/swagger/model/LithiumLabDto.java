@@ -5,23 +5,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import javax.validation.constraints.*;
 /**
- * PatientMedicationDto
+ * LithiumLabDto
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T14:26:31.877-04:00")
 
-public class PatientMedicationDto   {
+public class LithiumLabDto   {
   @JsonProperty("id")
   private Long id = null;
 
   @JsonProperty("patientId")
   private Long patientId = null;
 
-  @JsonProperty("genericName")
-  private String genericName = null;
+  @JsonProperty("bloodLevel")
+  private BigDecimal bloodLevel = null;
 
-  public PatientMedicationDto id(Long id) {
+  @JsonProperty("createdTimestamp")
+  private OffsetDateTime createdTimestamp = null;
+
+  public LithiumLabDto id(Long id) {
     this.id = id;
     return this;
   }
@@ -39,7 +44,7 @@ public class PatientMedicationDto   {
     this.id = id;
   }
 
-  public PatientMedicationDto patientId(Long patientId) {
+  public LithiumLabDto patientId(Long patientId) {
     this.patientId = patientId;
     return this;
   }
@@ -57,22 +62,40 @@ public class PatientMedicationDto   {
     this.patientId = patientId;
   }
 
-  public PatientMedicationDto genericName(String genericName) {
-    this.genericName = genericName;
+  public LithiumLabDto bloodLevel(BigDecimal bloodLevel) {
+    this.bloodLevel = bloodLevel;
     return this;
   }
 
    /**
-   * Get genericName
-   * @return genericName
+   * Get bloodLevel
+   * @return bloodLevel
   **/
   @ApiModelProperty(value = "")
-  public String getGenericName() {
-    return genericName;
+  public BigDecimal getBloodLevel() {
+    return bloodLevel;
   }
 
-  public void setGenericName(String genericName) {
-    this.genericName = genericName;
+  public void setBloodLevel(BigDecimal bloodLevel) {
+    this.bloodLevel = bloodLevel;
+  }
+
+  public LithiumLabDto createdTimestamp(OffsetDateTime createdTimestamp) {
+    this.createdTimestamp = createdTimestamp;
+    return this;
+  }
+
+   /**
+   * Get createdTimestamp
+   * @return createdTimestamp
+  **/
+  @ApiModelProperty(value = "")
+  public OffsetDateTime getCreatedTimestamp() {
+    return createdTimestamp;
+  }
+
+  public void setCreatedTimestamp(OffsetDateTime createdTimestamp) {
+    this.createdTimestamp = createdTimestamp;
   }
 
 
@@ -84,25 +107,27 @@ public class PatientMedicationDto   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PatientMedicationDto patientMedicationDto = (PatientMedicationDto) o;
-    return Objects.equals(this.id, patientMedicationDto.id) &&
-        Objects.equals(this.patientId, patientMedicationDto.patientId) &&
-        Objects.equals(this.genericName, patientMedicationDto.genericName);
+    LithiumLabDto lithiumLabDto = (LithiumLabDto) o;
+    return Objects.equals(this.id, lithiumLabDto.id) &&
+        Objects.equals(this.patientId, lithiumLabDto.patientId) &&
+        Objects.equals(this.bloodLevel, lithiumLabDto.bloodLevel) &&
+        Objects.equals(this.createdTimestamp, lithiumLabDto.createdTimestamp);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, patientId, genericName);
+    return Objects.hash(id, patientId, bloodLevel, createdTimestamp);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PatientMedicationDto {\n");
+    sb.append("class LithiumLabDto {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
-    sb.append("    genericName: ").append(toIndentedString(genericName)).append("\n");
+    sb.append("    bloodLevel: ").append(toIndentedString(bloodLevel)).append("\n");
+    sb.append("    createdTimestamp: ").append(toIndentedString(createdTimestamp)).append("\n");
     sb.append("}");
     return sb.toString();
   }

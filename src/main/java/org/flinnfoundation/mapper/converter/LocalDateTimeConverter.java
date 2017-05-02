@@ -1,4 +1,4 @@
-package org.flinnfoundation.mapper;
+package org.flinnfoundation.mapper.converter;
 
 import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.converter.BidirectionalConverter;
