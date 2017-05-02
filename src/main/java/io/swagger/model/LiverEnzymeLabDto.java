@@ -6,12 +6,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import javax.validation.constraints.*;
 /**
  * LiverEnzymeLabDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T14:26:31.877-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T16:51:59.735-04:00")
 
 public class LiverEnzymeLabDto   {
   @JsonProperty("id")
@@ -19,6 +20,9 @@ public class LiverEnzymeLabDto   {
 
   @JsonProperty("patientId")
   private Long patientId = null;
+
+  @JsonProperty("testDate")
+  private LocalDate testDate = null;
 
   @JsonProperty("alt")
   private BigDecimal alt = null;
@@ -69,6 +73,24 @@ public class LiverEnzymeLabDto   {
 
   public void setPatientId(Long patientId) {
     this.patientId = patientId;
+  }
+
+  public LiverEnzymeLabDto testDate(LocalDate testDate) {
+    this.testDate = testDate;
+    return this;
+  }
+
+   /**
+   * Get testDate
+   * @return testDate
+  **/
+  @ApiModelProperty(value = "")
+  public LocalDate getTestDate() {
+    return testDate;
+  }
+
+  public void setTestDate(LocalDate testDate) {
+    this.testDate = testDate;
   }
 
   public LiverEnzymeLabDto alt(BigDecimal alt) {
@@ -173,6 +195,7 @@ public class LiverEnzymeLabDto   {
     LiverEnzymeLabDto liverEnzymeLabDto = (LiverEnzymeLabDto) o;
     return Objects.equals(this.id, liverEnzymeLabDto.id) &&
         Objects.equals(this.patientId, liverEnzymeLabDto.patientId) &&
+        Objects.equals(this.testDate, liverEnzymeLabDto.testDate) &&
         Objects.equals(this.alt, liverEnzymeLabDto.alt) &&
         Objects.equals(this.ast, liverEnzymeLabDto.ast) &&
         Objects.equals(this.alp, liverEnzymeLabDto.alp) &&
@@ -182,7 +205,7 @@ public class LiverEnzymeLabDto   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, patientId, alt, ast, alp, ggt, createdTimestamp);
+    return Objects.hash(id, patientId, testDate, alt, ast, alp, ggt, createdTimestamp);
   }
 
   @Override
@@ -192,6 +215,7 @@ public class LiverEnzymeLabDto   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
+    sb.append("    testDate: ").append(toIndentedString(testDate)).append("\n");
     sb.append("    alt: ").append(toIndentedString(alt)).append("\n");
     sb.append("    ast: ").append(toIndentedString(ast)).append("\n");
     sb.append("    alp: ").append(toIndentedString(alp)).append("\n");

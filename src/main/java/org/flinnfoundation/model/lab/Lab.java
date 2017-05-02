@@ -5,6 +5,7 @@ import org.flinnfoundation.model.Patient;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -18,6 +19,8 @@ abstract public class Lab {
 
     @ManyToOne
     private Patient patient;
+
+    private LocalDate testDate;
 
     //TODO: Change this to a Java8 Time (LocalDateTime, Offset, whatever) once Spring Boot supports Hibernate 5.2.x
     @CreationTimestamp

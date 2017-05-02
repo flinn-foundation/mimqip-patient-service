@@ -6,12 +6,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import javax.validation.constraints.*;
 /**
  * CbcLabDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T14:26:31.877-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T16:51:59.735-04:00")
 
 public class CbcLabDto   {
   @JsonProperty("id")
@@ -19,6 +20,9 @@ public class CbcLabDto   {
 
   @JsonProperty("patientId")
   private Long patientId = null;
+
+  @JsonProperty("testDate")
+  private LocalDate testDate = null;
 
   @JsonProperty("rbc")
   private Integer rbc = null;
@@ -72,6 +76,24 @@ public class CbcLabDto   {
 
   public void setPatientId(Long patientId) {
     this.patientId = patientId;
+  }
+
+  public CbcLabDto testDate(LocalDate testDate) {
+    this.testDate = testDate;
+    return this;
+  }
+
+   /**
+   * Get testDate
+   * @return testDate
+  **/
+  @ApiModelProperty(value = "")
+  public LocalDate getTestDate() {
+    return testDate;
+  }
+
+  public void setTestDate(LocalDate testDate) {
+    this.testDate = testDate;
   }
 
   public CbcLabDto rbc(Integer rbc) {
@@ -194,6 +216,7 @@ public class CbcLabDto   {
     CbcLabDto cbcLabDto = (CbcLabDto) o;
     return Objects.equals(this.id, cbcLabDto.id) &&
         Objects.equals(this.patientId, cbcLabDto.patientId) &&
+        Objects.equals(this.testDate, cbcLabDto.testDate) &&
         Objects.equals(this.rbc, cbcLabDto.rbc) &&
         Objects.equals(this.wbc, cbcLabDto.wbc) &&
         Objects.equals(this.hemoglobin, cbcLabDto.hemoglobin) &&
@@ -204,7 +227,7 @@ public class CbcLabDto   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, patientId, rbc, wbc, hemoglobin, hematocrit, platelets, createdTimestamp);
+    return Objects.hash(id, patientId, testDate, rbc, wbc, hemoglobin, hematocrit, platelets, createdTimestamp);
   }
 
   @Override
@@ -214,6 +237,7 @@ public class CbcLabDto   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
+    sb.append("    testDate: ").append(toIndentedString(testDate)).append("\n");
     sb.append("    rbc: ").append(toIndentedString(rbc)).append("\n");
     sb.append("    wbc: ").append(toIndentedString(wbc)).append("\n");
     sb.append("    hemoglobin: ").append(toIndentedString(hemoglobin)).append("\n");

@@ -114,6 +114,9 @@ definitions:
       patientId:
         type: integer
         format: int64
+      testDate:
+        type: string
+        format: date
       rbc:
         type: integer
       wbc:
@@ -136,6 +139,9 @@ definitions:
       patientId:
         type: integer
         format: int64
+      testDate:
+        type: string
+        format: date
       cholesterol:
         type: number
       hdl:
@@ -156,6 +162,9 @@ definitions:
       patientId:
         type: integer
         format: int64
+      testDate:
+        type: string
+        format: date
       alt:
         type: number
       ast:
@@ -176,6 +185,9 @@ definitions:
       patientId:
         type: integer
         format: int64
+      testDate:
+        type: string
+        format: date
       bloodLevel:
         type: number
       createdTimestamp:
@@ -190,6 +202,9 @@ definitions:
       patientId:
         type: integer
         format: int64
+      testDate:
+        type: string
+        format: date
       bloodLevel:
         type: number
       createdTimestamp:
@@ -204,6 +219,9 @@ definitions:
       patientId:
         type: integer
         format: int64
+      testDate:
+        type: string
+        format: date
       bloodLevel:
         type: number
       createdTimestamp:

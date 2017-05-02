@@ -112,26 +112,6 @@
             <column name="PRESCRIPTION_RCOPIA_ID" type="VARCHAR(20)"/>
         </createTable>
     </changeSet>
-
-    <changeSet author="Michael Iden" id="1489345089097-15">
-        <createTable tableName="PATIENT_STATUS">
-            <column name="ID" type="BIGINT">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="PATIENT_ID" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="KEY" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="VALUE" type="TEXT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ENTRY_DATE" type="DATETIME">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
     <changeSet author="miden (generated)" id="1489345089097-16">
         <createTable tableName="PrescriptionEvent">
             <column autoIncrement="true" name="ID" type="INT">
@@ -262,6 +242,9 @@
             <column name="PATIENT_ID" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
+            <column name="TEST_DATE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
             <column name="BLOOD_LEVEL" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
@@ -276,6 +259,9 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TEST_DATE" type="DATE">
                 <constraints nullable="false"/>
             </column>
             <column name="BLOOD_LEVEL" type="DOUBLE">
@@ -294,6 +280,9 @@
             <column name="PATIENT_ID" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
+            <column name="TEST_DATE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
             <column name="BLOOD_LEVEL" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
@@ -308,6 +297,9 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TEST_DATE" type="DATE">
                 <constraints nullable="false"/>
             </column>
             <column name="CHOLESTEROL" type="DOUBLE">
@@ -335,6 +327,9 @@
             <column name="PATIENT_ID" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
+            <column name="TEST_DATE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
             <column name="ALT" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
@@ -358,6 +353,9 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="PATIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TEST_DATE" type="DATE">
                 <constraints nullable="false"/>
             </column>
             <column name="HEMATOCRIT" type="DOUBLE">
@@ -424,15 +422,6 @@
                   schemaName="public"
                   separator=","
                   tableName="PATIENT_RACE"
-                  quotchar='"'>
-        </loadData>
-    </changeSet>
-    <changeSet author="Michael Iden" id="20170328-load-patient-status">
-        <loadData encoding="UTF-8"
-                  file="db/sampledata/patient-status-20170328.csv"
-                  schemaName="public"
-                  separator=","
-                  tableName="PATIENT_STATUS"
                   quotchar='"'>
         </loadData>
     </changeSet>

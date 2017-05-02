@@ -6,12 +6,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import javax.validation.constraints.*;
 /**
  * CarbamazepineLabDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T14:26:31.877-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T16:51:59.735-04:00")
 
 public class CarbamazepineLabDto   {
   @JsonProperty("id")
@@ -19,6 +20,9 @@ public class CarbamazepineLabDto   {
 
   @JsonProperty("patientId")
   private Long patientId = null;
+
+  @JsonProperty("testDate")
+  private LocalDate testDate = null;
 
   @JsonProperty("bloodLevel")
   private BigDecimal bloodLevel = null;
@@ -60,6 +64,24 @@ public class CarbamazepineLabDto   {
 
   public void setPatientId(Long patientId) {
     this.patientId = patientId;
+  }
+
+  public CarbamazepineLabDto testDate(LocalDate testDate) {
+    this.testDate = testDate;
+    return this;
+  }
+
+   /**
+   * Get testDate
+   * @return testDate
+  **/
+  @ApiModelProperty(value = "")
+  public LocalDate getTestDate() {
+    return testDate;
+  }
+
+  public void setTestDate(LocalDate testDate) {
+    this.testDate = testDate;
   }
 
   public CarbamazepineLabDto bloodLevel(BigDecimal bloodLevel) {
@@ -110,13 +132,14 @@ public class CarbamazepineLabDto   {
     CarbamazepineLabDto carbamazepineLabDto = (CarbamazepineLabDto) o;
     return Objects.equals(this.id, carbamazepineLabDto.id) &&
         Objects.equals(this.patientId, carbamazepineLabDto.patientId) &&
+        Objects.equals(this.testDate, carbamazepineLabDto.testDate) &&
         Objects.equals(this.bloodLevel, carbamazepineLabDto.bloodLevel) &&
         Objects.equals(this.createdTimestamp, carbamazepineLabDto.createdTimestamp);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, patientId, bloodLevel, createdTimestamp);
+    return Objects.hash(id, patientId, testDate, bloodLevel, createdTimestamp);
   }
 
   @Override
@@ -126,6 +149,7 @@ public class CarbamazepineLabDto   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
+    sb.append("    testDate: ").append(toIndentedString(testDate)).append("\n");
     sb.append("    bloodLevel: ").append(toIndentedString(bloodLevel)).append("\n");
     sb.append("    createdTimestamp: ").append(toIndentedString(createdTimestamp)).append("\n");
     sb.append("}");

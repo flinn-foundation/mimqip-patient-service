@@ -6,12 +6,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import javax.validation.constraints.*;
 /**
  * LipidPanelLabDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T14:26:31.877-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-05-02T16:51:59.735-04:00")
 
 public class LipidPanelLabDto   {
   @JsonProperty("id")
@@ -19,6 +20,9 @@ public class LipidPanelLabDto   {
 
   @JsonProperty("patientId")
   private Long patientId = null;
+
+  @JsonProperty("testDate")
+  private LocalDate testDate = null;
 
   @JsonProperty("cholesterol")
   private BigDecimal cholesterol = null;
@@ -69,6 +73,24 @@ public class LipidPanelLabDto   {
 
   public void setPatientId(Long patientId) {
     this.patientId = patientId;
+  }
+
+  public LipidPanelLabDto testDate(LocalDate testDate) {
+    this.testDate = testDate;
+    return this;
+  }
+
+   /**
+   * Get testDate
+   * @return testDate
+  **/
+  @ApiModelProperty(value = "")
+  public LocalDate getTestDate() {
+    return testDate;
+  }
+
+  public void setTestDate(LocalDate testDate) {
+    this.testDate = testDate;
   }
 
   public LipidPanelLabDto cholesterol(BigDecimal cholesterol) {
@@ -173,6 +195,7 @@ public class LipidPanelLabDto   {
     LipidPanelLabDto lipidPanelLabDto = (LipidPanelLabDto) o;
     return Objects.equals(this.id, lipidPanelLabDto.id) &&
         Objects.equals(this.patientId, lipidPanelLabDto.patientId) &&
+        Objects.equals(this.testDate, lipidPanelLabDto.testDate) &&
         Objects.equals(this.cholesterol, lipidPanelLabDto.cholesterol) &&
         Objects.equals(this.hdl, lipidPanelLabDto.hdl) &&
         Objects.equals(this.ldl, lipidPanelLabDto.ldl) &&
@@ -182,7 +205,7 @@ public class LipidPanelLabDto   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, patientId, cholesterol, hdl, ldl, triglycerides, createdTimestamp);
+    return Objects.hash(id, patientId, testDate, cholesterol, hdl, ldl, triglycerides, createdTimestamp);
   }
 
   @Override
@@ -192,6 +215,7 @@ public class LipidPanelLabDto   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
+    sb.append("    testDate: ").append(toIndentedString(testDate)).append("\n");
     sb.append("    cholesterol: ").append(toIndentedString(cholesterol)).append("\n");
     sb.append("    hdl: ").append(toIndentedString(hdl)).append("\n");
     sb.append("    ldl: ").append(toIndentedString(ldl)).append("\n");
